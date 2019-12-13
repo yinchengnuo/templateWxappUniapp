@@ -1,0 +1,16 @@
+$theme-color: #007AFF;
+$font-color: #333333;
+$app-nav-height: 159rpx;
+
+@mixin flex($c: row) {
+	display: flex;
+	align-items: center;
+	flex-direction: $c;
+	justify-content: center;
+}
+
+.ellipsis { // 文字溢出打点换行
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
