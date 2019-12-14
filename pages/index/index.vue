@@ -37,6 +37,7 @@
 </template>
 
 <script>
+	import { _API_Index } from '@/apis/index.js'
 	export default {
 		data() {
 			return {
@@ -46,7 +47,9 @@
 			}
 		},
 		onLoad() {
-
+			const task = _API_Index()
+			task.then(res => console.log(res)).catch(e => console.log(e))
+			setTimeout(() => task.cancel(), 123)
 		},
 		methods: {
 			toPageIndex() {

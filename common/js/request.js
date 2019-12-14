@@ -2,27 +2,9 @@ import Vue from 'vue'
 import $store from '@/store'
 import uni_request from './uni_request.js'
 
-let isisConnected = true
-// const host = 'http://192.168.0.13'
 const host = 'https://yinchengnuo.com'
-// const port = 80
 const port = 443
 const url = '/dwbsapp'
-const wshost = 'ws://192.168.0.13'
-// const wshost = 'ws://47.102.113.25'
-const wsport = 80
-// const wsport = 39000
-const wsurl = '/websocket'
-// const wsurl = '/'
-
-// uni.connectSocket({ url: `${wshost}:${wsport}${wsurl}` }) // 发起 websocket 连接
-// uni.onNetworkStatusChange(res => {
-// 	$store.commit('app/NETWORKTYPE_CHANGE', res.networkType) // 网络类型变化监听
-// 	uni.closeSocket() // 关闭已有 websocket 
-// 	uni.connectSocket({ url: `${wshost}:${wsport}${wsurl}` }) // 发起 websocket 连接
-// })
-
-uni.getNetworkType({ success(res) { $store.commit('app/NETWORKTYPE_CHANGE', res.networkType) }}) // 获取网络类型
 
 const request = uni_request({
 	timeout: 12345,
@@ -30,20 +12,24 @@ const request = uni_request({
 	headers: { Authorization: 'Bearer ' + $store.state.app.token }
 })
 
-request.interceptors.request.use(config => {
+request.interceptors.request.use(async config => {
+	await new Promise(resolve => setTimeout(() => resolve(), 3456))
 	return config
 })
 
 request.interceptors.response.use((response, ...args) => { // 拦截器
 	uni.$emit('HIDELOADING') // 隐藏加载
 	uni.stopPullDownRefresh() // 停止下拉刷新
-	if (response.statusCode === 200) { 
+	if (response.statusCode === 200) {
 		// Vue.prototype.$toast(`${response.statusCode}:${args[1]}`)
 	} else { // 服务器响应不为 200 的统一处理方法
-		try{
-			Vue.prototype.$toast(`${response.statusCode}:${response.data}:${args[1]}`)
-		}catch(e){}
+		console.log(134)
 	}
+	return response
+})
+
+request.interceptors.response.use(async (response, ...args) => { // 拦截器
+	await new Promise(resolve => setTimeout(() => resolve(), 3456))
 	return response
 })
 

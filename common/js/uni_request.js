@@ -10,52 +10,66 @@ export default function ({ baseURL, timeout, headers }) {
 		head(url, data) { return this.request('HEAD', url, data) },
 		options(url, data) { return this.request('OPTIONS', url, data) },
 		reace(url, data) { return this.request('TRACE', url, data) },
-		onerror: [],
-		overtime: [],
+		onerror: [], // 请求错误钩子函数集合
+		overtime: [], // 超时钩子函数集合
 		request(method, url, data) {
-			let timer, requestTask, _watcher = { cancelHandle: null, cancel: () => _watcher.cancelHandle() }
-			return new Proxy(new MyPromise((resolve, reject) => {
-				requestTask = uni.request({
-				    url: url[0] === '/' ? baseURL + url : url,
-				    data,
-					method,
-					header: { ...this.interceptors.request.intercept({ headers: headers || {} }, method, url, data).headers },
-				    success: res => {
-						clearTimeout(timer)
-						res.statusCode === 200 ? resolve(this.interceptors.response.intercept(res, method, url, data)) : reject(this.interceptors.response.intercept(res, method, url, data))
-				    },
-					fail: res => {
-						clearTimeout(timer)
-						_watcher.abort ? reject('网络请求失败：主动取消') : reject('网络请求失败：（URL无效|无网络|DNS解析失败|请求时间过长）')
-						this.onerror.forEach(e => e(method, url, data, _watcher.abort ? '网络请求失败：主动取消' : '网络请求失败：（URL无效|无网络|DNS解析失败|请求时间过长）'))
+			let timer, requestTask, _watcher = { abort: false, cancelHandle: null, cancel: () => _watcher.cancelHandle() }
+			return new Proxy(new MyPromise((resolve, reject) => { // 返回经过 Proxy 后的 Promise 对象使其可以监听到是否调用 cancel 方法
+				this.interceptors.request.intercept({ headers: headers || {} }, method, url, data).then(({ headers: header }) => { // 等待请求拦截器里的方法执行完
+					if (_watcher.abort) { // 如果请求已被取消,停止执行,返回 reject
+						reject('网络请求失败：主动取消')
+						return
 					}
+					requestTask = uni.request({
+					    url: url[0] === '/' ? baseURL + url : url,
+					    data,
+						method,
+						header,
+					    success: res => {
+							clearTimeout(timer)
+							res.statusCode === 200 ? this.interceptors.response.intercept(resolve, res, method, url, data) : this.interceptors.response.intercept(reject, res, method, url, data)
+					    },
+						fail: async res => {
+							clearTimeout(timer)
+							_watcher.abort ? reject('网络请求失败：主动取消') : reject('网络请求失败：（URL无效|无网络|DNS解析失败|请求时间过长）')
+							for (let i = 0; i < this.onerror.length; i ++) {
+								await this.onerror[i](method, url, data, _watcher.abort ? '网络请求失败：主动取消' : '网络请求失败：（URL无效|无网络|DNS解析失败|请求时间过长）')
+							}
+						}
+					})
+					timer = setTimeout(async () => {
+						requestTask.abort()
+						reject('网络请求时间超时')
+						for (let i = 0; i < this.overtime.length; i ++) {
+							await this.overtime[i](method, url, data)
+						}
+					}, timeout)
 				})
-				timer = setTimeout(() => {
-					requestTask.abort()
-					reject('网络请求时间超时')
-					this.overtime.forEach(e => e(method, url, data))
-				}, timeout)
-				_watcher.cancelHandle = () => {
-					_watcher.abort= true
-					requestTask.abort()
+				_watcher.cancelHandle = () => { // _watcher.cancel 要执行的方法
+					_watcher.abort= true // 将请求标记为 已取消状态
+					requestTask ? requestTask.abort() : '' // 如果 requestTask 存在就取消,不存在说明正在等待请求拦截器里的异步函数
 				}
-			}), { get: (target, prop) => prop === 'cancel' ? _watcher.cancel : Reflect.get(target, prop) })
+			}), { get: (target, prop) => prop === 'cancel' ? _watcher.cancel : Reflect.get(target, prop) }) // 如果调用 cancel 方法,返回 _watcher.cancel 方法
 		},
-		interceptors: {
+		interceptors: { // 拦截器
 			request: {
 				interceptors: [],
 				use(fun) { this.interceptors.push(fun) },
-				intercept(config, method, url, data) {
-					this.interceptors.forEach(fun => config = fun(config, method, url, data))
+				async intercept(config, method, url, data) {
+					for (let i = 0; i < this.interceptors.length; i ++) {
+						config = await this.interceptors[i](config, method, url, data)
+					}
 					return config
 				}
 			},
 			response: {
 				interceptors: [],
 				use(fun) { this.interceptors.push(fun) },
-				intercept(response, method, url, data) {
-					this.interceptors.forEach(fun => response = fun(response, method, url, data))
-					return response.data
+				async intercept(STATUS, response, method, url, data) {
+					for (let i = 0; i < this.interceptors.length; i ++) {
+						response = await this.interceptors[i](response, method, url, data)
+					}
+					return STATUS(response.data)
 				}
 			}
 		}
