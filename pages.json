@@ -4,8 +4,28 @@
 			"path": "pages/index/index",
 			"style": {}
 		}
-	    ,{
-            "path" : "pages/tem-index/tem-index",
+        ,{
+            "path" : "pages/style/style",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/router/router",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/store/store",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/request/request",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/storage/storage",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/other/other",
             "style" : {}
         }
     ],

@@ -9,29 +9,42 @@
 			<view class="card-top">
 				<open-data class="avatar" type="userAvatarUrl"></open-data>
 				<open-data class="nickname ellipsis" type="userNickName"></open-data>
+				<open-data class="city cuIcon-locationfill" type="userCity"></open-data>
 			</view>
 			<view class="card-bot">
-				<open-data class="city" type="userCity"></open-data>
-				<open-data class="province" type="userProvince"></open-data>
+				<view class="cuIcon-github" type="userCity">Github</view>
+				<view class="province" type="userProvince"></view>
 			</view>
 		</view>
-		<view class="item item1 bg-gradual-red padding radius text-center shadow-blur" :class="{ rotate: rotate === 1 }" @tap="toPageIndex">
-			自定义顶部导航栏底部TabBar
+		<view class="item item1 bg-gradual-red padding radius text-center shadow-blur" :class="{ rotate: rotate === 1 }" @tap="toStyle">
+			<text class="icon cuIcon-skinfill"></text>
+			<text class="name">关于<text>样式</text></text>
+			<text class="english">Style</text>
 		</view>
-		<view class="item item2 bg-gradual-orange padding radius text-center shadow-blur" :class="{ rotate: rotate === 2 }">
-			2
+		<view class="item item2 bg-gradual-orange padding radius text-center shadow-blur" :class="{ rotate: rotate === 2 }" @tap="toRouter">
+			<text class="icon cuIcon-deliver_fill"></text>
+			<text class="name">关于<text>路由</text></text>
+			<text class="english">Router</text>
 		</view>
-		<view class="item item3 bg-gradual-green padding radius text-center shadow-blur" :class="{ rotate: rotate === 3 }">
-			3
+		<view class="item item3 bg-gradual-green padding radius text-center shadow-blur" :class="{ rotate: rotate === 3 }" @tap="toStore">
+			<text class="icon cuIcon-shopfill"></text>
+			<text class="name">关于<text>状态</text></text>
+			<text class="english">Store</text>
 		</view>
-		<view class="item item4 bg-gradual-blue padding radius text-center shadow-blur" :class="{ rotate: rotate === 4 }">
-			4
+		<view class="item item4 bg-gradual-blue padding radius text-center shadow-blur" :class="{ rotate: rotate === 4 }" @tap="toRequest">
+			<text class="icon cuIcon-rankfill"></text>
+			<text class="name">关于<text>网络</text></text>
+			<text class="english">Request</text>
 		</view>
-		<view class="item item5 bg-gradual-purple padding radius text-center shadow-blur" :class="{ rotate: rotate === 5 }">
-			5
+		<view class="item item5 bg-gradual-purple padding radius text-center shadow-blur" :class="{ rotate: rotate === 5 }" @tap="toStorage">
+			<text class="icon cuIcon-homefill"></text>
+			<text class="name">关于<text>存储</text></text>
+			<text class="english">Storage</text>
 		</view>
-		<view class="item item6 bg-gradual-pink padding radius text-center shadow-blur" :class="{ rotate: rotate === 5 }">
-			6
+		<view class="item item6 bg-gradual-pink padding radius text-center shadow-blur" :class="{ rotate: rotate === 5 }" @tap="toOther">
+			<text class="icon cuIcon-play_forward_fill"></text>
+			<text class="name">关于<text>其他</text></text>
+			<text class="english">Other</text>
 		</view>
 	</view>
 </template>
@@ -43,7 +56,7 @@
 			return {
 				title: 'UNI-APP微信小程序快速开发模板',
 				rotate: -1,
-				topBgs: ['bg-red', 'bg-orange', 'bg-yellow', 'bg-olive', 'bg-green', 'bg-cyan', 'bg-blue', 'bg-purple', 'bg-mauve', 'bg-pink', 'bg-brown']
+				topBgs: ['bg-red', 'bg-orange', 'bg-yellow', 'bg-olive', 'bg-green', 'bg-cyan', 'bg-blue', 'bg-purple', 'bg-mauve', 'bg-pink', 'bg-brown', 'bg-grey']
 			}
 		},
 		onLoad() {
@@ -52,10 +65,35 @@
 			setTimeout(() => task.cancel(), 123)
 		},
 		methods: {
-			toPageIndex() {
-				this.rotate = 1
+			toStyle() {
+				this.rotate = 1;
+				this.$router.push('/style')
 				setTimeout(() => this.rotate = -1, 2000)
-				setTimeout(() => this.$router.push('/tem-index'), 567)
+			},
+			toRouter() {
+				this.rotate = 2;
+				this.$router.push('/router')
+				setTimeout(() => this.rotate = -1, 2000)
+			},
+			toStore() {
+				this.rotate = 3;
+				this.$router.push('/store')
+				setTimeout(() => this.rotate = -1, 2000)
+			},
+			toRequest() {
+				this.rotate = 4;
+				this.$router.push('/request')
+				setTimeout(() => this.rotate = -1, 2000)
+			},
+			toStorage() {
+				this.rotate = 5;
+				this.$router.push('/storage')
+				setTimeout(() => this.rotate = -1, 2000)
+			},
+			toOther() {
+				this.rotate = 6;
+				this.$router.push('/other')
+				setTimeout(() => this.rotate = -1, 2000)
 			}
 		}
 	}
@@ -135,6 +173,8 @@
 		}
 		.item {
 			@include flex();
+			overflow: hidden;
+			position: relative;
 			border-radius: 16rpx;
 			&.item1 { animation: move 9s infinite; }
 			&.item2 { animation: move 17s infinite alternate; }
@@ -144,6 +184,29 @@
 			&.item6 { animation: move 30s infinite; }
 			&.rotate {
 				animation: rotate 2s infinite;
+			}
+			.icon {
+				top: 16rpx;
+				left: 16rpx;
+				opacity: .6;
+				font-size: 180rpx;
+				position: absolute;
+			}
+			.english {
+				top: 56rpx;
+				right: 16rpx;
+				font-size: 34rpx;
+				position: absolute;
+				letter-spacing: 3.6rpx;
+			}
+			.name {
+				right: 16rpx;
+				bottom: 16rpx;
+				position: absolute;
+				text {
+					font-size: 45rpx;
+					margin-left: 8rpx;
+				}
 			}
 		}
 	}
