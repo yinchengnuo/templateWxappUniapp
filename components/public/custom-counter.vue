@@ -1,8 +1,8 @@
 <template>
 	<view class="custom-counter">
-		<text class="reduce cuIcon-move" @tap.stop="reduce"></text>
-		<text class="num">{{ value }}</text>
-		<text class="add cuIcon-add" @tap.stop="add"></text>
+		<text class="reduce cuIcon-move" :class="{ disabled: inputValue == 0 }" @tap.stop="reduce"></text>
+		<input class="num" type="number" @focus="focus" @blur="blur" maxlength="3" v-model="inputValue" />
+		<text class="add cuIcon-add" :class="{ disabled: inputValue == max }" @tap.stop="add"></text>
 	</view>
 </template>
 
@@ -15,25 +15,26 @@
 				default: () => []
 			},
 			value: String,
-			zeroWarn: String // 当 value 为 0 时是否触发 zero 事件
+			zeroWarn: String, // 当 value 为 0 时是否触发 zero 事件
+			max: {
+				type: Number,
+				default: () => 999
+			}
 		},
 		data() {
 			return {
 				inputValue: this.value
 			}
 		},
-		methods: {
-			add () { // +
-				this.inputValue = this.value
-				if (+this.inputValue < 99) {
-					this.inputValue ++
-					this.emitInputChange()
-				}
+		watch: {
+			value(n) {
+				this.inputValue = n
 			},
-			reduce () { // -
-				this.inputValue = this.value
-				if (+this.inputValue) { // value 只允许 大于等于 0
-					this.inputValue --
+			inputValue(n) {
+				if (+this.inputValue > this.max) {
+					setTimeout(() => this.inputValue = this.max)
+				} else {
+					this.inputValue = +this.inputValue
 					if (this.zeroWarn) {
 						if (this.inputValue) {
 							this.emitInputChange()
@@ -55,10 +56,36 @@
 						this.emitInputChange()
 					}
 				}
+			}
+		},
+		methods: {
+			focus() {
+				if(this.inputValue === '0') {
+					this.inputValue = ''
+				}
+			},
+			blur() {
+				if(this.inputValue === '') {
+					this.inputValue = '0'
+				}
+			},
+			add () { // +
+				this.inputValue = this.value
+				if (+this.inputValue < this.max) {
+					this.inputValue ++
+				} else {
+					this.inputValue = +this.max
+				}
+			},
+			reduce () { // -
+				this.inputValue = this.value
+				if (+this.inputValue) { // value 只允许 大于等于 0
+					this.inputValue --
+				}
 			},
 			emitInputChange() {
-				this.$emit('input', this.inputValue)
-				this.$emit('change', this.inputValue, ...this.args)
+				this.$emit('input', +this.inputValue)
+				this.$emit('change', +this.inputValue, ...this.args)
 			}
 		}
 	}
@@ -73,14 +100,23 @@
 		border-radius:5rpx;
 		color: $app-sec-text-color;
 		border: 1rpx solid $app-sec-text-color;
-		text {
+		.disabled {
+			background: #F5F7FA;
+		}
+		text, input {
 			@include flex();
 			flex: 1;
 			height: 100%;
+			box-sizing: border-box;
 			&.num {
+				text-align: center;
 				color: $app-main-text-color;
-				border-left: 2rpx solid $app-sec-text-color;
+			}
+			&.reduce {
 				border-right: 2rpx solid $app-sec-text-color;
+			}
+			&.add {
+				border-left: 2rpx solid $app-sec-text-color;
 			}
 		}
 	}

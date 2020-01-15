@@ -176,12 +176,12 @@
 			overflow: hidden;
 			position: relative;
 			border-radius: 16rpx;
-			&.item1 { animation: move 9s infinite; }
-			&.item2 { animation: move 17s infinite alternate; }
-			&.item3 { animation: move 23s infinite; }
-			&.item4 { animation: move 12s infinite alternate; }
-			&.item5 { animation: move 45s infinite alternate; }
-			&.item6 { animation: move 30s infinite; }
+			&.item1 { animation: move 68s infinite; }
+			&.item2 { animation: move 36s infinite alternate; }
+			&.item3 { animation: move 46s infinite; }
+			&.item4 { animation: move 24s infinite alternate; }
+			&.item5 { animation: move 90s infinite alternate; }
+			&.item6 { animation: move 60s infinite; }
 			&.rotate {
 				animation: rotate 2s infinite;
 			}
@@ -223,8 +223,8 @@
 		50% { transform: translate(8rpx, 0); }
 		60% { transform: translate(8rpx, 8rpx); }
 		70% { transform: translate(0, 8rpx); }
-		80% { transform: translate(-8rpx, 8rpx); transform: rotate(0deg); }
-		90% { transform: translate(-8rpx, 0rpx); transform: rotate(360deg); }
+		80% { transform: translate(-8rpx, 8rpx); }
+		90% { transform: translate(-8rpx, 0rpx); }
 		100% { transform: translate(0, 0); }
 	}
 </style>

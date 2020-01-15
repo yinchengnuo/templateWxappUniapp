@@ -1,5 +1,5 @@
 <template>
-	<div class="pulldown-refresher">
+	<view class="pulldown-refresher">
 		<swiper class="pulldown" vertical @touchend="touchend" @transition="pulldown">
 			<swiper-item class="pulldown-item" :style="{ top: pulldownRefreshingTop + 'px' }">
 				<slot></slot>
@@ -16,7 +16,7 @@
 			<text v-else-if="status === 2">... 刷新中 ...</text>
 			<text v-else-if="status ===3">... 继续下拉刷新列表 ...</text>
 		</view>
-	</div>
+	</view>
 </template>
 
 <script>
