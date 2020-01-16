@@ -11,12 +11,19 @@
 				<view class="color-view" @touchstart="pickColor" @touchmove="pickColor" :style="{ backgroundColor: 'hsl(' + hueView.H + ', 100%, 50%)' }">
 					<text class="anchor" :style="{ top: colorView.anchorTop + 'px', left: colorView.anchorLeft + 'px' }"></text>
 				</view>
+				<rich-text style="width: 100%; border: 1px solid #C0C0C0; height: 234px; margin-top: 12px;" :nodes="nodes"></rich-text>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import marked from 'marked'
+	marked.setOptions({
+		gfm: true,
+		tables: true,
+		breaks: true
+	})
 	export default {
 		data() {
 			return {
@@ -27,7 +34,20 @@
 				hueLeft: 0.5, // 色相选择器初始位置 [0, 1]
 				anchorTop: 0.5, // 颜色选择器初始 top [0, 1]
 				anchorLeft: 0.5, // 颜色选择器初始 left [0, 1]
+				mardDown: `### hello, markdown!\n### hello, markdown!\n\`\`\`javascript
+					var a = 123
+					const a = {
+						a: 1,
+						b: 3
+					}\n\`\`\`\n### hello, markdown!\n
+				`
 			};
+		},
+		computed: {
+			nodes() {
+				console.log(marked(this.mardDown))
+				return marked(this.mardDown)
+			}
 		},
 		mounted() {
 			Promise.all([this.getHueViewOffset(), this.getColorViewOffset()]).then(() => {
@@ -185,6 +205,15 @@ function hslToRgb(h, s, l) {  // HSL 转 RGB 方法
 						border: 4rpx solid #FFFFFF;
 						background: rgba(0, 0, 0, .3);
 						transform: translate(-50%, -50%);
+					}
+				}
+				rich-text {
+					.language-javascript {
+						background: #AAAAAA;
+						color: #FFFFFF;
+					}
+					h3 {
+						color: #007AFF;
 					}
 				}
 			}
