@@ -1,16 +1,16 @@
-$bg-color: #F2F2F2;
+$bg-color: #F8F8F8;
 $font-color: #333333;
 $theme-color: #007AFF;
 $app-nav-height: 159rpx;
 
-@mixin flex($c: row) {
+@mixin flex($c: row) { // flex布局
 	display: flex;
 	align-items: center;
 	flex-direction: $c;
 	justify-content: center;
 }
 
-@mixin page {
+@mixin page { // 页面布局
 	height: 100%;
 	box-sizing: border-box;
 	flex-direction: column;
@@ -22,6 +22,14 @@ $app-nav-height: 159rpx;
 		position: relative;
 		box-sizing: border-box;
 	}
+}
+
+.theme-color {
+	color: $theme-color;
+}
+
+.bold {
+	font-weight: bold;
 }
 
 .ellipsis { // 文字溢出打点换行

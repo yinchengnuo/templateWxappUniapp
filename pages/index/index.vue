@@ -11,10 +11,9 @@
 				<open-data class="nickname ellipsis" type="userNickName"></open-data>
 				<open-data class="city cuIcon-locationfill" type="userCity"></open-data>
 			</view>
-			<view class="card-bot">
-				<view class="cuIcon-github" type="userCity">Github</view>
-				<view class="province" type="userProvince"></view>
-			</view>
+			<navigator url="../roll-man/roll-man" class="card-bot">
+				<view class="index-roll">戳我一起滚动吧！滚动君！</view>
+			</navigator>
 		</view>
 		<view class="item item1 bg-gradual-red padding radius text-center shadow-blur" :class="{ rotate: rotate === 1 }" @tap="toStyle">
 			<text class="icon cuIcon-skinfill"></text>
@@ -41,11 +40,12 @@
 			<text class="name">关于<text>存储</text></text>
 			<text class="english">Storage</text>
 		</view>
-		<view class="item item6 bg-gradual-pink padding radius text-center shadow-blur" :class="{ rotate: rotate === 5 }" @tap="toOther">
+		<view class="item item6 bg-gradual-pink padding radius text-center shadow-blur" :class="{ rotate: rotate === 6 }" @tap="toOther">
 			<text class="icon cuIcon-play_forward_fill"></text>
 			<text class="name">关于<text>其他</text></text>
 			<text class="english">Other</text>
 		</view>
+		<view @tap="toAbout" class="about"><text class="cuIcon-questionfill"></text> 关于本项目</view>
 	</view>
 </template>
 
@@ -94,6 +94,11 @@
 				this.rotate = 6;
 				this.$router.push('/other')
 				setTimeout(() => this.rotate = -1, 2000)
+			},
+			toAbout() {
+				uni.navigateTo({
+					url: `../about/about?id=${true}`
+				})
 			}
 		}
 	}
@@ -141,8 +146,8 @@
 			left: 30rpx;
 			width: 690rpx;
 			height: 234rpx;
-			padding: 23rpx;
-			background: #F8F8F8;
+			padding: 25rpx;
+			background: #FDFDFD;
 			border-radius: 16rpx;
 			box-sizing: border-box;
 			box-shadow: 0rpx 1rpx #AAAAAA;
@@ -152,7 +157,15 @@
 				width: 100%;
 				justify-content: flex-start;
 				&.card-bot {
-					justify-content: flex-end;
+					@include flex();
+					overflow: hidden;
+					justify-content: flex-start;
+					.index-roll {
+						width: auto;
+						font-size: 64rpx;
+						white-space: nowrap;
+						animation: right-left infinite linear 6s;
+					}
 				}
 				.avatar {
 					width: 88rpx;
@@ -209,6 +222,14 @@
 				}
 			}
 		}
+		.about {
+			@include flex();
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: 88rpx;
+			position: fixed;
+		}
 	}
 	@keyframes rotate {
 		0% { transform: rotate(0deg); }
@@ -226,5 +247,13 @@
 		80% { transform: translate(-8rpx, 8rpx); }
 		90% { transform: translate(-8rpx, 0rpx); }
 		100% { transform: translate(0, 0); }
+	}
+	@keyframes right-left {
+		0% {
+			transform: translateX(640rpx);
+		}
+		100% {
+			transform: translateX(-100%);
+		}
 	}
 </style>

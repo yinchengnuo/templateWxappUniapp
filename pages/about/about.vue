@@ -1,5 +1,5 @@
 <template>
-	<view class="store">
+	<view class="about">
 		<custom-nav :title="title" />
 		<view class="content">
 			{{ title }}
@@ -11,14 +11,17 @@
 	export default {
 		data() {
 			return {
-				title: '关于状态'
+				title: '关于本项目'
 			}
+		},
+		onLoad(e) {
+			console.log(e)
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.store {
+	.about {
 		@include page();
 		.content {
 			@include flex();
