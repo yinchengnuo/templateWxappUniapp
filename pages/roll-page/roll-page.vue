@@ -20,6 +20,12 @@
 
 <script>
 	export default {
+		onShareAppMessage (res) {  //分享小程序
+			return {
+				title: this.rollText,
+				path: `/pages/roll-page/roll-page?rollText=${this.rollText}&fontColor=${this.fontColor}&fontSize=${this.fontSize}&fontWeight=${this.fontWeight}&fontStyle=${this.fontStyle}&textDecoration=${this.textDecoration}&textShadow=${this.textShadow}&opacity=${this.opacity}&letterSpacing=${this.letterSpacing}&bgColor=${this.bgColor}&animationDuration=${this.animationDuration}&animationDelay=${this.animationDelay}&animationTimingFunction=${this.animationTimingFunction}&animationDirection=${this.animationDirection}`
+			}
+		},
 		data() {
 			return {
 				rollText: '',
@@ -38,21 +44,21 @@
 				animationDirection: '',
 			}
 		},
-		onLoad({ animationDelay }) {
-			this.rollText = this.$route.query.rollText
-			this.fontColor = this.$route.query.fontColor
-			this.fontSize = this.$route.query.fontSize
-			this.fontWeight = this.$route.query.fontWeight
-			this.fontStyle = this.$route.query.fontStyle
-			this.textDecoration = this.$route.query.textDecoration
-			this.textShadow = this.$route.query.textShadow
-			this.opacity = this.$route.query.opacity
-			this.letterSpacing = this.$route.query.letterSpacing
-			this.bgColor = this.$route.query.bgColor
-			this.animationDuration = this.$route.query.animationDuration
-			this.animationDelay = this.$route.query.animationDelay
-			this.animationTimingFunction = this.$route.query.animationTimingFunction
-			this.animationDirection = this.$route.query.animationDirection
+		onLoad(opt) {
+			this.rollText = opt.rollText
+			this.fontColor = opt.fontColor
+			this.fontSize = Number(opt.fontSize)
+			this.fontWeight = opt.fontWeight
+			this.fontStyle = opt.fontStyle
+			this.textDecoration = opt.textDecoration
+			this.textShadow = opt.textShadow
+			this.opacity = Number(opt.opacity)
+			this.letterSpacing = opt.letterSpacing
+			this.bgColor = opt.bgColor
+			this.animationDuration = opt.animationDuration
+			this.animationDelay = opt.animationDelay
+			this.animationTimingFunction = opt.animationTimingFunction
+			this.animationDirection = opt.animationDirection
 		}
 	}
 </script>

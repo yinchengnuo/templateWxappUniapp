@@ -50,8 +50,14 @@
 </template>
 
 <script>
-	import { _API_Index } from '@/apis/index.js'
+	import { _API_Index, _API_IndexDownload, _API_IndexUpload } from '@/apis/index.js'
 	export default {
+		onShareAppMessage (res) {  //分享小程序
+			return {
+				title: '滚动吧！滚动君！',
+				path: '/pages/index/index'
+			}
+		},
 		data() {
 			return {
 				title: 'UNI-APP微信小程序快速开发模板',
@@ -62,7 +68,28 @@
 		onLoad() {
 			const task = _API_Index()
 			task.then(res => console.log(res)).catch(e => console.log(e))
-			setTimeout(() => task.cancel(), 123)
+			setTimeout(() => task.abort(), 567)
+			// const fileD = _API_IndexDownload({ header: { test: 666666 } })
+			// fileD.onProgressUpdate(e => console.log(e))
+			// fileD.then(res => console.log(res)).catch(e => console.log(e))
+			// let fileU
+			// setTimeout(() => {
+			// 	uni.compressImage({ src: '../../static/colorUIPreview.jpg', quality: 100 }).then(([, { tempFilePath }]) => {
+			// 		console.log(tempFilePath)
+			// 		fileU = _API_IndexUpload({ 
+			// 			name: 'img',
+			// 			filePath: tempFilePath,
+			// 			formData: {
+			// 				a: 1,
+			// 				b: 2
+			// 			}
+			// 		})
+			// 		fileU.onProgressUpdate(e => console.log(e))
+			// 		fileU.then(res => {
+			// 			console.log(res)
+			// 		})
+			// 	})
+			// }, 5678)
 		},
 		methods: {
 			toStyle() {
@@ -229,6 +256,9 @@
 			width: 100%;
 			height: 88rpx;
 			position: fixed;
+			text {
+				font-size: 42rpx;
+			}
 		}
 	}
 	@keyframes rotate {

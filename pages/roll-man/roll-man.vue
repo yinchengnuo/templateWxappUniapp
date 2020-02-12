@@ -121,9 +121,15 @@
 </template>
 
 <script>
-	import colorPicker from '@/components/public/color-picker.vue'
-	import customCounter from '@/components/public/custom-counter.vue'
+	import colorPicker from '@/components/color-picker.vue'
+	import customCounter from '@/components/custom-counter.vue'
 	export default {
+		onShareAppMessage (res) {  //分享小程序
+			return {
+				title: '滚动吧！滚动君！',
+				path: '/pages/index/index'
+			}
+		},
 		components: { colorPicker, customCounter },
 		data() {
 			return {
