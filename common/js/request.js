@@ -11,25 +11,23 @@ const request = uni_request({
 	baseURL: `${host}:${port}${url}`
 })
 
-request.interceptors.request.use(async config => {
+request.interceptors.request.use(async config => { // 请求拦截器
 	await new Promise(resolve => setTimeout(() => resolve(), 1234))
-	config.header.Authorization = 'Bearer ' + $store.state.app.token
+	config.header.Authorization = 'Bearer ' + uni.getStorageSync('token')
 	config.body.test = 'test'
 	return config
 })
 
-request.interceptors.response.use((response, ...args) => { // 拦截器
-	uni.$emit('HIDELOADING') // 隐藏加载
-	uni.stopPullDownRefresh() // 停止下拉刷新
+request.interceptors.response.use((response, ...args) => { // 响应拦截器
 	if (response.statusCode === 200) {
 		// Vue.prototype.$toast(`${response.statusCode}:${args[1]}`)
 	} else { // 服务器响应不为 200 的统一处理方法
-		console.log(134)
+		console.log('服务器响应异常')
 	}
 	return response
 })
 
-request.interceptors.response.use(async (response, ...args) => { // 拦截器
+request.interceptors.response.use(async (response, ...args) => { // 响应拦截器
 	await new Promise(resolve => setTimeout(() => resolve(), 3456))
 	return response
 })

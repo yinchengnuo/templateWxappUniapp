@@ -1,5 +1,3 @@
-# templateWxappUniapp
-
 ![1](https://raw.githubusercontent.com/yinchengnuo/templateWxappUniapp/master/md/1.jpg)
 ![2](https://raw.githubusercontent.com/yinchengnuo/templateWxappUniapp/master/md/2.jpg)
 ![3](https://raw.githubusercontent.com/yinchengnuo/templateWxappUniapp/master/md/3.jpg)
