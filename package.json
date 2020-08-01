@@ -1,0 +1,23 @@
+{
+  "name": "templateWxappUniapp",
+  "version": "1.0.0",
+  "description": "![1](https://raw.githubusercontent.com/yinchengnuo/templateWxappUniapp/master/md/1.jpg)\r ![2](https://raw.githubusercontent.com/yinchengnuo/templateWxappUniapp/master/md/2.jpg)\r ![3](https://raw.githubusercontent.com/yinchengnuo/templateWxappUniapp/master/md/3.jpg)\r ![4](https://raw.githubusercontent.com/yinchengnuo/templateWxappUniapp/master/md/4.jpg)\r ![5](https://raw.githubusercontent.com/yinchengnuo/templateWxappUniapp/master/md/5.jpg)",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinchengnuo/templateWxappUniapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yinchengnuo/templateWxappUniapp/issues"
+  },
+  "homepage": "https://github.com/yinchengnuo/templateWxappUniapp#readme",
+  "dependencies": {
+    "webpack": "^4.44.1"
+  }
+}

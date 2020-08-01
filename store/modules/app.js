@@ -1,7 +1,7 @@
 export default {
 	namespaced: true,
 	state: {
-		token: 'eydsocbfsdffhsjvcnlsdfg;sjdgh;aig'
+		token: 'token'
 	},
 	mutations: {}
 }
