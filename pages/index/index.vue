@@ -45,7 +45,7 @@
 			<text class="name">关于<text>其他</text></text>
 			<text class="english">Other</text>
 		</view>
-		<view @tap="toAbout" class="about"><text class="cuIcon-questionfill"></text> 关于本项目</view>
+		<view @tap="$router.push('/index-about')" class="about"><text class="cuIcon-questionfill"></text> 关于本项目</view>
 	</view>
 </template>
 
@@ -65,7 +65,16 @@
 				topBgs: ['bg-red', 'bg-orange', 'bg-yellow', 'bg-olive', 'bg-green', 'bg-cyan', 'bg-blue', 'bg-purple', 'bg-mauve', 'bg-pink', 'bg-brown', 'bg-grey']
 			}
 		},
-		onLoad() {
+		onShow() {
+			this.$emit('onShow')
+		},
+		onLoad(opt) {
+			if (Object.keys(opt).length) { // 有参数，表示从分享页 relaunch
+				this.$once('onShow', () => {
+					this.$router.push('/roll-man', { ...opt })
+				})
+			}
+			this.$request(_API_Index(), data => console.log(data))
 			// const task = _API_Index() // 执行接口并保存请求任务
 			// task.then(res => console.log(res)).catch(e => console.log(e)) // 请求任务的结果处理
 			// setTimeout(() => task.abort(), 567) // 需要的时候，可以主动取消请求任务
@@ -94,38 +103,33 @@
 		methods: {
 			toStyle() {
 				this.rotate = 1;
-				this.$router.push('/style')
+				this.$router.push('/index-style')
 				setTimeout(() => this.rotate = -1, 2000)
 			},
 			toRouter() {
 				this.rotate = 2;
-				this.$router.push('/router')
+				this.$router.push('/index-router')
 				setTimeout(() => this.rotate = -1, 2000)
 			},
 			toStore() {
 				this.rotate = 3;
-				this.$router.push('/store')
+				this.$router.push('/index-store')
 				setTimeout(() => this.rotate = -1, 2000)
 			},
 			toRequest() {
 				this.rotate = 4;
-				this.$router.push('/request')
+				this.$router.push('/index-request')
 				setTimeout(() => this.rotate = -1, 2000)
 			},
 			toStorage() {
 				this.rotate = 5;
-				this.$router.push('/storage')
+				this.$router.push('/index-storage')
 				setTimeout(() => this.rotate = -1, 2000)
 			},
 			toOther() {
 				this.rotate = 6;
-				this.$router.push('/other')
+				this.$router.push('/index-other')
 				setTimeout(() => this.rotate = -1, 2000)
-			},
-			toAbout() {
-				uni.navigateTo({
-					url: `../about/about?id=${true}`
-				})
 			}
 		}
 	}

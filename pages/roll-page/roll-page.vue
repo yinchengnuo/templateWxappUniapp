@@ -26,6 +26,12 @@
 				path: `/pages/roll-page/roll-page?rollText=${this.rollText}&fontColor=${this.fontColor}&fontSize=${this.fontSize}&fontWeight=${this.fontWeight}&fontStyle=${this.fontStyle}&textDecoration=${this.textDecoration}&textShadow=${this.textShadow}&opacity=${this.opacity}&letterSpacing=${this.letterSpacing}&bgColor=${this.bgColor}&animationDuration=${this.animationDuration}&animationDelay=${this.animationDelay}&animationTimingFunction=${this.animationTimingFunction}&animationDirection=${this.animationDirection}`
 			}
 		},
+		onShareTimeline() {
+			return {
+			        title: this.rollText,
+			        query: `rollText=${this.rollText}&fontColor=${this.fontColor}&fontSize=${this.fontSize}&fontWeight=${this.fontWeight}&fontStyle=${this.fontStyle}&textDecoration=${this.textDecoration}&textShadow=${this.textShadow}&opacity=${this.opacity}&letterSpacing=${this.letterSpacing}&bgColor=${this.bgColor}&animationDuration=${this.animationDuration}&animationDelay=${this.animationDelay}&animationTimingFunction=${this.animationTimingFunction}&animationDirection=${this.animationDirection}`
+			    }
+		},
 		data() {
 			return {
 				rollText: '',
@@ -45,6 +51,10 @@
 			}
 		},
 		onLoad(opt) {
+			if (!opt.fromRollMan) { // 表示不是从分享页面进入
+				delete opt.fromRollMan
+				this.$router.reLaunch('/index', { ...opt })
+			}
 			this.rollText = opt.rollText
 			this.fontColor = opt.fontColor
 			this.fontSize = Number(opt.fontSize)

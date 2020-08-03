@@ -180,7 +180,7 @@ switch .uni-switch-input {
 
 switch .wx-switch-input:not([class*="bg-"]),
 switch .uni-switch-input:not([class*="bg-"]) {
-	background: #8799a3 !important;
+	background: #CCCCCC !important;
 }
 
 switch .wx-switch-input::after,
@@ -271,8 +271,8 @@ radio.radio .uni-radio-input-checked::after {
 
 .switch-sex[checked] .wx-switch-input,
 .switch-sex.checked .uni-switch-input {
-	background: #0081ff !important;
-	border-color: #0081ff !important;
+	background: #2C6EFF !important;
+	border-color: #2C6EFF !important;
 }
 
 switch.red[checked] .wx-switch-input.wx-switch-input-checked,
@@ -354,8 +354,8 @@ radio.blue[checked] .wx-radio-input,
 switch.blue.checked .uni-switch-input,
 checkbox.blue.checked .uni-checkbox-input,
 radio.blue.checked .uni-radio-input {
-	background-color: #0081ff !important;
-	border-color: #0081ff !important;
+	background-color: #2C6EFF !important;
+	border-color: #2C6EFF !important;
 	color: #ffffff !important;
 }
 
@@ -409,8 +409,8 @@ radio.grey[checked] .wx-radio-input,
 switch.grey.checked .uni-switch-input,
 checkbox.grey.checked .uni-checkbox-input,
 radio.grey.checked .uni-radio-input {
-	background-color: #8799a3 !important;
-	border-color: #8799a3 !important;
+	background-color: #CCCCCC !important;
+	border-color: #CCCCCC !important;
 	color: #ffffff !important;
 }
 
@@ -627,7 +627,7 @@ radio.white.checked .uni-radio-input {
 	align-items: center;
 	justify-content: center;
 	box-sizing: border-box;
-	padding: 0 30upx;
+	padding: 0 20upx;
 	font-size: 28upx;
 	height: 64upx;
 	line-height: 1;
@@ -1328,7 +1328,7 @@ button.cuIcon.lg {
 	margin: auto;
 	width: 30upx;
 	height: 30upx;
-	color: #8799a3;
+	color: #CCCCCC;
 	content: "\e6a3";
 	text-align: center;
 	font-size: 34upx;
@@ -2098,7 +2098,7 @@ button.cuIcon.lg {
 .cu-chat .cu-item .date {
 	position: absolute;
 	font-size: 24upx;
-	color: #8799a3;
+	color: #CCCCCC;
 	width: calc(100% - 320upx);
 	bottom: 20upx;
 	left: 160upx;
@@ -2389,7 +2389,7 @@ button.cuIcon.lg {
 	content: "\e6a3";
 	position: absolute;
 	font-size: 34upx;
-	color: #8799a3;
+	color: #CCCCCC;
 	line-height: 100upx;
 	width: 60upx;
 	text-align: center;
@@ -2532,7 +2532,7 @@ swiper.square-dot .uni-swiper-dot {
 	width: 10upx;
 	height: 10upx;
 	border-radius: 20upx;
-	margin: 0 8upx !important;
+	margin: 8upx 8upx !important;
 }
 
 swiper.square-dot .wx-swiper-dot.wx-swiper-dot-active,
@@ -2672,7 +2672,7 @@ scroll-view.cu-steps .cu-item {
 }
 
 .cu-steps .cu-item:not([class*="text-"]) {
-	color: #8799a3;
+	color: #CCCCCC;
 }
 
 .cu-steps .cu-item [class*="cuIcon-"],
@@ -2913,7 +2913,7 @@ scroll-view.cu-steps .cu-item {
 .grid.grid-square>view>text[class*="cuIcon-"] {
 	font-size: 52upx;
 	position: absolute;
-	color: #8799a3;
+	color: #CCCCCC;
 	margin: auto;
 	top: 0;
 	bottom: 0;
@@ -3360,7 +3360,7 @@ scroll-view.cu-steps .cu-item {
 
 .line-blue::after,
 .lines-blue::after {
-	border-color: #0081ff;
+	border-color: #2C6EFF;
 }
 
 .line-purple::after,
@@ -3385,7 +3385,7 @@ scroll-view.cu-steps .cu-item {
 
 .line-grey::after,
 .lines-grey::after {
-	border-color: #8799a3;
+	border-color: #CCCCCC;
 }
 
 .line-gray::after,
@@ -3434,7 +3434,7 @@ scroll-view.cu-steps .cu-item {
 }
 
 .bg-blue {
-	background-color: #0081ff;
+	background-color: #2C6EFF;
 	color: #ffffff;
 }
 
@@ -3459,7 +3459,7 @@ scroll-view.cu-steps .cu-item {
 }
 
 .bg-grey {
-	background-color: #8799a3;
+	background-color: #CCCCCC;
 	color: #ffffff;
 }
 
@@ -3519,7 +3519,7 @@ scroll-view.cu-steps .cu-item {
 }
 
 .bg-blue.light {
-	color: #0081ff;
+	color: #2C6EFF;
 	background-color: #cce6ff;
 }
 
@@ -3544,7 +3544,7 @@ scroll-view.cu-steps .cu-item {
 }
 
 .bg-grey.light {
-	color: #8799a3;
+	color: #CCCCCC;
 	background-color: #e7ebed;
 }
 
@@ -3574,7 +3574,7 @@ scroll-view.cu-steps .cu-item {
 }
 
 .bg-gradual-blue {
-	background-image: linear-gradient(45deg, #0081ff, #1cbbb4);
+	background-image: linear-gradient(45deg, #2C6EFF, #1cbbb4);
 	color: #ffffff;
 }
 
@@ -3860,7 +3860,7 @@ scroll-view.cu-steps .cu-item {
 .text-blue,
 .line-blue,
 .lines-blue {
-	color: #0081ff;
+	color: #2C6EFF;
 }
 
 .text-purple,
@@ -3890,7 +3890,7 @@ scroll-view.cu-steps .cu-item {
 .text-grey,
 .line-grey,
 .lines-grey {
-	color: #8799a3;
+	color: #CCCCCC;
 }
 
 .text-gray,

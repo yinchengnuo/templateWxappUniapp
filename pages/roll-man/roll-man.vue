@@ -1,6 +1,5 @@
 <template>
 	<view class="roll-man">
-		<custom-nav :title="title" />
 		<color-picker @cancel="colorPickerCancel1" @change="colorPickerChange1" @preview="colorPickerPreview1" ref="colorPicker1" />
 		<color-picker @cancel="colorPickerCancel2" @change="colorPickerChange2" @preview="colorPickerPreview2" ref="colorPicker2" />
 		<color-picker @cancel="colorPickerCancel3" @change="colorPickerChange3" @preview="colorPickerPreview3" ref="colorPicker3" />
@@ -115,7 +114,7 @@
 					<text class="cuIcon-right"></text>
 				</view>
 			</view>
-			<button type="primary" @tap="toRoll">滚动吧！滚动君！</button>
+			<button style="width: 100%;" class="bg-red" @tap="toRoll">滚动吧！滚动君！</button>
 		</view>
 	</view>
 </template>
@@ -124,20 +123,14 @@
 	import colorPicker from '@/components/color-picker.vue'
 	import customCounter from '@/components/custom-counter.vue'
 	export default {
-		onShareAppMessage (res) {  //分享小程序
-			return {
-				title: '滚动吧！滚动君！',
-				path: '/pages/index/index'
-			}
-		},
 		components: { colorPicker, customCounter },
 		data() {
 			return {
 				title: '滚动吧！滚动君！',
-				value: '武汉加油！中国加油！',
+				value: '普天同庆',
 				chooseColorType: 1, // 选择颜色类型 1 文本颜色 2 文本阴影颜色 3 背景颜色
 				fontColor: '#FF0000', // 文本颜色
-				fontPreviewColor: '', // 文本颜色（打开颜色选择器选择颜色预览时的颜色）
+				fontPreviewColor: '#FF0000', // 文本颜色（打开颜色选择器选择颜色预览时的颜色）
 				fontSize: 98, // 文本尺寸
 				fontWeightIndex: 1, // 文本粗细所选下标
 				fontWeightRange: [ // 文本粗细可选项目
@@ -162,7 +155,7 @@
 				opacity: 100, // 文本透明度
 				letterSpacing: 0, // 文字间隔
 				bgColor: '#FFFFFF', // 背景色
-				bgPreviewColor: '', // 背景色（打开颜色选择器选择颜色预览时的颜色）
+				bgPreviewColor: '#FFFFFF', // 背景色（打开颜色选择器选择颜色预览时的颜色）
 				animationDuration: 6, // 动画周期时常
 				animationDelay: 1, // 动画延时时长
 				animationTimingFunctionIndex: 0, // 文本装饰所选下标
@@ -188,9 +181,38 @@
 				return Number(this.animationDirectionIndex) === 0 ? this.value : Array.from(this.value).reverse().join('')
 			}
 		},
+		onShow() {
+			this.$emit('onShow')
+		},
+		onLoad(opt) {
+			if (Object.keys(opt).length) {
+				this.title = opt.rollText
+				this.fontColor = this.fontPreviewColor = opt.fontColor,
+				this.fontSize = Number(opt.fontSize)
+				this.fontWeightIndex = this.fontWeightRange.findIndex(e => e.value === opt.fontWeight)
+				this.fontStyle = opt.fontStyle
+				this.fontDecorationIndex = this.fontDecorationRange.findIndex(e => e.value === opt.textDecoration)
+				this.fontShadowH = opt.textShadow.split(' ')[0].replace('px', '')
+				this.fontShadowV = opt.textShadow.split(' ')[1].replace('px', '')
+				this.fontShadowB = opt.textShadow.split(' ')[2].replace('px', '')
+				this.fontShadowColor = opt.textShadow.split(' ')[3]
+				this.opacity = Number(opt.opacity)
+				this.letterSpacing = Number(opt.letterSpacing.replace('px', ''))
+				this.bgColor = this.bgPreviewColor = opt.bgColor
+				this.animationDuration = Number(opt.animationDuration.replace('s', ''))
+				this.animationDelay = Number(opt.animationDelay.replace('s', ''))
+				this.animationTimingFunctionIndex = this.animationTimingFunctionRange.findIndex(e => e.value === opt.animationTimingFunction)
+				this.animationDirectionIndex = this.animationDirectionRange.findIndex(e => e.value === opt.animationDirection)
+				
+				this.$once('onShow', () => {
+					this.toRoll()
+				})
+			}
+		},
 		methods: {
 			toRoll() { // 去work页面
 				this.$router.push('/roll-page', {
+					fromRollMan: 1, // 标记，不是从分享后的页面进入
 					rollText: this.rollText,
 					fontColor: this.fontColor,
 					fontSize: this.fontSize,
@@ -228,12 +250,14 @@
 
 <style lang="scss" scoped>
 	.roll-man {
-		@include page();
+		height: 100%;
+		padding: 20rpx;
+		background: #FFFFFF;
+		box-sizing: border-box;
 		.content {
+			height: 100%;
+			position: relative;
 			@include flex(column);
-			padding: 24rpx;
-			background: #FFFFFF;
-			justify-content: flex-start;
 			.preview {
 				@include flex();
 				width: 100%;
@@ -306,7 +330,7 @@
 					line-height: 88rpx;
 					box-sizing: border-box;
 					justify-content: space-between;
-					border-top: 1rpx solid $bg-color;
+					border-top: 1rpx solid #CCCCCC;
 					picker {
 						flex: 1;
 						height: 100%;

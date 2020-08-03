@@ -1,48 +1,69 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [
 		{
 			"path": "pages/index/index",
-			"style": {}
+			"style": {
+				"navigationStyle": "custom"
+			}
 		},
         {
-            "path" : "pages/roll-man/roll-man",
-            "style" : {}
+            "path" : "pages/index-style/index-style",
+            "style" : {
+				"navigationBarTitleText": "关于样式"
+			}
         },
         {
-            "path" : "pages/style/style",
-            "style" : {}
-        },
-        {
-            "path" : "pages/router/router",
-            "style" : {}
+            "path" : "pages/index-router/index-router",
+            "style" : {
+				"navigationBarTitleText": "关于路由"
+			}
         }
         ,{
-            "path" : "pages/store/store",
-            "style" : {}
+            "path" : "pages/index-store/index-store",
+            "style" : {
+				"navigationBarTitleText": "关于状态"
+			}
         }
         ,{
-            "path" : "pages/request/request",
-            "style" : {}
+            "path" : "pages/index-request/index-request",
+            "style" : {
+				"navigationBarTitleText": "关于网络"
+			}
         }
         ,{
-            "path" : "pages/storage/storage",
-            "style" : {}
+            "path" : "pages/index-storage/index-storage",
+            "style" : {
+				"navigationBarTitleText": "关于存储"
+			}
         }
         ,{
-            "path" : "pages/other/other",
-            "style" : {}
+            "path" : "pages/index-other/index-other",
+            "style" : {
+				"navigationBarTitleText": "关于其他"
+			}
         }
+		,{
+		    "path" : "pages/index-about/index-about",
+		    "style" : {
+				"navigationBarTitleText": "关于本项目"
+			}
+		},
+		{
+		    "path" : "pages/roll-man/roll-man",
+		    "style" : {
+				"navigationBarTitleText": "滚动吧！滚动君！"
+			}
+		}
         ,{
             "path" : "pages/roll-page/roll-page",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/about/about",
-            "style" : {}
+            "style" : {
+				"navigationStyle": "custom"
+			}
         }
     ],
 	"globalStyle": {
-		"navigationStyle": "custom",
-		"navigationBarTextStyle": "black"
+		"backgroundColor": "#FFFFFF",
+		"navigationBarTextStyle": "black",
+		"navigationBarBackgroundColor": "#FFFFFF"
 	}
 }

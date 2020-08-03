@@ -1,18 +1,36 @@
 import Vue from 'vue'
-import App from './App'
-import $router, { $route } from '@/common/js/uni_router.js'
+import App from '@/App'
+import $store from '@/store/index.js'
+import * as filters from '@/utils/filters.js'
+import $storage from '@/utils/tools/uni_storage.js'
+import router, { route } from '@/utils/tools/uni_router.js'
 
-Vue.prototype.$route = $route // 当前路由对象，保存路由当前信息
-Vue.prototype.$router = $router // 路由对象，保存了实例方法
+import '@/utils/uni.js'
+import '@/utils/router.js'
+Object.assign(Vue.prototype, Object.getPrototypeOf(uni))
 
-Vue.prototype.$offset = function (selector) { // 获取元素宽高位置信息
-	return new Promise((resolve, reject) => {
-		uni.createSelectorQuery().in(this).select(selector).boundingClientRect(data => data ? resolve(data) : reject('元素不存在')).exec()
-	})
-}
+Object.keys(filters).forEach(e => {
+	Vue.filter(e, filters[e])
+})
 
-import CustomNav from './components/custom-nav.vue' //自定义头部导航栏交互组件
-Vue.component('custom-nav', CustomNav) //注册自定义头部导航栏
+Vue.prototype.$route = route
+Vue.prototype.$store = $store
+Vue.prototype.$router = router
+Vue.prototype.$storage = $storage
 
-Vue.config.productionTip = false
-;( new Vue( { ...App } ) ).$mount()
+Vue.mixin({
+	onShareAppMessage (res) { //分享小程序
+		return {
+			title: '滚动吧！滚动君！',
+			path: '/pages/index/index'
+		}
+	},
+	onShow() {
+		uni.showShareMenu({
+		  withShareTicket: true,
+		  menus: ['shareAppMessage', 'shareTimeline']
+		})
+	}
+})
+
+;(new Vue({ ...App }) ).$mount()

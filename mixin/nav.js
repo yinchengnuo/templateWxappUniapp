@@ -10,16 +10,27 @@ export default {
 		}
 	},
 	mounted() {
-		this.$offset('.swiper').then(res => this.MIXIN_ScrollViewHeight = res.height)
+		this.$offset('.nav-view').then(res => {
+			console.log(res)
+			this.MIXIN_ScrollViewHeight = res.height
+		})
 	},
 	methods: {
-		MIXIN_transition({ detail: { dx } }) {
-			this.MIXIN_DrogLeft = this.MIXIN_FinishedIndex * (this.MIXIN_ScreenWidth / this.navList.length) +  dx / this.navList.length
+		MIXIN_transition({ detail: { dx }}) {
+			this.MIXIN_DrogLeft = this.MIXIN_FinishedIndex * (this.MIXIN_ScreenWidth / this.navList.length) + dx / this.navList.length
 		},
-		MIXIN_change({ detail: { current } }) {
+		MIXIN_change({
+			detail: {
+				current
+			}
+		}) {
 			this.MIXIN_ActiveIndex = current
 		},
-		MIXIN_animationfinish({ detail: { current } }) { // swiper 停止切换
+		MIXIN_animationfinish({
+			detail: {
+				current
+			}
+		}) { // swiper 停止切换
 			this.MIXIN_FinishedIndex = this.MIXIN_NowIndex = current
 		},
 		MIXIN_SwitchNav(index) {
