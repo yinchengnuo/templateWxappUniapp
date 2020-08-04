@@ -8,7 +8,7 @@
 			现在如果要调用 getUserInfo() 获取用户信息，只能通过：</view>
 			<rich-text :nodes="code1"></rich-text>
 			<view class="p">因为如果当前小程序的缓存中没有用户允许小程序获取用户信息的记录，在调用 getUserInfo() 时，小程序会提示弹窗，就像这样：</view>
-			<image src="../../static/getUserInfo.png" mode=""></image>
+			<image src="../../../static/getUserInfo.png" mode=""></image>
 			<view class="p">许多开发者滥用 getUserInfo() 导致小程序体验下降。因此小程序官方才把 getUserInfo() 接口改为：如果当前小程序的缓存中没有用户允许小程序获取用户信息的记录，getUserInfo() 接口只能以用户点击的方式触发调用，而不能直接调用：</view>
 			<rich-text :nodes="code2"></rich-text>
 			<view class="p">所有这里我们不讨论是否应该废弃 getUserInfo() 接口，而是在这种情况下我们如果更优雅的调用 getUserInfo() 接口，也就是如何更优雅地让用户点击一个 open-type 属性为 getUserInfo 的按钮。</view>
@@ -26,15 +26,8 @@
 
 <script>
 	export default {
-		onShareAppMessage (res) {  //分享小程序
-			return {
-				title: '滚动吧！滚动君！',
-				path: '/pages/index/index'
-			}
-		},
 		data() {
 			return {
-				title: '关于其他',
 				showGetUserInfoButton: false,
 				code1: `
 <pre style="border: 1px solid #AAAAAA; border-radius: 8px; background: #FFFAE8; padding: 8px; margin: 8px 0px; overflow: scroll;">&lt;button
@@ -64,7 +57,15 @@
 			}
 		},
 		methods: {
-			getuserinfo({ detail }) {
+			getuserinfo({ detail: { rawData }}) {
+				if (rawData) {
+					this.$model('获取成功', rawData, {
+						confirmText: '复制信息',
+						cancelText: '我知道了',
+					}).then(() => this.$copy(rawData, '复制成功')).catch(() => this.$toast('我知道你知道了'))
+				} else {
+					this.$toast('你拒绝了...')
+				}
 				this.showGetUserInfoButton = false
 			}
 		}

@@ -13,15 +13,8 @@
 
 <script>
 	export default {
-		onShareAppMessage (res) {  //分享小程序
-			return {
-				title: '滚动吧！滚动君！',
-				path: '/pages/index/index'
-			}
-		},
 		data() {
 			return {
-				title: '关于状态',
 				code1: `
 <pre style="border: 1px solid #AAAAAA; border-radius: 8px; background: #FFFAE8; padding: 8px; margin: 8px 0px; overflow: scroll;">Vue.prototype.$store = store
 </pre>	

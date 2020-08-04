@@ -75,7 +75,7 @@ const router = new Proxy({
 	},
 	_routeTo(UNIAPI, type, path, query, notBeforeEach, notAfterEach) {
 		return new Promise((resolve, reject) => {
-			if (type !== 'reLaunch' && _$ROUTING) {
+			if (type === 'push' && _$ROUTING) {
 				reject('路由进行中')
 				return
 			}

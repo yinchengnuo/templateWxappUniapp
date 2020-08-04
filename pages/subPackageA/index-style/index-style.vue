@@ -11,16 +11,16 @@
 				<swiper-item>
 					<scroll-view scroll-y :style="{ height: MIXIN_ScrollViewHeight + 'px' }">
 						<view class="p">uni-app插件市场有许多优秀的UI组件库，给出了许多通用样式的解决方案，非常值得我们学习和使用，如 ColorUI（作者：文晓港）：</view>
-						<image @tap="preview('../../static/colorUIWXcode.png')" class="colorUI1" src="../../static/colorUIWXcode.png"></image>
-						<image @tap="preview('../../static/colorUI.png')" class="colorUI2" src="../../static/colorUI.png"></image>
-						<image @tap="preview('../../static/colorUIPreview.jpg')" class="colorUI3" src="../../static/colorUIPreview.jpg"></image>
+						<image @tap="$preview('../../../static/colorUIWXcode.png')" class="colorUI1" src="../../../static/colorUIWXcode.png"></image>
+						<image @tap="$preview('../../../static/colorUI.png')" class="colorUI2" src="../../../static/colorUI.png"></image>
+						<image @tap="$preview('../../../static/colorUIPreview.jpg')" class="colorUI3" src="../../../static/colorUIPreview.jpg"></image>
 					</scroll-view>
 				</swiper-item>
 				<swiper-item>
 					<scroll-view scroll-y :style="{ height: MIXIN_ScrollViewHeight + 'px' }">
 						<view class="p">uni-app插件市场也有许多优秀的图表库，如果你的小程序有这方面的需求，建议直接使用 uCharts（作者：秋云）：</view>
-						<image class="uChart" @tap="previewChart('../../static/uChartWXcode.png')" src="../../static/uChartWXcode.png"></image>
-						<image v-for="item in chartImgList" :key="item" :src="item" @tap="previewChart(item)" class="chartImg"></image>
+						<image class="uChart" @tap="$preview('../../../static/uChartWXcode.png')" src="../../../static/uChartWXcode.png"></image>
+						<image v-for="item in chartImgList" :key="item" :src="item" @tap="$preview(item)" class="chartImg"></image>
 					</scroll-view>
 				</swiper-item>
 			</swiper>
@@ -46,18 +46,10 @@
 					'https://box.kancloud.cn/af4fb86f40538d85da3e8def8669b87d_468x342.gif',
 					'https://box.kancloud.cn/1a7b5b2908751cbb3f135e5071e42f1b_468x345.gif',
 					'https://box.kancloud.cn/a3c42919a45fbf93db028fe9a0975adc_468x345.gif',
-					'https://box.kancloud.cn/fe5f988bfb017c5d46d695e4626bd656_468x345.gif',
+					'https://box.kancloud.cn/fe5f988bfb017c5d46d695e4626bd656_468x345.gif'
 				]
 			}
-		},
-		methods: {
-			preview(src) {
-				uni.compressImage({ src, quality: 100 }).then(([, { tempFilePath }]) => uni.previewImage({ urls: [tempFilePath] }))
-			},
-			previewChart(tempFilePath) {
-				tempFilePath[0] === 'h' ? uni.previewImage({ urls: [tempFilePath] }) : this.preview(tempFilePath)
-			},
-		} 
+		}
 	}
 </script>
 

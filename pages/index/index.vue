@@ -11,9 +11,9 @@
 				<open-data class="nickname ellipsis" type="userNickName"></open-data>
 				<open-data class="city cuIcon-locationfill" type="userCity"></open-data>
 			</view>
-			<navigator url="../roll-man/roll-man" class="card-bot">
+			<view class="card-bot" @click="$router.push('/roll-man')">
 				<view class="index-roll">戳我一起滚动吧！滚动君！</view>
-			</navigator>
+			</view>
 		</view>
 		<view class="item item1 bg-gradual-red padding radius text-center shadow-blur" :class="{ rotate: rotate === 1 }" @tap="toStyle">
 			<text class="icon cuIcon-skinfill"></text>
@@ -74,7 +74,7 @@
 					this.$router.push('/roll-man', { ...opt })
 				})
 			}
-			this.$request(_API_Index(), data => console.log(data))
+			// this.$request(_API_Index(), data => console.log(data))
 			// const task = _API_Index() // 执行接口并保存请求任务
 			// task.then(res => console.log(res)).catch(e => console.log(e)) // 请求任务的结果处理
 			// setTimeout(() => task.abort(), 567) // 需要的时候，可以主动取消请求任务

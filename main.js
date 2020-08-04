@@ -5,9 +5,9 @@ import * as filters from '@/utils/filters.js'
 import $storage from '@/utils/tools/uni_storage.js'
 import router, { route } from '@/utils/tools/uni_router.js'
 
-import '@/utils/uni.js'
 import '@/utils/router.js'
-Object.assign(Vue.prototype, Object.getPrototypeOf(uni))
+
+Object.setPrototypeOf(Vue.prototype, G)
 
 Object.keys(filters).forEach(e => {
 	Vue.filter(e, filters[e])

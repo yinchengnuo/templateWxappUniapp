@@ -9,27 +9,14 @@
 			同时一些插件的开发也都是为了满足本人工作中的业务需求，插件的功能都比较简练，但是非常实用。如果没有满足你的需求，非常遗憾。而如果你在使用过程中发现了问题，或者出现了BUG。
 			欢迎在插件市场留言！非常感谢！</view>
 			<view class="p">开源地址：</view>
-			<button class="url" @tap="copy">https://github.com/yinchengnuo/templateWxappUniapp</button>
+			<button class="url" @tap="$copy('https://github.com/yinchengnuo/templateWxappUniapp')">https://github.com/yinchengnuo/templateWxappUniapp</button>
 		</view>
 	</view>
 </template>
 
 <script>
 	export default {
-		onShareAppMessage (res) {  //分享小程序
-			return {
-				title: '滚动吧！滚动君！',
-				path: '/pages/index/index'
-			}
-		},
-		data() {
-			return {
-				title: '关于本项目'
-			}
-		},
-		methods: {
-			copy() { uni.setClipboardData({ data: 'https://github.com/yinchengnuo/templateWxappUniapp' }) }
-		}
+		
 	}
 </script>
 

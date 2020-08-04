@@ -1,69 +1,74 @@
 {
-	"pages": [
-		{
-			"path": "pages/index/index",
+	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"navigationStyle": "custom"
+		}
+	}],
+	"subPackages": [{
+		"root": "pages/subPackageA",
+		"pages": [{
+				"path": "index-style/index-style",
+				"style": {
+					"navigationBarTitleText": "关于样式"
+				}
+			},
+			{
+				"path": "index-router/index-router",
+				"style": {
+					"navigationBarTitleText": "关于路由"
+				}
+			}, {
+				"path": "index-store/index-store",
+				"style": {
+					"navigationBarTitleText": "关于状态"
+				}
+			}, {
+				"path": "index-request/index-request",
+				"style": {
+					"navigationBarTitleText": "关于网络"
+				}
+			}, {
+				"path": "index-storage/index-storage",
+				"style": {
+					"navigationBarTitleText": "关于存储"
+				}
+			}, {
+				"path": "index-other/index-other",
+				"style": {
+					"navigationBarTitleText": "关于其他"
+				}
+			}, {
+				"path": "index-about/index-about",
+				"style": {
+					"navigationBarTitleText": "关于本项目"
+				}
+			}
+            ]
+	}, {
+		"root": "pages/subPackageB",
+		"pages": [{
+			"path": "roll-man/roll-man",
+			"style": {
+				"navigationBarTitleText": "滚动吧！滚动君！"
+			}
+		}, {
+			"path": "roll-page/roll-page",
 			"style": {
 				"navigationStyle": "custom"
 			}
-		},
-        {
-            "path" : "pages/index-style/index-style",
-            "style" : {
-				"navigationBarTitleText": "关于样式"
-			}
-        },
-        {
-            "path" : "pages/index-router/index-router",
-            "style" : {
-				"navigationBarTitleText": "关于路由"
-			}
-        }
-        ,{
-            "path" : "pages/index-store/index-store",
-            "style" : {
-				"navigationBarTitleText": "关于状态"
-			}
-        }
-        ,{
-            "path" : "pages/index-request/index-request",
-            "style" : {
-				"navigationBarTitleText": "关于网络"
-			}
-        }
-        ,{
-            "path" : "pages/index-storage/index-storage",
-            "style" : {
-				"navigationBarTitleText": "关于存储"
-			}
-        }
-        ,{
-            "path" : "pages/index-other/index-other",
-            "style" : {
-				"navigationBarTitleText": "关于其他"
-			}
-        }
-		,{
-		    "path" : "pages/index-about/index-about",
-		    "style" : {
-				"navigationBarTitleText": "关于本项目"
-			}
-		},
-		{
-		    "path" : "pages/roll-man/roll-man",
-		    "style" : {
-				"navigationBarTitleText": "滚动吧！滚动君！"
-			}
+		}]
+	}],
+	"preloadRule": {
+		"pages/index/index": {
+			"network": "all",
+			"packages": ["pages/subPackageA", "pages/subPackageB"]
 		}
-        ,{
-            "path" : "pages/roll-page/roll-page",
-            "style" : {
-				"navigationStyle": "custom"
-			}
-        }
-    ],
+	},
 	"globalStyle": {
 		"backgroundColor": "#FFFFFF",
 		"navigationBarTextStyle": "black",
 		"navigationBarBackgroundColor": "#FFFFFF"
-	}
+	},
+	"sitemapLocation": "sitemap.json"
 }

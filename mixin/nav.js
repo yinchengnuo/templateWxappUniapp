@@ -10,10 +10,7 @@ export default {
 		}
 	},
 	mounted() {
-		this.$offset('.nav-view').then(res => {
-			console.log(res)
-			this.MIXIN_ScrollViewHeight = res.height
-		})
+		this.$offset('.nav-view').then(({ height }) => this.MIXIN_ScrollViewHeight = height)
 	},
 	methods: {
 		MIXIN_transition({ detail: { dx }}) {
