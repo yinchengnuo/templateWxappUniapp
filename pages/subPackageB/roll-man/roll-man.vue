@@ -120,8 +120,8 @@
 </template>
 
 <script>
-	import colorPicker from '@/components/color-picker.vue'
-	import customCounter from '@/components/custom-counter.vue'
+	import colorPicker from '@/components/color-picker/color-picker.vue'
+	import customCounter from '@/components/custom-counter/custom-counter.vue'
 	export default {
 		components: { colorPicker, customCounter },
 		data() {

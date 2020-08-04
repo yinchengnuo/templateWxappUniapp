@@ -19,7 +19,7 @@ Vue.prototype.$router = router
 Vue.prototype.$storage = $storage
 
 Vue.mixin({
-	onShareAppMessage (res) { //分享小程序
+	onShareAppMessage(res) {
 		return {
 			title: '滚动吧！滚动君！',
 			path: '/pages/index/index'
@@ -27,10 +27,10 @@ Vue.mixin({
 	},
 	onShow() {
 		uni.showShareMenu({
-		  withShareTicket: true,
-		  menus: ['shareAppMessage', 'shareTimeline']
+			withShareTicket: true,
+			menus: ['shareAppMessage', 'shareTimeline']
 		})
 	}
 })
 
-;(new Vue({ ...App }) ).$mount()
+;(new Vue({ ...App })).$mount()
