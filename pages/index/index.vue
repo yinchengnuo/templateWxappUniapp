@@ -45,7 +45,7 @@
 			<text class="name">关于<text>其他</text></text>
 			<text class="english">Other</text>
 		</view>
-		<view @tap="$router.push('/index-about')" class="about"><text class="cuIcon-questionfill"></text> 关于本项目</view>
+		<view @tap="$router.push('/index-about')" class="about"><text class="cuIcon-questionfill"></text>关于本项目</view>
 	</view>
 </template>
 
