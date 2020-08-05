@@ -20,7 +20,7 @@ module.exports = {
 	configureWebpack: {
 		plugins: [
 			new webpack.ProvidePlugin({
-				'G': [path.resolve(path.join(__dirname, 'G')), 'default']
+				'G': [path.resolve(path.join(__dirname, 'G')), 'default'] // https://github.com/dcloudio/uni-app/issues/1971
 			}),
 			new webpack.ProgressPlugin(percentage => {
 				console.log(`编译进度：${(percentage * 100).toFixed(2)}%`)
@@ -30,7 +30,7 @@ module.exports = {
 					let mainWxss = (fs.readFileSync(mainWxssPath)).toString()
 					const pageWxssPaths = getFilePathList(path.join(__dirname, `unpackage/dist/${env}/mp-weixin/pages`))
 					pageWxssPaths.forEach(e => mainWxss = mainWxss.replace((fs.readFileSync(e)).toString(), ''))
-					fs.writeFileSync(mainWxssPath, mainWxss)
+					fs.writeFileSync(mainWxssPath, mainWxss) // https://github.com/dcloudio/uni-app/issues/1980
 					console.log('编译完成')
 				}
 			})
