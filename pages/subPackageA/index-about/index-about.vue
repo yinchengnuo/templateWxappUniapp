@@ -1,6 +1,5 @@
 <template>
 	<view class="about padding-sm">
-		<custom-nav :title="title" />
 		<view class="content">
 			<view class="t">这一切，都要从那只蝙蝠说起...</view>
 			<view class="p">本项目是本人入行前端半年以来，使用 uni-app 从事微信小程序开发的一些总结和心得。非常感谢 uni-app 官方的努力，使得使用 Vue 语法开发小程序变得十分方便。
