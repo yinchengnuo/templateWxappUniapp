@@ -1,5 +1,7 @@
 import request from '@/utils/request.js'
 
+export const _API_Font = data => request.get('/fonts', data) // 获取 字体列表
+
 export const _API_Index = data => request.get('/', data) // 获取 index 首页数据
 
 export const _API_IndexUpload = data => request.uploadFile('/user/auth_share', data) // 上次文件接口

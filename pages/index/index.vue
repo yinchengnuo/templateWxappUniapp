@@ -147,8 +147,8 @@
 		grid-column-gap: 8px;
 		box-sizing: border-box;
 		padding: 456rpx 30rpx 123rpx;
-		grid-template-columns: 341rpx 341rpx;
 		grid-template-rows: 33% 33% 33%;
+		grid-template-columns: 341rpx 341rpx;
 		.top, .title, .card{
 			@include flex();
 			top: 0;

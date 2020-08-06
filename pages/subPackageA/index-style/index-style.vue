@@ -35,10 +35,10 @@
 		data() {
 			return {
 				navList: ['样式', '图表'],
-				colorUI1: 'https://yinchengnuo.com/static/templateWxappUniapp/colorUIWXcode.png',
-				colorUI2: 'https://yinchengnuo.com/static/templateWxappUniapp/colorUI.png',
-				colorUI3: 'https://yinchengnuo.com/static/templateWxappUniapp/colorUIPreview.jpg',
-				uChart: 'https://yinchengnuo.com/static/templateWxappUniapp/uChartWXcode.png',
+				colorUI1: 'https://yinchengnuo.com/static/templateWxappUniapp/images/colorUIWXcode.png',
+				colorUI2: 'https://yinchengnuo.com/static/templateWxappUniapp/images/colorUI.png',
+				colorUI3: 'https://yinchengnuo.com/static/templateWxappUniapp/images/colorUIPreview.jpg',
+				uChart: 'https://yinchengnuo.com/static/templateWxappUniapp/images/uChartWXcode.png',
 				chartImgList: [
 					'https://img.kancloud.cn/ac/ef/acef49105d33936d872f8eb9d3526af1_468x453.gif',
 					'https://img.kancloud.cn/b4/df/b4dfcc01461fc6b918932f1e15c06172_446x337.gif',

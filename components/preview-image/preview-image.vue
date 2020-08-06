@@ -9,11 +9,11 @@
 		data() {
 			return {
 				list: [
-					'https://yinchengnuo.com/static/templateWxappUniapp/colorUIWXcode.png',
-					'https://yinchengnuo.com/static/templateWxappUniapp/colorUI.png',
-					'https://yinchengnuo.com/static/templateWxappUniapp/colorUIPreview.jpg',
-					'https://yinchengnuo.com/static/templateWxappUniapp/uChartWXcode.png',
-					'https://yinchengnuo.com/static/templateWxappUniapp/getUserInfo.png'
+					'https://yinchengnuo.com/static/templateWxappUniapp/images/colorUIWXcode.png',
+					'https://yinchengnuo.com/static/templateWxappUniapp/images/colorUI.png',
+					'https://yinchengnuo.com/static/templateWxappUniapp/images/colorUIPreview.jpg',
+					'https://yinchengnuo.com/static/templateWxappUniapp/images/uChartWXcode.png',
+					'https://yinchengnuo.com/static/templateWxappUniapp/images/getUserInfo.png',
 				]
 			};
 		}

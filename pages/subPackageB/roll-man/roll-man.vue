@@ -12,6 +12,7 @@
 						fontSize: _fontSize,
 						fontWeight: fontWeightRange[fontWeightIndex].value,
 						fontStyle: fontStyle,
+						fontFamily: fontFaceRange[fontFaceIndex].value,
 						textDecoration: fontDecorationRange[fontDecorationIndex].value,
 						textShadow: fontShadowPreviewColor ? (fontShadowH+'px '+fontShadowV+'px '+fontShadowB+'px '+fontShadowPreviewColor) : (fontShadowH+'px '+fontShadowV+'px '+fontShadowB+'px '+fontShadowColor),
 						opacity: 0.01 * opacity,
@@ -57,6 +58,13 @@
 					<text>文本装饰</text>
 					<picker mode="selector" @change="fonDecorationPickerChange" :value="fontDecorationIndex" :range="fontDecorationRange" range-key="name">
 						<view class="bold">{{ fontDecorationRange[fontDecorationIndex].name }}</view>
+					</picker>
+					<text class="cuIcon-right"></text>
+				</view>
+				<view class="config-item">
+					<text>文本字体</text>
+					<picker mode="selector" @change="fonFacePickerChange" :value="fontFaceIndex" :range="fontFaceRange" range-key="name">
+						<view class="bold">{{ fontFaceRange[fontFaceIndex].name }}</view>
 					</picker>
 					<text class="cuIcon-right"></text>
 				</view>
@@ -136,6 +144,11 @@
 					{ name: '最粗', value: 'bolder' },
 				],
 				fontStyle: 'normal', // 文本是否斜体
+				fontFaceIndex: 0,
+				fontFaceRange: [
+					{ name: '默认', value: '' },
+					...this.$store.state.app.fontFaceList.map(({ family }) => ({ name: family, value: family }))
+				],
 				fontDecorationIndex: 0, // 文本装饰所选下标
 				fontDecorationRange: [ // 文本装饰可选项目
 					{ name: '无', value: 'none' },
@@ -179,6 +192,7 @@
 		},
 		onShow() {
 			this.$emit('onShow')
+			this.$store.dispatch('app/getFontFace')
 		},
 		onLoad(opt) {
 			if (Object.keys(opt).length) {
@@ -187,6 +201,7 @@
 				this.fontSize = Number(opt.fontSize)
 				this.fontWeightIndex = this.fontWeightRange.findIndex(e => e.value === opt.fontWeight)
 				this.fontStyle = opt.fontStyle
+				this.fontFaceIndex = this.fontFaceRange.findIndex(e => e.value === opt.fontFamily)
 				this.fontDecorationIndex = this.fontDecorationRange.findIndex(e => e.value === opt.textDecoration)
 				this.fontShadowH = opt.textShadow.split(' ')[0].replace('px', '')
 				this.fontShadowV = opt.textShadow.split(' ')[1].replace('px', '')
@@ -199,7 +214,6 @@
 				this.animationDelay = Number(opt.animationDelay.replace('s', ''))
 				this.animationTimingFunctionIndex = this.animationTimingFunctionRange.findIndex(e => e.value === opt.animationTimingFunction)
 				this.animationDirectionIndex = this.animationDirectionRange.findIndex(e => e.value === opt.animationDirection)
-				
 				this.$once('onShow', () => this.toRoll())
 			}
 		},
@@ -215,6 +229,7 @@
 					textDecoration: this.fontDecorationRange[this.fontDecorationIndex].value,
 					textShadow: `${this.fontShadowH}px ${this.fontShadowV}px ${this.fontShadowB}px ${this.fontShadowColor}`,
 					opacity: this.opacity,
+					fontFamily: this.fontFaceRange[this.fontFaceIndex].value,
 					letterSpacing: `${this.letterSpacing}px`,
 					bgColor: this.bgColor,
 					animationDuration: `${this.animationDuration}s`,
@@ -235,6 +250,7 @@
 			chooseColor(type) { this.$refs[`colorPicker${type}`].show() }, // 点击选择颜色
 			fontWeightPickerChange(e) { this.fontWeightIndex = e.detail.value }, // 选择文本粗细类型
 			fontStyleChange(e) { this.fontStyle = e.detail.value ? 'Oblique' : 'normal' }, // 设置文本斜体
+			fonFacePickerChange(e) { this.fontFaceIndex = e.detail.value }, // 选择文本字体
 			fonDecorationPickerChange(e) { this.fontDecorationIndex = e.detail.value }, // 选择文本装饰类型
 			animationTimingFunctionPickerChange(e) { this.animationTimingFunctionIndex = e.detail.value }, // 选择动画速度曲线类型
 			animationDirectionPickerChange(e) { this.animationDirectionIndex = e.detail.value } // 选择动画方向类型

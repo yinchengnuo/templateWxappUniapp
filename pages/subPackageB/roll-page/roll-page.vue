@@ -7,6 +7,7 @@
 			fontStyle: fontStyle,
 			textDecoration: textDecoration,
 			textShadow: textShadow,
+			fontFamily: fontFamily,
 			opacity: opacity / 100,
 			letterSpacing: letterSpacing,
 			animationDuration: animationDuration,
@@ -42,6 +43,7 @@
 				textDecoration: 'none',
 				textShadow: '0px 0px 0px #000000',
 				opacity: 100,
+				fontFamily: '',
 				letterSpacing: '0px',
 				bgColor: '#FFFFFF',
 				animationDuration: '0s',
@@ -51,6 +53,7 @@
 			}
 		},
 		onLoad(opt) {
+			this.$store.dispatch('app/getFontFace')
 			if (!opt.fromRollMan) { // 表示不是从分享页面进入
 				delete opt.fromRollMan
 				this.$router.reLaunch('/index', { ...opt })
@@ -65,10 +68,12 @@
 			this.opacity = Number(opt.opacity)
 			this.letterSpacing = opt.letterSpacing
 			this.bgColor = opt.bgColor
+			this.fontFamily = opt.fontFamily
 			this.animationDuration = opt.animationDuration
 			this.animationDelay = opt.animationDelay
 			this.animationTimingFunction = opt.animationTimingFunction
 			this.animationDirection = opt.animationDirection
+			console.log(opt)
 		}
 	}
 </script>
