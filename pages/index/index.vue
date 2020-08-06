@@ -11,7 +11,7 @@
 				<open-data class="nickname ellipsis" type="userNickName"></open-data>
 				<open-data class="city cuIcon-locationfill" type="userCity"></open-data>
 			</view>
-			<view class="card-bot" @click="$router.push('/roll-man')">
+			<view class="card-bot" @click="$router.push('/subPackageB/roll-man')">
 				<view class="index-roll">戳我一起滚动吧！滚动君！</view>
 			</view>
 		</view>
@@ -45,7 +45,7 @@
 			<text class="name">关于<text>其他</text></text>
 			<text class="english">Other</text>
 		</view>
-		<view @tap="$router.push('/index-about')" class="about"><text class="cuIcon-questionfill"></text>关于本项目</view>
+		<view @tap="$router.push('/subPackageA/index-about')" class="about"><text class="cuIcon-questionfill"></text>关于本项目</view>
 	</view>
 </template>
 
@@ -71,7 +71,7 @@
 		onLoad(opt) {
 			if (Object.keys(opt).length) { // 有参数，表示从分享页 relaunch
 				this.$once('onShow', () => {
-					this.$router.push('/roll-man', { ...opt })
+					this.$router.push('/subPackageB/roll-man', { ...opt })
 				})
 			}
 			// this.$request(_API_Index(), data => console.log(data))
@@ -103,32 +103,32 @@
 		methods: {
 			toStyle() {
 				this.rotate = 1;
-				this.$router.push('/index-style')
+				this.$router.push('/subPackageA/index-style')
 				setTimeout(() => this.rotate = -1, 2000)
 			},
 			toRouter() {
 				this.rotate = 2;
-				this.$router.push('/index-router')
+				this.$router.push('/subPackageA/index-router')
 				setTimeout(() => this.rotate = -1, 2000)
 			},
 			toStore() {
 				this.rotate = 3;
-				this.$router.push('/index-store')
+				this.$router.push('/subPackageA/index-store')
 				setTimeout(() => this.rotate = -1, 2000)
 			},
 			toRequest() {
 				this.rotate = 4;
-				this.$router.push('/index-request')
+				this.$router.push('/subPackageA/index-request')
 				setTimeout(() => this.rotate = -1, 2000)
 			},
 			toStorage() {
 				this.rotate = 5;
-				this.$router.push('/index-storage')
+				this.$router.push('/subPackageA/index-storage')
 				setTimeout(() => this.rotate = -1, 2000)
 			},
 			toOther() {
 				this.rotate = 6;
-				this.$router.push('/index-other')
+				this.$router.push('/subPackageA/index-other')
 				setTimeout(() => this.rotate = -1, 2000)
 			}
 		}

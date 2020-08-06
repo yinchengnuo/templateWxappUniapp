@@ -12,7 +12,6 @@ let onchange = () => {} // 路由变化监听函数
 const _$UNI_ACTIVED_PAGE_ROUTES = [] // 页面数据缓存
 let _$UNI_ROUTER_PUSH_POP_FUN = () => {} // pushPop resolve 函数
 const _c = obj => JSON.parse(JSON.stringify(obj)) // 简易克隆方法
-const modulesFiles = require.context('@/pages', true, /\.vue$/) // pages 文件夹下所有的 .vue 文件
 
 Vue.mixin({
 	onShow() {
@@ -38,11 +37,11 @@ const router = new Proxy({
 	route: route, // 当前路由对象所在的 path 等信息,
 	afterEach: to => {}, // 全局后置守卫
 	beforeEach: (to, next) => next(), // 全局前置守卫
-	routes: modulesFiles.keys().map(e => e = e.replace(/^\./, '/pages')), // 路由表
 	_getFullPath(route) { // 根据传进来的路由名称获取完整的路由名称
 		return new Promise((resolve, reject) => {
-			const fullPath = this.routes.find(e => RegExp(route + '.vue').test(e))
-			fullPath ? resolve(fullPath.replace(/\.vue$/, '')) : reject(`路由 ${ route + '.vue' } 不存在于 pages 目录中`)
+			const split = route.split('/')
+			const name = `/${split[split.length - 1]}`
+			resolve(`/pages${route}${name}`)
 		})
 	},
 	_formatData(query) { // 序列化路由传参
@@ -75,7 +74,7 @@ const router = new Proxy({
 	},
 	_routeTo(UNIAPI, type, path, query, notBeforeEach, notAfterEach) {
 		return new Promise((resolve, reject) => {
-			if (type === 'push' && _$ROUTING) {
+			if (_$ROUTING) {
 				reject('路由进行中')
 				return
 			}

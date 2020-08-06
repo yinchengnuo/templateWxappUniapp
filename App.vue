@@ -10,15 +10,16 @@
 					this.$storage[this.Storage['WX_INFO']] = res.userInfo // 保存到本地存储
 					this.$store.commit('userInfo/SAVE_USER_WX_INFO', res.userInfo) // 保存到 vuex 中
 				}
- 			}).finally(() => this.$loaded())
+			}).finally(() => this.$loaded())
 		}
 	}
 </script>
 
 <style>
-	@import '@/styles/main.css';  //引入 ColorUI 组件库主样式
-	@import '@/styles/icon.css';  //引入 ColorUI 组件库图标样式
-	@import '@/styles/animation.css';  //引入 ColorUI 组件库动画样式
+	@import '@/styles/main.css'; //引入 ColorUI 组件库主样式
+	@import '@/styles/icon.css'; //引入 ColorUI 组件库图标样式
+	@import '@/styles/animation.css'; //引入 ColorUI 组件库动画样式
+
 	page {
 		height: 100%;
 		background: #FFFFFF;

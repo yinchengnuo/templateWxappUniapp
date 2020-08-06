@@ -44,7 +44,7 @@
 					"navigationBarTitleText": "关于本项目"
 				}
 			}
-            ]
+		]
 	}, {
 		"root": "pages/subPackageB",
 		"pages": [{

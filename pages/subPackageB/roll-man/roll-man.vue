@@ -203,14 +203,12 @@
 				this.animationTimingFunctionIndex = this.animationTimingFunctionRange.findIndex(e => e.value === opt.animationTimingFunction)
 				this.animationDirectionIndex = this.animationDirectionRange.findIndex(e => e.value === opt.animationDirection)
 				
-				this.$once('onShow', () => {
-					this.toRoll()
-				})
+				this.$once('onShow', () => this.toRoll())
 			}
 		},
 		methods: {
 			toRoll() { // 去work页面
-				this.$router.push('/roll-page', {
+				this.$router.push('/subPackageB/roll-page', {
 					fromRollMan: 1, // 标记，不是从分享后的页面进入
 					rollText: this.rollText,
 					fontColor: this.fontColor,
