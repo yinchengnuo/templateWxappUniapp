@@ -1,4 +1,4 @@
-export default function ({ baseURL, timeout = 12345, header: headers, statusCode = [200, 401] }) {
+export default function ({ baseURL, timeout = 56 * 1000, header: headers, statusCode = [200, 401] }) {
 	return {
 		get(url, data, header, ...args) { return this.request('GET', url, data, { ...header, ...headers }, ...args) },
 		post(url, data, header, ...args) { return this.request('POST', url, data, { ...header, ...headers }, ...args) },

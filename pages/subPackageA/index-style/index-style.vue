@@ -11,15 +11,15 @@
 				<swiper-item>
 					<scroll-view scroll-y :style="{ height: MIXIN_ScrollViewHeight + 'px' }">
 						<view class="p">uni-app插件市场有许多优秀的UI组件库，给出了许多通用样式的解决方案，非常值得我们学习和使用，如 ColorUI（作者：文晓港）：</view>
-						<image @tap="$preview('../../../static/colorUIWXcode.png')" class="colorUI1" src="../../../static/colorUIWXcode.png"></image>
-						<image @tap="$preview('../../../static/colorUI.png')" class="colorUI2" src="../../../static/colorUI.png"></image>
-						<image @tap="$preview('../../../static/colorUIPreview.jpg')" class="colorUI3" src="../../../static/colorUIPreview.jpg"></image>
+						<image @tap="$preview(colorUI1)" class="colorUI1" :src="colorUI1"></image>
+						<image @tap="$preview(colorUI2)" class="colorUI2" :src="colorUI2"></image>
+						<image @tap="$preview(colorUI3)" class="colorUI3" :src="colorUI3"></image>
 					</scroll-view>
 				</swiper-item>
 				<swiper-item>
 					<scroll-view scroll-y :style="{ height: MIXIN_ScrollViewHeight + 'px' }">
 						<view class="p">uni-app插件市场也有许多优秀的图表库，如果你的小程序有这方面的需求，建议直接使用 uCharts（作者：秋云）：</view>
-						<image class="uChart" @tap="$preview('../../../static/uChartWXcode.png')" src="../../../static/uChartWXcode.png"></image>
+						<image class="uChart" @tap="$preview(uChart)" :src="uChart"></image>
 						<image v-for="item in chartImgList" :key="item" :src="item" @tap="$preview(item)" class="chartImg"></image>
 					</scroll-view>
 				</swiper-item>
@@ -35,6 +35,10 @@
 		data() {
 			return {
 				navList: ['样式', '图表'],
+				colorUI1: 'https://yinchengnuo.com/static/templateWxappUniapp/colorUIWXcode.png',
+				colorUI2: 'https://yinchengnuo.com/static/templateWxappUniapp/colorUI.png',
+				colorUI3: 'https://yinchengnuo.com/static/templateWxappUniapp/colorUIPreview.jpg',
+				uChart: 'https://yinchengnuo.com/static/templateWxappUniapp/uChartWXcode.png',
 				chartImgList: [
 					'https://img.kancloud.cn/ac/ef/acef49105d33936d872f8eb9d3526af1_468x453.gif',
 					'https://img.kancloud.cn/b4/df/b4dfcc01461fc6b918932f1e15c06172_446x337.gif',

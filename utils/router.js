@@ -1,5 +1,5 @@
 import $store from '@/store/index.js'
-import router, { route } from '@/utils/tools/uni_router.js'
+import router, { route } from '@/utils/uni_router/uni_router.js'
 
 router.beforeEach = (to, next) => { // 全局导航守卫
 	// console.log(to)

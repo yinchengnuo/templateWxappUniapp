@@ -3,8 +3,8 @@ import App from '@/App'
 import mixin from '@/mixin/global.js'
 import $store from '@/store/index.js'
 import * as filters from '@/utils/filters.js'
-import $storage from '@/utils/tools/uni_storage.js'
-import router, { route } from '@/utils/tools/uni_router.js'
+import $storage from '@/utils/uni_storage/uni_storage.js'
+import router, { route } from '@/utils/uni_router/uni_router.js'
 import '@/utils/router.js'
 
 Vue.prototype.$route = route

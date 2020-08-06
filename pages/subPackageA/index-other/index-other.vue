@@ -8,7 +8,7 @@
 			现在如果要调用 getUserInfo() 获取用户信息，只能通过：</view>
 			<rich-text :nodes="code1"></rich-text>
 			<view class="p">因为如果当前小程序的缓存中没有用户允许小程序获取用户信息的记录，在调用 getUserInfo() 时，小程序会提示弹窗，就像这样：</view>
-			<image src="../../../static/getUserInfo.png" mode=""></image>
+			<image src="https://yinchengnuo.com/static/templateWxappUniapp/getUserInfo.png" mode=""></image>
 			<view class="p">许多开发者滥用 getUserInfo() 导致小程序体验下降。因此小程序官方才把 getUserInfo() 接口改为：如果当前小程序的缓存中没有用户允许小程序获取用户信息的记录，getUserInfo() 接口只能以用户点击的方式触发调用，而不能直接调用：</view>
 			<rich-text :nodes="code2"></rich-text>
 			<view class="p">所有这里我们不讨论是否应该废弃 getUserInfo() 接口，而是在这种情况下我们如果更优雅的调用 getUserInfo() 接口，也就是如何更优雅地让用户点击一个 open-type 属性为 getUserInfo 的按钮。</view>

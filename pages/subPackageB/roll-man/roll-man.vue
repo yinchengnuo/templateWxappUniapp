@@ -120,10 +120,7 @@
 </template>
 
 <script>
-	import colorPicker from '@/components/color-picker/color-picker.vue'
-	import customCounter from '@/components/custom-counter/custom-counter.vue'
 	export default {
-		components: { colorPicker, customCounter },
 		data() {
 			return {
 				value: '普天同庆',

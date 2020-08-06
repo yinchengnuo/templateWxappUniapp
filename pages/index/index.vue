@@ -46,6 +46,8 @@
 			<text class="english">Other</text>
 		</view>
 		<view @tap="$router.push('/subPackageA/index-about')" class="about"><text class="cuIcon-questionfill"></text>关于本项目</view>
+		
+		<preview-image v-if="readyed" />
 	</view>
 </template>
 
@@ -60,21 +62,23 @@
 		},
 		data() {
 			return {
-				title: 'UNI-APP微信小程序快速开发模板',
 				rotate: -1,
+				readyed: false,
+				title: 'UNI-APP微信小程序快速开发模板',
 				topBgs: ['bg-red', 'bg-orange', 'bg-yellow', 'bg-olive', 'bg-green', 'bg-cyan', 'bg-blue', 'bg-purple', 'bg-mauve', 'bg-pink', 'bg-brown', 'bg-grey']
 			}
 		},
 		onShow() {
 			this.$emit('onShow')
 		},
+		onReady() {
+			this.readyed = true
+		},
 		onLoad(opt) {
 			if (Object.keys(opt).length) { // 有参数，表示从分享页 relaunch
-				this.$once('onShow', () => {
-					this.$router.push('/subPackageB/roll-man', { ...opt })
-				})
+				this.$once('onShow', () => this.$router.push('/subPackageB/roll-man', { ...opt }))
 			}
-			// this.$request(_API_Index(), data => console.log(data))
+			this.$request(_API_Index(), data => console.log(data))
 			// const task = _API_Index() // 执行接口并保存请求任务
 			// task.then(res => console.log(res)).catch(e => console.log(e)) // 请求任务的结果处理
 			// setTimeout(() => task.abort(), 567) // 需要的时候，可以主动取消请求任务

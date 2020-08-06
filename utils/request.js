@@ -1,5 +1,5 @@
 import $store from '@/store'
-import uni_request from '@/utils/tools/uni_request.js'
+import uni_request from '@/utils/uni_request/uni_request.js'
 
 let baseURL
 
