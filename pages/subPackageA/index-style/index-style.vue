@@ -4,12 +4,12 @@
 			<view class="nav-bar-items">
 				<view v-for="(item, index) in navList" class="nav-bar-item" :class="{ active: MIXIN_ActiveIndex === index }" :key="index" @tap="MIXIN_SwitchNav(index)">{{ item }}</view>
 			</view>
-			<view class="nav-bar-drog" :style="{ left: MIXIN_DrogLeft + 'px' }"><text></text></view>
+			<view class="nav-bar-drog" :style="{ width: 750 / navList.length + 'rpx', left: MIXIN_DrogLeft + 'px' }"><text></text></view>
 		</view>
 		<view class="nav-view">
 			<swiper class="swiper" :duration="333" :current="MIXIN_ActiveIndex" @transition="MIXIN_transition" @change="MIXIN_change" @animationfinish="MIXIN_animationfinish">
 				<swiper-item>
-					<scroll-view scroll-y :style="{ height: MIXIN_ScrollViewHeight + 'px' }">
+					<scroll-view scroll-y style="height: calc(100vh - 93rpx)">
 						<view class="p">uni-app插件市场有许多优秀的UI组件库，给出了许多通用样式的解决方案，非常值得我们学习和使用，如 ColorUI（作者：文晓港）：</view>
 						<image @tap="$preview(colorUI1)" class="colorUI1" :src="colorUI1"></image>
 						<image @tap="$preview(colorUI2)" class="colorUI2" :src="colorUI2"></image>
@@ -17,7 +17,7 @@
 					</scroll-view>
 				</swiper-item>
 				<swiper-item>
-					<scroll-view scroll-y :style="{ height: MIXIN_ScrollViewHeight + 'px' }">
+					<scroll-view scroll-y style="height: calc(100vh - 93rpx)">
 						<view class="p">uni-app插件市场也有许多优秀的图表库，如果你的小程序有这方面的需求，建议直接使用 uCharts（作者：秋云）：</view>
 						<image class="uChart" @tap="$preview(uChart)" :src="uChart"></image>
 						<image v-for="item in chartImgList" :key="item" :src="item" @tap="$preview(item)" class="chartImg"></image>
@@ -61,15 +61,10 @@
 	.style {
 		height: 100%;
 		@include flex(column);
-		.nav-bar-drog {
-			width: 375rpx;
-		}
 		.nav-view {
-			flex: 1;
-			width: 100%;
 			.swiper {
 				scroll-view {
-					padding: 24rpx;
+					padding: 0 24rpx;
 					border-radius: 8rx;
 					box-sizing: border-box;
 					.colorUI1, .uChart {

@@ -53,7 +53,6 @@
 			}
 		},
 		onLoad(opt) {
-			this.$store.dispatch('app/getFontFace')
 			if (!opt.fromRollMan) { // 表示不是从分享页面进入
 				delete opt.fromRollMan
 				this.$router.reLaunch('/index', { ...opt })

@@ -9,10 +9,7 @@ module.exports = {
 				'G': [path.resolve(path.join(__dirname, 'G')), 'default']
 			}),
 			new webpack.ProgressPlugin(percentage => {
-				console.log(`编译进度：${(percentage * 100).toFixed(2)}%`)
-				if (percentage === 1) {
-					console.log('编译完成')
-				}
+				percentage === 1 ? console.log('编译完成') : console.log(`编译进度：${(percentage * 100).toFixed(2)}%`)
 			})
 		]
 	}

@@ -20,8 +20,8 @@
 	}
 </script>
 
-<style lang="scss">
-	image {
+<style lang="scss" scoped>
+	view {
 		height: 0;
 		overflow: hidden;
 	}
