@@ -21,16 +21,16 @@
 
 <script>
 	export default {
-		onShareAppMessage (res) {  //分享小程序
+		onShareAppMessage (res) {
 			return {
 				title: this.rollText,
-				path: `/pages/subPackageB/roll-page/roll-page?rollText=${this.rollText}&fontColor=${this.fontColor}&fontSize=${this.fontSize}&fontWeight=${this.fontWeight}&fontStyle=${this.fontStyle}&textDecoration=${this.textDecoration}&textShadow=${this.textShadow}&opacity=${this.opacity}&letterSpacing=${this.letterSpacing}&bgColor=${this.bgColor}&animationDuration=${this.animationDuration}&animationDelay=${this.animationDelay}&animationTimingFunction=${this.animationTimingFunction}&animationDirection=${this.animationDirection}`
+				path: `/pages/subPackageB/roll-page/roll-page?rollText=${this.rollText}&fontColor=${this.fontColor}&fontSize=${this.fontSize}&fontWeight=${this.fontWeight}&fontStyle=${this.fontStyle}&textDecoration=${this.textDecoration}&textShadow=${this.textShadow}&opacity=${this.opacity}&fontFamily=${this.fontFamily}&letterSpacing=${this.letterSpacing}&bgColor=${this.bgColor}&animationDuration=${this.animationDuration}&animationDelay=${this.animationDelay}&animationTimingFunction=${this.animationTimingFunction}&animationDirection=${this.animationDirection}`
 			}
 		},
 		onShareTimeline() {
 			return {
 			        title: this.rollText,
-			        query: `rollText=${this.rollText}&fontColor=${this.fontColor}&fontSize=${this.fontSize}&fontWeight=${this.fontWeight}&fontStyle=${this.fontStyle}&textDecoration=${this.textDecoration}&textShadow=${this.textShadow}&opacity=${this.opacity}&letterSpacing=${this.letterSpacing}&bgColor=${this.bgColor}&animationDuration=${this.animationDuration}&animationDelay=${this.animationDelay}&animationTimingFunction=${this.animationTimingFunction}&animationDirection=${this.animationDirection}`
+			        query: `rollText=${this.rollText}&fontColor=${this.fontColor}&fontSize=${this.fontSize}&fontWeight=${this.fontWeight}&fontStyle=${this.fontStyle}&textDecoration=${this.textDecoration}&textShadow=${this.textShadow}&opacity=${this.opacity}&fontFamily=${this.fontFamily}&letterSpacing=${this.letterSpacing}&bgColor=${this.bgColor}&animationDuration=${this.animationDuration}&animationDelay=${this.animationDelay}&animationTimingFunction=${this.animationTimingFunction}&animationDirection=${this.animationDirection}`
 			    }
 		},
 		data() {

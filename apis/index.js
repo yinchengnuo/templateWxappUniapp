@@ -1,6 +1,7 @@
 import request from '@/utils/request.js'
 
-export const _API_Font = data => request.get('/fonts', data) // 获取 字体列表
+export const _API_Font = data => request.get('/fonts', data) // 获取字体列表
+export const _API_MsgSecCheck = data => request.get('/check', data) // 获取字体列表
 
 export const _API_Index = data => request.get('/', data) // 获取 index 首页数据
 

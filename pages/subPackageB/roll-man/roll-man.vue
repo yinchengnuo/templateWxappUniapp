@@ -122,20 +122,21 @@
 					<text class="cuIcon-right"></text>
 				</view>
 			</view>
-			<button style="width: 100%;" class="bg-red" @tap="toRoll">滚动吧！滚动君！</button>
+			<button style="width: 100%;" type="primary" @tap="toRoll">滚动吧！滚动君！</button>
 		</view>
 	</view>
 </template>
 
 <script>
+	import { _API_Index, _API_MsgSecCheck, _API_IndexDownload, _API_IndexUpload } from '@/apis/index.js'
 	export default {
 		data() {
 			return {
 				value: '普天同庆',
 				chooseColorType: 1, // 选择颜色类型 1 文本颜色 2 文本阴影颜色 3 背景颜色
-				fontColor: '#FF0000', // 文本颜色
-				fontPreviewColor: '#FF0000', // 文本颜色（打开颜色选择器选择颜色预览时的颜色）
-				fontSize: 98, // 文本尺寸
+				fontColor: '#000000', // 文本颜色
+				fontPreviewColor: '#000000', // 文本颜色（打开颜色选择器选择颜色预览时的颜色）
+				fontSize: 88, // 文本尺寸
 				fontWeightIndex: 1, // 文本粗细所选下标
 				fontWeightRange: [ // 文本粗细可选项目
 					{ name: '更细', value: 'lighter' },
@@ -192,10 +193,10 @@
 		},
 		onShow() {
 			this.$emit('onShow')
-			this.$store.dispatch('app/getFontFace')
 		},
 		onLoad(opt) {
 			if (Object.keys(opt).length) {
+				console.log(opt)
 				this.value = opt.rollText
 				this.fontColor = this.fontPreviewColor = opt.fontColor,
 				this.fontSize = Number(opt.fontSize)
@@ -219,23 +220,33 @@
 		},
 		methods: {
 			toRoll() { // 去work页面
-				this.$router.push('/subPackageB/roll-page', {
-					fromRollMan: 1, // 标记，不是从分享后的页面进入
-					rollText: this.rollText,
-					fontColor: this.fontColor,
-					fontSize: this.fontSize,
-					fontWeight: this.fontWeightRange[this.fontWeightIndex].value,
-					fontStyle: this.fontStyle,
-					textDecoration: this.fontDecorationRange[this.fontDecorationIndex].value,
-					textShadow: `${this.fontShadowH}px ${this.fontShadowV}px ${this.fontShadowB}px ${this.fontShadowColor}`,
-					opacity: this.opacity,
-					fontFamily: this.fontFaceRange[this.fontFaceIndex].value,
-					letterSpacing: `${this.letterSpacing}px`,
-					bgColor: this.bgColor,
-					animationDuration: `${this.animationDuration}s`,
-					animationDelay: `${this.animationDelay}s`,
-					animationTimingFunction: this.animationTimingFunctionRange[this.animationTimingFunctionIndex].value,
-					animationDirection: this.animationDirectionRange[this.animationDirectionIndex].value
+				this.$request(_API_MsgSecCheck({ content: this.value }), ({ errmsg }) => {
+					console.log(errmsg)
+					if (errmsg == 'ok') {
+						this.$router.push('/subPackageB/roll-page', {
+							fromRollMan: 1, // 标记，不是从分享后的页面进入
+							rollText: this.rollText,
+							fontColor: this.fontColor,
+							fontSize: this.fontSize,
+							fontWeight: this.fontWeightRange[this.fontWeightIndex].value,
+							fontStyle: this.fontStyle,
+							textDecoration: this.fontDecorationRange[this.fontDecorationIndex].value,
+							textShadow: `${this.fontShadowH}px ${this.fontShadowV}px ${this.fontShadowB}px ${this.fontShadowColor}`,
+							opacity: this.opacity,
+							fontFamily: this.fontFaceRange[this.fontFaceIndex] ? this.fontFaceRange[this.fontFaceIndex].value : '',
+							letterSpacing: `${this.letterSpacing}px`,
+							bgColor: this.bgColor,
+							animationDuration: `${this.animationDuration}s`,
+							animationDelay: `${this.animationDelay}s`,
+							animationTimingFunction: this.animationTimingFunctionRange[this.animationTimingFunctionIndex].value,
+							animationDirection: this.animationDirectionRange[this.animationDirectionIndex].value
+						})
+					} else {
+						this.$toast(errmsg)
+						this.fontColor = '#FF0000'
+						this.animationDuration = '16'
+						this.value = '富强、民主、文明、和谐，自由、平等、公正、法治，爱国、敬业、诚信、友善'
+					}
 				})
 			},
 			colorPickerPreview1(color) { this.fontPreviewColor = color }, // 颜色选择器选择预览色变化
