@@ -136,7 +136,7 @@
 				chooseColorType: 1, // 选择颜色类型 1 文本颜色 2 文本阴影颜色 3 背景颜色
 				fontColor: '#000000', // 文本颜色
 				fontPreviewColor: '#000000', // 文本颜色（打开颜色选择器选择颜色预览时的颜色）
-				fontSize: 88, // 文本尺寸
+				fontSize: 66, // 文本尺寸
 				fontWeightIndex: 1, // 文本粗细所选下标
 				fontWeightRange: [ // 文本粗细可选项目
 					{ name: '更细', value: 'lighter' },

@@ -4,7 +4,7 @@ import uni_request from '@/utils/uni_request/uni_request.js'
 let baseURL
 
 if (process.env.NODE_ENV === 'development') {
-	baseURL = 'http://192.168.43.159/dwbsapp'
+	baseURL = 'https://yinchengnuo.com/dwbsapp'
 } else {
 	baseURL = 'https://yinchengnuo.com/dwbsapp'
 }
