@@ -2,7 +2,60 @@
 
 此项目是在2020年疫情在家期间闲来无事花了两天时间做着玩的。那个时候做前端工作刚好半年，期间做了几个项目，略有心得。于是便写了个项目简单汇总下。转眼又是半年过去，除了业务更加熟练，我对使用 uni 开发小程序又多了几分心得。而且我在微信公众平台的后台也看到，这个小程序一直都有人在使用。想到这半年多一直扔着没管这个项目，心中惭愧。隧重构，带着最近半年的想法。
 
-## 新增功能
+## 新增免声明调用组件
+
+在全局方法（见下方），Global API 中。我们可以简单的通过 this.$loading()。来实现 loading 效果。
+但是实际上，有时候这个 loading 效果并不是我们想要的。比如 UI 设计的 loading 是一张 Gif 动图。产品希望 loading 开始结束时有淡入淡出效果。而且整个 App 所有的 loading 是统一的。当然更有时候除了loading，甚至toast 、model 等交互效果都是如此。
+我们通常的做法是，在 components 文件夹中定义一个组件，比如这里叫：custom-interactive，同时在里面定义了 _$loading 方法。
+
+引入后就是在 template 中写组件：
+```javascript
+<custom-interactive ref="custom-interactive" />
+```
+
+使用时：
+
+```javascript
+this.$refs['custom-interactive']._$loading();
+```
+这种做法本身没有什么问题，但是过于繁琐。不仅需要在每个页面的模板中都要声明组件，而且还需要用：
+```javascript
+this.$refs['custom-interactive']...
+```
+这里实现了一个无需引入组件即可调用组件内部方法的例子，仅供参考。
+
+#### 原理是在 vue.config.js 中，通过配置 vue-loader，重写 vue-template-compiler 的 compile 方法。手动在 compile 之前将 custom-interactive 组件插入 template。
+
+如下：
+
+```javascript
+module.exports = {
+	// ...
+	chainWebpack: config => {
+		config.module.rule('vue').use('vue-loader').loader('vue-loader').tap(options => {
+			const compile = options.compiler.compile
+			options.compiler.compile = (template, info) => {
+				if (info.resourcePath.match(/^pages/)) {
+					template = template.trim()
+					template = template.replace(/^<[\d\D]+?>/g, _ => `${_}
+						<custom-interactive ref="custom-interactive" style="position: fixed; z-index: 123;" />
+					`)
+				}
+				return compile(template, info)
+			}
+			return options
+		})
+	}
+}
+```
+
+此时只需封装：
+```javascript
+this._$loading() // 代替 this.$refs['custom-interactive']._$loading() 即可
+```
+
+
+## 新增方法
 
 之前在开发 uni-app 项目时，个人习惯在全局变量 uni 上挂载一些工具方法。但是随着项目的深入，这些方法一定会越来越多。这是候就又出现了那个老生常谈的问题：命名冲突。uni 作为全局变量，是由官方维护的。如果处理不好命名问题，很容易覆盖一些官方的 API。这就得不偿失了。
 
