@@ -193,6 +193,9 @@
 		},
 		onShow() {
 			this.$emit('onShow')
+			uni.hideShareMenu({
+				menus: ['shareAppMessage', 'shareTimeline']
+			})
 		},
 		onLoad(opt) {
 			if (Object.keys(opt).length) {
