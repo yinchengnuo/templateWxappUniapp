@@ -43,6 +43,16 @@
 				"style": {
 					"navigationBarTitleText": "关于本项目"
 				}
+			}, {
+				"path": "index-global/index-global",
+				"style": {
+					"navigationBarTitleText": "关于全局方法"
+				}
+			}, {
+				"path": "index-component/index-component",
+				"style": {
+					"navigationBarTitleText": "关于全局组件"
+				}
 			}
 		]
 	}, {

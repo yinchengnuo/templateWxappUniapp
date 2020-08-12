@@ -36,5 +36,9 @@ export default G => ({
 				}
 			})
 		})
-	}
+	},
+	_$loading(title = '加载中', mask = true) { // 显示 loading
+		if (!(this instanceof Vue)) return
+		this.$refs['custom-interactive']['_$loading']()
+	},
 })

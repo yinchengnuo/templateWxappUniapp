@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 export default G => ({
 	$copy(data, title, icon) { // 复制到剪切板方法
 		data = data.toString()

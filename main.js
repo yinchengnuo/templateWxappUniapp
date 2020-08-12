@@ -8,9 +8,9 @@ import router, { route } from '@/utils/uni_router/uni_router.js'
 import '@/utils/router.js'
 
 Vue.prototype.$route = route
-Vue.prototype.$store = $store
 Vue.prototype.$router = router
 Vue.prototype.$storage = $storage
+Vue.prototype.$store = G.$store = $store
 
 Vue.mixin(mixin)
 Object.setPrototypeOf(Vue.prototype, G)

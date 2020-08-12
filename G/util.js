@@ -1,4 +1,10 @@
+import $storage from '@/utils/uni_storage/uni_storage.js'
+import $router, { route } from '@/utils/uni_router/uni_router.js'
+
 export default G => ({
+	$router,
+	$storage,
+	$route: route,
 	$clone(object) {
 		if (!(typeof object === 'object')) return
 		return JSON.parse(JSON.stringify(object))

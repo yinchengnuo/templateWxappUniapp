@@ -1,6 +1,5 @@
 <template>
 	<view class="index">
-		<custom-nav ref="ltm" style="position: absolute;" />
 		<view class="title">UNI-APP微信小程序快速开发模板</view>
 		<view class="top">
 			<view class="top-item" v-for="item in topBgs" :class="item" :key="item"></view>
@@ -15,39 +14,24 @@
 				<view class="index-roll">戳我一起滚动吧！滚动君！</view>
 			</view>
 		</view>
-		<view class="item item1 bg-gradual-red padding radius text-center shadow-blur" :class="{ rotate: rotate === 1 }" @tap="toStyle">
-			<text class="icon cuIcon-skinfill"></text>
-			<text class="name">关于<text>样式</text></text>
-			<text class="english">Style</text>
+		
+		<view
+			v-for="(item, index) in itemList"
+			:key="index"
+			class="item padding radius text-center shadow-blur"
+			:class="['item' + index, item.bg, rotate === index ? 'rotate' : '']"
+			@tap="toPage(index, item.to)"
+		>
+			<text class="icon" :class="item.icon"></text>
+			<text class="name">关于<text>{{ item.about }}</text></text>
+			<text class="english">{{ item.name }}</text>
 		</view>
-		<view class="item item2 bg-gradual-orange padding radius text-center shadow-blur" :class="{ rotate: rotate === 2 }" @tap="toRouter">
-			<text class="icon cuIcon-deliver_fill"></text>
-			<text class="name">关于<text>路由</text></text>
-			<text class="english">Router</text>
-		</view>
-		<view class="item item3 bg-gradual-green padding radius text-center shadow-blur" :class="{ rotate: rotate === 3 }" @tap="toStore">
-			<text class="icon cuIcon-shopfill"></text>
-			<text class="name">关于<text>状态</text></text>
-			<text class="english">Store</text>
-		</view>
-		<view class="item item4 bg-gradual-blue padding radius text-center shadow-blur" :class="{ rotate: rotate === 4 }" @tap="toRequest">
-			<text class="icon cuIcon-rankfill"></text>
-			<text class="name">关于<text>网络</text></text>
-			<text class="english">Request</text>
-		</view>
-		<view class="item item5 bg-gradual-purple padding radius text-center shadow-blur" :class="{ rotate: rotate === 5 }" @tap="toStorage">
-			<text class="icon cuIcon-homefill"></text>
-			<text class="name">关于<text>存储</text></text>
-			<text class="english">Storage</text>
-		</view>
-		<view class="item item6 bg-gradual-pink padding radius text-center shadow-blur" :class="{ rotate: rotate === 6 }" @tap="toOther">
-			<text class="icon cuIcon-play_forward_fill"></text>
-			<text class="name">关于<text>其他</text></text>
-			<text class="english">Other</text>
-		</view>
+		
 		<view @tap="$router.push('/subPackageA/index-about')" class="about"><text class="cuIcon-questionfill"></text>关于本项目</view>
 		
 		<preview-image v-if="readyed" />
+		
+		<view>{{ abc }}</view>
 	</view>
 </template>
 
@@ -65,7 +49,17 @@
 				rotate: -1,
 				readyed: false,
 				title: 'UNI-APP微信小程序快速开发模板',
-				topBgs: ['bg-red', 'bg-orange', 'bg-yellow', 'bg-olive', 'bg-green', 'bg-cyan', 'bg-blue', 'bg-purple', 'bg-mauve', 'bg-pink', 'bg-brown', 'bg-grey']
+				topBgs: ['bg-red', 'bg-orange', 'bg-yellow', 'bg-olive', 'bg-green', 'bg-cyan', 'bg-blue', 'bg-purple', 'bg-mauve', 'bg-pink', 'bg-brown', 'bg-grey'],
+				itemList: [
+					{ about: '样式', name: 'Style', bg: 'bg-gradual-red', icon: 'cuIcon-skinfill', to: '/subPackageA/index-style' },
+					{ about: '路由', name: 'Router', bg: 'bg-gradual-orange', icon: 'cuIcon-deliver_fill', to: '/subPackageA/index-router' },
+					{ about: '状态', name: 'Store', bg: 'bg-gradual-green', icon: 'cuIcon-shopfill', to: '/subPackageA/index-store' },
+					{ about: '网络', name: 'Request', bg: 'bg-gradual-blue', icon: 'cuIcon-rankfill', to: '/subPackageA/index-request' },
+					{ about: '存储', name: 'Storage', bg: 'bg-gradual-purple', icon: 'cuIcon-homefill', to: '/subPackageA/index-storage' },
+					{ about: '其他', name: 'Other', bg: 'bg-gradual-pink', icon: 'cuIcon-play_forward_fill', to: '/subPackageA/index-other' },
+					{ about: '方法', name: 'Global API', bg: 'bg-gradual-yellow', icon: 'cuIcon-repairfill', to: '/subPackageA/index-global' },
+					{ about: '组件', name: 'Component', bg: 'bg-gradual-young', icon: 'cuIcon-formfill', to: '/subPackageA/index-component' },
+				]
 			}
 		},
 		onShow() {
@@ -105,34 +99,9 @@
 			// }, 5678)
 		},
 		methods: {
-			toStyle() {
-				this.rotate = 1;
-				this.$router.push('/subPackageA/index-style')
-				setTimeout(() => this.rotate = -1, 2000)
-			},
-			toRouter() {
-				this.rotate = 2;
-				this.$router.push('/subPackageA/index-router')
-				setTimeout(() => this.rotate = -1, 2000)
-			},
-			toStore() {
-				this.rotate = 3;
-				this.$router.push('/subPackageA/index-store')
-				setTimeout(() => this.rotate = -1, 2000)
-			},
-			toRequest() {
-				this.rotate = 4;
-				this.$router.push('/subPackageA/index-request')
-				setTimeout(() => this.rotate = -1, 2000)
-			},
-			toStorage() {
-				this.rotate = 5;
-				this.$router.push('/subPackageA/index-storage')
-				setTimeout(() => this.rotate = -1, 2000)
-			},
-			toOther() {
-				this.rotate = 6;
-				this.$router.push('/subPackageA/index-other')
+			toPage(index, path) {
+				this.rotate = index;
+				this.$router.push(path)
 				setTimeout(() => this.rotate = -1, 2000)
 			}
 		}
@@ -147,7 +116,7 @@
 		grid-column-gap: 8px;
 		box-sizing: border-box;
 		padding: 456rpx 30rpx 123rpx;
-		grid-template-rows: 33% 33% 33%;
+		grid-template-rows: 25% 25% 25% 25%;
 		grid-template-columns: 341rpx 341rpx;
 		.top, .title, .card{
 			@include flex();
@@ -214,7 +183,7 @@
 					font-size: 32rpx;
 				}
 				.city, .province {
-					font-size: 36;
+					font-size: 36rpx;
 					margin-left: 36rpx;
 				}
 			}
@@ -224,12 +193,14 @@
 			overflow: hidden;
 			position: relative;
 			border-radius: 16rpx;
-			&.item1 { animation: move 68s infinite; }
-			&.item2 { animation: move 36s infinite alternate; }
-			&.item3 { animation: move 46s infinite; }
-			&.item4 { animation: move 24s infinite alternate; }
-			&.item5 { animation: move 90s infinite alternate; }
-			&.item6 { animation: move 60s infinite; }
+			&.item0 { animation: move 68s infinite; }
+			&.item1 { animation: move 36s infinite alternate; }
+			&.item2 { animation: move 46s infinite; }
+			&.item3 { animation: move 24s infinite alternate; }
+			&.item4 { animation: move 90s infinite alternate; }
+			&.item5 { animation: move 60s infinite; }
+			&.item6 { animation: move 48s infinite alternate; }
+			&.item7 { animation: move 99s infinite; }
 			&.rotate {
 				animation: rotate 2s infinite;
 			}
