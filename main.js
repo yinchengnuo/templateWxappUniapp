@@ -16,4 +16,8 @@ Vue.mixin(mixin)
 Object.setPrototypeOf(Vue.prototype, G)
 Object.keys(filters).forEach(e => Vue.filter(e, filters[e]))
 
+Vue.config.productionTip = false
+
+App.mpType = 'app'
+
 ;(new Vue({ ...App })).$mount()
