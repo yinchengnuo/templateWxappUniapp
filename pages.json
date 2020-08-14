@@ -6,7 +6,7 @@
 		}
 	}],
 	"subPackages": [{
-		"root": "pages/subPackageA",
+		"root": "pages/A",
 		"pages": [{
 				"path": "index-style/index-style",
 				"style": {
@@ -56,7 +56,7 @@
 			}
 		]
 	}, {
-		"root": "pages/subPackageB",
+		"root": "pages/B",
 		"pages": [{
 			"path": "roll-man/roll-man",
 			"style": {
@@ -72,7 +72,7 @@
 	"preloadRule": {
 		"pages/index/index": {
 			"network": "all",
-			"packages": ["pages/subPackageA", "pages/subPackageB"]
+			"packages": ["pages/A", "pages/B"]
 		}
 	},
 	"globalStyle": {

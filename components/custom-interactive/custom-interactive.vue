@@ -36,7 +36,7 @@
 			opacity: 0;
 			@include abs();
 			@include flex();
-			background: rgba(59, 45, 71, 1);
+			background: rgb(43, 44, 48);
 			&.in {
 				animation: fade-in 0.5s forwards;
 			}
@@ -45,17 +45,17 @@
 			}
 			.loading-img {
 				width: 400rpx;
-				height: 300rpx;
+				height: 255rpx;
 			}
 		}
 	}
 	
 	@keyframes fade-in {
 		from { opacity: 0; }
-		to { opacity: 0.8;}
+		to { opacity: 0.9;}
 	}
 	@keyframes fade-out {
-		from { opacity: 0.8; }
+		from { opacity: 0.9; }
 		to { opacity: 0;}
 	}
 </style>

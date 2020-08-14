@@ -17,14 +17,13 @@ module.exports = {
 	chainWebpack: config => {
 		config.module.rule('vue').use('vue-loader').loader('vue-loader').tap(options => {
 			const compile = options.compiler.compile
-			options.compiler.compile = (template, info) => {
-				if (info.resourcePath.match(/^pages/)) {
-					template = template.trim()
-					template = template.replace(/^<[\d\D]+?>/g, _ => `${_}
+			options.compiler.compile = (template, ...args) => {
+				if (args[0].resourcePath.match(/^pages/)) {
+					template = template.replace(/[\s\S]+?<[\d\D]+?>/, _ => `${_}
 						<custom-interactive ref="custom-interactive" style="position: fixed; z-index: 123;" />
 					`)
 				}
-				return compile(template, info)
+				return compile(template, ...args)
 			}
 			return options
 		})

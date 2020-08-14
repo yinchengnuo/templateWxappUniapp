@@ -10,7 +10,7 @@
 				<open-data class="nickname ellipsis" type="userNickName"></open-data>
 				<open-data class="city cuIcon-locationfill" type="userCity"></open-data>
 			</view>
-			<view class="card-bot" @click="$router.push('/subPackageB/roll-man')">
+			<view class="card-bot" @click="$router.push('/B/roll-man')">
 				<view class="index-roll">戳我一起滚动吧！滚动君！</view>
 			</view>
 		</view>
@@ -27,11 +27,9 @@
 			<text class="english">{{ item.name }}</text>
 		</view>
 		
-		<view @tap="$router.push('/subPackageA/index-about')" class="about"><text class="cuIcon-questionfill"></text>关于本项目</view>
+		<view @tap="$router.push('/A/index-about')" class="about"><text class="cuIcon-questionfill"></text>关于本项目</view>
 		
 		<preview-image v-if="readyed" />
-		
-		<view>{{ abc }}</view>
 	</view>
 </template>
 
@@ -51,14 +49,14 @@
 				title: 'UNI-APP微信小程序快速开发模板',
 				topBgs: ['bg-red', 'bg-orange', 'bg-yellow', 'bg-olive', 'bg-green', 'bg-cyan', 'bg-blue', 'bg-purple', 'bg-mauve', 'bg-pink', 'bg-brown', 'bg-grey'],
 				itemList: [
-					{ about: '样式', name: 'Style', bg: 'bg-gradual-red', icon: 'cuIcon-skinfill', to: '/subPackageA/index-style' },
-					{ about: '路由', name: 'Router', bg: 'bg-gradual-orange', icon: 'cuIcon-deliver_fill', to: '/subPackageA/index-router' },
-					{ about: '状态', name: 'Store', bg: 'bg-gradual-green', icon: 'cuIcon-shopfill', to: '/subPackageA/index-store' },
-					{ about: '网络', name: 'Request', bg: 'bg-gradual-blue', icon: 'cuIcon-rankfill', to: '/subPackageA/index-request' },
-					{ about: '存储', name: 'Storage', bg: 'bg-gradual-purple', icon: 'cuIcon-homefill', to: '/subPackageA/index-storage' },
-					{ about: '其他', name: 'Other', bg: 'bg-gradual-pink', icon: 'cuIcon-play_forward_fill', to: '/subPackageA/index-other' },
-					{ about: '方法', name: 'Global API', bg: 'bg-gradual-yellow', icon: 'cuIcon-repairfill', to: '/subPackageA/index-global' },
-					{ about: '组件', name: 'Component', bg: 'bg-gradual-young', icon: 'cuIcon-formfill', to: '/subPackageA/index-component' },
+					{ about: '样式', name: 'Style', bg: 'bg-gradual-red', icon: 'cuIcon-skinfill', to: '/A/index-style' },
+					{ about: '路由', name: 'Router', bg: 'bg-gradual-orange', icon: 'cuIcon-deliver_fill', to: '/A/index-router' },
+					{ about: '状态', name: 'Store', bg: 'bg-gradual-green', icon: 'cuIcon-shopfill', to: '/A/index-store' },
+					{ about: '网络', name: 'Request', bg: 'bg-gradual-blue', icon: 'cuIcon-rankfill', to: '/A/index-request' },
+					{ about: '存储', name: 'Storage', bg: 'bg-gradual-purple', icon: 'cuIcon-homefill', to: '/A/index-storage' },
+					{ about: '其他', name: 'Other', bg: 'bg-gradual-pink', icon: 'cuIcon-play_forward_fill', to: '/A/index-other' },
+					{ about: '方法', name: 'Global API', bg: 'bg-gradual-yellow', icon: 'cuIcon-repairfill', to: '/A/index-global' },
+					{ about: '组件', name: 'Component', bg: 'bg-gradual-young', icon: 'cuIcon-formfill', to: '/A/index-component' },
 				]
 			}
 		},
@@ -70,7 +68,7 @@
 		},
 		onLoad(opt) {
 			if (Object.keys(opt).length) { // 有参数，表示从分享页 relaunch
-				this.$once('onShow', () => this.$router.push('/subPackageB/roll-man', { ...opt }))
+				this.$once('onShow', () => this.$router.push('/B/roll-man', { ...opt }))
 			}
 			this.$request(_API_Index(), data => console.log(data))
 			// const task = _API_Index() // 执行接口并保存请求任务
