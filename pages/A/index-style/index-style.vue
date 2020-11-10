@@ -11,15 +11,19 @@
 				<swiper-item>
 					<scroll-view scroll-y style="height: calc(100vh - 93rpx)">
 						<view class="p">uni-app插件市场有许多优秀的UI组件库，给出了许多通用样式的解决方案，非常值得我们学习和使用，如 ColorUI（作者：文晓港）：</view>
+						<!--  #ifndef  MP-TOUTIAO -->
 						<image @tap="$preview(colorUI1)" class="colorUI1" :src="colorUI1"></image>
 						<image @tap="$preview(colorUI2)" class="colorUI2" :src="colorUI2"></image>
+						<!--  #endif -->
 						<image @tap="$preview(colorUI3)" class="colorUI3" :src="colorUI3"></image>
 					</scroll-view>
 				</swiper-item>
 				<swiper-item>
 					<scroll-view scroll-y style="height: calc(100vh - 93rpx)">
 						<view class="p">uni-app插件市场也有许多优秀的图表库，如果你的小程序有这方面的需求，建议直接使用 uCharts（作者：秋云）：</view>
+						<!--  #ifndef  MP-TOUTIAO -->
 						<image class="uChart" @tap="$preview(uChart)" :src="uChart"></image>
+						<!--  #endif -->
 						<image v-for="item in chartImgList" :key="item" :src="item" @tap="$preview(item)" class="chartImg"></image>
 					</scroll-view>
 				</swiper-item>

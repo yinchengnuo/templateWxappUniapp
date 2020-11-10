@@ -1,6 +1,6 @@
 <template>
 	<view class="index">
-		<view class="title">UNI-APP微信小程序快速开发模板</view>
+		<view class="title">UNI-APP小程序快速开发模板</view>
 		<view class="top">
 			<view class="top-item" v-for="item in topBgs" :class="item" :key="item"></view>
 		</view>

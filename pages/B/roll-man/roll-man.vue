@@ -128,7 +128,7 @@
 </template>
 
 <script>
-	import { _API_Index, _API_MsgSecCheck, _API_IndexDownload, _API_IndexUpload } from '@/apis/index.js'
+	import { _API_MsgSecCheck } from '@/apis/index.js'
 	export default {
 		data() {
 			return {
