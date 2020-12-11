@@ -26,9 +26,9 @@ export default G => ({
 		const conf = args.find(e => typeof e === 'object') || {}
 		return new Promise((resolve, reject) => {
 			uni.showModal({
-				...conf,
 				title: args.length > 1 ? args[0] : '提示',
 				content: args.length > 1 ? args[1] : args[0],
+				...conf,
 				success: ({
 					confirm
 				}) => {

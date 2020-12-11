@@ -1,7 +1,7 @@
 <script>
 	export default {
 		onLaunch() {
-			this.$store.dispatch('app/getFontFaceList') // 下载字体
+			// this.$store.dispatch('app/getFontFaceList') // 下载字体
 			this.$loading() // 带有 mask 的 loading
 			uni.getUserInfo().then(([err, res]) => { // 通常进入小程序就要获取用户信息
 				if (err) { // 获取失败的操作
