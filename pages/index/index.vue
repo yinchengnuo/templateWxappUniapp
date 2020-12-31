@@ -15,6 +15,11 @@
 			</view>
 		</view>
 		
+		<view class="unicloud bg-gray">uniCloud相关</view>
+		<!-- <view class="unicloud bg-gray" @click="$router.push('/webview', { src: 'https://mp.weixin.qq.com/s/XiayBNoBdZ-wPCyGW5OWkw' })">关注公众号</view> -->
+		
+		<!-- <ad unit-id="adunit-e3f467955c2226a4" ad-intervals="100"></ad> -->
+		
 		<view
 			v-for="(item, index) in itemList"
 			:key="index"
@@ -107,160 +112,5 @@
 </script>
 
 <style lang="scss" scoped>
-	.index {
-		height: 100%;
-		display: grid;
-		grid-row-gap: 8px;
-		grid-column-gap: 8px;
-		box-sizing: border-box;
-		padding: 456rpx 30rpx 123rpx;
-		grid-template-rows: 25% 25% 25% 25%;
-		grid-template-columns: 341rpx 341rpx;
-		.top, .title, .card{
-			@include flex();
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 432rpx;
-			position: fixed;
-			overflow: hidden;
-			border-bottom-right-radius: 350rpx 30rpx;
-			border-bottom-left-radius: 350rpx 30rpx;
-			.top-item {
-				flex: 1;
-				height: 100%;
-			}
-		}
-		.title {
-			@include flex();
-			top: 0;
-			z-index: 1;
-			left: 30rpx;
-			color: #FFFFFF;
-			height: 206rpx;
-			font-size: 42rpx;
-			justify-content: flex-start;
-			text-shadow: 3rpx 3rpx $theme-color;
-		}
-		.card {
-			@include flex(column);
-			top: 206rpx;
-			left: 30rpx;
-			width: 690rpx;
-			height: 234rpx;
-			padding: 25rpx;
-			background: #FDFDFD;
-			border-radius: 16rpx;
-			box-sizing: border-box;
-			box-shadow: 0rpx 1rpx #AAAAAA;
-			.card-top, .card-bot {
-				@include flex();
-				flex: 1;
-				width: 100%;
-				justify-content: flex-start;
-				&.card-bot {
-					@include flex();
-					overflow: hidden;
-					justify-content: flex-start;
-					.index-roll {
-						width: auto;
-						font-size: 64rpx;
-						white-space: nowrap;
-						animation: right-left infinite linear 6s;
-					}
-				}
-				.avatar {
-					width: 88rpx;
-					height: 88rpx;
-					overflow: hidden;
-					border-radius: 50%;
-				}
-				.nickname {
-					flex: 1;
-					margin: 0 23rpx;
-					font-size: 32rpx;
-				}
-				.city, .province {
-					font-size: 36rpx;
-					margin-left: 36rpx;
-				}
-			}
-		}
-		.item {
-			@include flex();
-			overflow: hidden;
-			position: relative;
-			border-radius: 16rpx;
-			&.item0 { animation: move 68s infinite; }
-			&.item1 { animation: move 36s infinite alternate; }
-			&.item2 { animation: move 46s infinite; }
-			&.item3 { animation: move 24s infinite alternate; }
-			&.item4 { animation: move 90s infinite alternate; }
-			&.item5 { animation: move 60s infinite; }
-			&.item6 { animation: move 48s infinite alternate; }
-			&.item7 { animation: move 99s infinite; }
-			&.rotate {
-				animation: rotate 2s infinite;
-			}
-			.icon {
-				top: 16rpx;
-				left: 16rpx;
-				opacity: .6;
-				font-size: 180rpx;
-				position: absolute;
-			}
-			.english {
-				top: 56rpx;
-				right: 16rpx;
-				font-size: 34rpx;
-				position: absolute;
-				letter-spacing: 3.6rpx;
-			}
-			.name {
-				right: 16rpx;
-				bottom: 16rpx;
-				position: absolute;
-				text {
-					font-size: 45rpx;
-					margin-left: 8rpx;
-				}
-			}
-		}
-		.about {
-			@include flex();
-			left: 0;
-			bottom: 0;
-			width: 100%;
-			height: 88rpx;
-			position: fixed;
-			text {
-				font-size: 42rpx;
-			}
-		}
-	}
-	@keyframes rotate {
-		0% { transform: rotate(0deg); }
-		100% { transform: rotate(2160deg); }
-	}
-	@keyframes move {
-		0% { transform: translate(0, 0); }
-		10% { transform: translate(-8rpx, 0); }
-		20% { transform: translate(-8rpx, -8rpx); }
-		30% { transform: translate(-8rpx, 0); }
-		40% { transform: translate(-8rpx, 8rpx); }
-		50% { transform: translate(8rpx, 0); }
-		60% { transform: translate(8rpx, 8rpx); }
-		70% { transform: translate(0, 8rpx); }
-		80% { transform: translate(-8rpx, 8rpx); }
-		90% { transform: translate(-8rpx, 0rpx); }
-		100% { transform: translate(0, 0); }
-	}
-	@keyframes right-left {
-		0% {
-			transform: translateX(640rpx);
-		}
-		100% {
-			transform: translateX(-100%);
-		}
-	}
+@import './index.scss';
 </style>

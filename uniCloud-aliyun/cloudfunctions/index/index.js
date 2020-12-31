@@ -6,8 +6,15 @@ const module2 = require('./modules/module2.js') // module2 模块
 exports.main = async (event, context) => {
 	const router = require('router')(event, context)
 	
-	router.interceptors.request.use(() => {
-		
+	router.interceptors.request.use(async route => { // 请求拦截器
+		route.params.requestAppend = { message: '请求拦截器追加数据' }
+		route.interceptor.interceptorAppend = { message: '请求拦截器传递给路由业务处理的数据' }
+		// router.response = { code: 233, message: '请求拦截器响应', route }
+	})
+	
+	router.interceptors.response.use(async ({ response, route }) => { // 响应拦截器
+		// response.responseAppend = { message: '响应拦截器追加数据' }
+		// router.response = response
 	})
 	
 	router.response = await module1(event, context) // module1 模块
