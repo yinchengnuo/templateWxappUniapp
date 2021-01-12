@@ -15,7 +15,7 @@
 			</view>
 		</view>
 		
-		<view class="unicloud bg-gray">uniCloud相关</view>
+		<view class="unicloud bg-gray" @click="$router.push('/A/index-uniCloud')">uniCloud相关</view>
 		<!-- <view class="unicloud bg-gray" @click="$router.push('/webview', { src: 'https://mp.weixin.qq.com/s/XiayBNoBdZ-wPCyGW5OWkw' })">关注公众号</view> -->
 		
 		<!-- <ad unit-id="adunit-e3f467955c2226a4" ad-intervals="100"></ad> -->

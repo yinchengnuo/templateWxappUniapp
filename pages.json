@@ -53,6 +53,11 @@
 				"style": {
 					"navigationBarTitleText": "关于全局组件"
 				}
+			}, {
+				"path": "index-uniCloud/index-uniCloud",
+				"style": {
+					"navigationBarTitleText": "相关uniCloud"
+				}
 			}
 		]
 	}, {

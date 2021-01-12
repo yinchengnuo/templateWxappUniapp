@@ -1,6 +1,3 @@
-const module1 = require('./modules/module1.js') // module1 模块
-const module2 = require('./modules/module2.js') // module2 模块
-
 // https://21d91afa-8266-426f-ada2-b23e9f16be9d.bspapp.com/http/index
 
 exports.main = async (event, context) => {
@@ -12,13 +9,8 @@ exports.main = async (event, context) => {
 		// router.response = { code: 233, message: '请求拦截器响应', route }
 	})
 	
-	router.interceptors.response.use(async ({ response, route }) => { // 响应拦截器
-		// response.responseAppend = { message: '响应拦截器追加数据' }
-		// router.response = response
-	})
-	
-	router.response = await module1(event, context) // module1 模块
-	router.response = await module2(event, context) // module2 模块
+	router.response = await (require('./modules/module1.js')(event, context)) // module1 模块
+	router.response = await (require('./modules/module2.js')(event, context)) // module2 模块
 
 	await router.get('/', async data => {
 		router.response = { code: 200, message: 'GET success', data, event, context: {
@@ -33,6 +25,10 @@ exports.main = async (event, context) => {
 			basement: context.basement, requestId: context.requestId, SPACEINFO: context.SPACEINFO,
 		}}
 	})
+	
+	;(async () => { // 响应拦截器相关处理
+		router.response.data.responseAppend = { message: '响应拦截器追加数据' }
+	})()
 	
 	return router.response || new Error('404 not found')
 }

@@ -4,14 +4,12 @@ import uni_request from '@/utils/uni_request/uni_request.js'
 let baseURL
 
 if (process.env.NODE_ENV === 'development') {
-	baseURL = 'https://yinchengnuo.com/dwbsapp'
+	baseURL = 'https://21d91afa-8266-426f-ada2-b23e9f16be9d.bspapp.com/http/index'
 } else {
-	baseURL = 'https://yinchengnuo.com/dwbsapp'
+	baseURL = 'https://21d91afa-8266-426f-ada2-b23e9f16be9d.bspapp.com/http/index'
 }
 
-const request = uni_request({
-	baseURL
-})
+const request = uni_request({ baseURL })
 
 request.interceptors.request.use(async (config, ...args) => { // 请求拦截器
 	// ...
