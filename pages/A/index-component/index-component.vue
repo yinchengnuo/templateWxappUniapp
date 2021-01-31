@@ -53,8 +53,4 @@ module.exports = {
 	}
 </script>
 
-<style lang="scss" scoped>
-	.index-component {
-		
-	}
-</style>
+<style lang="scss" scoped></style>

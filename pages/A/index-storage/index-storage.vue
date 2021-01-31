@@ -43,8 +43,4 @@ console.log(this.$storage.storage_key)
 	}
 </script>
 
-<style lang="scss" scoped>
-	.storage {
-		
-	}
-</style>
+<style lang="scss" scoped></style>

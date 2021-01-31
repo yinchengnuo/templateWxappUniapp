@@ -72,6 +72,12 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
+		}, {
+			"path": "roll-font/roll-font",
+			"style": {
+				"navigationBarTitleText": "字体管理"
+			}
+
 		}]
 	}],
 	"preloadRule": {

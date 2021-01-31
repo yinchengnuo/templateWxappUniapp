@@ -33,8 +33,4 @@
 	}
 </script>
 
-<style lang="scss" scoped>
-	.index-global {
-		
-	}
-</style>
+<style lang="scss" scoped></style>

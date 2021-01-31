@@ -1,0 +1,24 @@
+.other {
+	button {
+		margin: 24rpx 0;
+	}
+	.getUserInfo {
+		@include flex();
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		opacity: 0.4;
+		z-index: 9999;
+		position: fixed;
+		font-size: 123rpx;
+	}
+	image {
+		width: 700rpx;
+		height: 392rpx;
+		margin: 8rpx 0;
+		overflow: hidden;
+		border-radius: 24rpx;
+		box-shadow: 0 0 1rpx 1rpx #C0C0C0;
+	}
+}

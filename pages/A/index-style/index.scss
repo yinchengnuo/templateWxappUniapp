@@ -1,0 +1,29 @@
+.style {
+	height: 100%;
+	@include flex(column);
+	.nav-view {
+		.swiper {
+			scroll-view {
+				padding: 0 24rpx;
+				border-radius: 8rx;
+				box-sizing: border-box;
+				.colorUI1, .uChart {
+					width: 702rpx;
+					height: 702rpx;
+				}
+				.colorUI2 {
+					width: 702rpx;
+					height: 488.5rpx;
+				}
+				.colorUI3 {
+					width: 702rpx;
+					height: 4666rpx;
+				}
+				.chartImg {
+					width: 702rpx;
+					height: 567rpx;
+				}
+			}
+		}
+	}
+}

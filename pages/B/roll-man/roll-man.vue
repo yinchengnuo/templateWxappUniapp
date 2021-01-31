@@ -224,7 +224,6 @@
 		methods: {
 			toRoll() { // 去work页面
 				this.$request(_API_MsgSecCheck({ content: this.value }), ({ errmsg }) => {
-					console.log(errmsg)
 					if (errmsg == 'ok') {
 						this.$router.push('/B/roll-page', {
 							fromRollMan: 1, // 标记，不是从分享后的页面进入

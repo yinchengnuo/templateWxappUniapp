@@ -55,8 +55,4 @@
 	}
 </script>
 
-<style lang="scss" scoped>
-	.uniCloud {
-		
-	}
-</style>
+<style lang="scss" scoped></style>

@@ -48,8 +48,4 @@
 	}
 </script>
 
-<style lang="scss" scoped>
-	.request {
-		
-	}
-</style>
+<style lang="scss" scoped></style>

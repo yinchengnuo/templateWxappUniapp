@@ -51,8 +51,4 @@ export default new Vuex.Store({
 	}
 </script>
 
-<style lang="scss" scoped>
-	.store {
-		
-	}
-</style>
+<style lang="scss" scoped></style>
