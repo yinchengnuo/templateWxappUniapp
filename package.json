@@ -18,6 +18,6 @@
 	},
 	"homepage": "https://github.com/yinchengnuo/templateWxappUniapp#readme",
 	"dependencies": {
-		"webpack": "^4.44.1"
+		"webpack": "^5.75.0"
 	}
 }
