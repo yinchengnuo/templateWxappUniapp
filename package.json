@@ -1,0 +1,27 @@
+{
+	"name": "templateWxappUniapp",
+	"version": "1.0.0",
+	"description": "ToolBox365，生活小帮手",
+	"main": "main.js",
+	"scripts": {
+		"push": "git add . && git commit -m \".\" && git push -f"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/yinchengnuo/templateWxappUniapp.git"
+	},
+	"keywords": [
+		"实用工具",
+		"每日图文",
+		"AI聊天"
+	],
+	"author": "yinchengnuo",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/yinchengnuo/templateWxappUniapp/issues"
+	},
+	"homepage": "https://github.com/yinchengnuo/templateWxappUniapp#readme",
+	"dependencies": {
+		"webpack": "^5.89.0"
+	}
+}

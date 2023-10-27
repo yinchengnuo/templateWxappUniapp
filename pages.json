@@ -1,0 +1,215 @@
+{
+	"tabBar": {
+		"color": "#7f7f7f",
+		"selectedColor": "#000",
+		"list": [{
+			"text": "首页",
+			"iconPath": "static/首页.png",
+			"pagePath": "pages/首页/首页",
+			"selectedIconPath": "static/首页_.png"
+		}, {
+			"text": "每日",
+			"iconPath": "static/每日.png",
+			"pagePath": "pages/每日/每日",
+			"selectedIconPath": "static/每日_.png"
+		}, {
+			"text": "聊天",
+			"iconPath": "static/聊天.png",
+			"pagePath": "pages/聊天/聊天",
+			"selectedIconPath": "static/聊天_.png"
+		}, {
+			"text": "数据",
+			"iconPath": "static/数据.png",
+			"pagePath": "pages/数据/数据",
+			"selectedIconPath": "static/数据_.png"
+		}, {
+			"text": "我的",
+			"iconPath": "static/我的.png",
+			"pagePath": "pages/我的/我的",
+			"selectedIconPath": "static/我的_.png"
+		}]
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/首页/首页",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/每日/每日",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/聊天/聊天",
+			"style": {
+				"navigationBarTitleText": "有问题，问AI"
+			}
+		}, {
+			"path": "pages/数据/数据",
+			"style": {
+				"navigationBarTitleText": "数据集"
+			}
+		}, {
+			"path": "pages/我的/我的",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		}, {
+			"path": "pages/实用工具/滚动君/滚动君",
+			"style": {
+				"navigationBarTitleText": "滚动君"
+			}
+		}, {
+			"path": "pages/滚动君/滚动君",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/实用工具/手机号信息查询/手机号信息查询",
+			"style": {
+				"navigationBarTitleText": "手机号信息查询"
+			}
+		}, {
+			"path": "pages/实用工具/翻译/翻译",
+			"style": {
+				"navigationBarTitleText": "翻译"
+			}
+		}, {
+			"path": "pages/实用工具/天气/天气",
+			"style": {
+				"navigationBarTitleText": "天气"
+			}
+		}, {
+			"path": "pages/实用工具/快递查询/快递查询",
+			"style": {
+				"navigationBarTitleText": "快递查询"
+			}
+		}, {
+			"path": "pages/实用工具/垃圾分类/垃圾分类",
+			"style": {
+				"navigationBarTitleText": "垃圾分类"
+			}
+		}, {
+			"path": "pages/实用工具/二维码生成/二维码生成",
+			"style": {
+				"navigationBarTitleText": "二维码生成"
+			}
+		}, {
+			"path": "pages/实用工具/食物营养查询/食物营养查询",
+			"style": {
+				"navigationBarTitleText": "食物营养查询"
+			}
+		}, {
+			"path": "pages/实用工具/米游社随机头像/米游社随机头像",
+			"style": {
+				"navigationBarTitleText": "米游社随机头像"
+			}
+		}, {
+			"path": "pages/实用工具/骚扰电话查询/骚扰电话查询",
+			"style": {
+				"navigationBarTitleText": "骚扰电话查询"
+			}
+		}, {
+			"path": "pages/实用工具/字典/字典",
+			"style": {
+				"navigationBarTitleText": "字典"
+			}
+		}, {
+			"path": "pages/实用工具/表情包搜索/表情包搜索",
+			"style": {
+				"navigationBarTitleText": "表情包搜索"
+			}
+		}, {
+			"path": "pages/实用工具/AI抠图/AI抠图",
+			"style": {
+				"navigationBarTitleText": "AI抠图"
+			}
+		}, {
+			"path": "pages/实用工具/AI以图搜番/AI以图搜番",
+			"style": {
+				"navigationBarTitleText": "AI以图搜番"
+			}
+		}, {
+			"path": "pages/实用工具/AI图片文字识别/AI图片文字识别",
+			"style": {
+				"navigationBarTitleText": "AI图片文字识别"
+			}
+		}, {
+			"path": "pages/实用工具/AI万物识别/AI万物识别",
+			"style": {
+				"navigationBarTitleText": "AI万物识别"
+			}
+		}, {
+			"path": "pages/实用工具/AI身份证识别/AI身份证识别",
+			"style": {
+				"navigationBarTitleText": "AI身份证识别"
+			}
+		},
+
+
+		{
+			"path": "pages/每日随机/历史上的今天/历史上的今天",
+			"style": {
+				"navigationBarTitleText": "历史上的今天"
+			}
+		},
+		{
+			"path": "pages/每日随机/摸鱼人日历/摸鱼人日历",
+			"style": {
+				"navigationBarTitleText": "摸鱼人日历"
+			}
+		},
+		{
+			"path": "pages/每日随机/职场人日历/职场人日历",
+			"style": {
+				"navigationBarTitleText": "职场人日历"
+			}
+		},
+		{
+			"path": "pages/每日随机/60秒看世界/60秒看世界",
+			"style": {
+				"navigationBarTitleText": "60秒看世界"
+			}
+		},
+		{
+			"path": "pages/每日随机/明星吃瓜/明星吃瓜",
+			"style": {
+				"navigationBarTitleText": "明星吃瓜"
+			}
+		},
+		{
+			"path": "pages/每日随机/摸鱼日报/摸鱼日报",
+			"style": {
+				"navigationBarTitleText": "摸鱼日报"
+			}
+		},
+		{
+			"path": "pages/每日随机/内涵段子/内涵段子",
+			"style": {
+				"navigationBarTitleText": "内涵段子"
+			}
+		},
+		{
+			"path": "pages/每日随机/情感花园/情感花园",
+			"style": {
+				"navigationBarTitleText": "情感花园"
+			}
+		},
+		{
+			"path": "pages/每日随机/星座运势/星座运势",
+			"style": {
+				"navigationBarTitleText": "星座运势"
+			}
+		}
+
+
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#E9E9E9",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}
