@@ -43,7 +43,7 @@
 		}, {
 			"path": "pages/聊天/聊天",
 			"style": {
-				"navigationBarTitleText": "有问题，问AI"
+				"navigationStyle": "custom"
 			}
 		}, {
 			"path": "pages/数据/数据",

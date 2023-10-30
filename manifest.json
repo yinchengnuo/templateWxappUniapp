@@ -41,7 +41,9 @@
 				]
 			},
 			/* ios打包配置 */
-			"ios": {},
+			"ios": {
+				"idfa": false
+			},
 			/* SDK配置 */
 			"sdkConfigs": {}
 		}
@@ -56,7 +58,7 @@
 		},
 		"usingComponents": true,
 		"unipush": {
-			"enable": true
+			"enable": false
 		}
 	},
 	"mp-alipay": {
@@ -71,5 +73,10 @@
 	"uniStatistics": {
 		"enable": false
 	},
-	"vueVersion": "2"
+	"vueVersion": "2",
+	"h5": {
+		"unipush": {
+			"enable": false
+		}
+	}
 }
