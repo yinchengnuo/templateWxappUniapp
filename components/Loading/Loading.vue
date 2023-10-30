@@ -1,18 +1,16 @@
 <template>
 	<view>
-		<Loading />
+		Loading
 	</view>
 </template>
 
 <script>
 	export default {
+		name: "Loading",
 		data() {
 			return {
 
-			}
-		},
-		methods: {
-
+			};
 		}
 	}
 </script>
