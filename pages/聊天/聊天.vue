@@ -132,6 +132,7 @@
 						chat.energy = data.promptTokens
 						reply.energy = data.completionTokens
 						setTimeout(() => this.scroll++)
+						this.$store.state.user.energy -= data.totalTokens
 					}).finally(() => {
 						this.ing = false
 					})
