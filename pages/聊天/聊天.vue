@@ -2,10 +2,12 @@
 	<view class="index">
 		<image class=".page_bg" mode="aspectFill"
 			src='https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/page_bg.png'></image>
-		<view class="page_title flex" :style="{
+		<view class="page_title flex flex_sb" style="box-sizing: border-box; padding: 0 30rpx;" :style="{
 				marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` 
 			}">
+			<text class="cuIcon-lightauto text-green text-shadow">{{ user.energy }}</text>
 			<text>有问题，问AI</text>
+			<text></text>
 		</view>
 		<scroll-view scroll-y :scroll-top="scroll"
 			:style="{  height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px - 84rpx)` }">
@@ -68,6 +70,11 @@
 				ing: false,
 				scroll: 999999999,
 			}
+		},
+		computed: {
+			user() {
+				return this.$store.state.user
+			},
 		},
 		created() {
 			this.$('/chat_record').then(data => {
@@ -142,7 +149,7 @@
 		.page_bg {
 			top: 0;
 			left: 0;
-			z-index: 0;
+			z-index: -1;
 			width: 100%;
 			height: 100vh;
 			position: fixed;

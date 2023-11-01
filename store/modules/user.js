@@ -3,8 +3,7 @@ import Vue from 'vue'
 export default {
 	namespaced: true,
 	state: {
-		openid: uni.getStorageSync('openid'),
-		openid_time: uni.getStorageSync('openid_time'),
+		openid: ''
 	},
 	mutations: {
 		SET_USER_INFO(state, payload) {
@@ -19,12 +18,11 @@ export default {
 	actions: {
 		login({
 			state: {
-				openid,
-				openid_time
+				openid
 			},
 			commit
 		}) {
-			if (!(openid && openid_time && ((Date.now() - openid_time) < (1000 * 60 * 60 * 24)))) {
+			if (!openid) {
 				uni.login().then(({
 					code
 				}) => {
