@@ -76,11 +76,6 @@
 				"navigationBarTitleText": "翻译"
 			}
 		}, {
-			"path": "pages/实用工具/天气/天气",
-			"style": {
-				"navigationBarTitleText": "天气"
-			}
-		}, {
 			"path": "pages/实用工具/快递查询/快递查询",
 			"style": {
 				"navigationBarTitleText": "快递查询"
@@ -148,6 +143,7 @@
 		},
 
 
+
 		{
 			"path": "pages/每日随机/历史上的今天/历史上的今天",
 			"style": {
@@ -200,6 +196,31 @@
 			"path": "pages/每日随机/星座运势/星座运势",
 			"style": {
 				"navigationBarTitleText": "星座运势"
+			}
+		},
+		{
+			"path": "pages/每日随机/舔狗日记/舔狗日记",
+			"style": {
+				"navigationBarTitleText": "舔狗日记"
+			}
+		}, {
+			"path": "pages/每日随机/天气/天气",
+			"style": {
+				"navigationBarTitleText": "天气"
+			}
+		},
+
+
+		{
+			"path": "pages/数据集合/电子书/电子书",
+			"style": {
+				"navigationBarTitleText": "电子书"
+			}
+		},
+		{
+			"path": "pages/数据集合/宠物大全/宠物大全",
+			"style": {
+				"navigationBarTitleText": "宠物大全"
 			}
 		}
 

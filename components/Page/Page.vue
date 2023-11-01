@@ -35,6 +35,7 @@
 		},
 		mounted() {
 			this.getH()
+			// 'adunit-02b562d4a8c16436' J1
 		},
 		methods: {
 			getH() {

@@ -10,9 +10,8 @@ export default {
 		SET_LIST(state, payload) {
 			state.list = payload.map(e => ({
 				...e,
-				icon: `/static/${e.page}/${e.name}.svg`
+				icon: `https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/${e.type}/${e.name}.svg`
 			}))
-			uni.stopPullDownRefresh()
 		},
 		UPDATE_FUNCTION(state, payload) {
 			const item = state.list.find(e => e.name === payload.name)
@@ -21,19 +20,25 @@ export default {
 			}
 			state.recorded = {
 				...payload,
-				icon: `/static/${payload.page}/${payload.name}.svg`
+				icon: `https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/${payload.type}/${payload.name}.svg`
 			}
 		}
 	},
 	actions: {
 		getApp({
+			state,
 			commit
 		}) {
-			Vue.prototype.$loading()
-			Vue.prototype.$('/functions').then((data) => {
-				uni.stopPullDownRefresh()
-				commit('SET_LIST', data)
-			}).finally(() => Vue.prototype.$loaded())
+			return new Promise((resolve, reject) => {
+				Vue.prototype.$('/functions').then((data) => {
+					commit('SET_LIST', data)
+					setTimeout(() => {
+						resolve(state)
+					})
+				}).catch((e) => {
+					reject(e)
+				})
+			})
 		}
 	}
 }

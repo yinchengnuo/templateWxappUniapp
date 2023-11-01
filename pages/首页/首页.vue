@@ -1,12 +1,13 @@
 <template>
 	<view class="index">
-		<image class=".page_bg" mode="aspectFill" src='/static/page_bg.png'></image>
+		<image class=".page_bg" mode="aspectFill"
+			src='https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/page_bg.png'></image>
 		<view class="page_title flex" :style="{
 				marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` 
 			}">ToolBox365</view>
 		<scroll-view scroll-y
 			:style="{  height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px)` }"
-			refresher-enabled>
+			refresher-enabled :refresher-triggered="refreshing" @refresherrefresh="getList">
 			<swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="2333"
 				duration="500" @change="cardSwiper" previousMargin="0.01rpx" indicator-color="#1F1F1F"
 				indicator-active-color="#000000">
@@ -36,7 +37,7 @@
 			<view class="cu-good-act margin bg-purple light" style="margin-top: 0;">
 				<view class="cu-good-point-con" style="left: auto; right: 107rpx;">
 					<swiper class="swiper-box" :indicator-dots="false" autoplay="true" interval="1500" duration="1000"
-						circular="true" :display-multiple-items="3">
+						circular="true" :display-multiple-items="(listDaily && listDaily.length) ? 3 : undefined">
 						<swiper-item v-for="(item, index) in listDaily" :key="index" @click="navigateTo(item)">
 							<view class="cu-good-point-flex-w">
 								<image class="cu-good-point-img radius-lg" :src="item.icon"></image>
@@ -57,6 +58,8 @@
 				</view>
 			</view>
 		</scroll-view>
+		<uni-fab ref="fab" :pattern="pattern" horizontal="right" :content="content" @trigger="trigger"
+			@fabClick="fabClick" />
 	</view>
 </template>
 
@@ -64,13 +67,39 @@
 	export default {
 		data() {
 			return {
+				show: 0,
 				cardCur: 0,
+				refreshing: false,
+				interstitialAd: {},
+				pattern: {
+					color: '#7A7E83',
+					backgroundColor: '#fff',
+					selectedColor: '#000',
+					buttonColor: '#000',
+					iconColor: '#fff'
+				},
+				content: [{
+						selectedIconPath: '/static/icons/升序.png',
+						text: '默认排序',
+						active: true
+					},
+					{
+						selectedIconPath: '/static/icons/降序.png',
+						text: '降序',
+						active: true
+					},
+					{
+						selectedIconPath: '/static/icons/回到顶部.png',
+						text: '回到顶部',
+						active: true
+					}
+				]
 			}
 		},
 		computed: {
 			list() {
 				const colors = getApp().globalData.colors.sort(() => Math.random() - 0.5)
-				return this.$store.state.app.list.filter(e => e.page === '实用工具').map((e, i) => ({
+				return this.$store.state.app.list.filter(e => e.type === '实用工具').map((e, i) => ({
 					...e,
 					color: colors[i % 12] + ' light'
 				}))
@@ -86,29 +115,49 @@
 				return this.list.slice().sort((b, a) => a.index - b.index).slice(0, 6)
 			},
 			listDaily() {
-				return this.$store.state.app.list.filter(e => e.page === '每日随机').slice().sort((b, a) => a.view_num - b
+				return this.$store.state.app.list.filter(e => e.type === '每日随机').slice().sort((b, a) => a.view_num - b
 					.view_num)
 			}
 		},
-		onPullDownRefresh() {
-			this.$store.dispatch('app/getApp')
+		onShow() {
+			this.show++
+			if ((this.show !== 0) && (this.show % 2 === 0)) {
+				this.interstitialAd.show()
+			}
 		},
 		onLoad() {
-			this.$store.dispatch('app/getApp')
+			this.getList()
+			this.interstitialAd = uni.createInterstitialAd({
+				adUnitId: 'adunit-e3f467955c2226a4'
+			})
 		},
 		methods: {
+			getList() {
+				this.refreshing = true
+				this.$loading()
+				this.$store.dispatch('app/getApp').finally(() => {
+					this.$loaded()
+					this.refreshing = false
+				})
+			},
 			cardSwiper(e) {
 				this.cardCur = e.detail.current
 			},
 			navigateTo(item) {
 				uni.navigateTo({
-					url: `/pages/${item.page}/${item.name}/${item.name}`
+					url: item.page
 				})
 			},
 			toDaily() {
 				uni.switchTab({
 					url: '/pages/每日/每日'
 				})
+			},
+			trigger(e) {
+				console.log(e)
+			},
+			fabClick(e) {
+				console.log(e)
 			}
 		}
 	}

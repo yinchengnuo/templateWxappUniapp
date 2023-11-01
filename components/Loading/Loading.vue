@@ -1,5 +1,5 @@
 <template>
-	<view class="index flex">
+	<view v-if="ing" class="index flex">
 		<LoadingSpin />
 	</view>
 </template>
@@ -9,8 +9,16 @@
 		name: "Loading",
 		data() {
 			return {
-
+				ing: false
 			};
+		},
+		methods: {
+			loading() {
+				this.ing = true
+			},
+			loaded() {
+				this.ing = false
+			}
 		}
 	}
 </script>
@@ -22,6 +30,7 @@
 		width: 100vw;
 		height: 100vh;
 		position: fixed;
-		background: rgba(0, 0, 0, .3);
+		z-index: 999999999;
+		background: rgba(255, 255, 255, .6);
 	}
 </style>

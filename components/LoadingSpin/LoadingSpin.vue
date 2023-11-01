@@ -23,7 +23,6 @@
 		...getNames('shapes', 40),
 		...getNames('spinner', 29),
 	]
-	console.log(names)
 	export default {
 		name: "Loading",
 		data() {

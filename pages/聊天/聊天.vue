@@ -1,40 +1,46 @@
 <template>
 	<view class="index">
-		<image class=".page_bg" mode="aspectFill" src='/static/page_bg.png'></image>
+		<image class=".page_bg" mode="aspectFill"
+			src='https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/page_bg.png'></image>
 		<view class="page_title flex" :style="{
 				marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` 
-			}">有问题，问AI</view>
+			}">
+			<text>有问题，问AI</text>
+		</view>
 		<scroll-view scroll-y :scroll-top="scroll"
 			:style="{  height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px - 84rpx)` }">
 			<view class="cu-chat">
 				<template v-for="(item, index) in list">
 					<view v-if="item.type === 'chat'" :key="index" class="cu-item self"
 						style="padding: 12rpx 24rpx 48rpx;">
-						<view class="main" style="margin: 0 24rpx 0 0; max-width: calc(100% - 210rpx);">
+						<view class="main" style="margin: 0 24rpx 0 0; max-width: 494rpx;">
 							<view class="content bg-green shadow">
-								<text>{{ item.content }}</text>
+								<text @longpress="longpress(item.content)">{{ item.content }}</text>
 							</view>
 						</view>
 						<open-data class="cu-avatar radius" type="userAvatarUrl"></open-data>
-						<view class="date" style="bottom: 10rpx;">
+						<view class="date" style="bottom: 8rpx; left: auto; right: 128rpx;">
 							<text>{{ item.time }}</text>
-							<text class="cuIcon-lightauto text-green"
-								style="position: absolute; top: -6rpx; left: calc(100% + 48rpx); white-space: nowrap;">-{{ item.energy }}</text>
+							<text class="cuIcon-lightauto text-green flex"
+								style="position: absolute; 100%; left: 100%; top: 0; white-space: nowrap; width: 128rpx;">-{{ item.energy }}</text>
 						</view>
 					</view>
 
 					<view v-if="item.type === 'reply'" :key="index" class="cu-item" style="padding: 12rpx 24rpx 48rpx;">
 						<view class="cu-avatar radius">
-							<image src="../../static/openai.png" class="w100 h100"></image>
+							<image
+								src="https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/openai.png"
+								class="w100 h100"></image>
 						</view>
-						<view class="main" style="margin: 0 0 0 24rpx; max-width: calc(100% - 210rpx);">
+						<view class="main" style="margin: 0 0 0 24rpx; max-width: 494rpx;">
 							<view class="content shadow">
-								<text>{{ item.content }} <text v-if="ing">...</text> </text>
+								<text @longpress="longpress(item.content)">{{ item.content }} </text>
+								<LoadingSpin v-if="ing && index === list.length - 1"></LoadingSpin>
 							</view>
 						</view>
-						<view class="date" style="bottom: 10rpx;">
-							<text class="cuIcon-lightauto text-green"
-								style="position: absolute; top: -4rpx; right: calc(100% + 48rpx); white-space: nowrap;">-{{ item.energy }}</text>
+						<view class="date" style="bottom: 8rpx; right: auto; left: 128rpx;">
+							<text class="cuIcon-lightauto text-green flex"
+								style="position: absolute; left: -128rpx; width: 128rpx; top: 0; white-space: nowrap;">-{{ item.energy }}</text>
 							<text>{{ item.time }}</text>
 						</view>
 					</view>
@@ -42,11 +48,12 @@
 				<view style="height: 48rpx;"></view>
 			</view>
 		</scroll-view>
-		<view class="cu-bar foot input">
+		<view class="cu-bar foot input" style="bottom: 1rpx;">
 			<view class="action">
 				<text class="cuIcon-settings text-grey"></text>
 			</view>
-			<input class="solid-bottom" v-model="chat" @confirm="send"></input>
+			<input class="solid-bottom" v-model="chat" @confirm="send"
+				style="background: #EDEDED; border-radius: 4rpx; margin: 0 10rpx; padding: 0 10rpx;"></input>
 			<button class="cu-btn bg-green shadow" @click="send">发送</button>
 		</view>
 	</view>
@@ -85,6 +92,9 @@
 			})
 		},
 		methods: {
+			longpress(content) {
+				this.$copy(content)
+			},
 			async send() {
 				if (this.ing) {
 					return this.$toast('AI正在生成对话，请稍后再试')
@@ -120,7 +130,7 @@
 					})
 					this.chat = ''
 				} else {
-					this.$toast('请输入文字')
+					this.$toast('请输入问题')
 				}
 			}
 		}

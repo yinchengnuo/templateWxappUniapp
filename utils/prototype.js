@@ -24,12 +24,21 @@ Vue.prototype.$toasted = () => {
 	uni.hideToast()
 }
 
-Vue.prototype.$loading = () => {
-	uni.hideLoading()
-	uni.showLoading()
+Vue.prototype.$loading = function() {
+	if (this.$refs && this.$refs.Loading) {
+		this.$refs.Loading.loading()
+	} else {
+		uni.hideLoading()
+		uni.showLoading()
+	}
 }
-Vue.prototype.$loaded = () => {
-	uni.hideLoading()
+Vue.prototype.$loaded = function() {
+	if (this.$refs && this.$refs.Loading) {
+		this.$refs.Loading.loaded()
+	} else {
+		uni.hideLoading()
+
+	}
 }
 
 Vue.prototype.$copy = (data) => {

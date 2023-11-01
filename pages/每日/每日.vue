@@ -1,12 +1,13 @@
 <template>
 	<view class="index">
-		<image class=".page_bg" mode="aspectFill" src='/static/page_bg.png'></image>
+		<image class=".page_bg" mode="aspectFill"
+			src='https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/page_bg.png'></image>
 		<view class="page_title flex" :style="{
 				marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` 
 			}">每日随机</view>
 		<scroll-view scroll-y
 			:style="{  height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px)` }"
-			refresher-enabled>
+			refresher-enabled :refresher-triggered="refreshing" @refresherrefresh="getList">
 			<swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="2333"
 				duration="500" @change="cardSwiper" previousMargin="0.01rpx" indicator-color="#1F1F1F"
 				indicator-active-color="#000000">
@@ -47,13 +48,16 @@
 	export default {
 		data() {
 			return {
+				show: 0,
 				cardCur: 0,
+				refreshing: false,
+				interstitialAd: {},
 			}
 		},
 		computed: {
 			list() {
 				const colors = getApp().globalData.colors.sort(() => Math.random() - 0.5)
-				return this.$store.state.app.list.filter(e => e.page === '每日随机').map((e, i) => ({
+				return this.$store.state.app.list.filter(e => e.type === '每日随机').map((e, i) => ({
 					...e,
 					color: colors[i % 12] + ' light'
 				}))
@@ -69,19 +73,33 @@
 				return this.list.slice().sort((b, a) => a.index - b.index).slice(0, 6)
 			}
 		},
-		onPullDownRefresh() {
-			this.$store.dispatch('app/getApp')
+		onShow() {
+			this.show++
+			if ((this.show !== 0) && (this.show % 2 === 0)) {
+				this.interstitialAd.show()
+			}
 		},
 		onLoad() {
-			this.$store.dispatch('app/getApp')
+			this.getList()
+			this.interstitialAd = uni.createInterstitialAd({
+				adUnitId: 'adunit-e3f467955c2226a4'
+			})
 		},
 		methods: {
+			getList() {
+				this.refreshing = true
+				this.$loading()
+				this.$store.dispatch('app/getApp').finally(() => {
+					this.$loaded()
+					this.refreshing = false
+				})
+			},
 			cardSwiper(e) {
 				this.cardCur = e.detail.current
 			},
 			navigateTo(item) {
 				uni.navigateTo({
-					url: `/pages/${item.page}/${item.name}/${item.name}`
+					url: item.page
 				})
 			}
 		}
