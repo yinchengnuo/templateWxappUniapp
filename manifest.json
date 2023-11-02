@@ -61,7 +61,7 @@
 		},
 		"usingComponents": true,
 		"unipush": {
-			"enable": false
+			"enable": true
 		},
 		"permission": {
 			"scope.userLocation": {

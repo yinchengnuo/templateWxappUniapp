@@ -8,7 +8,6 @@ export default {
 	mutations: {
 		SET_USER_INFO(state, payload) {
 			uni.setStorageSync('openid', payload.openid)
-			uni.setStorageSync('openid_time', Date.now())
 			Object.keys(payload).forEach(key => {
 				Vue.prototype.$set(state, key, payload[key])
 			})
@@ -16,13 +15,17 @@ export default {
 		}
 	},
 	actions: {
-		login({
+		async login({
 			state: {
 				openid
 			},
 			commit
 		}) {
 			if (!openid) {
+				console.log((await uni.getPushClientId()).cid)
+				uni.onPushMessage((res) => {
+					console.log(res)
+				})
 				uni.login().then(({
 					code
 				}) => {

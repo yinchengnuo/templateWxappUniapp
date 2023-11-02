@@ -14,7 +14,6 @@
 			colors: ["red", "orange", "yellow", "olive", "green", "cyan", "blue", "purple", "mauve", "pink",
 				"brown", "grey"
 			],
-			systemInfo: uni.getSystemInfoSync(),
 			menuButtonBoundingClientRect: uni.getMenuButtonBoundingClientRect()
 		},
 		onLaunch() {

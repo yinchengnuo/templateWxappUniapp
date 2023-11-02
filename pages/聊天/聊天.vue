@@ -2,12 +2,14 @@
 	<view class="index">
 		<image class=".page_bg" mode="aspectFill"
 			src='https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/page_bg.png'></image>
-		<view class="page_title flex flex_sb" style="box-sizing: border-box; padding: 0 30rpx;" :style="{
+		<view class="flex" style="box-sizing: border-box; padding: 0 30rpx; position: relative;" :style="{
 				marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` 
 			}">
-			<text class="cuIcon-lightauto text-green text-shadow">{{ user.energy }}</text>
-			<text>有问题，问AI</text>
-			<text></text>
+			<view class="flex h100" style="position: absolute; top: 0; left: 0; padding: 0 30rpx; font-weight: bolder;">
+				<text class="cuIcon-lightauto text-green text-shadow">{{ user.energy }}</text>
+				<text class="cuIcon-unfold text-green text-shadow" style="margin: 0 6rpx;"></text>
+			</view>
+			<text class="page_title ">有问题，问AI</text>
 		</view>
 		<scroll-view scroll-y :scroll-top="scroll"
 			:style="{  height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px - 84rpx)` }">
@@ -55,7 +57,10 @@
 				<text class="cuIcon-settings text-grey"></text>
 			</view>
 			<input class="solid-bottom" v-model="chat" @confirm="send"
-				style="background: #EDEDED; border-radius: 4rpx; margin: 0 10rpx; padding: 0 10rpx;"></input>
+				style="background: #EDEDED; border-radius: 8rpx; margin: 0 10rpx; padding: 0 20rpx; box-sizing: border-box;"></input>
+			<view class="action">
+				<text class="cuIcon-roundadd text-grey"></text>
+			</view>
 			<button class="cu-btn bg-green shadow" @click="send">发送</button>
 		</view>
 	</view>
