@@ -4251,7 +4251,7 @@ movable-view.indexBar-item::before {
 	position: absolute;
 	left: 0;
 	top: 0;
-	background: linear-gradient(35deg, var(--orange), var(--pink));
+	/* background: linear-gradient(35deg, var(--orange), var(--pink)); */
 	-webkit-mask: radial-gradient(circle at 20rpx 65%, transparent 20rpx, red 0) -20rpx;
 	/* red 0 ：后面颜色的位置只需要小于等于前面颜色的位置就行了 */
 	mask: radial-gradient(circle at 20rpx 65%, transparent 20rpx, red 0) -20rpx;
@@ -4302,10 +4302,10 @@ movable-view.indexBar-item::before {
 	height: 220rpx;
 	overflow: hidden;
 	position: relative;
-	background: radial-gradient(circle at right top, transparent 18rpx, var(--pinkLight) 0) top left / 215rpx 51% no-repeat,
+	/* background: radial-gradient(circle at right top, transparent 18rpx, var(--pinkLight) 0) top left / 215rpx 51% no-repeat,
 		radial-gradient(circle at right bottom, transparent 18rpx, var(--pinkLight) 0) bottom left /215rpx 51% no-repeat,
 		radial-gradient(circle at left top, transparent 18rpx, var(--cyanLight) 0) top right /487rpx 51% no-repeat,
-		radial-gradient(circle at left bottom, transparent 18rpx, var(--cyanLight) 0) bottom right /487rpx 51% no-repeat;
+		radial-gradient(circle at left bottom, transparent 18rpx, var(--cyanLight) 0) bottom right /487rpx 51% no-repeat; */
 	filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, .3));
 	margin: 20px auto;
 	/* 解决filter-导致border-radius生效 */
@@ -5102,111 +5102,111 @@ image {
 /* flex布局 */
 
 .flex {
-	display: flex;
+	display: flex !important;
 }
 
 .basis-xs {
-	flex-basis: 20%;
+	flex-basis: 20% !important;
 }
 
 .basis-sm {
-	flex-basis: 40%;
+	flex-basis: 40% !important;
 }
 
 .basis-df {
-	flex-basis: 50%;
+	flex-basis: 50% !important;
 }
 
 .basis-lg {
-	flex-basis: 60%;
+	flex-basis: 60% !important;
 }
 
 .basis-xl {
-	flex-basis: 80%;
+	flex-basis: 80% !important;
 }
 
 .basis-xxl {
-	flex-basis: 100%;
+	flex-basis: 100% !important;
 }
 
 .flex-sub {
-	flex: 1;
+	flex: 1 !important;
 }
 
 .flex-twice {
-	flex: 2;
+	flex: 2 !important;
 }
 
 .flex-treble {
-	flex: 3;
+	flex: 3 !important;
 }
 
 .flex-column {
-	flex-direction: column;
+	flex-direction: column !important;
 }
 
 .flex-row {
-	flex-direction: row;
+	flex-direction: row !important;
 }
 
 .flex-wrap {
-	flex-wrap: wrap;
+	flex-wrap: wrap !important;
 }
 
 .align-start {
-	align-items: flex-start;
+	align-items: flex-start !important;
 }
 
 .align-end {
-	align-items: flex-end;
+	align-items: flex-end !important;
 }
 
 .align-center {
-	align-items: center;
+	align-items: center !important;
 }
 
 .align-stretch {
-	align-items: stretch;
+	align-items: stretch !important;
 }
 
 .self-start {
-	align-self: flex-start;
+	align-self: flex-start !important;
 }
 
 .self-center {
-	align-self: flex-center;
+	align-self: flex-center !important;
 }
 
 .self-end {
-	align-self: flex-end;
+	align-self: flex-end !important;
 }
 
 .self-stretch {
-	align-self: stretch;
+	align-self: stretch !important;
 }
 
 .align-stretch {
-	align-items: stretch;
+	align-items: stretch !important;
 }
 
 .justify-start {
-	justify-content: flex-start;
+	justify-content: flex-start !important;
 }
 
 .justify-end {
-	justify-content: flex-end;
+	justify-content: flex-end !important;
 }
 
 .justify-center {
-	justify-content: center;
+	justify-content: center !important;
 }
 
 .justify-between {
-	justify-content: space-between;
+	justify-content: space-between !important;
 }
 
 .justify-around {
-	justify-content: space-around;
+	justify-content: space-around !important;
 }
 
 /* grid布局 */

@@ -56,14 +56,14 @@
 		},
 		computed: {
 			list() {
-				const colors = getApp().globalData.colors.sort(() => Math.random() - 0.5)
+				const colors = getApp().globalData.colors.slice().sort(() => Math.random() - 0.5)
 				return this.$store.state.app.list.filter(e => e.type === '每日随机').map((e, i) => ({
 					...e,
 					color: colors[i % 12] + ' light'
 				}))
 			},
 			listHot() {
-				const images = getApp().globalData.images.sort(() => Math.random() - 0.5)
+				const images = getApp().globalData.images.slice().sort(() => Math.random() - 0.5)
 				return this.list.slice().sort((b, a) => a.view_num - b.view_num).slice(0, 6).map((e, i) => ({
 					...e,
 					image: images[i]
@@ -75,7 +75,7 @@
 		},
 		onShow() {
 			this.show++
-			if ((this.show !== 0) && (this.show % 2 === 0)) {
+			if ((this.show !== 0) && (this.show % 4 === 0)) {
 				this.interstitialAd.show()
 			}
 		},

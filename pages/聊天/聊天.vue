@@ -53,16 +53,19 @@
 			</view>
 		</scroll-view>
 		<view class="cu-bar foot input" style="bottom: 1rpx;">
-			<view class="action">
+			<view class="action" @click="page_container_show = page_container_content = true">
 				<text class="cuIcon-settings text-grey"></text>
 			</view>
 			<input class="solid-bottom" v-model="chat" @confirm="send"
 				style="background: #EDEDED; border-radius: 8rpx; margin: 0 10rpx; padding: 0 20rpx; box-sizing: border-box;"></input>
-			<view class="action">
+			<view class="action" style="margin-right: 10rpx;">
 				<text class="cuIcon-roundadd text-grey"></text>
 			</view>
 			<button class="cu-btn bg-green shadow" @click="send">发送</button>
 		</view>
+		<page-container :show="page_container_show" :z-index="2048" round @afterleave="page_container_show = false">
+			<AISettings v-if="page_container_show" />
+		</page-container>
 	</view>
 </template>
 
@@ -70,10 +73,13 @@
 	export default {
 		data() {
 			return {
+				show: 0,
 				list: [],
 				chat: '',
 				ing: false,
 				scroll: 999999999,
+				interstitialAd: {},
+				page_container_show: false,
 			}
 		},
 		computed: {
@@ -81,31 +87,43 @@
 				return this.$store.state.user
 			},
 		},
-		created() {
-			this.$('/chat_record').then(data => {
-				console.log(data)
-				if (data.length) {
-					data.forEach(e => {
-						this.list.push({
-							type: 'chat',
-							content: e.chat,
-							time: e.chat_time,
-							energy: e.promptTokens
-						})
-						this.list.push({
-							type: 'reply',
-							content: e.reply,
-							time: e.reply_time,
-							energy: e.completionTokens
-						})
-						setTimeout(() => this.scroll++)
-					})
-				}
+		onShow() {
+			this.show++
+			if ((this.show !== 0) && (this.show % 4 === 0)) {
+				this.interstitialAd.show()
+			}
+		},
+		onLoad() {
+			this.interstitialAd = uni.createInterstitialAd({
+				adUnitId: 'adunit-e3f467955c2226a4'
 			})
+			this.getList()
 		},
 		methods: {
-			longpress(content) {
-				this.$copy(content)
+			getList() {
+				this.$loading()
+				this.$('/chat_record').then(data => {
+					console.log(data)
+					if (data.length) {
+						data.forEach(e => {
+							this.list.push({
+								type: 'chat',
+								content: e.chat,
+								time: e.chat_time,
+								energy: e.promptTokens
+							})
+							this.list.push({
+								type: 'reply',
+								content: e.reply,
+								time: e.reply_time,
+								energy: e.completionTokens
+							})
+							setTimeout(() => this.scroll++)
+						})
+					}
+				}).finally(() => {
+					this.$loaded()
+				})
 			},
 			async send() {
 				if (this.ing) {

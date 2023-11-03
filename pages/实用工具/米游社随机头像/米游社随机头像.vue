@@ -52,7 +52,7 @@
 				VerticalNavTop: 0
 			}
 		},
-		created() {
+		onLoad() {
 			this.$loading()
 			uni.request({
 				url: 'https://api.oioweb.cn/api/picture/miyoushe_avatar'
@@ -77,24 +77,24 @@
 			VerticalMain(e) {
 				let list = this.list;
 				let tabHeight = 0;
-				if (this.load) {
-					for (let i = 0; i < list.length; i++) {
-						let view = uni.createSelectorQuery().select("#main-" + list[i].id);
-						view.fields({
-							size: true
-						}, data => {
-							list[i].top = tabHeight;
-							tabHeight = tabHeight + data.height;
-							list[i].bottom = tabHeight;
-						}).exec();
-					}
-					this.load = false,
-						this.list = list
+				// if (this.load) {
+				for (let i = 0; i < list.length; i++) {
+					let view = uni.createSelectorQuery().select("#main-" + list[i].id);
+					view.fields({
+						size: true
+					}, data => {
+						list[i].top = tabHeight;
+						tabHeight = tabHeight + data.height;
+						list[i].bottom = tabHeight;
+					}).exec();
 				}
+				this.load = false
+				this.list = list
+				// }
 				let scrollTop = e.detail.scrollTop + 20;
 				for (let i = 0; i < list.length; i++) {
 					if (scrollTop > list[i].top && scrollTop < list[i].bottom) {
-						this.VerticalNavTop = (list[i].id - 1) * 50
+						this.VerticalNavTop = (list[i].id - 1) * 70
 						this.TabCur = list[i].id
 						return false
 					}

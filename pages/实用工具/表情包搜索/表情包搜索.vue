@@ -37,7 +37,7 @@
 				}
 			}
 		},
-		created() {
+		onLoad() {
 			this.request = this.$debounce(() => {
 				this.$loading()
 				uni.request({
