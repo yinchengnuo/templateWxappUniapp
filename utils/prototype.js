@@ -8,7 +8,7 @@ Vue.prototype.$app = getApp
 Vue.prototype.$store = $store
 
 Vue.prototype.$toast = (title, conf = {}) => {
-	if (!title) return
+	title = title ? title : '请输入提示信息'
 	title = title.toString()
 	setTimeout(() => {
 		uni.showToast({
@@ -26,19 +26,21 @@ Vue.prototype.$toasted = () => {
 
 Vue.prototype.$loading = function() {
 	if (this.$refs && this.$refs.Loading) {
-		this.$refs.Loading.loading()
-	} else {
-		uni.hideLoading()
-		uni.showLoading()
+		return this.$refs.Loading.loading()
 	}
+	if (this.$parent && this.$parent.$refs && this.$parent.$refs.Loading) {
+		return this.$parent.$refs.Loading.loading()
+	}
+	uni.showLoading()
 }
 Vue.prototype.$loaded = function() {
 	if (this.$refs && this.$refs.Loading) {
-		this.$refs.Loading.loaded()
-	} else {
-		uni.hideLoading()
-
+		return this.$refs.Loading.loaded()
 	}
+	if (this.$parent && this.$parent.$refs && this.$parent.$refs.Loading) {
+		return this.$parent.$refs.Loading.loaded()
+	}
+	uni.hideLoading()
 }
 
 Vue.prototype.$copy = (data) => {

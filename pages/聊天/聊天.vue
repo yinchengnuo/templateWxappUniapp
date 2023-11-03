@@ -25,7 +25,7 @@
 						<open-data class="cu-avatar radius" type="userAvatarUrl"></open-data>
 						<view class="date" style="bottom: 8rpx; left: auto; right: 128rpx;">
 							<text>{{ item.time }}</text>
-							<text class="cuIcon-lightauto text-green flex"
+							<text v-if="item.energy" class="cuIcon-lightauto text-green flex"
 								style="position: absolute; 100%; left: 100%; top: 0; white-space: nowrap; width: 128rpx;">-{{ item.energy }}</text>
 						</view>
 					</view>
@@ -33,18 +33,18 @@
 					<view v-if="item.type === 'reply'" :key="index" class="cu-item" style="padding: 12rpx 24rpx 48rpx;">
 						<view class="cu-avatar radius">
 							<image
-								src="https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/openai.png"
+								:src="'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/' + item.provider + '.png'"
 								class="w100 h100"></image>
 						</view>
 						<view class="main" style="margin: 0 0 0 24rpx; max-width: 494rpx;">
 							<view class="content shadow">
 								<text @longpress="longpress(item.content)">{{ item.content }} </text>
-								<LoadingSpin v-if="ing && index === list.length - 1"></LoadingSpin>
+								<LoadingSpin v-if="generating && index === list.length - 1"></LoadingSpin>
 							</view>
 						</view>
 						<view class="date" style="bottom: 8rpx; right: auto; left: 128rpx;">
 							<text class="cuIcon-lightauto text-green flex"
-								style="position: absolute; left: -128rpx; width: 128rpx; top: 0; white-space: nowrap;">-{{ item.energy }}</text>
+								style="position: absolute; left: -128rpx; width: 128rpx; top: 0; white-space: nowrap;">-{{ item.energy || item._energy }}</text>
 							<text>{{ item.time }}</text>
 						</view>
 					</view>
@@ -76,7 +76,7 @@
 				show: 0,
 				list: [],
 				chat: '',
-				ing: false,
+				generating: false,
 				scroll: 999999999,
 				interstitialAd: {},
 				page_container_show: false,
@@ -98,6 +98,9 @@
 				adUnitId: 'adunit-e3f467955c2226a4'
 			})
 			this.getList()
+			setTimeout(() => {
+				this.page_container_show = true
+			}, 1234)
 		},
 		methods: {
 			getList() {
@@ -110,13 +113,17 @@
 								type: 'chat',
 								content: e.chat,
 								time: e.chat_time,
-								energy: e.promptTokens
+								provider: e.provider,
+								energy: e.promptTokens,
+								_energy: e.totalTokens,
 							})
 							this.list.push({
 								type: 'reply',
 								content: e.reply,
 								time: e.reply_time,
-								energy: e.completionTokens
+								provider: e.provider,
+								_energy: e.totalTokens,
+								energy: e.completionTokens,
 							})
 							setTimeout(() => this.scroll++)
 						})
@@ -126,22 +133,29 @@
 				})
 			},
 			async send() {
-				if (this.ing) {
+				if (this.generating) {
 					return this.$toast('AI正在生成对话，请稍后再试')
 				}
+				if (this.$store.state.user.energy < 1) {
+					return this.$toast('能量不足')
+				}
 				if (this.chat.trim()) {
-					this.ing = true
+					this.generating = true
 					const chat = {
 						energy: 0,
+						_energy: 0,
 						type: 'chat',
 						content: this.chat,
-						time: (new Date).toLocaleString()
+						time: (new Date).toLocaleString(),
+						provider: this.$store.state.user.ai_provider,
 					}
 					const reply = {
 						time: '',
 						energy: 0,
+						_energy: 0,
 						content: '',
 						type: 'reply',
+						provider: this.$store.state.user.ai_provider,
 					}
 					this.list.push(chat)
 					this.list.push(reply)
@@ -153,11 +167,13 @@
 						reply.content = data.reply
 						reply.time = data.reply_time
 						chat.energy = data.promptTokens
+						chat._energy = data.totalTokens
+						reply._energy = data.totalTokens
 						reply.energy = data.completionTokens
 						setTimeout(() => this.scroll++)
 						this.$store.state.user.energy -= data.totalTokens
 					}).finally(() => {
-						this.ing = false
+						this.generating = false
 					})
 					this.chat = ''
 				} else {

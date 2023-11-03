@@ -16,28 +16,26 @@ export default {
 	},
 	actions: {
 		async login({
-			state: {
-				openid
-			},
 			commit
 		}) {
-			if (!openid) {
-				console.log((await uni.getPushClientId()).cid)
-				uni.onPushMessage((res) => {
-					console.log(res)
-				})
-				uni.login().then(({
+			Vue.prototype.$loading()
+			Promise.all([uni.getPushClientId(), uni.login()]).then(([{
+				cid
+			}, {
+				code
+			}]) => {
+				Vue.prototype.$('/login', {
+					cid,
 					code
-				}) => {
-					Vue.prototype.$loading()
-					Vue.prototype.$('/login', {
-						code
-					}).then((data) => {
-						commit('SET_USER_INFO', data)
-					}).finally(() => Vue.prototype.$loaded())
+				}).then((data) => {
+					commit('SET_USER_INFO', data)
+				}).finally(() => {
+					Vue.prototype.$loaded()
 				})
-			}
-
+			}).catch((e) => {
+				Vue.prototype.$loaded()
+				Vue.prototype.$toast(e.message)
+			})
 		}
 	}
 }

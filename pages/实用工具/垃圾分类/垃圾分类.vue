@@ -28,7 +28,7 @@
 		data() {
 			return {
 				// text: '',
-				text: '避孕套',
+				text: '鱼泡',
 				result: null
 			}
 		},

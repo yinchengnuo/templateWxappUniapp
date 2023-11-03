@@ -2,14 +2,14 @@
 	export default {
 		globalData: {
 			images: [
-				"https://image.meiye.art/FiLUT-wb9DP0-dpxRQH19HJOOJOW",
+				"https://image.meiye.art/FhtISupNHMibBgrGZOe15CPQ-d5R",
 				"https://image.meiye.art/FlqKg5bugFQD5Qzm_QhGM7ET4Mtx",
 				"https://image.meiye.art/Fha6tqRTIwHtlLW3xuZBJj8ZXSX3",
-				"https://image.meiye.art/FhHGe9NyO0uddb6D4203jevC_gzc",
-				"https://image.meiye.art/FhtISupNHMibBgrGZOe15CPQ-d5R",
-				"https://image.meiye.art/FiqphSjedkvi1y0hfqeNrYGXqLKo",
 				"https://image.meiye.art/FgaFNs-YNxw_vRtqCbvQru3z6s3P",
-				"https://image.meiye.art/FqZALKFWQ7vEZtmJyMyB_w776B_H"
+				"https://image.meiye.art/FiqphSjedkvi1y0hfqeNrYGXqLKo",
+				"https://image.meiye.art/FqZALKFWQ7vEZtmJyMyB_w776B_H",
+				"https://image.meiye.art/FhHGe9NyO0uddb6D4203jevC_gzc",
+				"https://image.meiye.art/FiLUT-wb9DP0-dpxRQH19HJOOJOW",
 			],
 			colors: ["red", "orange", "yellow", "olive", "green", "cyan", "blue", "purple", "mauve", "pink",
 				"brown", "grey"
