@@ -1,40 +1,53 @@
 <template>
-	<view>
-		<view class="flex solid-bottom margin-top justify-center">
+	<view style="background: #efefef;overflow: hidden;">
+		<view class="flex solid-bottom margin-top justify-center" style="margin-bottom: 20rpx;">
 			<view class="cu-coupon-box bg-img bg-mask radius-lg padding-sm">
 				<image class="w100 h100" :src="image" mode="aspectFill"
 					style="position: absolute; top: 0; left: 0; z-index: 1; opacity: .6;"></image>
 				<view class="w100 h100 padding-sm" style="position: absolute; top: 0; left: 0; z-index: 1;">
 					<view class="flex justify-between" style="position: relative; z-index: 2;">
-						<view class="text-white text-xl text-bold">ToolBox AI 设置</view>
-						<view class="cu-tag line-white round text-df padding">
-							<text>我的能量</text>
-							<text class="cuIcon-right"></text>
+						<view class="text-xl text-bold text-white">ToolBox AI 设置</view>
+						<view class="cu-capsule round margin-right">
+							<navigator url="/pages/用户中心/我的能量/我的能量" class="cu-tag bg-green">
+								<text>我的能量</text>
+								<text class="cuIcon-lightauto"></text>
+							</navigator>
+							<view class="cu-tag line-green">
+								<text class="cuIcon-right text-bold"></text>
+							</view>
 						</view>
 					</view>
 					<view v-if="user.openid"
 						class="flex justify-center align-end padding-tb cu-coupon-content text-white">
-						<text class="text-lg padding-bottom-xs">余额</text>
-						<text class="text-sl text-bold text-shadow" style="text-shadow: 0px 0px 2rpx green">
+						<text class="text-lg padding-bottom-xs text-black">余额</text>
+						<text class="text-sl text-bold text-shadow " style="text-shadow: 0px 0px 2rpx green">
 							{{ user.energy }} </text>
-						<text class="text-lg text-white text-shadow cuIcon-lightauto">能量</text>
+						<text class="text-lg text-green text-shadow cuIcon-lightauto">能量</text>
 					</view>
 					<view v-if="user.openid" class="flex justify-around align-center margin-top-xl text-white">
-						<button class="cu-btn round shadow bg-red">每日签到 +1000</button>
-						<button class="cu-btn round shadow bg-green" style="margin: 0 30rpx;">邀请好友
+						<navigator url="/pages/用户中心/我的签到/我的签到">
+							<button class="cu-btn round shadow bg-red">每日签到 +1000</button>
+						</navigator>
+						<button open-type="share" class="cu-btn round shadow bg-green" style="margin: 0 30rpx;">邀请好友
 							+2000</button>
 						<button class="cu-btn round shadow bg-blue">看30S广告+3000</button>
 					</view>
 				</view>
 			</view>
 		</view>
-		<view class="cu-coupon-box2 radius-lg " :class="bg">
+		<navigator url="/pages/用户中心/我的能量/我的能量?action=buy">
+			<uni-notice-bar show-get-more show-icon :fontSize="16" scrollable text="能量不够用? 10,000 能量只需一元！点我立即充值吧！"
+				style="margin-bottom: 0;" />
+		</navigator>
+		<view class="cu-coupon-box2 radius-lg " :class="bg" style="margin-top: 0;margin-bottom: 0;">
 			<view class="cu-tag bg-orange radius text-df padding-lr-sm">
 				{{ user.ai_provider === 'azure' ? 'OpenAI' : '国产大模型' }}
 			</view>
 			<view v-if="user.openid" class="flex p-xs margin-bottom-sm mb-sm shadow">
 				<view class="cu-avatar xl radius margin-left  margin-right">
-					<image :src="'/static/ai/' + user.ai_provider + '.png'" class="w100 h100"></image>
+					<image mode="aspectFit"
+						:src="'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/' + user.ai_provider + '.jpg'"
+						class="w100 h100"></image>
 				</view>
 				<view class="flex-treble padding-left-sm  margin-left">
 					<picker class="text-black text-xxl text-bold" :value="aiNameIndex" :range="aiNameList"
@@ -53,6 +66,45 @@
 				</view>
 			</view>
 		</view>
+
+		<view class="cu-list menu card-menu sm-border margin-top-sm shadow radius-lg"
+			style="margin-left: 25rpx;margin-right: 25rpx;">
+			<view class="cu-bar bg-white">
+				<view class="action">
+					<text class="cuIcon-titles text-grey"></text>
+					<text class="text-bold">AI 行为设置</text>
+				</view>
+				<navigator url="/pages/用户中心/关于ToolBoxAI/关于ToolBoxAI" class='action'
+					style="height: 100rpx; margin: 0; padding: 0 30rpx;">
+					<text>关于 ToolBox AI</text>
+					<text class="cuIcon-right"></text>
+				</navigator>
+			</view>
+
+			<view class="cu-form-group">
+				<view class="title">连续对话记忆次数</view>
+				<view class="cuIcon-questionfill text-gray margin-right" style="font-size: 42rpx;" @click="showModal1">
+				</view>
+				<input placeholder="请输入0~9" type="number" :value="ai_memory_count" @input="input" @confirm="confirm"
+					style="border: 1px solid #efefef; border-radius: 8rpx; padding: 10rpx 20rpx; height: 80rpx;"></input>
+				<button class="cu-btn round margin-left bg-green shadow"
+					v-if="Number(ai_memory_count) !== user.ai_memory_count" @click="confirm">
+					保存
+				</button>
+				<view class="text-grey cuIcon-infofill margin-left" style="font-size: 42rpx" @click="showModal2"></view>
+			</view>
+			<view class="cu-item margin-bottom-sm">
+				<view class="content">
+					<text>AI回答完成自动播放语音</text>
+				</view>
+				<view class="">
+					<switch v-if="switchShow" class="green radius" :checked="user.ai_reply_sound_auto"
+						@change="switchChange"></switch>
+				</view>
+			</view>
+			<button class="cu-btn block bg-grey margin-tb-sm lg" @click="$parent.page_container_show = false">退出 ToolBox
+				AI 设置</button>
+		</view>
 	</view>
 </template>
 
@@ -67,17 +119,16 @@
 	if (H >= 12 && H < 15) image = getApp().globalData.images[4]
 	if (H >= 15 && H < 17) image = getApp().globalData.images[5]
 	if (H >= 17 && H < 19) image = getApp().globalData.images[6]
-	if (H >= 19 && H < 23) image = getApp().globalData.images[7]
+	if (H >= 19) image = getApp().globalData.images[7]
 	console.log(image)
 	export default {
 		name: "AISettings",
 		data() {
 			return {
 				image,
-				bg: ["bg-gradual-red-light", "bg-gradual-orange-light", "bg-gradual-green-light",
-					"bg-gradual-purple-light", "bg-gradual-pink-light", "bg-gradual-blue-light",
-					"bg-gradual-pinknew-light", "bg-gradual-cyan-light"
-				].sort(() => Math.random() - 0.5)[0],
+				switchShow: true,
+				ai_memory_count: 0,
+				bg: getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)[0],
 				modelList: []
 			};
 		},
@@ -95,7 +146,11 @@
 				return this.$store.state.user
 			},
 		},
+		created() {
+			this.ai_memory_count = this.user.ai_memory_count ? this.user.ai_memory_count : ''
+		},
 		methods: {
+			// 切换厂商
 			chooseProvider(e) {
 				const index = +e.detail.value
 				if (index !== this.aiNameIndex) {
@@ -110,17 +165,99 @@
 					})
 				}
 			},
+			// 切换模型
 			chooseModel(e) {
 				this.$store.state.user.ai_model = this.modelList[e.detail.value]
 				this.setting({
 					ai_model: this.$store.state.user.ai_model
 				})
 			},
+			// 保存模型设置
 			setting(payload) {
 				this.$loading()
 				this.$('/setting', payload).finally(() => {
 					this.$loaded()
 				})
+			},
+			showModal1() {
+				uni.showModal({
+					title: '什么是连续对话记忆次数',
+					content: '默认情况下，AI并不会记得你的上个问题问了什么，因此不具备理解问答上下文的能力。设置连续对话记忆次数（一问一答为一次）可以解决这个问题。',
+					showCancel: false,
+					confirmText: '我知道了'
+				});
+			},
+			showModal2() {
+				uni.showModal({
+					title: '设置连续对话记忆次数注意事项',
+					content: '当设置了连续对话记忆次数后，每次提问时会提取最近 N 次（N 为设置的连续对话记忆次数）作为前置参数输入给 AI 模型，这就意味着每次对话会消耗更多的能量。例如：张三已经提问了 3 个 问题，平均每个问题约消耗 100 能量（提问：20， 回答：80）。此时设置了连续对话记忆次数为 3。则下次提问时需消耗能量约为 320。若回答消耗能量约为 80，则此次问答共计消耗能量约为 400。更详细说明见上方【关于 ToolBox AI】',
+					showCancel: false,
+					confirmText: '我知道了'
+				});
+			},
+			switchChange(e) {
+				if (e.detail.value) {
+					uni.showModal({
+						title: '开启AI回答完成自动播放语音？',
+						content: '每次开启需要耗费100能量，是否开启？',
+						success: res => {
+							if (res.confirm) {
+								this.$store.state.user.energy -= 100
+								this.$store.state.user.ai_reply_sound_auto = true
+								this.setting({
+									ai_reply_sound_auto: this.$store.state.user.ai_reply_sound_auto
+								})
+							} else {
+								this.$store.state.user.ai_reply_sound_auto = false
+							}
+							this.switchShow = false
+							setTimeout(() => this.switchShow = true)
+						}
+					});
+				} else {
+					uni.showModal({
+						title: '关闭AI回答完成自动播放语音？',
+						content: '再次开启需要耗费100能量，是否关闭？',
+						success: res => {
+							if (res.confirm) {
+								this.$store.state.user.ai_reply_sound_auto = false
+								this.setting({
+									ai_reply_sound_auto: this.$store.state.user.ai_reply_sound_auto
+								})
+							} else {
+								this.$store.state.user.ai_reply_sound_auto = true
+							}
+							this.switchShow = false
+							setTimeout(() => this.switchShow = true)
+						}
+					});
+				}
+			},
+			input(e) {
+				let ai_memory_count = Number(e.detail.value)
+				if (isNaN(ai_memory_count)) {
+					this.ai_memory_count = 0
+					this.$toast('请输入数字0~9')
+				} else {
+					if (ai_memory_count < 0) {
+						ai_memory_count = 0
+						this.$toast('请输入数字0~9')
+					}
+					if (ai_memory_count > 9) {
+						ai_memory_count = 9
+						this.$toast('请输入数字0~9')
+					}
+				}
+				this.ai_memory_count = ai_memory_count ? ai_memory_count : ''
+				return this.ai_memory_count.toString()
+			},
+			confirm() {
+				if (Number(this.ai_memory_count) !== this.user.ai_memory_count) {
+					this.$store.state.user.ai_memory_count = Number(this.ai_memory_count)
+					this.setting({
+						ai_memory_count: this.$store.state.user.ai_memory_count
+					})
+				}
 			}
 		}
 	}

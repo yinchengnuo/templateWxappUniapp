@@ -1,6 +1,26 @@
 <script>
+	const getNames = (name, num) => {
+		return Array(num).fill(0).map((e, i) => `${name}${(i + 1).toString().padStart(2, '0')}`)
+	}
 	export default {
 		globalData: {
+			systemInfo: uni.getSystemInfoSync(),
+			menuButtonBoundingClientRect: uni.getMenuButtonBoundingClientRect(),
+			loadings: [
+				...getNames('clones', 20),
+				...getNames('cut', 10),
+				...getNames('dancers', 10),
+				...getNames('hungry', 8),
+				...getNames('time', 10),
+				...getNames('nature', 16),
+				...getNames('colorful', 20),
+				...getNames('continuous', 10),
+				...getNames('flipping', 20),
+				...getNames('wobbling', 20),
+				...getNames('progress', 20),
+				...getNames('shapes', 40),
+				...getNames('spinner', 29),
+			],
 			images: [
 				"https://image.meiye.art/FhtISupNHMibBgrGZOe15CPQ-d5R",
 				"https://image.meiye.art/FlqKg5bugFQD5Qzm_QhGM7ET4Mtx",
@@ -11,11 +31,13 @@
 				"https://image.meiye.art/FhHGe9NyO0uddb6D4203jevC_gzc",
 				"https://image.meiye.art/FiLUT-wb9DP0-dpxRQH19HJOOJOW",
 			],
+			bgClass: ["bg-gradual-red-light", "bg-gradual-orange-light", "bg-gradual-green-light",
+				"bg-gradual-purple-light", "bg-gradual-pink-light", "bg-gradual-blue-light",
+				"bg-gradual-pinknew-light", "bg-gradual-cyan-light"
+			],
 			colors: ["red", "orange", "yellow", "olive", "green", "cyan", "blue", "purple", "mauve", "pink",
 				"brown", "grey"
 			],
-			systemInfo: uni.getSystemInfoSync(),
-			menuButtonBoundingClientRect: uni.getMenuButtonBoundingClientRect()
 		},
 		onLaunch() {
 			this.$store.dispatch('user/login')

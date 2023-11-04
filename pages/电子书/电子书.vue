@@ -1,5 +1,5 @@
 <template>
-	<Page ref="Page">
+	<Page no_padding type="S1" ref="Page">
 		<view class="index">
 			电子书
 		</view>
@@ -22,5 +22,9 @@
 <style lang="scss" scoped>
 	.index {
 		height: 100%;
+
+		image {
+			width: 100%;
+		}
 	}
 </style>

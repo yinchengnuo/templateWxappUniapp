@@ -1,33 +1,21 @@
 <template>
 	<view style="display: flex;flex-wrap: wrap;">
-		<view :class="name"></view>
+		<view :class="loading || name"></view>
 	</view>
 </template>
 
 <script>
-	const getNames = (name, num) => {
-		return Array(num).fill(0).map((e, i) => `${name}${(i + 1).toString().padStart(2, '0')}`)
-	}
-	const names = [
-		...getNames('clones', 20),
-		...getNames('cut', 10),
-		...getNames('dancers', 10),
-		...getNames('hungry', 8),
-		...getNames('time', 10),
-		...getNames('nature', 16),
-		...getNames('colorful', 20),
-		...getNames('continuous', 10),
-		...getNames('flipping', 20),
-		...getNames('wobbling', 20),
-		...getNames('progress', 20),
-		...getNames('shapes', 40),
-		...getNames('spinner', 29),
-	]
 	export default {
-		name: "Loading",
+		name: "LoadingSpin",
+		props: {
+			loading: {
+				type: String,
+				default: ''
+			}
+		},
 		data() {
 			return {
-				name: names.sort(() => Math.random() - 0.5)[0]
+				name: getApp().globalData.loadings.slice().sort(() => Math.random() - 0.5)[0]
 			};
 		}
 	}

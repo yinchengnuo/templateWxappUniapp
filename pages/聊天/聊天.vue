@@ -1,25 +1,68 @@
 <template>
-	<view class="index">
+	<view class="index" style="overflow: hidden;">
 		<image class=".page_bg" mode="aspectFill"
 			src='https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/page_bg.png'></image>
 		<view class="flex" style="box-sizing: border-box; padding: 0 30rpx; position: relative;" :style="{
 				marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` 
 			}">
-			<view class="flex h100" style="position: absolute; top: 0; left: 0; padding: 0 30rpx; font-weight: bolder;">
-				<text class="cuIcon-lightauto text-green text-shadow">{{ user.energy }}</text>
-				<text class="cuIcon-unfold text-green text-shadow" style="margin: 0 6rpx;"></text>
-			</view>
-			<text class="page_title ">有问题，问AI</text>
+			<navigator url="/pages/用户中心/我的能量/我的能量" class="flex h100"
+				style="position: absolute; top: 0; left: 0; padding: 0 30rpx; font-weight: bolder;">
+				<text class="cuIcon-lightauto text-purple text-shadow">{{ user.energy }}</text>
+				<text class="cuIcon-right text-purple text-shadow  text-blod" style="margin: 0 6rpx;"></text>
+			</navigator>
+			<text class="page_title text-black text-shadow">有问题，问AI</text>
 		</view>
+		<swiper class="tips-swiperitem" autoplay circular interval="5432" duration="4321" style="height: 64rpx;">
+			<swiper-item>
+				<view class="bg-blue light">
+					<view class='padding-xs text-xl padding-left flex'>
+						<text class='cuIcon-lightauto text-blue margin-right-xs'></text>
+						<text class="text-df">能量不够用？10,000 能量仅需 1 元</text>
+					</view>
+				</view>
+			</swiper-item>
+			<swiper-item>
+				<view class="bg-blue light">
+					<view class='padding-xs text-xl padding-left flex' @click="showSettings()">
+						<text class='cuIcon-magic text-blue margin-right-xs'></text>
+						<text class="text-df">每日签到、邀请新用户、看视频广告都可以获取能量</text>
+					</view>
+				</view>
+			</swiper-item>
+			<swiper-item>
+				<view class="bg-blue light">
+					<view class='padding-xs text-xl padding-left flex' @click="showSettings()">
+						<text class='icon-bug text-blue margin-right-xs'></text>
+						<text class="text-df">对话不智能？试试切换AI厂商&大语音模型？</text>
+					</view>
+				</view>
+			</swiper-item>
+			<swiper-item>
+				<view class="bg-blue light">
+					<view class='padding-xs text-xl padding-left flex' @click="showQuestions()">
+						<text class='cuIcon-searchlist text-blue margin-right-xs'></text>
+						<text class="text-df">不知道问什么？看看大家怎么问</text>
+					</view>
+				</view>
+			</swiper-item>
+			<swiper-item>
+				<view class="bg-blue light">
+					<view class='padding-xs text-xl padding-left flex' @click="showSettings()">
+						<text class='icon-bulb text-blue margin-right-xs'></text>
+						<text class="text-df">设置【连续对话记忆次数】，让AI理解对话上下文</text>
+					</view>
+				</view>
+			</swiper-item>
+		</swiper>
 		<scroll-view scroll-y :scroll-top="scroll"
-			:style="{  height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px - 84rpx)` }">
+			:style="{  height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px - 164rpx)` }">
 			<view class="cu-chat">
 				<template v-for="(item, index) in list">
 					<view v-if="item.type === 'chat'" :key="index" class="cu-item self"
 						style="padding: 12rpx 24rpx 48rpx;">
 						<view class="main" style="margin: 0 24rpx 0 0; max-width: 494rpx;">
 							<view class="content bg-green shadow">
-								<text @longpress="longpress(item.content)">{{ item.content }}</text>
+								<text>{{ item.content }}</text>
 							</view>
 						</view>
 						<open-data class="cu-avatar radius" type="userAvatarUrl"></open-data>
@@ -32,8 +75,8 @@
 
 					<view v-if="item.type === 'reply'" :key="index" class="cu-item" style="padding: 12rpx 24rpx 48rpx;">
 						<view class="cu-avatar radius">
-							<image
-								:src="'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/' + item.provider + '.png'"
+							<image mode="aspectFill"
+								:src="'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/' + item.provider + '.jpg'"
 								class="w100 h100"></image>
 						</view>
 						<view class="main" style="margin: 0 0 0 24rpx; max-width: 494rpx;">
@@ -49,22 +92,23 @@
 						</view>
 					</view>
 				</template>
-				<view style="height: 48rpx;"></view>
 			</view>
 		</scroll-view>
 		<view class="cu-bar foot input" style="bottom: 1rpx;">
-			<view class="action" @click="page_container_show = page_container_content = true">
-				<text class="cuIcon-settings text-grey"></text>
+			<view class="action" @click="showSettings()" style="margin: 0;padding: 0 20rpx;">
+				<text class="cuIcon-settings text-grey" style="margin: 0;"></text>
 			</view>
-			<input class="solid-bottom" v-model="chat" @confirm="send"
-				style="background: #EDEDED; border-radius: 8rpx; margin: 0 10rpx; padding: 0 20rpx; box-sizing: border-box;"></input>
-			<view class="action" style="margin-right: 10rpx;">
+			<input class="solid-bottom" v-model="chat" @confirm="send" confirm-type="send" placeholder="请输入问题"
+				style="background: #EDEDED; border-radius: 8rpx; margin: 0; padding: 0 20rpx; box-sizing: border-box;"></input>
+			<view class="action" style="padding:  0 20rpx; margin: 0;" @click="showQuestions()">
 				<text class="cuIcon-roundadd text-grey"></text>
 			</view>
 			<button class="cu-btn bg-green shadow" @click="send">发送</button>
 		</view>
-		<page-container :show="page_container_show" :z-index="2048" round @afterleave="page_container_show = false">
-			<AISettings v-if="page_container_show" />
+		<page-container :show="page_container_show" :z-index="2048" round
+			@afterleave="page_container_show = page_container_ai_settings_show = page_container_ai_questions_show = false">
+			<AISettings v-if="page_container_ai_settings_show" />
+			<AIQuestions v-if="page_container_ai_questions_show" />
 		</page-container>
 	</view>
 </template>
@@ -80,6 +124,9 @@
 				scroll: 999999999,
 				interstitialAd: {},
 				page_container_show: false,
+				page_container_ai_settings_show: false,
+				page_container_ai_questions_show: false,
+				bg: getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)[0]
 			}
 		},
 		computed: {
@@ -98,11 +145,16 @@
 				adUnitId: 'adunit-e3f467955c2226a4'
 			})
 			this.getList()
-			setTimeout(() => {
-				this.page_container_show = true
-			}, 1234)
 		},
 		methods: {
+			showSettings() {
+				this.page_container_show = true
+				this.page_container_ai_settings_show = true
+			},
+			showQuestions() {
+				this.page_container_show = true
+				this.page_container_ai_questions_show = true
+			},
 			getList() {
 				this.$loading()
 				this.$('/chat_record').then(data => {
@@ -189,7 +241,7 @@
 		.page_bg {
 			top: 0;
 			left: 0;
-			z-index: -1;
+			z-index: 0;
 			width: 100%;
 			height: 100vh;
 			position: fixed;

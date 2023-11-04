@@ -2,14 +2,14 @@
 	<view class="index">
 		<view class='nav-list'>
 			<view v-for="(item, index) in list" :key="index" :class="['nav-li', 'shadow']"
-				style="background: #fff; padding: 0; width: 220rpx; border-radius: 24rpx; overflow: hidden; position: relative; margin: 10rpx 0 10rpx;"
+				style="background: #fff; padding: 0; width: 320rpx; border-radius: 24rpx; overflow: hidden; position: relative; margin: 10rpx 0 10rpx;"
 				@click="navigateTo(item)">
-				<image class="w100" :src="item.icon.replace('.svg', '.png')" mode="widthFix"></image>
-				<view class="text-lg padding-xs text-bold">
+				<image class="w100" :src="item.icon.replace('.svg', '.jpg')" mode="widthFix"></image>
+				<!-- <view class="text-lg padding-xs text-bold">
 					{{ item.name }}
-				</view>
-				<view class="text-white padding-xs text-bold text-shadow padding-xs h100"
-					style="writing-mode: tb-rl; z-index: 0; white-space: nowrap; line-height: 2; position: absolute; top: 0; right: 0; background: linear-gradient(to right, rgba(0, 0, 0, .1), rgba(0, 0, 0, 1));">
+				</view> -->
+				<view class="text-white padding-xs text-bold text-shadow padding-xs w100"
+					style="z-index: 0; white-space: nowrap; line-height: 2; position: absolute; top: 0; left: 0; background: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .05));">
 					{{ item.desc }}
 				</view>
 			</view>
@@ -40,7 +40,9 @@
 			}
 		},
 		onLoad() {
-			!this.$store.state.app.list.length && this.getList()
+			if (!this.$store.state.app.list.length) {
+				this.refreshing = true
+			}
 			this.interstitialAd = uni.createInterstitialAd({
 				adUnitId: 'adunit-e3f467955c2226a4'
 			})
