@@ -1,5 +1,5 @@
 <template>
-	<view class="index">
+	<view class="index" :class="classList">
 		<view :id="id" class="_wrapper">
 			<view :style="{ padding: no_padding ? '0rpx' : '' }">
 				<slot :info="{height}"></slot>
@@ -22,6 +22,10 @@
 				type: String,
 				default: 'YHF'
 			},
+			classList: {
+				type: Array,
+				default: () => ([""])
+			},
 			no_padding: {
 				type: String,
 				default: ''
@@ -30,12 +34,21 @@
 		data() {
 			return {
 				height: 0,
+				interstitialAd: {},
+				rewardedVideoAd: {},
 				id: 'Page_' + Date.now()
 			};
 		},
+		created() {
+			this.interstitialAd = uni.createInterstitialAd({
+				adUnitId: 'adunit-e3f467955c2226a4'
+			})
+			// this.rewardedVideoAd = uni.createRewardedVideoAd({
+			// 	adUnitId: 'adunit-02b562d4a8c16436'
+			// })
+		},
 		mounted() {
 			this.getH()
-			// 'adunit-02b562d4a8c16436' J1
 		},
 		methods: {
 			getH() {
@@ -48,8 +61,13 @@
 					this.height = res.height
 				})
 			},
-			show() {
-
+			showAD(type = 1, cb = () => {}) {
+				if (type === 1) {
+					this.interstitialAd.show()
+				}
+				if (type === 2) {
+					this.rewardedVideoAd.show()
+				}
 			}
 		}
 	}
@@ -67,7 +85,7 @@
 			&._wrapper {
 				flex: 1;
 				position: relative;
-				background: #FFFFFF;
+				background: transparent;
 
 				>view {
 					top: 0;

@@ -10,6 +10,7 @@ module.exports = {
 				if (args[0].resourcePath.match(/^pages/)) {
 					template = template.replace(/[\s\S]+?<[\d\D]+?>/, _ => `${_}
 						<Loading ref="Loading" />
+						<ADFloat />
 					`)
 				}
 				return compile(template, ...args)

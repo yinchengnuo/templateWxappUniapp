@@ -57,7 +57,8 @@
 		{
 			"path": "pages/数据/数据",
 			"style": {
-				"navigationBarTitleText": "数据集"
+				"navigationBarTitleText": "数据集",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
@@ -268,9 +269,9 @@
 			}
 		},
 		{
-			"path": "pages/用户中心/关于ToolBoxAI/关于ToolBoxAI",
+			"path": "pages/用户中心/关于能量/关于能量",
 			"style": {
-				"navigationBarTitleText": "关于ToolBoxAI"
+				"navigationBarTitleText": "关于能量"
 			}
 		},
 		{
@@ -295,6 +296,12 @@
 			"path": "pages/用户中心/找到组织/找到组织",
 			"style": {
 				"navigationBarTitleText": "找到组织"
+			}
+		},
+		{
+			"path": "pages/用户中心/关于ToolBoxAI/关于ToolBoxAI",
+			"style": {
+				"navigationBarTitleText": "关于ToolBoxAI"
 			}
 		},
 		{

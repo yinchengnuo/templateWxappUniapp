@@ -15,6 +15,7 @@
 			</view>
 			<text v-if="condition" class="page_title text-black text-bold text-shadow">{{ condition.tips }}</text>
 		</view>
+
 		<view class="relative flex flex_sb text-bold text-shadow relative"
 			style="box-sizing: border-box; padding: 0 30rpx;"
 			:style="{ height: `${$app().globalData.menuButtonBoundingClientRect.height}px`  }">
@@ -30,9 +31,16 @@
 			<button open-type="chooseAvatar"
 				style="position: absolute; width: 350rpx; height: 200rpx; border-radius: 50%; opacity: 0; top: 0; left: 200rpx;"
 				@chooseavatar="chooseavatar"></button>
-			<view class="margin text-xxl text-black text-blod">
-				<text class="text-bold">{{ user.nickname || '微信用户' }}</text>
-				<text class="cuIcon-edit margin-left-xs text-xl text-black" style="text-shadow: none;"></text>
+			<view class="margin text-xxl text-black text-blod" @click="focus = true">
+				<view v-if="focus" class="flex" style="background: rgba(0, 0, 0, .1); border-radius: 32rpx;">
+					<input v-model="nickname" type="nickname" focus placeholder="请输入昵称"
+						style="width: 400rpx; padding: 0 24rpx;" @confirm="saveNickname()" />
+					<button class="cu-btn round margin-left bg-green shadow" @click="saveNickname()">保存昵称</button>
+				</view>
+				<template v-else>
+					<text class="text-bold">{{ user.nickname || '微信用户' }}</text>
+					<text class="cuIcon-edit margin-left-xs text-xl text-black" style="text-shadow: none;"></text>
+				</template>
 			</view>
 			<view class="margin-bottom text-black text-bold" @click="$copy(user.openid)">
 				<text>ID:</text>
@@ -92,8 +100,6 @@
 			<text>本机IP：{{ ip }}</text>
 			<text class=" cuIcon-copy"></text>
 		</view>
-
-		<!-- <view class="cu-tabbar-height"></view> -->
 	</view>
 </template>
 
@@ -104,6 +110,8 @@
 			return {
 				ip: '',
 				city: null,
+				focus: false,
+				nickname: '',
 				condition: null,
 				bg: getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)[0],
 			}
@@ -144,11 +152,8 @@
 				}
 				uniCloud.uploadFile({
 					filePath: filePath,
-					cloudPath: `/ToolBox365/avatar/${dayjs().format('YYYY-MM-DD_HH:mm:ss')}_${this.user.openid}.png`,
 					cloudPathAsRealPath: true,
-					onUploadProgress: function(progressEvent) {
-						console.log(progressEvent);
-					}
+					cloudPath: `/ToolBox365/avatar/${dayjs().format('YYYY-MM-DD_HH:mm:ss')}_${this.user.openid}.png`,
 				}).then(res => {
 					console.log(res)
 					this.$store.state.user.avatar = res.fileID
@@ -156,6 +161,26 @@
 						avatar: this.$store.state.user.avatar
 					})
 				}).catch(() => this.$loaded())
+			},
+			saveNickname() {
+				if ((this.nickname || '').trim()) {
+					this.$loading()
+					this.$('/msg_sec_check', {
+						content: this.nickname.trim()
+					}).then(res => {
+						this.$store.state.user.nickname = this.nickname.trim()
+						this.setting({
+							nickname: this.$store.state.user.nickname
+						})
+
+					}).finally(() => {
+						this.nickname = ''
+						this.focus = false
+						this.$loaded()
+					})
+				} else {
+					this.$toast('请输入昵称')
+				}
 			},
 			setting(payload) {
 				this.$('/setting', payload).finally(() => {

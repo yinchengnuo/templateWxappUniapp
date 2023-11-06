@@ -17,14 +17,14 @@
 							</view>
 						</view>
 					</view>
-					<view v-if="user.openid"
+					<navigator url="/pages/用户中心/我的能量/我的能量"
 						class="flex justify-center align-end padding-tb cu-coupon-content text-white">
 						<text class="text-lg padding-bottom-xs text-black">余额</text>
 						<text class="text-sl text-bold text-shadow " style="text-shadow: 0px 0px 2rpx green">
 							{{ user.energy }} </text>
-						<text class="text-lg text-green text-shadow cuIcon-lightauto">能量</text>
-					</view>
-					<view v-if="user.openid" class="flex justify-around align-center margin-top-xl text-white">
+						<text class="text-lg text-green text-shadow cuIcon-lightauto">T能量</text>
+					</navigator>
+					<view class="flex justify-around align-center margin-top-xl text-white">
 						<navigator url="/pages/用户中心/我的签到/我的签到">
 							<button class="cu-btn round shadow bg-red">每日签到 +1000</button>
 						</navigator>
@@ -36,14 +36,14 @@
 			</view>
 		</view>
 		<navigator url="/pages/用户中心/我的能量/我的能量?action=buy">
-			<uni-notice-bar show-get-more show-icon :fontSize="16" scrollable text="能量不够用? 10,000 能量只需一元！点我立即充值吧！"
-				style="margin-bottom: 0;" />
+			<uni-notice-bar show-get-more show-icon :fontSize="16" scrollable
+				text="能量不够用? 10,000 能量只需一元！多买多送，最低五折！点我立即充值" style="margin-bottom: 0;" />
 		</navigator>
 		<view class="cu-coupon-box2 radius-lg " :class="bg" style="margin-top: 0;margin-bottom: 0;">
 			<view class="cu-tag bg-orange radius text-df padding-lr-sm">
 				{{ user.ai_provider === 'azure' ? 'OpenAI' : '国产大模型' }}
 			</view>
-			<view v-if="user.openid" class="flex p-xs margin-bottom-sm mb-sm shadow">
+			<view class="flex p-xs margin-bottom-sm mb-sm shadow">
 				<view class="cu-avatar xl radius margin-left  margin-right">
 					<image mode="aspectFit"
 						:src="'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/' + user.ai_provider + '.jpg'"

@@ -23,13 +23,11 @@
 			return {
 				show: 0,
 				cardCur: 0,
-				refreshing: false,
 				interstitialAd: {},
 			}
 		},
 		computed: {
 			list() {
-				console.log(this.$store.state.app.list.filter(e => e.type === '数据集合'))
 				return this.$store.state.app.list.filter(e => e.type === '数据集合')
 			}
 		},
@@ -41,19 +39,21 @@
 		},
 		onLoad() {
 			if (!this.$store.state.app.list.length) {
-				this.refreshing = true
+				uni.startPullDownRefresh()
 			}
 			this.interstitialAd = uni.createInterstitialAd({
 				adUnitId: 'adunit-e3f467955c2226a4'
 			})
 		},
+		onPullDownRefresh() {
+			this.getList()
+		},
 		methods: {
 			getList() {
-				this.refreshing = true
 				this.$loading()
 				this.$store.dispatch('app/getApp').finally(() => {
 					this.$loaded()
-					this.refreshing = false
+					uni.stopPullDownRefresh()
 				})
 			},
 			cardSwiper(e) {
