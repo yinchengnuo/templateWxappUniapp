@@ -1,7 +1,7 @@
 <template>
 	<Page ref="Page">
 		<view class="index">
-			电子书
+			我的能量
 		</view>
 	</Page>
 </template>

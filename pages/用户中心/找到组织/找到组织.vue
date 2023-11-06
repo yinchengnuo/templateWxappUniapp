@@ -1,7 +1,7 @@
 <template>
 	<Page ref="Page">
 		<view class="index">
-			我的收藏
+			找到组织
 		</view>
 	</Page>
 </template>

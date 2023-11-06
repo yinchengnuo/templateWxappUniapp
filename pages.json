@@ -292,6 +292,12 @@
 			}
 		},
 		{
+			"path": "pages/用户中心/找到组织/找到组织",
+			"style": {
+				"navigationBarTitleText": "找到组织"
+			}
+		},
+		{
 			"path": "pages/用户中心/关于小程序/关于小程序",
 			"style": {
 				"navigationBarTitleText": "关于小程序"

@@ -2,7 +2,7 @@
 	<view class="index">
 		<view class='nav-list'>
 			<view v-for="(item, index) in list" :key="index" :class="['nav-li', 'shadow']"
-				style="background: #fff; padding: 0; width: 320rpx; border-radius: 24rpx; overflow: hidden; position: relative; margin: 10rpx 0 10rpx;"
+				style="background: #fff; padding: 0; width: 333rpx; border-radius: 24rpx; overflow: hidden; position: relative; margin: 10rpx 0 10rpx;"
 				@click="navigateTo(item)">
 				<image class="w100" :src="item.icon.replace('.svg', '.jpg')" mode="widthFix"></image>
 				<!-- <view class="text-lg padding-xs text-bold">
