@@ -48,7 +48,7 @@
 						</view>
 					</view>
 					<view class="cu-clockin-time_over flex justify-center align-center" catchtap="clockInStart">
-						<text class="text-white" style="z-index: 99;">已打卡</text>
+						<text class="text-white" style="z-index: 99;">今日已签到</text>
 					</view>
 				</view>
 				<view class="margin-tb padding-tb flex justify-center align-center">

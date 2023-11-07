@@ -138,7 +138,6 @@
 			}) => {
 				this.ip = data.ip
 			})
-
 		},
 		methods: {
 			async chooseavatar(e) {

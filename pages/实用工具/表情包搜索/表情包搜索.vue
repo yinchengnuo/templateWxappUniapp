@@ -5,7 +5,7 @@
 				<uni-section title="输入关键字搜索表情包:" type="line">
 					<view class="flex">
 						<uni-easyinput trim="all" focus confirmType="搜索" v-model="text" suffixIcon="search"
-							placeholder="请输入关键字" @confirm="make" @iconClick="make"></uni-easyinput>
+							placeholder="请输入关键字" @confirm="_request" @iconClick="_request"></uni-easyinput>
 					</view>
 				</uni-section>
 			</view>
@@ -25,29 +25,38 @@
 			return {
 				text: '',
 				list: [],
+				show: 0
 			}
 		},
 		watch: {
 			text(text) {
-				if (text) {
-					this.request()
-
-				} else {
-					this.list = []
-				}
+				this.request()
 			}
 		},
 		onLoad() {
 			this.request = this.$debounce(() => {
+				this._request()
+			}, 500)
+			this._request()
+		},
+		methods: {
+			make() {
+				this.request()
+			},
+			_request() {
 				this.$loading()
 				uni.request({
 					url: 'https://api.oioweb.cn/api/picture/emoticon',
 					data: {
-						keyword: this.text
+						keyword: this.text || 'Hi'
 					}
 				}).then((res) => {
 					if (res.data.result && res.data.result.length) {
 						this.list = res.data.result.map(e => e[0])
+						if (this.show % 4 === 0) {
+							this.$refs.Page.showAD()
+						}
+						this.show++
 					} else {
 						this.$toast('查询不到内容，请重输试试')
 						this.list = []
@@ -55,11 +64,6 @@
 				}).finally(() => {
 					this.$loaded()
 				})
-			}, 500)
-		},
-		methods: {
-			make() {
-				this.request()
 			},
 			preview(url) {
 				uni.previewImage({
