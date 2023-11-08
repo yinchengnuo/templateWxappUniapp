@@ -46,10 +46,10 @@
 			// 	desc: 'ddsfdsf'
 			// })
 		},
-		onShow: function() {
-			console.log('App Show')
+		async onShow() {
+			this.$store.dispatch('user/getCityWeather')
 		},
-		onHide: function() {
+		onHide() {
 			console.log('App Hide')
 		}
 	}

@@ -1,15 +1,19 @@
 <template>
 	<view class="index" :class="classList">
-		<view :id="id" class="_wrapper">
+		<view :id="PageID" class="_wrapper">
 			<view :style="{ padding: no_padding ? '0rpx' : '' }">
 				<slot :info="{height}"></slot>
 			</view>
 		</view>
-		<view class="_ad">
-			<ad v-if="type === 'B1'" unit-id="adunit-bb0d1a5ba7a52eac"></ad>
+		<view :id="ADID" class="_ad">
+			<!-- 视频广告 -->
 			<ad v-if="type === 'S1'" unit-id="adunit-42238affd4939e6a" ad-type="video" ad-theme="white"></ad>
+			<!-- 横幅广告 -->
+			<ad v-if="type === 'B1'" unit-id="adunit-bb0d1a5ba7a52eac"></ad>
+			<!-- 原生横幅广告 -->
 			<ad-custom v-if="type === 'YHF'" unit-id="adunit-ca19851efd20b3b7"></ad-custom>
-			<ad-custom v-if="type === 'YDG'" unit-id="adunit-e986a45f75420d2e"></ad-custom>
+			<!-- 原生多格广告 -->
+			<!-- <ad-custom v-if="type === 'YDG'" unit-id="adunit-e986a45f75420d2e"></ad-custom> -->
 		</view>
 	</view>
 </template>
@@ -36,7 +40,8 @@
 				height: 0,
 				interstitialAd: {},
 				rewardedVideoAd: {},
-				id: 'Page_' + Date.now()
+				ADID: 'AD_' + Date.now(),
+				PageID: 'Page_' + Date.now(),
 			};
 		},
 		created() {
@@ -48,19 +53,21 @@
 			// })
 		},
 		mounted() {
-			this.getH()
+			const getH = () => {
+				this.$offset(this.ADID).then(res => {
+					if (res.height) {
+						this.$offset(this.PageID).then(res => {
+							this.height = res.height
+							console.log("广告渲染完毕")
+						})
+					} else {
+						getH()
+					}
+				})
+			}
+			getH()
 		},
 		methods: {
-			getH() {
-				this.$offset(this.id).then(res => {
-					if (res.height === getApp().globalData.systemInfo.windowHeight) {
-						setTimeout(() => {
-							this.getH()
-						}, 100)
-					}
-					this.height = res.height
-				})
-			},
 			showAD(type = 1, cb = () => {}) {
 				if (type === 1) {
 					this.interstitialAd.show()

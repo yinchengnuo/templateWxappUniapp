@@ -6,21 +6,27 @@
 		<image class="w100;" mode="widthFix" style="position: fixed; top: 0 ; left: 0; opacity: 0.2; z-index: 0;"
 			src="https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/logo.png"></image>
 
-		<view class="flex relative" style="box-sizing: border-box; padding: 0 30rpx;" :style="{
-				marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` 
+		<view class="flex relative" style="box-sizing: border-box;" :style="{
+				marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, 
+				height: `${$app().globalData.menuButtonBoundingClientRect.height}px`,
+				padding: `0 ${$app().globalData.menuButtonBoundingClientRect.width}px`
 			}">
-			<view v-if="city" class="flex h100"
-				style="position: absolute; top: 0; left: 0; padding: 0 30rpx; font-weight: bolder;">
-				<text class="cuIcon-locationfill text-blue text-shadow">{{ ' ' + city.city_name }}</text>
+			<view class="flex h100" style="position: absolute; top: 0; left: 0; padding: 0 30rpx; font-weight: bolder;">
+				<text v-if="user.city"
+					class="cuIcon-locationfill text-blue text-shadow">{{ ' ' + (user.city || '') }}</text>
 			</view>
-			<text v-if="condition" class="page_title text-black text-bold text-shadow">{{ condition.tips }}</text>
+			<swiper class="h100 w100" autoplay circular vertical :interval="6543" :duration="1000">
+				<swiper-item class="h100 flex" v-for="(tip, index) in weather.tips" :key="index">
+					<text class="page_title text-black text-bold text-shadow text-xs">{{ tip }}</text>
+				</swiper-item>
+			</swiper>
 		</view>
 
 		<view class="relative flex flex_sb text-bold text-shadow relative"
 			style="box-sizing: border-box; padding: 0 30rpx;"
 			:style="{ height: `${$app().globalData.menuButtonBoundingClientRect.height}px`  }">
-			<text>{{ condition.condition }} 体感：{{ condition.realFeel }}℃</text>
-			<text>{{ condition.windDir }}{{ condition.windLevel }}级</text>
+			<text>{{ weather.type || '' }} {{ weather.low || '' }}~{{ weather.high || '' }}</text>
+			<text>{{ weather.fengxiang || '' }}{{ weather.fengli || '' }}</text>
 		</view>
 
 		<view class="relative UCenter-bg">
@@ -96,10 +102,11 @@
 				</button>
 			</view>
 		</view>
-		<view v-if="ip" class="relative margin-top text-center" @click="$copy(ip)">
-			<text>本机IP：{{ ip }}</text>
+		<view v-if="user.ip" class="relative margin-top text-center" @click="$copy(user.i)">
+			<text>本机IP：{{ user.i }}</text>
 			<text class=" cuIcon-copy"></text>
 		</view>
+		<ad unit-id="adunit-bb0d1a5ba7a52eac"></ad>
 	</view>
 </template>
 
@@ -108,35 +115,28 @@
 	export default {
 		data() {
 			return {
-				ip: '',
-				city: null,
+				show: 0,
 				focus: false,
 				nickname: '',
-				condition: null,
-				bg: getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)[0],
 			}
 		},
 		computed: {
 			user() {
 				return this.$store.state.user || {}
 			},
+			weather() {
+				return (this.$store.state.user || {}).weather || {}
+			},
 		},
 		onShow() {
-			this.bg = getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)[0]
-			uni.request({
-				url: "https://api.oioweb.cn/api/weather/GetWeather"
-			}).then(({
-				data
-			}) => {
-				this.city = data.result.city
-				this.condition = data.result.condition
-			})
-			uni.request({
-				url: "https://api.vvhan.com/api/visitor.info"
-			}).then(({
-				data
-			}) => {
-				this.ip = data.ip
+			this.show++
+			if ((this.show !== 0) && (this.show % 4 === 0)) {
+				this.interstitialAd.show()
+			}
+		},
+		onLoad() {
+			this.interstitialAd = uni.createInterstitialAd({
+				adUnitId: 'adunit-e3f467955c2226a4'
 			})
 		},
 		methods: {
