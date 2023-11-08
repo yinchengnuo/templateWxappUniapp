@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 
+import './utils/mixin.js'
 import './utils/prototype.js'
 import './uni.promisify.adaptor'
 

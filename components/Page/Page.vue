@@ -2,8 +2,8 @@
 	<!-- https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/树洞.jpg -->
 	<view class="Page" :class="classList">
 		<view class="cu-drawer-page flex flexc" :class="show ? 'show' : ''">
-			<image class="inlet" :src="inlet" @click="show = true"></image>
-			<NavigationBar :title="title" :collected="collected" @collect="collect" />
+			<image v-if="favor" class="inlet animation-shake" :src="inlet" @click="show = true"></image>
+			<NavigationBar :title="title" :favor="favor" :collected="collected" @collect="collect" />
 			<view :id="PageID" class="_wrapper w100">
 				<view>
 					<slot :page="{height}"></slot>
@@ -47,6 +47,7 @@
 			return {
 				height: 0,
 				show: false,
+				favor: false,
 				collected: false,
 				animation: false,
 				interstitialAd: {},
@@ -86,6 +87,8 @@
 					this.collected = data.collected
 					this.$store.commit('app/UPDATE_FUNCTION', data)
 				}
+			}).finally(() => {
+				this.favor = true
 			})
 
 			// this.rewardedVideoAd = uni.createRewardedVideoAd({
@@ -145,9 +148,9 @@
 		position: relative;
 
 		.inlet {
-			left: 0;
+			bottom: 59%;
+			left: -12rpx;
 			z-index: 999;
-			bottom: 61.8%;
 			width: 100rpx;
 			height: 100rpx;
 			position: absolute;
@@ -167,5 +170,53 @@
 				position: absolute;
 			}
 		}
+	}
+
+	@keyframes shake {
+
+		0%,
+		100% {
+			transform: translateX(0)
+		}
+
+		10% {
+			transform: translateX(-9px)
+		}
+
+		20% {
+			transform: translateX(8px)
+		}
+
+		30% {
+			transform: translateX(-7px)
+		}
+
+		40% {
+			transform: translateX(6px)
+		}
+
+		50% {
+			transform: translateX(-5px)
+		}
+
+		60% {
+			transform: translateX(4px)
+		}
+
+		70% {
+			transform: translateX(-3px)
+		}
+
+		80% {
+			transform: translateX(2px)
+		}
+
+		90% {
+			transform: translateX(-1px)
+		}
+	}
+
+	.animation-shake {
+		animation: shake 5s infinite;
 	}
 </style>

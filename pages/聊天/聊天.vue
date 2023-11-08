@@ -7,7 +7,7 @@
 			}">
 			<navigator url="/pages/用户中心/我的能量/我的能量" class="flex h100"
 				style="position: absolute; top: 0; left: 0; padding: 0 30rpx; font-weight: bolder;">
-				<text class="cuIcon-lightauto text-purple text-shadow">{{ user.energy }}T</text>
+				<text class="cuIcon-lightauto text-purple text-shadow">{{ user.energy }}</text>
 				<text class="cuIcon-right text-purple text-shadow  text-blod" style="margin: 0 6rpx;"></text>
 			</navigator>
 			<text class="page_title text-black text-shadow">有问题，问AI</text>
@@ -17,7 +17,7 @@
 				<view class="bg-blue light">
 					<view class='padding-xs text-xl padding-left flex'>
 						<text class='cuIcon-lightauto text-blue margin-right-xs'></text>
-						<text class="text-df">能量不够用? 10,000 能量只需一元！多买多送，最低五折！</text>
+						<text class="text-df">10,000 能量只需一元！多买多送，最低五折！</text>
 					</view>
 				</view>
 			</swiper-item>

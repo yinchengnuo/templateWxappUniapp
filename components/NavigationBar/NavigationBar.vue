@@ -6,7 +6,8 @@
 					<text v-if="PageStack.length === 1" class="cuIcon-home"></text>
 					<text v-else class="cuIcon-back"></text>
 				</view>
-				<view class="action_bar h100 flex" :style="{ width: height + 'px' }" @click="$emit('collect')">
+				<view v-if="favor" class="action_bar h100 flex" :style="{ width: height + 'px' }"
+					@click="$emit('collect')">
 					<text v-if="collected" class="cuIcon-favorfill" style="color: #f37b1d;"></text>
 					<text v-else class="cuIcon-favor"></text>
 				</view>
@@ -24,6 +25,10 @@
 				type: String,
 				default: 'ToolBox365'
 			},
+			favor: {
+				type: Boolean,
+				default: false
+			},
 			collected: {
 				type: Boolean,
 				default: false
@@ -35,12 +40,6 @@
 				paddingTop: this.$app().globalData.statusBarHeight,
 				height: this.$app().globalData.navigationBarHeight - this.$app().globalData.statusBarHeight,
 			};
-		},
-		mounted() {
-			// this.h1 = getApp().globalData.systemInfo.statusBarHeight
-			// console.log(this.h1)
-			// this.h2
-			// console.log(getApp().globalData.systemInfo.statusBarHeight, getApp().globalData.menuButtonBoundingClientRect)
 		},
 		methods: {
 			back() {
@@ -59,7 +58,7 @@
 <style lang="scss" scoped>
 	.index {
 		width: 100vw;
-		background: #E9E9E9;
+		background: #E4E4E4;
 		box-sizing: border-box;
 
 		.bar {

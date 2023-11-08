@@ -57,8 +57,9 @@
 		{
 			"path": "pages/数据/数据",
 			"style": {
-				"navigationBarTitleText": "数据集",
-				"enablePullDownRefresh": true
+				"navigationStyle": "default",
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "数据集"
 			}
 		},
 		{
@@ -70,7 +71,7 @@
 		{
 			"path": "pages/实用工具/滚动君/滚动君",
 			"style": {
-				"navigationBarTitleText": "滚动君"
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -313,10 +314,11 @@
 
 	],
 	"globalStyle": {
+		"navigationStyle": "custom",
+		"backgroundColor": "#F8F8F8",
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#E9E9E9",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarBackgroundColor": "#E9E9E9"
 	},
 	"uniIdRouter": {}
 }

@@ -1,16 +1,17 @@
 <template>
-	<view class="roll-man">
-		<ColorPicker @cancel="colorPickerCancel1" @change="colorPickerChange1" @preview="colorPickerPreview1"
-			ref="colorPicker1" />
-		<ColorPicker @cancel="colorPickerCancel2" @change="colorPickerChange2" @preview="colorPickerPreview2"
-			ref="colorPicker2" />
-		<ColorPicker @cancel="colorPickerCancel3" @change="colorPickerChange3" @preview="colorPickerPreview3"
-			ref="colorPicker3" />
-		<view class="content">
-			<view class="preview">
-				<view class="left"></view>
-				<view class="center" :style="{ background: bgPreviewColor || bgColor }">
-					<view class="roll-view" :class="animationDirectionRange[animationDirectionIndex].value" :style="{
+	<Page ref="Page">
+		<view class="roll-man">
+			<ColorPicker @cancel="colorPickerCancel1" @change="colorPickerChange1" @preview="colorPickerPreview1"
+				ref="colorPicker1" />
+			<ColorPicker @cancel="colorPickerCancel2" @change="colorPickerChange2" @preview="colorPickerPreview2"
+				ref="colorPicker2" />
+			<ColorPicker @cancel="colorPickerCancel3" @change="colorPickerChange3" @preview="colorPickerPreview3"
+				ref="colorPicker3" />
+			<view class="content">
+				<view class="preview">
+					<view class="left"></view>
+					<view class="center" :style="{ background: bgPreviewColor || bgColor }">
+						<view class="roll-view" :class="animationDirectionRange[animationDirectionIndex].value" :style="{
 						color: fontPreviewColor || fontColor,
 						fontSize: _fontSize,
 						fontWeight: fontWeightRange[fontWeightIndex].value,
@@ -24,122 +25,126 @@
 						animationDelay: animationDelay + 's',
 						animationTimingFunction: animationTimingFunctionRange[animationTimingFunctionIndex].value
 					}">{{ rollText }}</view>
+					</view>
+					<view class="right">
+						<text class="cuIcon-back"></text>
+						<text class="cuIcon-home"></text>
+						<text class="cuIcon-sort"></text>
+					</view>
 				</view>
-				<view class="right">
-					<text class="cuIcon-back"></text>
-					<text class="cuIcon-home"></text>
-					<text class="cuIcon-sort"></text>
+				<textarea v-model="value" placeholder="请输入滚动字幕文字" />
+				<view class="config">
+					<view class="config-item" @tap="chooseColor(1)">
+						<text>文本颜色</text>
+						<view class="choosedColor">
+							<view class="bold">{{ fontColor }} </view>
+							<view class="choosedColorPreview" :style="{ background: fontColor }"></view>
+						</view>
+						<text class="cuIcon-right"></text>
+					</view>
+					<view class="config-item">
+						<text>文本尺寸</text>
+						<text class="bold">0 ~ 100</text>
+						<CustomCounter v-model="fontSize" />
+					</view>
+					<view class="config-item">
+						<text>文本粗细</text>
+						<picker mode="selector" @change="fontWeightPickerChange" :value="fontWeightIndex"
+							:range="fontWeightRange" range-key="name">
+							<view class="bold">{{ fontWeightRange[fontWeightIndex].name }}</view>
+						</picker>
+						<text class="cuIcon-right"></text>
+					</view>
+					<view class="config-item">
+						<text>文本斜体</text>
+						<switch :checked="fontStyle !='normal'" @change="fontStyleChange" />
+					</view>
+					<view class="config-item">
+						<text>文本装饰</text>
+						<picker mode="selector" @change="fonDecorationPickerChange" :value="fontDecorationIndex"
+							:range="fontDecorationRange" range-key="name">
+							<view class="bold">{{ fontDecorationRange[fontDecorationIndex].name }}</view>
+						</picker>
+						<text class="cuIcon-right"></text>
+					</view>
+					<view class="config-item">
+						<text>文本字体</text>
+						<picker mode="selector" @change="fonFacePickerChange" :value="fontFaceIndex"
+							:range="fontFaceRange" range-key="name">
+							<view class="bold">{{ fontFaceRange[fontFaceIndex].name }}</view>
+						</picker>
+						<text class="cuIcon-right"></text>
+					</view>
+					<view class="config-item">
+						<text>文本阴影</text>
+						<CustomCounter v-model="fontShadowH" mini />
+						<CustomCounter v-model="fontShadowV" mini />
+						<CustomCounter v-model="fontShadowB" mini />
+						<view @tap="chooseColor(2)" class="choosedColor">
+							<view class="bold">{{ fontShadowColor }} </view>
+							<view class="choosedColorPreview" :style="{ background: fontShadowColor }"></view>
+						</view>
+						<text class="cuIcon-right" @tap="chooseColor(2)"></text>
+					</view>
+					<view class="config-item">
+						<text>文本透明</text>
+						<text class="bold">0 ~ 100</text>
+						<CustomCounter v-model="opacity" />
+					</view>
+					<view class="config-item">
+						<text>字符间距</text>
+						<text class="bold">px</text>
+						<CustomCounter v-model="letterSpacing" />
+					</view>
+					<view class="config-item" @tap="chooseColor(3)">
+						<text>背景颜色</text>
+						<view class="choosedColor">
+							<view class="bold">{{ bgColor }} </view>
+							<view class="choosedColorPreview" :style="{ background: bgColor }"></view>
+						</view>
+						<text class="cuIcon-right"></text>
+					</view>
+					<view class="config-item">
+						<text>动画周期</text>
+						<text class="bold">秒</text>
+						<CustomCounter v-model="animationDuration" />
+					</view>
+					<view class="config-item">
+						<text>动画延时</text>
+						<text class="bold">秒</text>
+						<CustomCounter v-model="animationDelay" />
+					</view>
+					<view class="config-item">
+						<text>动画曲线</text>
+						<picker mode="selector" @change="animationTimingFunctionPickerChange"
+							:value="animationTimingFunctionIndex" :range="animationTimingFunctionRange"
+							range-key="name">
+							<view class="bold">{{ animationTimingFunctionRange[animationTimingFunctionIndex].name }}
+							</view>
+						</picker>
+						<text class="cuIcon-right"></text>
+					</view>
+					<view class="config-item">
+						<text>动画方向</text>
+						<picker mode="selector" @change="animationDirectionPickerChange"
+							:value="animationDirectionIndex" :range="animationDirectionRange" range-key="name">
+							<view class="bold">{{ animationDirectionRange[animationDirectionIndex].name }}</view>
+						</picker>
+						<text class="cuIcon-right"></text>
+					</view>
 				</view>
+				<button style="width: 100%;" type="primary" @tap="toRoll">滚动吧！滚动君！</button>
 			</view>
-			<textarea v-model="value" placeholder="请输入滚动字幕文字" />
-			<view class="config">
-				<view class="config-item" @tap="chooseColor(1)">
-					<text>文本颜色</text>
-					<view class="choosedColor">
-						<view class="bold">{{ fontColor }} </view>
-						<view class="choosedColorPreview" :style="{ background: fontColor }"></view>
-					</view>
-					<text class="cuIcon-right"></text>
-				</view>
-				<view class="config-item">
-					<text>文本尺寸</text>
-					<text class="bold">0 ~ 100</text>
-					<CustomCounter v-model="fontSize" />
-				</view>
-				<view class="config-item">
-					<text>文本粗细</text>
-					<picker mode="selector" @change="fontWeightPickerChange" :value="fontWeightIndex"
-						:range="fontWeightRange" range-key="name">
-						<view class="bold">{{ fontWeightRange[fontWeightIndex].name }}</view>
-					</picker>
-					<text class="cuIcon-right"></text>
-				</view>
-				<view class="config-item">
-					<text>文本斜体</text>
-					<switch :checked="fontStyle !='normal'" @change="fontStyleChange" />
-				</view>
-				<view class="config-item">
-					<text>文本装饰</text>
-					<picker mode="selector" @change="fonDecorationPickerChange" :value="fontDecorationIndex"
-						:range="fontDecorationRange" range-key="name">
-						<view class="bold">{{ fontDecorationRange[fontDecorationIndex].name }}</view>
-					</picker>
-					<text class="cuIcon-right"></text>
-				</view>
-				<view class="config-item">
-					<text>文本字体</text>
-					<picker mode="selector" @change="fonFacePickerChange" :value="fontFaceIndex" :range="fontFaceRange"
-						range-key="name">
-						<view class="bold">{{ fontFaceRange[fontFaceIndex].name }}</view>
-					</picker>
-					<text class="cuIcon-right"></text>
-				</view>
-				<view class="config-item">
-					<text>文本阴影</text>
-					<CustomCounter v-model="fontShadowH" mini />
-					<CustomCounter v-model="fontShadowV" mini />
-					<CustomCounter v-model="fontShadowB" mini />
-					<view @tap="chooseColor(2)" class="choosedColor">
-						<view class="bold">{{ fontShadowColor }} </view>
-						<view class="choosedColorPreview" :style="{ background: fontShadowColor }"></view>
-					</view>
-					<text class="cuIcon-right" @tap="chooseColor(2)"></text>
-				</view>
-				<view class="config-item">
-					<text>文本透明</text>
-					<text class="bold">0 ~ 100</text>
-					<CustomCounter v-model="opacity" />
-				</view>
-				<view class="config-item">
-					<text>字符间距</text>
-					<text class="bold">px</text>
-					<CustomCounter v-model="letterSpacing" />
-				</view>
-				<view class="config-item" @tap="chooseColor(3)">
-					<text>背景颜色</text>
-					<view class="choosedColor">
-						<view class="bold">{{ bgColor }} </view>
-						<view class="choosedColorPreview" :style="{ background: bgColor }"></view>
-					</view>
-					<text class="cuIcon-right"></text>
-				</view>
-				<view class="config-item">
-					<text>动画周期</text>
-					<text class="bold">秒</text>
-					<CustomCounter v-model="animationDuration" />
-				</view>
-				<view class="config-item">
-					<text>动画延时</text>
-					<text class="bold">秒</text>
-					<CustomCounter v-model="animationDelay" />
-				</view>
-				<view class="config-item">
-					<text>动画曲线</text>
-					<picker mode="selector" @change="animationTimingFunctionPickerChange"
-						:value="animationTimingFunctionIndex" :range="animationTimingFunctionRange" range-key="name">
-						<view class="bold">{{ animationTimingFunctionRange[animationTimingFunctionIndex].name }}</view>
-					</picker>
-					<text class="cuIcon-right"></text>
-				</view>
-				<view class="config-item">
-					<text>动画方向</text>
-					<picker mode="selector" @change="animationDirectionPickerChange" :value="animationDirectionIndex"
-						:range="animationDirectionRange" range-key="name">
-						<view class="bold">{{ animationDirectionRange[animationDirectionIndex].name }}</view>
-					</picker>
-					<text class="cuIcon-right"></text>
-				</view>
-			</view>
-			<button style="width: 100%;" type="primary" @tap="toRoll">滚动吧！滚动君！</button>
 		</view>
-	</view>
+	</Page>
 </template>
 
 <script>
 	export default {
 		data() {
 			return {
-				value: '普天同庆',
+				show: 0,
+				value: '叮当工具箱',
 				chooseColorType: 1, // 选择颜色类型 1 文本颜色 2 文本阴影颜色 3 背景颜色
 				fontColor: '#000000', // 文本颜色
 				fontPreviewColor: '#000000', // 文本颜色（打开颜色选择器选择颜色预览时的颜色）
@@ -250,12 +255,16 @@
 				return Number(this.animationDirectionIndex) === 0 ? this.value : Array.from(this.value).reverse().join('')
 			}
 		},
-		// onShow() {
-		// 	this.$emit('onShow')
-		// 	uni.hideShareMenu({
-		// 		menus: ['shareAppMessage', 'shareTimeline']
-		// 	})
-		// },
+		onShow() {
+			if (this.show) {
+				this.$refs.Page.showAD()
+			}
+			this.show++
+			// this.$emit('onShow')
+			// uni.hideShareMenu({
+			// 	menus: ['shareAppMessage', 'shareTimeline']
+			// })
+		},
 		onLoad(opt) {
 			// if (Object.keys(opt).length) {
 			// 	console.log(opt)
@@ -284,30 +293,43 @@
 		},
 		methods: {
 			toRoll() { // 去work页面
-				const config = {
-					rollText: this.rollText,
-					fontColor: this.fontColor,
-					fontSize: this.fontSize,
-					fontWeight: this.fontWeightRange[this.fontWeightIndex].value,
-					fontStyle: this.fontStyle,
-					textDecoration: this.fontDecorationRange[this.fontDecorationIndex].value,
-					textShadow: `${this.fontShadowH}px ${this.fontShadowV}px ${this.fontShadowB}px ${this.fontShadowColor}`,
-					opacity: this.opacity,
-					fontFamily: this.fontFaceRange[this.fontFaceIndex] ? this.fontFaceRange[this
-						.fontFaceIndex].value : '',
-					letterSpacing: `${this.letterSpacing}px`,
-					bgColor: this.bgColor,
-					animationDuration: `${this.animationDuration}s`,
-					animationDelay: `${this.animationDelay}s`,
-					animationTimingFunction: this.animationTimingFunctionRange[this
-						.animationTimingFunctionIndex].value,
-					animationDirection: this.animationDirectionRange[this.animationDirectionIndex]
-						.value
-				}
-				uni.navigateTo({
-					url: '/pages/滚动君/滚动君' + Object.entries(config).reduce((t, e) => t +
-						`${e[0]}=${e[1]}&`, '?').slice(0, -1)
+				this.$loading()
+				this.$('/msg_sec_check', {
+					scene: 3,
+					content: this.rollText,
+				}).then(() => {
+					const config = {
+						rollText: this.rollText,
+						fontColor: this.fontColor,
+						fontSize: this.fontSize,
+						fontWeight: this.fontWeightRange[this.fontWeightIndex].value,
+						fontStyle: this.fontStyle,
+						textDecoration: this.fontDecorationRange[this.fontDecorationIndex].value,
+						textShadow: `${this.fontShadowH}px ${this.fontShadowV}px ${this.fontShadowB}px ${this.fontShadowColor}`,
+						opacity: this.opacity,
+						fontFamily: this.fontFaceRange[this.fontFaceIndex] ? this.fontFaceRange[this
+							.fontFaceIndex].value : '',
+						letterSpacing: `${this.letterSpacing}px`,
+						bgColor: this.bgColor,
+						animationDuration: `${this.animationDuration}s`,
+						animationDelay: `${this.animationDelay}s`,
+						animationTimingFunction: this.animationTimingFunctionRange[this
+							.animationTimingFunctionIndex].value,
+						animationDirection: this.animationDirectionRange[this.animationDirectionIndex]
+							.value
+					}
+					uni.navigateTo({
+						url: '/pages/滚动君/滚动君' + Object.entries(config).reduce((t, e) => t +
+							`${e[0]}=${e[1]}&`, '?').slice(0, -1)
+					})
+				}).catch((e) => {
+					this.fontColor = '#FF0000'
+					this.animationDuration = '16'
+					this.value = '富强、民主、文明、和谐，自由、平等、公正、法治，爱国、敬业、诚信、友善'
+				}).finally(() => {
+					this.$loaded()
 				})
+
 				// if (errmsg == 'ok') {
 				// this.$router.push('/B/roll-page', {
 				// fromRollMan: 1, // 标记，不是从分享后的页面进入
@@ -394,9 +416,9 @@
 
 <style lang="scss" scoped>
 	.roll-man {
-		height: 100vh;
-		padding: 20rpx;
+		height: 100%;
 		background: #FFFFFF;
+		padding: 20rpx 20rpx 0;
 		box-sizing: border-box;
 
 		.content {
@@ -471,7 +493,7 @@
 			textarea {
 				width: 100%;
 				padding: 8rpx;
-				height: 136rpx;
+				height: 96rpx;
 				font-size: 32rpx;
 				margin-top: 12rpx;
 				border-radius: 8rpx;

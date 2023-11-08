@@ -146,6 +146,7 @@
 				this.cardCur = e.detail.current
 			},
 			navigateTo(item) {
+				console.log(item)
 				uni.navigateTo({
 					url: item.page
 				})

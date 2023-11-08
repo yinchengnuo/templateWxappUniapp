@@ -48,14 +48,29 @@
 				"brown", "grey"
 			],
 		},
-		onLaunch() {
-			this.$store.dispatch('user/login')
+		onLaunch(option) {
+			this.$store.dispatch('user/login', {
+				openid: option.query.openid
+			})
 			// uni.getUserProfile({
 			// 	lang: 'zh_CN',
 			// 	desc: 'ddsfdsf'
 			// })
 		},
-		async onShow() {
+		async onShow(option) {
+			if (option.query.path) {
+				if (this.$store.state.user.openid) {
+					uni.navigateTo({
+						url: option.query.path
+					})
+				} else {
+					uni.$on('LOGON', () => {
+						uni.navigateTo({
+							url: option.query.path
+						})
+					})
+				}
+			}
 			this.$store.dispatch('user/getCityWeather')
 		},
 		onHide() {

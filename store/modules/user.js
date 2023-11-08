@@ -18,7 +18,7 @@ export default {
 		}
 	},
 	actions: {
-		async login(Store) {
+		async login(Store, payload) {
 			Vue.prototype.$loading()
 			Promise.all([uni.getPushClientId(), uni.login()]).then(([{
 				cid
@@ -27,7 +27,8 @@ export default {
 			}]) => {
 				Vue.prototype.$('/login', {
 					cid,
-					code
+					code,
+					openid: payload.openid
 				}).then((data) => {
 					Store.commit('SET_USER_INFO', data)
 				}).finally(() => {

@@ -22,7 +22,7 @@
 						<text class="text-lg padding-bottom-xs text-black">余额</text>
 						<text class="text-sl text-bold text-shadow " style="text-shadow: 0px 0px 2rpx green">
 							{{ user.energy }} </text>
-						<text class="text-lg text-green text-shadow cuIcon-lightauto">T能量</text>
+						<text class="text-lg text-green text-shadow cuIcon-lightauto">能量</text>
 					</navigator>
 					<view class="flex justify-around align-center margin-top-xl text-white">
 						<navigator url="/pages/用户中心/我的签到/我的签到">
@@ -45,7 +45,7 @@
 			</view>
 			<view class="flex p-xs margin-bottom-sm mb-sm shadow">
 				<view class="cu-avatar xl radius margin-left  margin-right">
-					<image mode="aspectFit"
+					<image v-if="user.ai_provider" mode="aspectFit"
 						:src="'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/' + user.ai_provider + '.jpg'"
 						class="w100 h100"></image>
 				</view>
