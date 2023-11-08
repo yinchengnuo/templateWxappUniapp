@@ -1,5 +1,5 @@
 <template>
-	<Page no_padding ref="Page">
+	<Page ref="Page">
 		<view class="index">
 			<image src="https://dayu.qqsuu.cn/moyuribao/apis.php" mode="widthFix"></image>
 		</view>

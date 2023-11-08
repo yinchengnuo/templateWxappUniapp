@@ -1,5 +1,5 @@
 <template>
-	<Page no_padding ref="Page">
+	<Page ref="Page">
 		<view class="index">
 			<image src="https://xiaoapi.cn/API/lssdjt_pic.php" mode="widthFix"></image>
 		</view>

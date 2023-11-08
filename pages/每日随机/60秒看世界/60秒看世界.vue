@@ -1,5 +1,5 @@
 <template>
-	<Page no_padding ref="Page">
+	<Page ref="Page">
 		<view class="index">
 			<image src="https://api.vvhan.com/api/60s" mode="widthFix"></image>
 		</view>

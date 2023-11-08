@@ -1,5 +1,5 @@
 <template>
-	<Page no_padding type="B1" ref="Page">
+	<Page type="B1" ref="Page">
 		<view class="index">
 			<image src="https://api.vvhan.com/api/moyu" mode="widthFix"></image>
 		</view>

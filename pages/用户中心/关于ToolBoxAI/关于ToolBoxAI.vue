@@ -1,5 +1,5 @@
 <template>
-	<Page no_padding :classList="['bg-gradual-blue-light']" ref="Page">
+	<Page :classList="['bg-gradual-blue-light']" ref="Page">
 		<view class="index text-black text-black text-lg" style=" overflow: auto;">
 			<view class="bg-white padding-xs margin-sm align-center radius-df">
 				<view class="padding-xs" style="text-indent: 2em;">

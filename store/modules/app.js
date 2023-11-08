@@ -3,8 +3,7 @@ import Vue from 'vue'
 export default {
 	namespaced: true,
 	state: {
-		list: [],
-		recorded: {}
+		list: []
 	},
 	mutations: {
 		SET_LIST(state, payload) {
@@ -14,13 +13,12 @@ export default {
 			}))
 		},
 		UPDATE_FUNCTION(state, payload) {
-			const item = state.list.find(e => e.name === payload.name)
+			const item = state.list.find(e => (e.type === payload.type) && (e.name === payload.name))
 			if (item) {
-				Object.assign(item, payload)
-			}
-			state.recorded = {
-				...payload,
-				icon: `https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/${payload.type}/${payload.name}.svg`
+				Object.assign(item, {
+					...payload,
+					icon: `https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/${payload.type}/${payload.name}.svg`
+				})
 			}
 		}
 	},

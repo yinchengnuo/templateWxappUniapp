@@ -1,19 +1,31 @@
 <template>
-	<view class="index" :class="classList">
-		<view :id="PageID" class="_wrapper">
-			<view :style="{ padding: no_padding ? '0rpx' : '' }">
-				<slot :info="{height}"></slot>
+	<!-- https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/树洞.jpg -->
+	<view class="Page" :class="classList">
+		<view class="cu-drawer-page flex flexc" :class="show ? 'show' : ''">
+			<image class="inlet" :src="inlet" @click="show = true"></image>
+			<NavigationBar :title="title" :collected="collected" @collect="collect" />
+			<view :id="PageID" class="_wrapper w100">
+				<view>
+					<slot :page="{height}"></slot>
+				</view>
+			</view>
+			<view :id="ADID" class="_ad w100">
+				<!-- 视频广告 -->
+				<ad v-if="type === 'S1'" unit-id="adunit-42238affd4939e6a" ad-type="video" ad-theme="white"></ad>
+				<!-- 横幅广告 -->
+				<ad v-if="type === 'B1'" unit-id="adunit-bb0d1a5ba7a52eac"></ad>
+				<!-- 原生横幅广告 -->
+				<ad-custom v-if="type === 'YHF'" unit-id="adunit-ca19851efd20b3b7"></ad-custom>
+				<!-- 原生多格广告 -->
+				<!-- <ad-custom v-if="type === 'YDG'" unit-id="adunit-e986a45f75420d2e"></ad-custom> -->
 			</view>
 		</view>
-		<view :id="ADID" class="_ad">
-			<!-- 视频广告 -->
-			<ad v-if="type === 'S1'" unit-id="adunit-42238affd4939e6a" ad-type="video" ad-theme="white"></ad>
-			<!-- 横幅广告 -->
-			<ad v-if="type === 'B1'" unit-id="adunit-bb0d1a5ba7a52eac"></ad>
-			<!-- 原生横幅广告 -->
-			<ad-custom v-if="type === 'YHF'" unit-id="adunit-ca19851efd20b3b7"></ad-custom>
-			<!-- 原生多格广告 -->
-			<!-- <ad-custom v-if="type === 'YDG'" unit-id="adunit-e986a45f75420d2e"></ad-custom> -->
+
+		<view class="cu-drawer-window" :class="show ? 'show' : ''">
+			<TreeHole v-if="show && animation" />
+		</view>
+		<view class="cu-drawer-close" :class="show ? 'show' : ''" @click="show = false">
+			<text class="cuIcon-pullright"></text>
 		</view>
 	</view>
 </template>
@@ -29,25 +41,53 @@
 			classList: {
 				type: Array,
 				default: () => ([""])
-			},
-			no_padding: {
-				type: String,
-				default: ''
 			}
 		},
 		data() {
 			return {
 				height: 0,
+				show: false,
+				collected: false,
+				animation: false,
 				interstitialAd: {},
+				title: 'ToolBox365',
 				rewardedVideoAd: {},
 				ADID: 'AD_' + Date.now(),
 				PageID: 'Page_' + Date.now(),
+				inlet: 'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/树洞.jpg'
 			};
+		},
+		watch: {
+			show() {
+				if (this.show) {
+					this.animation = true
+				} else {
+					setTimeout(() => {
+						this.animation = false
+					}, 400)
+				}
+			}
 		},
 		created() {
 			this.interstitialAd = uni.createInterstitialAd({
 				adUnitId: 'adunit-e3f467955c2226a4'
 			})
+
+			const PageStack = getCurrentPages()
+			const types = ["实用工具", "每日随机", "数据集合"]
+			const [type, name] = PageStack[PageStack.length - 1].route.replace(/^(.|)pages\//, '').split('/')
+			this._type = type
+			this._name = name
+			types.includes(type) && this.$('/record', {
+				type,
+				name
+			}).then((data) => {
+				if (data) {
+					this.collected = data.collected
+					this.$store.commit('app/UPDATE_FUNCTION', data)
+				}
+			})
+
 			// this.rewardedVideoAd = uni.createRewardedVideoAd({
 			// 	adUnitId: 'adunit-02b562d4a8c16436'
 			// })
@@ -68,6 +108,25 @@
 			getH()
 		},
 		methods: {
+			collect() {
+				this.$loading()
+				this.$('/collect', {
+					type: this._type,
+					name: this._name
+				}).then((data) => {
+					if (data) {
+						this.collected = data.collected
+						this.$store.commit('app/UPDATE_FUNCTION', data)
+						if (this.collected) {
+							this.$toast('收藏成功')
+						} else {
+							this.$toast('取消收藏成功')
+						}
+					}
+				}).finally(() => {
+					this.$loaded()
+				})
+			},
 			showAD(type = 1, cb = () => {}) {
 				if (type === 1) {
 					this.interstitialAd.show()
@@ -81,29 +140,30 @@
 </script>
 
 <style lang="scss" scoped>
-	.index {
+	.Page {
 		height: 100vh;
-		display: flex;
-		flex-direction: column;
+		position: relative;
 
-		>view {
-			width: 100%;
+		.inlet {
+			left: 0;
+			bottom: 61.8%;
+			width: 100rpx;
+			height: 100rpx;
+			border-radius: 20rpx;
+			position: absolute;
+		}
 
-			&._wrapper {
-				flex: 1;
-				position: relative;
-				background: transparent;
+		._wrapper {
+			flex: 1;
+			position: relative;
 
-				>view {
-					top: 0;
-					left: 0;
-					width: 100%;
-					height: 100%;
-					overflow: auto;
-					position: absolute;
-					padding: 20rpx 20rpx 0;
-					box-sizing: border-box;
-				}
+			>view {
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				position: absolute;
 			}
 		}
 	}

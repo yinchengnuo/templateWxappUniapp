@@ -1,5 +1,5 @@
 <template>
-	<Page no_padding type="S1" ref="Page">
+	<Page type="S1" ref="Page">
 		<view class="index">
 			电子书
 		</view>

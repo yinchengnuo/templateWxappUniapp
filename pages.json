@@ -1,6 +1,6 @@
 {
 	"tabBar": {
-		"color": "#7f7f7f",
+		"color": "#7F7F7F",
 		"selectedColor": "#000",
 		"list": [{
 				"text": "首页",
@@ -82,7 +82,7 @@
 		{
 			"path": "pages/实用工具/手机号信息查询/手机号信息查询",
 			"style": {
-				"navigationBarTitleText": "手机号信息查询"
+				"navigationStyle": "custom"
 			}
 		},
 		{

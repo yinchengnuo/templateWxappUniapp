@@ -2,10 +2,19 @@
 	const getNames = (name, num) => {
 		return Array(num).fill(0).map((e, i) => `${name}${(i + 1).toString().padStart(2, '0')}`)
 	}
+	const appBaseInfo = uni.getAppBaseInfo()
+	const systemInfo = uni.getSystemInfoSync()
+	const statusBarHeight = systemInfo.statusBarHeight
+	const menuButtonBoundingClientRect = uni.getMenuButtonBoundingClientRect()
+	const navigationBarHeight = menuButtonBoundingClientRect.bottom + (menuButtonBoundingClientRect.top -
+		statusBarHeight)
 	export default {
 		globalData: {
-			systemInfo: uni.getSystemInfoSync(),
-			menuButtonBoundingClientRect: uni.getMenuButtonBoundingClientRect(),
+			systemInfo,
+			appBaseInfo,
+			statusBarHeight,
+			navigationBarHeight,
+			menuButtonBoundingClientRect,
 			loadings: [
 				...getNames('clones', 20),
 				...getNames('cut', 10),
