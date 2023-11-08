@@ -77,7 +77,7 @@
 			const types = ["实用工具", "每日随机", "数据集合"]
 			const [type, name] = PageStack[PageStack.length - 1].route.replace(/^(.|)pages\//, '').split('/')
 			this._type = type
-			this._name = name
+			this._name = this.title = name
 			types.includes(type) && this.$('/record', {
 				type,
 				name
@@ -146,11 +146,12 @@
 
 		.inlet {
 			left: 0;
+			z-index: 999;
 			bottom: 61.8%;
 			width: 100rpx;
 			height: 100rpx;
-			border-radius: 20rpx;
 			position: absolute;
+			border-radius: 20rpx;
 		}
 
 		._wrapper {
