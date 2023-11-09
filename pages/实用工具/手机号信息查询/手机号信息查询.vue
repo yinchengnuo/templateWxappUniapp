@@ -17,13 +17,13 @@
 				</view>
 			</view>
 			<template v-if="result">
-				<view class="cu-bar solid-bottom margin-top  margin-bottom">
+				<view class="cu-bar solid-bottom margin-top">
 					<view class="action">
 						<text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
 						<text>查询结果</text>
 					</view>
 				</view>
-				<view class="cu-list menu sm-border card-menu margin-top">
+				<view class="cu-list menu sm-border card-menu margin-top margin-bottom">
 					<view class="cu-item">
 						<view class="content">
 							<text class="text-lg text-grey">运营商</text>
@@ -80,7 +80,7 @@
 					</view>
 				</view>
 			</template>
-			<view v-else class="cu-list menu sm-border bg-white card-menu margin-top">
+			<view v-else class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
 				<Empty />
 				<AD1 />
 				<AD2 />
