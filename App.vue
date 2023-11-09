@@ -113,6 +113,20 @@
 		justify-content: space-between;
 	}
 
+	.my_input {
+		border-radius: 10rpx;
+		height: 74rpx !important;
+		padding: 0 66rpx 0 20rpx;
+		border: 1px solid #efefef;
+	}
+
+	.my_input_clear {
+		top: 28rpx;
+		right: 190rpx;
+		font-size: 44rpx;
+		position: absolute;
+	}
+
 	.container {
 		height: 100%;
 		display: flex;

@@ -18,7 +18,7 @@ export default {
 		}
 	},
 	actions: {
-		async login(Store, payload) {
+		async login(Store, payload = {}) {
 			Vue.prototype.$loading()
 			Promise.all([uni.getPushClientId(), uni.login()]).then(([{
 				cid
@@ -43,11 +43,9 @@ export default {
 			if (!Store.state.LOGON) {
 				await new Promise(resolve => uni.$on('LOGON', resolve))
 			}
-			Promise.all([uni.request({
+			uni.request({
 				url: "https://api.oioweb.cn/api/weather/GetWeather"
-			}), uni.request({
-				url: "https://api.vvhan.com/api/weather"
-			})]).then(([{
+			}).then(({
 				data: {
 					result: {
 						city,
@@ -56,11 +54,7 @@ export default {
 						}
 					}
 				}
-			}, {
-				data: {
-					info
-				}
-			}]) => {
+			}) => {
 				Store.state.city = city.city_name
 				Store.state.country = city.country
 				Store.state.province = city.economize
@@ -68,9 +62,23 @@ export default {
 					city: Store.state.city,
 					country: Store.state.country,
 					province: Store.state.province
+				}).then(data => {
+					Store.commit('SET_USER_INFO', data)
 				})
-				info.tips = [tips, info.tip]
-				Vue.prototype.$set(Store.state, 'weather', info)
+				uni.request({
+					url: "https://api.lolimi.cn/API/weather/?city=" + Store.state.city
+				}).then(({
+					data: {
+						data
+					}
+				}) => {
+					Vue.prototype.$set(Store.state, 'weather', {
+						...data,
+						living: [{
+							tips
+						}, ...data.living]
+					})
+				})
 			})
 		}
 	}

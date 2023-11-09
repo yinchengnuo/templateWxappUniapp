@@ -1,5 +1,5 @@
 <template>
-	<Page ref="Page">
+	<Page bg ref="Page">
 		<view class="roll-man">
 			<ColorPicker @cancel="colorPickerCancel1" @change="colorPickerChange1" @preview="colorPickerPreview1"
 				ref="colorPicker1" />
@@ -133,7 +133,8 @@
 						<text class="cuIcon-right"></text>
 					</view>
 				</view>
-				<button style="width: 100%;" type="primary" @tap="toRoll">滚动吧！滚动君！</button>
+				<button class="w100 cu-btn shadow-blur" :class="'bg-' + ($refs.Page.bgClass || '').split('-')[2]"
+					@tap="toRoll">滚动吧！滚动君！</button>
 			</view>
 		</view>
 	</Page>

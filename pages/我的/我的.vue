@@ -1,33 +1,43 @@
 <template>
 	<view class="index bg-gradual-blue-light" style="position: relative; min-height: 100vh; overflow: hidden;">
-		<image class=".page_bg" mode="aspectFill"
+		<image class="page_bg" mode="aspectFill"
 			src='https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/page_bg.png'></image>
 
 		<image class="w100;" mode="widthFix" style="position: fixed; top: 0 ; left: 0; opacity: 0.2; z-index: 0;"
 			src="https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/logo.png"></image>
 
-		<view class="flex relative" style="box-sizing: border-box;" :style="{
+		<navigator url="/pages/每日随机/天气/天气" class="flex relative" style="box-sizing: border-box;" :style="{
 				marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, 
 				height: `${$app().globalData.menuButtonBoundingClientRect.height}px`,
 				padding: `0 ${$app().globalData.menuButtonBoundingClientRect.width}px`
 			}">
-			<view class="flex h100" style="position: absolute; top: 0; left: 0; padding: 0 30rpx; font-weight: bolder;">
+			<view class="flex h100" style="position: absolute; top: 0; left: 0; padding: 0 20rpx; font-weight: bolder;">
 				<text v-if="user.city"
-					class="cuIcon-locationfill text-blue text-shadow">{{ ' ' + (user.city || '') }}</text>
+					class="cuIcon-locationfill text-blue text-shadow">{{ ' ' + (weather.city || user.city || '') }}</text>
 			</view>
-			<swiper class="h100 w100" autoplay circular vertical :interval="6543" :duration="1000">
-				<swiper-item class="h100 flex" v-for="(tip, index) in weather.tips" :key="index">
-					<text class="page_title text-black text-bold text-shadow text-xs">{{ tip }}</text>
+			<swiper class="h100 w100" autoplay circular vertical :interval="3210" :duration="1000">
+				<swiper-item class="h100 flex text-center" v-for="item in (weather.living || [])" :key="item.name">
+					<text class="page_title text-black text-bold text-shadow text-sm">{{ item.tips }}</text>
 				</swiper-item>
 			</swiper>
-		</view>
+		</navigator>
 
-		<view class="relative flex flex_sb text-bold text-shadow relative"
-			style="box-sizing: border-box; padding: 0 30rpx;"
+		<navigator url="/pages/每日随机/天气/天气" class="relative flex flex_sb text-shadow relative"
+			style="box-sizing: border-box; padding: 0 20rpx;"
 			:style="{ height: `${$app().globalData.menuButtonBoundingClientRect.height}px`  }">
-			<text>{{ weather.type || '' }} {{ weather.low || '' }}~{{ weather.high || '' }}</text>
-			<text>{{ weather.fengxiang || '' }}{{ weather.fengli || '' }}</text>
-		</view>
+			<view v-if="weather.city" class="flex">
+				<image class="margin-right-xs" :src="weather.current.image" :style="{
+						width: `${$app().globalData.menuButtonBoundingClientRect.height / 2}px`,
+						height: `${$app().globalData.menuButtonBoundingClientRect.height / 2}px`,
+				}"></image>
+				{{ weather.current.weather }}·{{ weather.weather }}{{ ' ' }}{{ weather.current.temp }}°C
+			</view>
+			<text v-if="weather.city && weather.warning"
+				class="text-bold">{{ weather.warning.wind }}{{ weather.warning.color }}预警</text>
+			<view v-if="weather.city">
+				{{ weather.current.wind }}{{ ' ' }}{{ weather.current.windSpeed }}{{ ' ' }}
+			</view>
+		</navigator>
 
 		<view class="relative UCenter-bg">
 			<image v-if="user.avatar" :src="user.avatar" class="png bg-white shadow" mode="scaleToFill"></image>
@@ -37,7 +47,7 @@
 			<button open-type="chooseAvatar"
 				style="position: absolute; width: 350rpx; height: 200rpx; border-radius: 50%; opacity: 0; top: 0; left: 200rpx;"
 				@chooseavatar="chooseavatar"></button>
-			<view class="margin text-xxl text-black text-blod" @click="focus = true">
+			<view class="margin text-xxl text-black text-bold" @click="focus = true">
 				<view v-if="focus" class="flex" style="background: rgba(0, 0, 0, .1); border-radius: 32rpx;">
 					<input v-model="nickname" type="nickname" focus placeholder="请输入昵称"
 						style="width: 400rpx; padding: 0 24rpx;" @confirm="saveNickname()" />
@@ -102,9 +112,9 @@
 				</button>
 			</view>
 		</view>
-		<view v-if="user.ip" class="relative margin-top text-center" @click="$copy(user.i)">
-			<text>本机IP：{{ user.i }}</text>
-			<text class=" cuIcon-copy"></text>
+		<view v-if="user.ip" class="relative text-center" @click="$copy(user.ip)">
+			<text>本机IP：{{ user.ip }}</text>
+			<text class="cuIcon-copy"></text>
 		</view>
 		<ad unit-id="adunit-bb0d1a5ba7a52eac"></ad>
 	</view>
@@ -138,15 +148,20 @@
 			this.interstitialAd = uni.createInterstitialAd({
 				adUnitId: 'adunit-e3f467955c2226a4'
 			})
+			uni.$on('LOGON', () => {
+				uni.stopPullDownRefresh()
+			})
+		},
+		onPullDownRefresh() {
+			this.$store.dispatch('user/login')
 		},
 		methods: {
 			async chooseavatar(e) {
 				const filePath = e.target.avatarUrl
 				this.$loading()
 				if (this.user.avatar) {
-					await this.setting({
-						avatar: "",
-						_avatar: this.user.avatar
+					await this.$('/delete_file', {
+						file: this.user.avatar
 					})
 				}
 				uniCloud.uploadFile({
@@ -154,7 +169,6 @@
 					cloudPathAsRealPath: true,
 					cloudPath: `/ToolBox365/avatar/${dayjs().format('YYYY-MM-DD_HH:mm:ss')}_${this.user.openid}.png`,
 				}).then(res => {
-					console.log(res)
 					this.$store.state.user.avatar = res.fileID
 					this.setting({
 						avatar: this.$store.state.user.avatar

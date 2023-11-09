@@ -1,5 +1,5 @@
 <template>
-	<view class="index" :style="{ paddingTop: paddingTop + 'px' }">
+	<view class="index" :style="{ background: bg ? '' : '#E4E4E4', paddingTop: paddingTop + 'px' }">
 		<view class="bar flex" :style="{ height: height + 'px' }">
 			<view class="left flex">
 				<view class="action_bar h100 flex" :style="{ width: height + 'px' }" @click="back">
@@ -21,6 +21,10 @@
 	export default {
 		name: "NavigationBar",
 		props: {
+			bg: {
+				type: String,
+				default: ''
+			},
 			title: {
 				type: String,
 				default: 'ToolBox365'
@@ -58,7 +62,6 @@
 <style lang="scss" scoped>
 	.index {
 		width: 100vw;
-		background: #E4E4E4;
 		box-sizing: border-box;
 
 		.bar {
@@ -71,13 +74,6 @@
 			left: 0;
 			height: 100%;
 			position: absolute;
-
-			.split {
-				width: 2rpx;
-				height: 61.8%;
-				border-radius: 50%;
-				background: #7F7F7F;
-			}
 
 			.action_bar {
 				font-size: 20px;

@@ -17,8 +17,8 @@
 
 <style lang="scss">
 	.index {
-		right: 30rpx;
-		bottom: 30%;
+		right: 8rpx;
+		bottom: 33%;
 		position: fixed;
 		z-index: 9999999999;
 	}

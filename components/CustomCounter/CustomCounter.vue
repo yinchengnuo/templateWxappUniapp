@@ -52,7 +52,7 @@
 		justify-content: center;
 		width: 224rpx;
 		height: 52rpx;
-		font-size: 50rpx;
+		font-size: 40rpx;
 		border-radius: 8rpx;
 		border: 1rpx solid #000000;
 
@@ -62,7 +62,7 @@
 			font-size: 44rpx;
 
 			.val {
-				font-size: 30rpx;
+				font-size: 24rpx;
 			}
 		}
 

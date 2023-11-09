@@ -39,18 +39,21 @@
 		{
 			"path": "pages/首页/首页",
 			"style": {
+				"disableScroll": true,
 				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/每日/每日",
 			"style": {
+				"disableScroll": true,
 				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/聊天/聊天",
 			"style": {
+				"disableScroll": true,
 				"navigationStyle": "custom"
 			}
 		},
@@ -65,24 +68,28 @@
 		{
 			"path": "pages/我的/我的",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/实用工具/滚动君/滚动君",
 			"style": {
+				"disableScroll": true,
 				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/滚动君/滚动君",
 			"style": {
+				"disableScroll": true,
 				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/实用工具/手机号信息查询/手机号信息查询",
 			"style": {
+				"disableScroll": true,
 				"navigationStyle": "custom"
 			}
 		},
