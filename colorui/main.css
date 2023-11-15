@@ -2978,7 +2978,7 @@ egg-label>span::after {
 }
 
 .cu-form-group textarea {
-	margin: 32rpx 0 30rpx;
+	margin: 12rpx 0 10rpx;
 	height: 4.6em;
 	width: 100%;
 	line-height: 1.2em;

@@ -68,7 +68,6 @@
 		{
 			"path": "pages/我的/我的",
 			"style": {
-				"navigationStyle": "custom",
 				"enablePullDownRefresh": true
 			}
 		},
@@ -229,6 +228,12 @@
 			}
 		},
 		{
+			"path": "pages/每日随机/微语简报/微语简报",
+			"style": {
+				"navigationBarTitleText": "微语简报"
+			}
+		},
+		{
 			"path": "pages/每日随机/星座运势/星座运势",
 			"style": {
 				"navigationBarTitleText": "星座运势"
@@ -244,6 +249,30 @@
 			"path": "pages/每日随机/天气/天气",
 			"style": {
 				"navigationBarTitleText": "天气"
+			}
+		},
+		{
+			"path": "pages/每日随机/全国降雨量/全国降雨量",
+			"style": {
+				"navigationBarTitleText": "全国降雨量"
+			}
+		},
+		{
+			"path": "pages/每日随机/随机美女/随机美女",
+			"style": {
+				"navigationBarTitleText": "随机美女"
+			}
+		},
+		{
+			"path": "pages/每日随机/随机白丝/随机白丝",
+			"style": {
+				"navigationBarTitleText": "随机白丝"
+			}
+		},
+		{
+			"path": "pages/每日随机/随机黑丝/随机黑丝",
+			"style": {
+				"navigationBarTitleText": "随机黑丝"
 			}
 		},
 

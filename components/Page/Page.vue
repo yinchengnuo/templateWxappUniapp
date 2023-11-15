@@ -11,11 +11,11 @@
 			</view>
 			<view :id="ADID" class="_ad w100">
 				<!-- 视频广告 -->
-				<ad v-if="type === 'S1'" unit-id="adunit-42238affd4939e6a" ad-type="video" ad-theme="white"></ad>
+				<AD3 v-if="type === 'S1'" />
 				<!-- 横幅广告 -->
-				<ad v-if="type === 'B1'" unit-id="adunit-bb0d1a5ba7a52eac"></ad>
+				<AD2 v-if="type === 'B1'" />
 				<!-- 原生横幅广告 -->
-				<ad-custom v-if="type === 'YHF'" unit-id="adunit-ca19851efd20b3b7"></ad-custom>
+				<AD1 v-if="type === 'YHF'" />
 				<!-- 原生多格广告 -->
 				<!-- <ad-custom v-if="type === 'YDG'" unit-id="adunit-e986a45f75420d2e"></ad-custom> -->
 			</view>
@@ -111,7 +111,7 @@
 				}
 			}, 1000)
 		},
-		beforeMount() {
+		beforeDestroy() {
 			clearInterval(this.timer)
 		},
 		mounted() {
@@ -170,8 +170,8 @@
 			bottom: 59%;
 			left: -12rpx;
 			z-index: 999;
-			width: 100rpx;
-			height: 100rpx;
+			width: 61rpx;
+			height: 61rpx;
 			position: absolute;
 			border-radius: 20rpx;
 		}

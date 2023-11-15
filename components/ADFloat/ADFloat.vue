@@ -1,6 +1,6 @@
 <template>
-	<view class="index flex">
-		<ad-custom unit-id="adunit-8b304cf8af7361f2" @></ad-custom>
+	<view class="index">
+		<ad-custom v-if="show" unit-id="adunit-8b304cf8af7361f2" @error="error"></ad-custom>
 	</view>
 </template>
 
@@ -9,13 +9,18 @@
 		name: "ADFloat",
 		data() {
 			return {
-
+				show: true
 			};
+		},
+		methods: {
+			error() {
+				this.show = false
+			}
 		}
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.index {
 		right: 8rpx;
 		bottom: 33%;

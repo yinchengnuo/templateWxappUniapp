@@ -133,7 +133,7 @@
 						<text class="cuIcon-right"></text>
 					</view>
 				</view>
-				<button class="w100 cu-btn shadow-blur" :class="'bg-' + ($refs.Page.bgClass || '').split('-')[2]"
+				<button class="w100 cu-btn xxl shadow-blur" :class="'bg-' + ($refs.Page.bgClass || '').split('-')[2]"
 					@tap="toRoll">滚动吧！滚动君！</button>
 			</view>
 		</view>

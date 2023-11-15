@@ -1,22 +1,51 @@
 <template>
-	<Page type="S1" ref="Page">
-		<view class="index flexc">
-			<view class="w100">
-				<uni-section title="请输入文字(仅支持英汉互译):" type="line">
-					<view class="flex">
-						<uni-easyinput focus confirmType="搜索" type="textarea" v-model="text" placeholder="请输入关键字"
-							@confirm="make" @iconClick="make"></uni-easyinput>
+	<Page type="S1" ref="Page" bg>
+		<template v-slot:default="{ page }">
+			<template v-if="page">
+				<view class="cu-bar bg-white solid-bottom margin-top">
+					<view class="action">
+						<text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+						<text>输入中&英文即可翻译</text>
 					</view>
-				</uni-section>
-				<button class="margin-top" type="primary" @click="make">翻译</button>
-			</view>
-			<view class="w100 flex1 margin-top" style="overflow: auto;">
-				<uni-card v-if="result" title="翻译结果" :margin="0">
-					{{ result }}
-				</uni-card>
-				<button v-if="result" class="margin-top" @click="copy">复制</button>
-			</view>
-		</view>
+					<view class="action">
+						<text v-if="text" class="my_textarea_clear cuIcon-roundclosefill"
+							@click="text = ''; make()"></text>
+					</view>
+				</view>
+				<view class="cu-form-group padding-left-sm padding-right-sm">
+					<textarea v-model="text" class="my_textarea" :focus="focus" confirm-type="search" maxlength="-1"
+						placeholder="请输入输入中&英文" @blur="focus = false" @confirm="make"></textarea>
+				</view>
+				<view class="cu-form-group padding-left-sm padding-right-sm">
+					<button class="w100 cu-btn block xxl shadow-blur margin-top-xs margin-bottom-xs"
+						:class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click="make">翻译</button>
+				</view>
+				<view class="cu-bar solid-bottom margin-top-xs">
+					<view class="action">
+						<text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+						<text class="text-bold">翻译结果</text>
+					</view>
+				</view>
+				<template v-if="result">
+					<view class="cu-list menu sm-border card-menu margin-top margin-bottom">
+						<view class="cu-item">
+							<view class="content">
+								<text class="text-lg text-black text-bold">{{ result.result }}</text>
+							</view>
+							<view class="action" @click="$copy(result.result)">
+								<text></text>
+								<text class="cuIcon-copy margin-left-xs"></text>
+							</view>
+						</view>
+					</view>
+				</template>
+				<view v-else class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
+					<Empty />
+				</view>
+				<AD1 />
+				<AD2 />
+			</template>
+		</template>
 	</Page>
 </template>
 
@@ -25,42 +54,34 @@
 		data() {
 			return {
 				text: '',
-				result: ''
+				focus: true,
+				result: null
 			}
 		},
+		onLoad() {},
 		methods: {
 			make() {
-				if ((this.text || '').trim()) {
+				this.focus = false
+				this.result = null
+				this.text = (this.text || '').trim()
+				if (this.text) {
 					this.$loading()
 					uni.request({
-						url: 'https://api.oioweb.cn/api/txt/QQFanyi',
-						data: {
-							sourceText: this.text
-						}
-					}).then((res) => {
-						if (res.data.result && res.data.result.targetText) {
-							this.result = res.data.result.targetText
-						} else {
-							this.$toast('查询不到内容，请重输试试')
-							this.result = ''
-						}
+						url: 'https://www.yuanxiapi.cn/api/translation/?text=' + this.text
+					}).then(res => {
+						this.result = res.data
 					}).finally(() => {
 						this.$loaded()
 					})
 				} else {
-					this.result = ''
-					this.$toast('请输入文字')
+					this.focus = true
+					this.$toast('请输入翻译内容')
 				}
-			},
-			copy() {
-				this.$copy(this.result)
 			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.index {
-		height: 100%;
-	}
+
 </style>

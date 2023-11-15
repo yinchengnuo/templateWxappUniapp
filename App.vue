@@ -85,11 +85,11 @@
 	@import "colorui/icon-new.css";
 
 	.w100 {
-		width: 100%;
+		width: 100% !important;
 	}
 
 	.h100 {
-		height: 100%;
+		height: 100% !important;
 	}
 
 	.flex {
@@ -115,9 +115,10 @@
 
 	.my_input {
 		border-radius: 10rpx;
-		height: 74rpx !important;
 		padding: 0 66rpx 0 20rpx;
 		border: 1px solid #efefef;
+		margin: 0 20rpx !important;
+		min-height: 74rpx !important;
 	}
 
 	.my_input_clear {
@@ -125,6 +126,16 @@
 		right: 190rpx;
 		font-size: 44rpx;
 		position: absolute;
+	}
+
+	.my_textarea {
+		padding: 0 20rpx;
+		border-radius: 10rpx;
+		border: 1px solid #efefef;
+	}
+
+	.my_textarea_clear {
+		font-size: 44rpx;
 	}
 
 	.container {

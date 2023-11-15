@@ -1,7 +1,7 @@
 <template>
 	<Page ref="Page">
 		<view class="index">
-			<image v-if="src" :src="src" mode="widthFix"></image>
+			<image src="https://dayu.qqsuu.cn/weiyujianbao/apis.php" mode="widthFix"></image>
 		</view>
 	</Page>
 </template>
@@ -10,15 +10,8 @@
 	export default {
 		data() {
 			return {
-				src: ''
+
 			}
-		},
-		created() {
-			uni.request({
-				url: 'http://api.tangdouz.com/60.php'
-			}).then(res => {
-				this.src = res.data
-			})
 		},
 		methods: {
 
