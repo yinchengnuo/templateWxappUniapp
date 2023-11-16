@@ -5,7 +5,7 @@
 		<view class="page_title flex" :style="{
 				marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` 
 			}">每日随机</view>
-		<scroll-view scroll-y
+		<scroll-view scroll-y show-scrollbar enhanced scroll-with-animation enable-passive
 			:style="{  height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px)` }"
 			refresher-enabled :refresher-triggered="refreshing" @refresherrefresh="getList">
 			<swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="2333"

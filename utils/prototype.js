@@ -8,14 +8,13 @@ Vue.prototype.$app = getApp
 Vue.prototype.$store = $store
 
 Vue.prototype.$toast = (title, conf = {}) => {
-	title = title ? title : '请输入提示信息'
-	title = title.toString()
+	title = title + ''
 	setTimeout(() => {
 		uni.showToast({
 			title,
 			mask: false,
 			icon: 'none',
-			duration: 3210,
+			duration: 3456,
 			...conf
 		})
 	})
@@ -33,6 +32,7 @@ Vue.prototype.$loading = function() {
 	}
 	uni.showLoading()
 }
+
 Vue.prototype.$loaded = function() {
 	if (this.$refs && this.$refs.Loading) {
 		return this.$refs.Loading.loaded()
@@ -41,6 +41,12 @@ Vue.prototype.$loaded = function() {
 		return this.$parent.$refs.Loading.loaded()
 	}
 	uni.hideLoading()
+}
+
+Vue.prototype.$errorImage = function() {
+	this.$loaded.call(this)
+	this.$toast.call(this, '哎呀！加载失败了...请稍后再试呢，先看看美女叭...')
+	this.src = ''
 }
 
 Vue.prototype.$copy = (data) => {
@@ -58,17 +64,11 @@ Vue.prototype.$call = (phoneNumber) => {
 	})
 }
 
-Vue.prototype.$preview = async (src) => {
-	const urls = typeof src === 'string' ? [src] : src
-	const filePath = async src => src.match(/^http/) ? src : (await uni.compressImage({
-		src,
-		quality: 100
-	}))[1].tempFilePath
-	for (let i = 0; i < urls.length; i++) {
-		urls[i] = await filePath(urls[i])
-	}
+Vue.prototype.$preview = async (url, current) => {
+	const urls = typeof url === 'string' ? [url] : url
 	uni.previewImage({
-		urls
+		urls,
+		current
 	})
 }
 
@@ -84,19 +84,4 @@ Vue.prototype.$offset = function(selector) {
 Vue.prototype.$clone = object => {
 	if (!(typeof object === 'object')) return object
 	return JSON.parse(JSON.stringify(object))
-}
-
-Vue.prototype.$debounce = function(func, delay = 666) {
-	let timer;
-
-	return function() {
-		const context = this;
-		const args = arguments;
-
-		clearTimeout(timer);
-
-		timer = setTimeout(() => {
-			func.apply(context, args);
-		}, delay);
-	};
 }

@@ -156,7 +156,7 @@
 		right: 0;
 		bottom: 0;
 		z-index: -999;
-		position: fixed;
+		position: absolute;
 		background: rgba(0, 0, 0, 0);
 
 		&.show {

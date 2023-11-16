@@ -1,5 +1,5 @@
 <template>
-	<view class="index" :style="{ background: bg ? '' : '#E4E4E4', paddingTop: paddingTop + 'px' }">
+	<view class="index" :style="{ background: bg ? '' : '#E4E4E4', paddingTop: paddingTop + 'px' }" @click="test">
 		<view class="bar flex" :style="{ height: height + 'px' }">
 			<view class="left flex">
 				<view class="action_bar h100 flex" :style="{ width: height + 'px' }" @click="back">
@@ -54,6 +54,9 @@
 				} else {
 					uni.navigateBack()
 				}
+			},
+			test() {
+				this.$store.state.user.vip = !this.$store.state.user.vip
 			}
 		}
 	}

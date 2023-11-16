@@ -1,8 +1,14 @@
 <template>
-	<Page type="S1" ref="Page">
-		<view class="index">
-			<image src="https://api.vvhan.com/api/zhichang" mode="widthFix"></image>
-		</view>
+	<Page ref="Page" type="S1">
+		<template v-slot:default="{ page }">
+			<template v-if="page">
+				<image v-if="src" class="w100" :src="src" mode="widthFix" @load="$loaded()" @error="$errorImage()" />
+				<ErrorImage v-else />
+				<AD1 />
+				<AD2 />
+			</template>
+		</template>
+
 	</Page>
 </template>
 
@@ -10,21 +16,15 @@
 	export default {
 		data() {
 			return {
-
+				src: "https://api.vvhan.com/api/zhichang"
 			}
 		},
-		methods: {
-
+		mounted() {
+			this.$loading()
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.index {
-		height: 100%;
 
-		image {
-			width: 100%;
-		}
-	}
 </style>

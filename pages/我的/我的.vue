@@ -1,7 +1,8 @@
 <template>
-	<view class="index bg-gradual-blue-light" style="position: relative; min-height: 100vh; overflow: hidden;">
+	<view class="index" style="position: relative; min-height: 100vh; overflow: hidden;">
 		<image class="page_bg" mode="aspectFill"
 			src='https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/page_bg.png'></image>
+		<view class="page_bg bg-gradual-blue-light"></view>
 
 		<image class="w100;" mode="widthFix" style="position: fixed; top: 0 ; left: 0; opacity: 0.2; z-index: 0;"
 			src="https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/logo.png"></image>

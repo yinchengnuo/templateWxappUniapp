@@ -66,8 +66,8 @@
 	export default {
 		data() {
 			return {
-				text: '',
-				// text: 'YT8934188937784',
+				// text: '',
+				text: 'YT8934188937784',
 				focus: true,
 				result: null
 			}

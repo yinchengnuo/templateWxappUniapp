@@ -1,8 +1,14 @@
 <template>
 	<Page ref="Page">
-		<view class="index">
-			<image v-if="src" :src="src" mode="widthFix"></image>
-		</view>
+		<template v-slot:default="{ page }">
+			<template v-if="page">
+				<image v-if="src" class="w100" :src="src" mode="widthFix" @load="$loaded()" @error="$errorImage()" />
+				<ErrorImage v-else />
+				<AD2 />
+				<AD3 />
+			</template>
+		</template>
+
 	</Page>
 </template>
 
@@ -10,28 +16,20 @@
 	export default {
 		data() {
 			return {
-				src: ''
+				src: ""
 			}
 		},
-		created() {
+		mounted() {
+			this.$loading()
 			uni.request({
 				url: 'http://api.tangdouz.com/60.php'
 			}).then(res => {
 				this.src = res.data
 			})
-		},
-		methods: {
-
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.index {
-		height: 100%;
 
-		image {
-			width: 100%;
-		}
-	}
 </style>

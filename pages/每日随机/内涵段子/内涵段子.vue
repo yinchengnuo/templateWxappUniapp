@@ -1,8 +1,14 @@
 <template>
 	<Page ref="Page">
-		<view class="index">
-			<image src="https://dayu.qqsuu.cn/neihanduanzi/apis.php" mode="widthFix"></image>
-		</view>
+		<template v-slot:default="{ page }">
+			<template v-if="page">
+				<image v-if="src" class="w100" :src="src" mode="widthFix" @load="$loaded()" @error="$errorImage()" />
+				<ErrorImage v-else />
+				<AD2 />
+				<AD3 />
+			</template>
+		</template>
+
 	</Page>
 </template>
 
@@ -10,21 +16,15 @@
 	export default {
 		data() {
 			return {
-
+				src: "https://dayu.qqsuu.cn/neihanduanzi/apis.php"
 			}
 		},
-		methods: {
-
+		mounted() {
+			this.$loading()
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.index {
-		height: 100%;
 
-		image {
-			width: 100%;
-		}
-	}
 </style>

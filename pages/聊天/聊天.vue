@@ -54,7 +54,7 @@
 				</view>
 			</swiper-item>
 		</swiper>
-		<scroll-view scroll-y :scroll-top="scroll"
+		<scroll-view scroll-y show-scrollbar enhanced scroll-with-animation enable-passive :scroll-top="scroll"
 			:style="{  height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px - 164rpx)` }">
 			<view class="cu-chat">
 				<template v-for="(item, index) in list">
