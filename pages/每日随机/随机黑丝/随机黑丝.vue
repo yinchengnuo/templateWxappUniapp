@@ -14,19 +14,17 @@
 </template>
 
 <script>
+import PageImg from '@/mixins/PageImg.js'
 export default {
+	mixins: [PageImg],
 	data() {
-		return {
-			src: '',
-			errored: false,
-		}
+		return {}
 	},
 	mounted() {
 		this.refresh()
 	},
 	methods: {
 		refresh() {
-			this.$loading()
 			this.errored = false
 			uni.request({
 				url: 'https://jkapi.com/api/heisi_img?type=json&apiKey=e771bf212221b8536795356cc01e1b8e'
@@ -38,17 +36,6 @@ export default {
 			}).catch(() => {
 				this.error()
 			})
-		},
-		load() {
-			this.$loaded()
-			this.$refs.Page.refreshing = false
-		},
-		error() {
-			this.src = ''
-			this.$loaded()
-			this.errored = true
-			this.$refs.Page.refreshing = false
-			this.$toast('哎呀！加载失败了...请稍后再试或下拉刷新重试，或者先看看美女...')
 		}
 	}
 }

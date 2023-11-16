@@ -1,9 +1,9 @@
 <template>
-	<Page ref="Page">
+	<Page ref="Page" refresh @refresh="refresh">
 		<template v-slot:default="{ page }">
 			<template v-if="page">
-				<image v-if="src" class="w100" :src="src" mode="widthFix" @load="$loaded()" @error="$errorImage()" />
-				<ErrorImage v-else />
+				<image v-if="src" class="w100" :src="src" mode="widthFix" @load="load()" @error="error()" />
+				<ErrorImage v-if="errored" />
 				<AD2 />
 				<AD3 />
 			</template>
@@ -13,18 +13,15 @@
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				src: "https://dayu.qqsuu.cn/xingzuoyunshi/apis.php"
-			}
-		},
-		mounted() {
-			this.$loading()
+import PageImg from '@/mixins/PageImg.js'
+export default {
+	mixins: [PageImg],
+	data() {
+		return {
+			SRC: 'https://dayu.qqsuu.cn/xingzuoyunshi/apis.php'
 		}
 	}
+}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
