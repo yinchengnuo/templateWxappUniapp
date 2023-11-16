@@ -6,26 +6,23 @@
 				<AD3 />
 			</template>
 		</template>
-</template>
-</Page>
+	</Page>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-
-			}
-		},
-		onLoad() {
-
-		},
-		methods: {
+export default {
+	data() {
+		return {
 
 		}
+	},
+	onLoad() {
+
+	},
+	methods: {
+
 	}
+}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

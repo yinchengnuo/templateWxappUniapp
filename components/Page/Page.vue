@@ -1,5 +1,4 @@
 <template>
-	<!-- https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/树洞.jpg -->
 	<view class="Page" :class="classList.length ? classList : (bg ? bgClass : '')">
 		<view class="cu-drawer-page flex flexc" :class="show ? 'show' : ''">
 			<image v-if="favor" class="inlet animation-shake" :src="inlet" @click="show = true"></image>
@@ -7,8 +6,9 @@
 			<view :id="PageID" class="flex1 w100" style="position: relative;">
 				<view class="w100 h100" style="position: absolute; top: 0; left: 0; overflow: hidden;">
 					<scroll-view scroll-y show-scrollbar enhanced scroll-with-animation enable-passive using-sticky
-						:bounces="false" :scroll-top="willScrollTop" :style="{ height: height + 'px' }" @scroll="scroll"
-						@scrolltoupper="nowScrollTop = 0">
+						:bounces="false" :scroll-top="willScrollTop" :style="{ height: height + 'px' }"
+						:refresher-enabled="refresh" :refresher-triggered="refreshing"
+						@refresherrefresh="refresherrefresh" @scroll="scroll" @scrolltoupper="nowScrollTop = 0">
 						<slot ref="slot" :page="{ height, bgClass }"></slot>
 					</scroll-view>
 				</view>
@@ -50,6 +50,10 @@
 				type: String,
 				default: 'YHF'
 			},
+			refresh: {
+				type: String,
+				default: ''
+			},
 			classList: {
 				type: Array,
 				default: () => ([])
@@ -64,6 +68,7 @@
 				willScrollTop: 0,
 				collected: false,
 				animation: false,
+				refreshing: false,
 				interstitialAd: {},
 				title: 'ToolBox365',
 				rewardedVideoAd: {},
@@ -180,6 +185,10 @@
 				setTimeout(() => {
 					this.willScrollTop = 0
 				})
+			},
+			refresherrefresh() {
+				this.refreshing = true
+				this.$emit('refresh')
 			}
 		}
 	}

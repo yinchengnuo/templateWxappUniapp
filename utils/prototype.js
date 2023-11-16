@@ -43,12 +43,6 @@ Vue.prototype.$loaded = function() {
 	uni.hideLoading()
 }
 
-Vue.prototype.$errorImage = function() {
-	this.$loaded.call(this)
-	this.$toast.call(this, '哎呀！加载失败了...请稍后再试呢，先看看美女叭...')
-	this.src = ''
-}
-
 Vue.prototype.$copy = (data) => {
 	data = data.toString()
 	uni.setClipboardData({

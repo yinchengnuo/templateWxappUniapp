@@ -52,10 +52,6 @@
 			this.$store.dispatch('user/login', {
 				openid: option.query.openid
 			})
-			// uni.getUserProfile({
-			// 	lang: 'zh_CN',
-			// 	desc: 'ddsfdsf'
-			// })
 		},
 		async onShow(option) {
 			if (option.query.path) {
