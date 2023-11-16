@@ -5,6 +5,11 @@ export default {
       errored: false,
     };
   },
+  created() {
+    if (this.SRC) {
+      this.src = this.SRC;
+    }
+  },
   mounted() {
     this.$loading();
   },
