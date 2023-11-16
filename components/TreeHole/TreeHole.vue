@@ -5,18 +5,18 @@
 </template>
 
 <script>
-	export default {
-		name: "TreeHole",
-		data() {
-			return {
+export default {
+	name: "TreeHole",
+	data() {
+		return {
 
-			};
-		}
+		};
 	}
+}
 </script>
 
 <style lang="scss" scoped>
-	.index {
-		font-size: 80rpx;
-	}
+.index {
+	font-size: 80rpx;
+}
 </style>

@@ -6,55 +6,53 @@
 </template>
 
 <script>
-	export default {
-		name: "AD3",
-		data() {
-			return {
-				show: true
-			};
-		},
-		computed: {
-			vip() {
-				return this.$store.state.user.vip
-			}
-		},
-		watch: {
-			vip: {
-				immediate: true,
-				handler() {
-					if (this.vip === true) {
-						this.show = false
-						setTimeout(() => {
-							this.$emit('load')
-						})
-					}
-					if (this.vip === false) {
-						this.show = true
-					}
+export default {
+	name: "AD3",
+	data() {
+		return {
+			show: true
+		};
+	},
+	computed: {
+		vip() {
+			return this.$store.state.user.vip
+		}
+	},
+	watch: {
+		vip: {
+			immediate: true,
+			handler() {
+				if (this.vip === true) {
+					this.show = false
+					setTimeout(() => {
+						this.$emit('load')
+					})
+				}
+				if (this.vip === false) {
+					this.show = true
 				}
 			}
+		}
+	},
+	methods: {
+		load() {
+			setTimeout(() => {
+				this.$emit('load')
+			})
 		},
-		methods: {
-			load() {
-				setTimeout(() => {
-					this.$emit('load')
-				})
-			},
-			error() {
-				this.show = false
-				setTimeout(() => {
-					this.$emit('error')
-				})
-			},
-			close() {
-				setTimeout(() => {
-					this.$emit('close')
-				})
-			}
+		error() {
+			this.show = false
+			setTimeout(() => {
+				this.$emit('error')
+			})
+		},
+		close() {
+			setTimeout(() => {
+				this.$emit('close')
+			})
 		}
 	}
+}
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

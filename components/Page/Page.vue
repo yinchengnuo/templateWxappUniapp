@@ -5,16 +5,15 @@
 			<NavigationBar :bg="bg" :title="title" :favor="favor" :collected="collected" @collect="collect" />
 			<view :id="PageID" class="flex1 w100" style="position: relative;">
 				<view class="w100 h100" style="position: absolute; top: 0; left: 0; overflow: hidden;">
-					<scroll-view scroll-y show-scrollbar enhanced scroll-with-animation enable-passive using-sticky
-						:bounces="false" :scroll-top="willScrollTop" :style="{ height: height + 'px' }"
-						:refresher-enabled="refresh" :refresher-triggered="refreshing"
-						@refresherrefresh="refresherrefresh" @scroll="scroll" @scrolltoupper="nowScrollTop = 0">
+					<scroll-view scroll-y show-scrollbar enhanced scroll-with-animation enable-passive using-sticky :bounces="false"
+						:scroll-top="willScrollTop" :style="{ height: height + 'px' }" :refresher-enabled="refresh"
+						:refresher-triggered="refreshing" @refresherrefresh="refresherrefresh" @scroll="scroll"
+						@scrolltoupper="nowScrollTop = 0">
 						<slot ref="slot" :page="{ height, bgClass }"></slot>
 					</scroll-view>
 				</view>
 			</view>
-			<view v-if="nowScrollTop > 50" class="flex _to_top shadow padding-sm" :class="bgClass || 'bg-white'"
-				@click="toTop">
+			<view v-if="nowScrollTop > 50" class="flex _to_top shadow padding-sm" :class="bgClass || 'bg-white'" @click="toTop">
 				<text class="cuIcon-top" style="font-size: 56rpx;"></text>
 			</view>
 			<view class="w100">
@@ -39,232 +38,232 @@
 </template>
 
 <script>
-	export default {
-		name: "Page",
-		props: {
-			bg: {
-				type: String,
-				default: ''
-			},
-			type: {
-				type: String,
-				default: 'YHF'
-			},
-			refresh: {
-				type: String,
-				default: ''
-			},
-			classList: {
-				type: Array,
-				default: () => ([])
+export default {
+	name: "Page",
+	props: {
+		bg: {
+			type: String,
+			default: ''
+		},
+		type: {
+			type: String,
+			default: 'YHF'
+		},
+		refresh: {
+			type: String,
+			default: ''
+		},
+		classList: {
+			type: Array,
+			default: () => ([])
+		}
+	},
+	data() {
+		return {
+			time: 0,
+			show: false,
+			favor: false,
+			nowScrollTop: 0,
+			willScrollTop: 0,
+			collected: false,
+			animation: false,
+			refreshing: false,
+			interstitialAd: {},
+			title: 'ToolBox365',
+			rewardedVideoAd: {},
+			PageID: 'Page_' + Date.now(),
+			inlet: 'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/树洞.jpg',
+			bgClass: this.bg ? getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)[0] : '',
+			height: this.$app().globalData.systemInfo.windowHeight - this.$app().globalData.navigationBarHeight,
+		};
+	},
+	computed: {
+		vip() {
+			return this.$store.state.user.vip
+		}
+	},
+	watch: {
+		show() {
+			if (this.show) {
+				this.animation = true
+			} else {
+				setTimeout(() => {
+					this.animation = false
+				}, 400)
 			}
-		},
-		data() {
-			return {
-				time: 0,
-				show: false,
-				favor: false,
-				nowScrollTop: 0,
-				willScrollTop: 0,
-				collected: false,
-				animation: false,
-				refreshing: false,
-				interstitialAd: {},
-				title: 'ToolBox365',
-				rewardedVideoAd: {},
-				PageID: 'Page_' + Date.now(),
-				inlet: 'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/树洞.jpg',
-				bgClass: this.bg ? getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)[0] : '',
-				height: this.$app().globalData.systemInfo.windowHeight - this.$app().globalData.navigationBarHeight,
-			};
-		},
-		computed: {
-			vip() {
-				return this.$store.state.user.vip
-			}
-		},
-		watch: {
-			show() {
-				if (this.show) {
-					this.animation = true
-				} else {
-					setTimeout(() => {
-						this.animation = false
-					}, 400)
-				}
-			}
-		},
-		created() {
-			this.interstitialAd = uni.createInterstitialAd({
-				adUnitId: 'adunit-e3f467955c2226a4'
-			})
-			this.interstitialAd.onError(e => {
-				console.log(e)
-			})
-			// this.rewardedVideoAd = uni.createRewardedVideoAd({
-			// 	adUnitId: 'adunit-02b562d4a8c16436'
-			// })
+		}
+	},
+	created() {
+		this.interstitialAd = uni.createInterstitialAd({
+			adUnitId: 'adunit-e3f467955c2226a4'
+		})
+		this.interstitialAd.onError(e => {
+			console.log(e)
+		})
+		// this.rewardedVideoAd = uni.createRewardedVideoAd({
+		// 	adUnitId: 'adunit-02b562d4a8c16436'
+		// })
 
-			const PageStack = getCurrentPages()
-			const types = ["实用工具", "每日随机", "数据集合"]
-			const [type, name] = PageStack[PageStack.length - 1].route.replace(/^(.|)pages\//, '').split('/')
-			this._type = type
-			this._name = this.title = name
-			types.includes(type) && this.$('/record', {
-				type,
-				name
+		const PageStack = getCurrentPages()
+		const types = ["实用工具", "每日随机", "数据集合"]
+		const [type, name] = PageStack[PageStack.length - 1].route.replace(/^(.|)pages\//, '').split('/')
+		this._type = type
+		this._name = this.title = name
+		types.includes(type) && this.$('/record', {
+			type,
+			name
+		}).then((data) => {
+			if (data) {
+				this.collected = data.collected
+				this.$store.commit('app/UPDATE_FUNCTION', data)
+			}
+		}).finally(() => {
+			this.favor = true
+		})
+
+		const times = [60, 180, 360, 600, 900, 1260, 1680, 2160, 2700]
+		this.timer = setInterval(() => {
+			this.time++
+			if (times.includes(this.time)) {
+				!this.vip && this.showAD()
+			}
+			if (this.time > times[times.length - 1]) {
+				clearInterval(this.timer)
+			}
+		}, 1000)
+	},
+	beforeDestroy() {
+		clearInterval(this.timer)
+	},
+	mounted() { },
+	methods: {
+		getHeight() {
+			this.$offset(this.PageID).then(res => {
+				this.height = res.height
+				console.log("广告OK")
+			})
+		},
+		collect() {
+			this.$loading()
+			this.$('/collect', {
+				type: this._type,
+				name: this._name
 			}).then((data) => {
 				if (data) {
 					this.collected = data.collected
 					this.$store.commit('app/UPDATE_FUNCTION', data)
+					if (this.collected) {
+						this.$toast('收藏成功')
+					} else {
+						this.$toast('取消收藏成功')
+					}
 				}
 			}).finally(() => {
-				this.favor = true
+				this.$loaded()
 			})
-
-			const times = [60, 180, 360, 600, 900, 1260, 1680, 2160, 2700]
-			this.timer = setInterval(() => {
-				this.time++
-				if (times.includes(this.time)) {
-					!this.vip && this.showAD()
-				}
-				if (this.time > times[times.length - 1]) {
-					clearInterval(this.timer)
-				}
-			}, 1000)
 		},
-		beforeDestroy() {
-			clearInterval(this.timer)
+		showAD(type = 1, cb = () => { }) {
+			return new Promise((resolve, reject) => {
+				if (type === 1) {
+					this.interstitialAd.show().then(resolve).catch(e => {
+						console.log(e.errMsg)
+					})
+				}
+				if (type === 2) {
+					this.rewardedVideoAd.show().then(resolve).catch(e => {
+						console.log(e.errMsg)
+					})
+				}
+			})
 		},
-		mounted() {},
-		methods: {
-			getHeight() {
-				this.$offset(this.PageID).then(res => {
-					this.height = res.height
-					console.log("广告OK")
-				})
-			},
-			collect() {
-				this.$loading()
-				this.$('/collect', {
-					type: this._type,
-					name: this._name
-				}).then((data) => {
-					if (data) {
-						this.collected = data.collected
-						this.$store.commit('app/UPDATE_FUNCTION', data)
-						if (this.collected) {
-							this.$toast('收藏成功')
-						} else {
-							this.$toast('取消收藏成功')
-						}
-					}
-				}).finally(() => {
-					this.$loaded()
-				})
-			},
-			showAD(type = 1, cb = () => {}) {
-				return new Promise((resolve, reject) => {
-					if (type === 1) {
-						this.interstitialAd.show().then(resolve).catch(e => {
-							console.log(e.errMsg)
-						})
-					}
-					if (type === 2) {
-						this.rewardedVideoAd.show().then(resolve).catch(e => {
-							console.log(e.errMsg)
-						})
-					}
-				})
-			},
-			scroll(e) {
-				this.nowScrollTop = e.detail.scrollTop
-			},
-			toTop() {
-				this.willScrollTop = this.nowScrollTop
-				setTimeout(() => {
-					this.willScrollTop = 0
-				})
-			},
-			refresherrefresh() {
-				this.refreshing = true
-				this.$emit('refresh')
-			}
+		scroll(e) {
+			this.nowScrollTop = e.detail.scrollTop
+		},
+		toTop() {
+			this.willScrollTop = this.nowScrollTop
+			setTimeout(() => {
+				this.willScrollTop = 0
+			})
+		},
+		refresherrefresh() {
+			this.refreshing = true
+			this.$emit('refresh')
 		}
 	}
+}
 </script>
 
 <style lang="scss" scoped>
-	.Page {
-		height: 100vh;
-		position: relative;
+.Page {
+	height: 100vh;
+	position: relative;
 
-		.inlet {
-			bottom: 59%;
-			left: -12rpx;
-			z-index: 999;
-			width: 61rpx;
-			height: 61rpx;
-			position: absolute;
-			border-radius: 20rpx;
-		}
-
-		._to_top {
-			bottom: 34%;
-			right: 56rpx;
-			width: 96rpx;
-			height: 96rpx;
-			z-index: 999999;
-			border-radius: 50%;
-			position: absolute;
-		}
+	.inlet {
+		bottom: 59%;
+		left: -12rpx;
+		z-index: 999;
+		width: 61rpx;
+		height: 61rpx;
+		position: absolute;
+		border-radius: 20rpx;
 	}
 
-	@keyframes shake {
+	._to_top {
+		bottom: 34%;
+		right: 56rpx;
+		width: 96rpx;
+		height: 96rpx;
+		z-index: 999999;
+		border-radius: 50%;
+		position: absolute;
+	}
+}
 
-		0%,
-		100% {
-			transform: translateX(0)
-		}
+@keyframes shake {
 
-		10% {
-			transform: translateX(-9px)
-		}
-
-		20% {
-			transform: translateX(8px)
-		}
-
-		30% {
-			transform: translateX(-7px)
-		}
-
-		40% {
-			transform: translateX(6px)
-		}
-
-		50% {
-			transform: translateX(-5px)
-		}
-
-		60% {
-			transform: translateX(4px)
-		}
-
-		70% {
-			transform: translateX(-3px)
-		}
-
-		80% {
-			transform: translateX(2px)
-		}
-
-		90% {
-			transform: translateX(-1px)
-		}
+	0%,
+	100% {
+		transform: translateX(0)
 	}
 
-	.animation-shake {
-		animation: shake 5s infinite;
+	10% {
+		transform: translateX(-9px)
 	}
+
+	20% {
+		transform: translateX(8px)
+	}
+
+	30% {
+		transform: translateX(-7px)
+	}
+
+	40% {
+		transform: translateX(6px)
+	}
+
+	50% {
+		transform: translateX(-5px)
+	}
+
+	60% {
+		transform: translateX(4px)
+	}
+
+	70% {
+		transform: translateX(-3px)
+	}
+
+	80% {
+		transform: translateX(2px)
+	}
+
+	90% {
+		transform: translateX(-1px)
+	}
+}
+
+.animation-shake {
+	animation: shake 5s infinite;
+}
 </style>

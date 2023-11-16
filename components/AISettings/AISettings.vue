@@ -36,8 +36,8 @@
 			</view>
 		</view>
 		<navigator url="/pages/用户中心/我的能量/我的能量?action=buy">
-			<uni-notice-bar show-get-more show-icon :fontSize="16" scrollable
-				text="能量不够用? 10,000 能量只需一元！多买多送，最低五折！点我立即充值" style="margin-bottom: 0;" />
+			<uni-notice-bar show-get-more show-icon :fontSize="16" scrollable text="能量不够用? 10,000 能量只需一元！多买多送，最低五折！点我立即充值"
+				style="margin-bottom: 0;" />
 		</navigator>
 		<view class="cu-coupon-box2 radius-lg " :class="bg" style="margin-top: 0;margin-bottom: 0;">
 			<view class="cu-tag bg-orange radius text-df padding-lr-sm">
@@ -50,8 +50,7 @@
 						class="w100 h100"></image>
 				</view>
 				<view class="flex-treble padding-left-sm  margin-left">
-					<picker class="text-black text-xxl text-bold" :value="aiNameIndex" :range="aiNameList"
-						@change="chooseProvider">
+					<picker class="text-black text-xxl text-bold" :value="aiNameIndex" :range="aiNameList" @change="chooseProvider">
 						<text class="margin-right">{{ ai.name }}</text>
 						<text class="cuIcon-right"></text>
 					</picker>
@@ -86,9 +85,9 @@
 				<view class="cuIcon-questionfill text-gray margin-right" style="font-size: 42rpx;" @click="showModal1">
 				</view>
 				<input placeholder="请输入0~9" type="number" :value="ai_memory_count" @input="input" @confirm="confirm"
-					style="border: 1px solid #efefef; border-radius: 8rpx; padding: 10rpx 20rpx; height: 80rpx;"></input>
-				<button class="cu-btn round margin-left bg-green shadow"
-					v-if="Number(ai_memory_count) !== user.ai_memory_count" @click="confirm">
+					style="border: 1px solid #efefef; border-radius: 8rpx; padding: 10rpx 20rpx; height: 80rpx;" />
+				<button class="cu-btn round margin-left bg-green shadow" v-if="Number(ai_memory_count) !== user.ai_memory_count"
+					@click="confirm">
 					保存
 				</button>
 				<view class="text-grey cuIcon-infofill margin-left" style="font-size: 42rpx" @click="showModal2"></view>
@@ -98,8 +97,8 @@
 					<text>AI回答完成自动播放语音</text>
 				</view>
 				<view class="">
-					<switch v-if="switchShow" class="green radius" :checked="user.ai_reply_sound_auto"
-						@change="switchChange"></switch>
+					<switch v-if="switchShow" class="green radius" :checked="user.ai_reply_sound_auto" @change="switchChange">
+					</switch>
 				</view>
 			</view>
 			<button class="cu-btn block bg-grey margin-tb-sm lg" @click="$parent.page_container_show = false">退出 ToolBox
@@ -109,160 +108,158 @@
 </template>
 
 <script>
-	import dayjs from 'dayjs'
-	const H = dayjs().get('hour')
-	let image
-	if (H >= 0 && H < 4) image = getApp().globalData.images[0]
-	if (H >= 4 && H < 6) image = getApp().globalData.images[1]
-	if (H >= 6 && H < 9) image = getApp().globalData.images[2]
-	if (H >= 9 && H < 12) image = getApp().globalData.images[3]
-	if (H >= 12 && H < 15) image = getApp().globalData.images[4]
-	if (H >= 15 && H < 17) image = getApp().globalData.images[5]
-	if (H >= 17 && H < 19) image = getApp().globalData.images[6]
-	if (H >= 19) image = getApp().globalData.images[7]
-	console.log(image)
-	export default {
-		name: "AISettings",
-		data() {
-			return {
-				image,
-				switchShow: true,
-				ai_memory_count: 0,
-				bg: getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)[0],
-				modelList: []
-			};
+import dayjs from 'dayjs'
+const H = dayjs().get('hour')
+let image
+if (H >= 0 && H < 4) image = getApp().globalData.images[0]
+if (H >= 4 && H < 6) image = getApp().globalData.images[1]
+if (H >= 6 && H < 9) image = getApp().globalData.images[2]
+if (H >= 9 && H < 12) image = getApp().globalData.images[3]
+if (H >= 12 && H < 15) image = getApp().globalData.images[4]
+if (H >= 15 && H < 17) image = getApp().globalData.images[5]
+if (H >= 17 && H < 19) image = getApp().globalData.images[6]
+if (H >= 19) image = getApp().globalData.images[7]
+console.log(image)
+export default {
+	name: "AISettings",
+	data() {
+		return {
+			image,
+			switchShow: true,
+			ai_memory_count: 0,
+			bg: getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)[0],
+			modelList: []
+		};
+	},
+	computed: {
+		ai() {
+			return (this.$store.state.user.ai || []).find(e => e.provider === this.$store.state.user.ai_provider) || {}
 		},
-		computed: {
-			ai() {
-				return (this.$store.state.user.ai || []).find(e => e.provider === this.$store.state.user.ai_provider) || {}
-			},
-			aiNameList() {
-				return (this.$store.state.user.ai || []).map(e => e.name)
-			},
-			aiNameIndex() {
-				return this.aiNameList.indexOf(this.ai.name)
-			},
-			user() {
-				return this.$store.state.user
-			},
+		aiNameList() {
+			return (this.$store.state.user.ai || []).map(e => e.name)
 		},
-		created() {
-			this.ai_memory_count = this.user.ai_memory_count ? this.user.ai_memory_count : ''
+		aiNameIndex() {
+			return this.aiNameList.indexOf(this.ai.name)
 		},
-		methods: {
-			// 切换厂商
-			chooseProvider(e) {
-				const index = +e.detail.value
-				if (index !== this.aiNameIndex) {
-					console.log('change')
-					const ai = this.$store.state.user.ai[index]
-					this.$store.state.user.ai_provider = ai.provider
-					this.modelList = ai.models
-					this.$store.state.user.ai_model = ai.models[0]
-					this.setting({
-						ai_model: this.$store.state.user.ai_model,
-						ai_provider: this.$store.state.user.ai_provider
-					})
-				}
-			},
-			// 切换模型
-			chooseModel(e) {
-				this.$store.state.user.ai_model = this.modelList[e.detail.value]
+		user() {
+			return this.$store.state.user
+		},
+	},
+	created() {
+		this.ai_memory_count = this.user.ai_memory_count ? this.user.ai_memory_count : ''
+	},
+	methods: {
+		// 切换厂商
+		chooseProvider(e) {
+			const index = +e.detail.value
+			if (index !== this.aiNameIndex) {
+				console.log('change')
+				const ai = this.$store.state.user.ai[index]
+				this.$store.state.user.ai_provider = ai.provider
+				this.modelList = ai.models
+				this.$store.state.user.ai_model = ai.models[0]
 				this.setting({
-					ai_model: this.$store.state.user.ai_model
+					ai_model: this.$store.state.user.ai_model,
+					ai_provider: this.$store.state.user.ai_provider
 				})
-			},
-			// 保存模型设置
-			setting(payload) {
-				this.$loading()
-				this.$('/setting', payload).finally(() => {
-					this.$loaded()
-				})
-			},
-			showModal1() {
+			}
+		},
+		// 切换模型
+		chooseModel(e) {
+			this.$store.state.user.ai_model = this.modelList[e.detail.value]
+			this.setting({
+				ai_model: this.$store.state.user.ai_model
+			})
+		},
+		// 保存模型设置
+		setting(payload) {
+			this.$loading()
+			this.$('/setting', payload).finally(() => {
+				this.$loaded()
+			})
+		},
+		showModal1() {
+			uni.showModal({
+				title: '什么是连续对话记忆次数',
+				content: '默认情况下，AI并不会记得你的上个问题问了什么，因此不具备理解问答上下文的能力。设置连续对话记忆次数（一问一答为一次）可以解决这个问题。',
+				showCancel: false,
+				confirmText: '我知道了'
+			});
+		},
+		showModal2() {
+			uni.showModal({
+				title: '设置连续对话记忆次数注意事项',
+				content: '当设置了连续对话记忆次数后，每次提问时会提取最近 N 次（N 为设置的连续对话记忆次数）作为前置参数输入给 AI 模型，这就意味着每次对话会消耗更多的能量。例如：张三已经提问了 3 个 问题，平均每个问题约消耗 100 能量（提问：20， 回答：80）。此时设置了连续对话记忆次数为 3。则下次提问时需消耗能量约为 320。若回答消耗能量约为 80，则此次问答共计消耗能量约为 400。更详细说明见上方【关于 ToolBox AI】',
+				showCancel: false,
+				confirmText: '我知道了'
+			});
+		},
+		switchChange(e) {
+			if (e.detail.value) {
 				uni.showModal({
-					title: '什么是连续对话记忆次数',
-					content: '默认情况下，AI并不会记得你的上个问题问了什么，因此不具备理解问答上下文的能力。设置连续对话记忆次数（一问一答为一次）可以解决这个问题。',
-					showCancel: false,
-					confirmText: '我知道了'
+					title: '开启AI回答完成自动播放语音？',
+					content: '每次开启需要耗费100能量，是否开启？',
+					success: res => {
+						if (res.confirm) {
+							this.$store.state.user.energy -= 100
+							this.$store.state.user.ai_reply_sound_auto = true
+							this.setting({
+								ai_reply_sound_auto: this.$store.state.user.ai_reply_sound_auto
+							})
+						} else {
+							this.$store.state.user.ai_reply_sound_auto = false
+						}
+						this.switchShow = false
+						setTimeout(() => this.switchShow = true)
+					}
 				});
-			},
-			showModal2() {
+			} else {
 				uni.showModal({
-					title: '设置连续对话记忆次数注意事项',
-					content: '当设置了连续对话记忆次数后，每次提问时会提取最近 N 次（N 为设置的连续对话记忆次数）作为前置参数输入给 AI 模型，这就意味着每次对话会消耗更多的能量。例如：张三已经提问了 3 个 问题，平均每个问题约消耗 100 能量（提问：20， 回答：80）。此时设置了连续对话记忆次数为 3。则下次提问时需消耗能量约为 320。若回答消耗能量约为 80，则此次问答共计消耗能量约为 400。更详细说明见上方【关于 ToolBox AI】',
-					showCancel: false,
-					confirmText: '我知道了'
+					title: '关闭AI回答完成自动播放语音？',
+					content: '再次开启需要耗费100能量，是否关闭？',
+					success: res => {
+						if (res.confirm) {
+							this.$store.state.user.ai_reply_sound_auto = false
+							this.setting({
+								ai_reply_sound_auto: this.$store.state.user.ai_reply_sound_auto
+							})
+						} else {
+							this.$store.state.user.ai_reply_sound_auto = true
+						}
+						this.switchShow = false
+						setTimeout(() => this.switchShow = true)
+					}
 				});
-			},
-			switchChange(e) {
-				if (e.detail.value) {
-					uni.showModal({
-						title: '开启AI回答完成自动播放语音？',
-						content: '每次开启需要耗费100能量，是否开启？',
-						success: res => {
-							if (res.confirm) {
-								this.$store.state.user.energy -= 100
-								this.$store.state.user.ai_reply_sound_auto = true
-								this.setting({
-									ai_reply_sound_auto: this.$store.state.user.ai_reply_sound_auto
-								})
-							} else {
-								this.$store.state.user.ai_reply_sound_auto = false
-							}
-							this.switchShow = false
-							setTimeout(() => this.switchShow = true)
-						}
-					});
-				} else {
-					uni.showModal({
-						title: '关闭AI回答完成自动播放语音？',
-						content: '再次开启需要耗费100能量，是否关闭？',
-						success: res => {
-							if (res.confirm) {
-								this.$store.state.user.ai_reply_sound_auto = false
-								this.setting({
-									ai_reply_sound_auto: this.$store.state.user.ai_reply_sound_auto
-								})
-							} else {
-								this.$store.state.user.ai_reply_sound_auto = true
-							}
-							this.switchShow = false
-							setTimeout(() => this.switchShow = true)
-						}
-					});
-				}
-			},
-			input(e) {
-				let ai_memory_count = Number(e.detail.value)
-				if (isNaN(ai_memory_count)) {
-					this.ai_memory_count = 0
+			}
+		},
+		input(e) {
+			let ai_memory_count = Number(e.detail.value)
+			if (isNaN(ai_memory_count)) {
+				this.ai_memory_count = 0
+				this.$toast('请输入数字0~9')
+			} else {
+				if (ai_memory_count < 0) {
+					ai_memory_count = 0
 					this.$toast('请输入数字0~9')
-				} else {
-					if (ai_memory_count < 0) {
-						ai_memory_count = 0
-						this.$toast('请输入数字0~9')
-					}
-					if (ai_memory_count > 9) {
-						ai_memory_count = 9
-						this.$toast('请输入数字0~9')
-					}
 				}
-				this.ai_memory_count = ai_memory_count ? ai_memory_count : ''
-				return this.ai_memory_count.toString()
-			},
-			confirm() {
-				if (Number(this.ai_memory_count) !== this.user.ai_memory_count) {
-					this.$store.state.user.ai_memory_count = Number(this.ai_memory_count)
-					this.setting({
-						ai_memory_count: this.$store.state.user.ai_memory_count
-					})
+				if (ai_memory_count > 9) {
+					ai_memory_count = 9
+					this.$toast('请输入数字0~9')
 				}
+			}
+			this.ai_memory_count = ai_memory_count ? ai_memory_count : ''
+			return this.ai_memory_count.toString()
+		},
+		confirm() {
+			if (Number(this.ai_memory_count) !== this.user.ai_memory_count) {
+				this.$store.state.user.ai_memory_count = Number(this.ai_memory_count)
+				this.setting({
+					ai_memory_count: this.$store.state.user.ai_memory_count
+				})
 			}
 		}
 	}
+}
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

@@ -10,16 +10,14 @@
 </template>
 
 <script>
-	export default {
-		name: "Empty",
-		data() {
-			return {
+export default {
+	name: "Empty",
+	data() {
+		return {
 
-			};
-		}
+		};
 	}
+}
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

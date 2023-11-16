@@ -7,80 +7,80 @@
 </template>
 
 <script>
-	export default {
-		props: {
-			value: String,
-			mini: String
+export default {
+	props: {
+		value: String,
+		mini: String
+	},
+	data() {
+		return {
+			timer: null,
+			counterValue: Number(this.value)
+		}
+	},
+	methods: {
+		reduce() { // -
+			this.counterValue--
+			this.$emit('input', this.counterValue)
 		},
-		data() {
-			return {
-				timer: null,
-				counterValue: Number(this.value)
+		add() { // +
+			this.counterValue++
+			this.$emit('input', this.counterValue)
+		},
+		longpress(type) { // 长按
+			if (type === 1) {
+				this.timer = setInterval(() => this.reduce(), 88)
+			}
+			if (type === 2) {
+				this.timer = setInterval(() => this.add(), 88)
 			}
 		},
-		methods: {
-			reduce() { // -
-				this.counterValue--
-				this.$emit('input', this.counterValue)
-			},
-			add() { // +
-				this.counterValue++
-				this.$emit('input', this.counterValue)
-			},
-			longpress(type) { // 长按
-				if (type === 1) {
-					this.timer = setInterval(() => this.reduce(), 88)
-				}
-				if (type === 2) {
-					this.timer = setInterval(() => this.add(), 88)
-				}
-			},
-			longpressEnd() { // 长按结束
-				if (this.timer) {
-					clearInterval(this.timer)
-					this.timer = null
-				}
+		longpressEnd() { // 长按结束
+			if (this.timer) {
+				clearInterval(this.timer)
+				this.timer = null
 			}
 		}
 	}
+}
 </script>
 
 <style lang="scss" scoped>
-	.custom-counter {
+.custom-counter {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 224rpx;
+	height: 52rpx;
+	font-size: 40rpx;
+	border-radius: 8rpx;
+	border: 1rpx solid #000000;
+
+	&.mini {
+		width: 98rpx;
+		height: 40rpx;
+		font-size: 44rpx;
+
+		.val {
+			font-size: 24rpx;
+		}
+	}
+
+	.text {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 224rpx;
-		height: 52rpx;
-		font-size: 40rpx;
-		border-radius: 8rpx;
-		border: 1rpx solid #000000;
+		flex: 1;
+		height: 100%;
+		box-sizing: border-box;
 
-		&.mini {
-			width: 98rpx;
-			height: 40rpx;
-			font-size: 44rpx;
-
-			.val {
-				font-size: 24rpx;
-			}
+		&.reduce {
+			border-right: 2rpx solid #000000;
 		}
 
-		.text {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			flex: 1;
-			height: 100%;
-			box-sizing: border-box;
-
-			&.reduce {
-				border-right: 2rpx solid #000000;
-			}
-
-			&.add {
-				border-left: 2rpx solid #000000;
-			}
+		&.add {
+			border-left: 2rpx solid #000000;
 		}
 	}
+}
 </style>
