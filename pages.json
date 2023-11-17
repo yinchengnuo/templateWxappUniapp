@@ -1,335 +1,248 @@
 {
-	"tabBar": {
-		"color": "#7F7F7F",
-		"selectedColor": "#000",
-		"list": [{
-				"text": "首页",
-				"iconPath": "static/首页.png",
-				"pagePath": "pages/首页/首页",
-				"selectedIconPath": "static/首页_.png"
-			},
-			{
-				"text": "每日",
-				"iconPath": "static/每日.png",
-				"pagePath": "pages/每日/每日",
-				"selectedIconPath": "static/每日_.png"
-			},
-			{
-				"text": "聊天",
-				"iconPath": "static/聊天.png",
-				"pagePath": "pages/聊天/聊天",
-				"selectedIconPath": "static/聊天_.png"
-			},
-			{
-				"text": "数据",
-				"iconPath": "static/数据.png",
-				"pagePath": "pages/数据/数据",
-				"selectedIconPath": "static/数据_.png"
-			},
-			{
-				"text": "我的",
-				"iconPath": "static/我的.png",
-				"pagePath": "pages/我的/我的",
-				"selectedIconPath": "static/我的_.png"
-			}
-		]
-	},
-	"pages": [
-		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/首页/首页"
-		},
-		{
-			"path": "pages/每日/每日"
-		},
-		{
-			"path": "pages/聊天/聊天"
-		},
-		{
-			"path": "pages/数据/数据",
-			"style": {
-				"navigationStyle": "default",
-				"enablePullDownRefresh": true,
-				"navigationBarTitleText": "数据集"
-			}
-		},
-		{
-			"path": "pages/我的/我的",
-			"style": {
-				"enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/实用工具/滚动君/滚动君",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/滚动君/滚动君"
-		},
-		{
-			"path": "pages/实用工具/手机号信息查询/手机号信息查询",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/实用工具/翻译/翻译",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/实用工具/快递查询/快递查询",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/实用工具/垃圾分类/垃圾分类",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/实用工具/二维码生成/二维码生成",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/实用工具/食物营养查询/食物营养查询",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/实用工具/米游社随机头像/米游社随机头像",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/实用工具/骚扰电话查询/骚扰电话查询",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/实用工具/字典/字典",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/实用工具/表情包搜索/表情包搜索",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/实用工具/AI抠图/AI抠图",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/实用工具/AI以图搜番/AI以图搜番",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/实用工具/AI图片文字识别/AI图片文字识别",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/实用工具/AI万物识别/AI万物识别",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/实用工具/AI身份证识别/AI身份证识别",
-			"style": {
-				"disableScroll": true
-			}
-		},
+  "tabBar": {
+    "color": "#7F7F7F",
+    "selectedColor": "#000",
+    "list": [
+      {
+        "text": "首页",
+        "iconPath": "static/首页.png",
+        "pagePath": "pages/首页/首页",
+        "selectedIconPath": "static/首页_.png"
+      },
+      {
+        "text": "每日",
+        "iconPath": "static/每日.png",
+        "pagePath": "pages/每日/每日",
+        "selectedIconPath": "static/每日_.png"
+      },
+      {
+        "text": "聊天",
+        "iconPath": "static/聊天.png",
+        "pagePath": "pages/聊天/聊天",
+        "selectedIconPath": "static/聊天_.png"
+      },
+      {
+        "text": "数据",
+        "iconPath": "static/数据.png",
+        "pagePath": "pages/数据/数据",
+        "selectedIconPath": "static/数据_.png"
+      },
+      {
+        "text": "我的",
+        "iconPath": "static/我的.png",
+        "pagePath": "pages/我的/我的",
+        "selectedIconPath": "static/我的_.png"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "path": "pages/首页/首页",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日/每日",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/聊天/聊天",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据/数据",
+      "style": {
+        "navigationStyle": "default",
+        "enablePullDownRefresh": true,
+        "navigationBarTitleText": "数据集"
+      }
+    },
+    {
+      "path": "pages/我的/我的",
+      "style": {
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/实用工具/滚动君/滚动君",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/滚动君/滚动君"
+    },
+    {
+      "path": "pages/实用工具/手机号信息查询/手机号信息查询",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/实用工具/翻译/翻译",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/实用工具/快递查询/快递查询",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/实用工具/垃圾分类/垃圾分类",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/实用工具/二维码生成/二维码生成",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/实用工具/食物营养查询/食物营养查询",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/实用工具/米游社随机头像/米游社随机头像",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/实用工具/骚扰电话查询/骚扰电话查询",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/实用工具/字典/字典",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/实用工具/表情包搜索/表情包搜索",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/实用工具/AI抠图/AI抠图",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/实用工具/AI以图搜番/AI以图搜番",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/实用工具/AI图片文字识别/AI图片文字识别",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/实用工具/AI万物识别/AI万物识别",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/实用工具/AI身份证识别/AI身份证识别",
+      "style": { "disableScroll": true }
+    },
 
+    {
+      "path": "pages/每日随机/功能类/天气/天气",
+      "style": { "disableScroll": true }
+    },
 
-		{
-			"path": "pages/每日随机/历史上的今天/历史上的今天",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/摸鱼人日历/摸鱼人日历",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/职场人日历/职场人日历",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/60秒看世界/60秒看世界",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/明星吃瓜/明星吃瓜",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/摸鱼日报/摸鱼日报",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/内涵段子/内涵段子",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/情感花园/情感花园",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/微语简报/微语简报",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/星座运势/星座运势",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/舔狗日记/舔狗日记",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/天气/天气",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/全国降雨量/全国降雨量",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/随机美女/随机美女",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/随机白丝/随机白丝",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/每日随机/随机黑丝/随机黑丝",
-			"style": {
-				"disableScroll": true
-			}
-		},
+    {
+      "path": "pages/每日随机/图片类/历史上的今天/历史上的今天",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日随机/图片类/摸鱼人日历/摸鱼人日历",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日随机/图片类/职场人日历/职场人日历",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日随机/图片类/60秒看世界/60秒看世界",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日随机/图片类/明星吃瓜/明星吃瓜",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日随机/图片类/摸鱼日报/摸鱼日报",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日随机/图片类/内涵段子/内涵段子",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日随机/图片类/情感花园/情感花园",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日随机/图片类/微语简报/微语简报",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日随机/图片类/星座运势/星座运势",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日随机/图片类/舔狗日记/舔狗日记",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日随机/图片类/全国降雨量/全国降雨量",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日随机/图片类/美女/美女",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日随机/图片类/白丝/白丝",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/每日随机/图片类/黑丝/黑丝",
+      "style": { "disableScroll": true }
+    },
 
+    {
+      "path": "pages/数据集合/电子书/电子书",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/电子书/电子书",
+      "style": { "disableScroll": true }
+    },
 
-
-		{
-			"path": "pages/数据集合/电子书/电子书",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/电子书/电子书",
-			"style": {
-				"disableScroll": true
-			}
-		},
-
-
-
-		{
-			"path": "pages/用户中心/我的能量/我的能量",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/用户中心/关于能量/关于能量",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/用户中心/我的签到/我的签到",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/用户中心/我的分享/我的分享",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/用户中心/我的收藏/我的收藏",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/用户中心/找到组织/找到组织",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/用户中心/关于ToolBoxAI/关于ToolBoxAI",
-			"style": {
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/用户中心/关于小程序/关于小程序",
-			"style": {
-				"disableScroll": true
-			}
-		}
-
-	],
-	"globalStyle": {
-		"navigationStyle": "custom",
-		"backgroundColor": "#F8F8F8",
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#E9E9E9"
-	},
-	"uniIdRouter": {}
+    {
+      "path": "pages/用户中心/我的能量/我的能量",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/用户中心/关于能量/关于能量",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/用户中心/我的签到/我的签到",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/用户中心/我的分享/我的分享",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/用户中心/我的收藏/我的收藏",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/用户中心/找到组织/找到组织",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/用户中心/关于ToolBoxAI/关于ToolBoxAI",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/用户中心/关于小程序/关于小程序",
+      "style": { "disableScroll": true }
+    }
+  ],
+  "globalStyle": {
+    "navigationStyle": "custom",
+    "backgroundColor": "#F8F8F8",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#E9E9E9"
+  }
 }
