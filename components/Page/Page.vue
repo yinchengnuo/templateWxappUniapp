@@ -83,6 +83,7 @@ export default {
 		}
 	},
 	watch: {
+		// 控制树洞弹窗动画
 		show() {
 			if (this.show) {
 				this.animation = true
@@ -94,6 +95,7 @@ export default {
 		}
 	},
 	created() {
+		// 初始化弹屏广告
 		this.interstitialAd = uni.createInterstitialAd({
 			adUnitId: 'adunit-e3f467955c2226a4'
 		})
@@ -105,21 +107,20 @@ export default {
 		// })
 
 		const PageStack = getCurrentPages()
-		const types = ["实用工具", "每日随机", "数据集合"]
-		const [type, name] = PageStack[PageStack.length - 1].route.replace(/^(.|)pages\//, '').split('/')
-		this._type = type
-		this._name = this.title = name
-		types.includes(type) && this.$('/record', {
-			type,
-			name
-		}).then((data) => {
-			if (data) {
-				this.collected = data.collected
-				this.$store.commit('app/UPDATE_FUNCTION', data)
-			}
-		}).finally(() => {
-			this.favor = true
-		})
+		console.log("👀  file: Page.vue:110  created  PageStack:", PageStack.at(-1))
+		// const types = ["实用工具", "每日随机", "数据集合"]
+		// const [type, name] = PageStack[PageStack.length - 1].route.replace(/^(.|)pages\//, '').split('/')
+		// this._type = type
+		// this._name = this.title = name
+		// types.includes(type) && this.$('/record', {
+		// 	type,
+		// 	name
+		// }).then((data) => {
+		// 		this.collected = data.collected
+		// 		this.$store.commit('app/UPDATE_FUNCTION', data)
+		// }).finally(() => {
+		// 	this.favor = true
+		// })
 
 		const times = [60, 180, 360, 600, 900, 1260, 1680, 2160, 2700]
 		this.timer = setInterval(() => {

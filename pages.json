@@ -3,36 +3,11 @@
     "color": "#7F7F7F",
     "selectedColor": "#000",
     "list": [
-      {
-        "text": "首页",
-        "iconPath": "static/首页.png",
-        "pagePath": "pages/首页/首页",
-        "selectedIconPath": "static/首页_.png"
-      },
-      {
-        "text": "每日",
-        "iconPath": "static/每日.png",
-        "pagePath": "pages/每日/每日",
-        "selectedIconPath": "static/每日_.png"
-      },
-      {
-        "text": "聊天",
-        "iconPath": "static/聊天.png",
-        "pagePath": "pages/聊天/聊天",
-        "selectedIconPath": "static/聊天_.png"
-      },
-      {
-        "text": "数据",
-        "iconPath": "static/数据.png",
-        "pagePath": "pages/数据/数据",
-        "selectedIconPath": "static/数据_.png"
-      },
-      {
-        "text": "我的",
-        "iconPath": "static/我的.png",
-        "pagePath": "pages/我的/我的",
-        "selectedIconPath": "static/我的_.png"
-      }
+      { "text": "首页", "iconPath": "static/首页.png", "pagePath": "pages/首页/首页", "selectedIconPath": "static/首页_.png" },
+      { "text": "每日", "iconPath": "static/每日.png", "pagePath": "pages/每日/每日", "selectedIconPath": "static/每日_.png" },
+      { "text": "聊天", "iconPath": "static/聊天.png", "pagePath": "pages/聊天/聊天", "selectedIconPath": "static/聊天_.png" },
+      { "text": "数据", "iconPath": "static/数据.png", "pagePath": "pages/数据/数据", "selectedIconPath": "static/数据_.png" },
+      { "text": "我的", "iconPath": "static/我的.png", "pagePath": "pages/我的/我的", "selectedIconPath": "static/我的_.png" }
     ]
   },
   "pages": [
@@ -62,142 +37,200 @@
         "enablePullDownRefresh": true
       }
     },
+
     {
-      "path": "pages/实用工具/滚动君/滚动君",
+      "path": "pages/实用工具/生活服务/滚动君",
       "style": { "disableScroll": true }
     },
     {
       "path": "pages/滚动君/滚动君"
     },
+
     {
-      "path": "pages/实用工具/手机号信息查询/手机号信息查询",
+      "path": "pages/实用工具/生活服务/手机号信息查询",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/翻译/翻译",
+      "path": "pages/实用工具/生活服务/翻译",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/快递查询/快递查询",
+      "path": "pages/实用工具/生活服务/快递查询",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/垃圾分类/垃圾分类",
+      "path": "pages/实用工具/生活服务/垃圾分类",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/二维码生成/二维码生成",
+      "path": "pages/实用工具/图片生成/二维码生成",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/食物营养查询/食物营养查询",
+      "path": "pages/实用工具/生活服务/食物营养查询",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/米游社随机头像/米游社随机头像",
+      "path": "pages/实用工具/生活服务/米游社随机头像",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/骚扰电话查询/骚扰电话查询",
+      "path": "pages/实用工具/生活服务/骚扰电话查询",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/字典/字典",
+      "path": "pages/实用工具/生活服务/字典",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/表情包搜索/表情包搜索",
+      "path": "pages/实用工具/生活服务/表情包搜索",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/AI抠图/AI抠图",
+      "path": "pages/实用工具/人工智能/AI抠图",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/AI以图搜番/AI以图搜番",
+      "path": "pages/实用工具/人工智能/AI以图搜番",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/AI图片文字识别/AI图片文字识别",
+      "path": "pages/实用工具/人工智能/AI图片文字识别",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/AI万物识别/AI万物识别",
+      "path": "pages/实用工具/人工智能/AI万物识别",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/AI身份证识别/AI身份证识别",
+      "path": "pages/实用工具/人工智能/AI身份证识别",
       "style": { "disableScroll": true }
     },
 
     {
-      "path": "pages/每日随机/功能类/天气/天气",
+      "path": "pages/每日随机/功能类/天气",
       "style": { "disableScroll": true }
     },
 
     {
-      "path": "pages/每日随机/图片类/历史上的今天/历史上的今天",
+      "path": "pages/每日随机/图片类/历史上的今天",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/摸鱼人日历/摸鱼人日历",
+      "path": "pages/每日随机/图片类/摸鱼人日历",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/职场人日历/职场人日历",
+      "path": "pages/每日随机/图片类/职场人日历",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/60秒看世界/60秒看世界",
+      "path": "pages/每日随机/图片类/60秒看世界",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/明星吃瓜/明星吃瓜",
+      "path": "pages/每日随机/图片类/明星吃瓜",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/摸鱼日报/摸鱼日报",
+      "path": "pages/每日随机/图片类/摸鱼日报",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/内涵段子/内涵段子",
+      "path": "pages/每日随机/图片类/内涵段子",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/情感花园/情感花园",
+      "path": "pages/每日随机/图片类/情感花园",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/微语简报/微语简报",
+      "path": "pages/每日随机/图片类/微语简报",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/星座运势/星座运势",
+      "path": "pages/每日随机/图片类/星座运势",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/舔狗日记/舔狗日记",
+      "path": "pages/每日随机/图片类/舔狗日记",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/全国降雨量/全国降雨量",
+      "path": "pages/每日随机/图片类/全国降雨量",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/美女/美女",
+      "path": "pages/每日随机/图片类/美女",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/白丝/白丝",
+      "path": "pages/每日随机/图片类/白丝",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/黑丝/黑丝",
+      "path": "pages/每日随机/图片类/黑丝",
       "style": { "disableScroll": true }
     },
 
     {
-      "path": "pages/数据集合/电子书/电子书",
+      "path": "pages/数据集合/电子书/三国志",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/山海经",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/世说新语",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/吕氏春秋",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/古文观止",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/梦溪笔谈",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/庄子",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/史记",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/论语",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/老子·道德经",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/孟子",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/元曲三百首",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/宋词三百首",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/唐诗三百首",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/黄帝内经",
       "style": { "disableScroll": true }
     },
     {
@@ -206,35 +239,35 @@
     },
 
     {
-      "path": "pages/用户中心/我的能量/我的能量",
+      "path": "pages/用户中心/我的能量",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/用户中心/关于能量/关于能量",
+      "path": "pages/用户中心/关于能量",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/用户中心/我的签到/我的签到",
+      "path": "pages/用户中心/我的签到",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/用户中心/我的分享/我的分享",
+      "path": "pages/用户中心/我的分享",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/用户中心/我的收藏/我的收藏",
+      "path": "pages/用户中心/我的收藏",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/用户中心/找到组织/找到组织",
+      "path": "pages/用户中心/找到组织",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/用户中心/关于ToolBoxAI/关于ToolBoxAI",
+      "path": "pages/用户中心/关于ToolBoxAI",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/用户中心/关于小程序/关于小程序",
+      "path": "pages/用户中心/关于小程序",
       "style": { "disableScroll": true }
     }
   ],

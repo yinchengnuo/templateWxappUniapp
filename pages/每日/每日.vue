@@ -90,9 +90,7 @@
 		methods: {
 			getList() {
 				this.refreshing = true
-				this.$loading()
-				this.$store.dispatch('app/getApp').finally(() => {
-					this.$loaded()
+				this.$store.dispatch('app/getFunction').finally(() => {
 					this.refreshing = false
 				})
 			},

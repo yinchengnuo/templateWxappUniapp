@@ -50,9 +50,7 @@
 		},
 		methods: {
 			getList() {
-				this.$loading()
-				this.$store.dispatch('app/getApp').finally(() => {
-					this.$loaded()
+				this.$store.dispatch('app/getFunction').finally(() => {
 					uni.stopPullDownRefresh()
 				})
 			},
