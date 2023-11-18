@@ -1,63 +1,77 @@
 <template>
-	<Page type="B1" ref="Page">
-		<view class="index flexc">
-			<view class="w100">
-				<uni-section title="请输入文字/网址:" type="line">
-					<view class="flex">
-						<uni-easyinput focus confirmType="搜索" type="textarea" v-model="text" placeholder="请输入文字/网址"
-							@confirm="make" @iconClick="make"></uni-easyinput>
+	<Page ref="Page" bg>
+		<template v-slot:default="{ page }">
+			<template v-if="page">
+				<view class="cu-bar bg-white solid-bottom margin-top">
+					<view class="action">
+						<text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+						<text>输入文字/网址即可生成</text>
 					</view>
-				</uni-section>
-				<button class="margin-top" type="primary" @click="make">生成二维码</button>
-			</view>
-			<view class="w100 flex1 margin-top" style="overflow: auto;">
-				<uni-card v-if="result" title="生成结果" :margin="0">
-					<image class="radius shadow bg-white radius-df" :src="src" mode="aspectFit" @click="preview(item)">
-					</image>
-				</uni-card>
-			</view>
-		</view>
+					<view class="action">
+						<text v-if="text" class="my_textarea_clear cuIcon-roundclosefill" @click="text = ''; make()"></text>
+					</view>
+				</view>
+				<view class="cu-form-group padding-left-sm padding-right-sm">
+					<textarea v-model="text" class="my_textarea" :focus="focus" confirm-type="search" maxlength="-1"
+						placeholder="请输入文字/网址" @blur="focus = false" @confirm="make"></textarea>
+				</view>
+				<view class="cu-form-group padding-left-sm padding-right-sm">
+					<button class="w100 cu-btn block xxl shadow-blur margin-top-xs margin-bottom-xs"
+						:class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click="make">生成</button>
+				</view>
+				<view class="cu-bar solid-bottom margin-top-xs">
+					<view class="action">
+						<text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+						<text class="text-bold">生成结果</text>
+					</view>
+				</view>
+				<template v-if="result">
+					<view class="cu-list menu sm-border card-menu margin-top margin-bottom" @click="$preview(result)">
+						<image :src="result" mode="aspectFill" show-menu-by-longpress style="width: 686rpx; height: 686rpx;"
+							@load="load()" @error="error()">
+						</image>
+					</view>
+				</template>
+				<view v-else class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
+					<Empty />
+				</view>
+				<AD2 />
+				<AD3 />
+			</template>
+		</template>
 	</Page>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				text: '',
-				result: ''
-			}
-		},
-		computed: {
-			src() {
-				return 'https://api.vvhan.com/api/qr?text=' + this.result
-			}
-		},
-		methods: {
-			make() {
-				if ((this.text || '').trim()) {
-					this.result = this.text
-				} else {
-					this.result = ''
-					this.$toast('请输入文字')
-				}
-			},
-			preview(url) {
-				uni.previewImage({
-					current: this.src,
-					urls: [this.src]
-				})
+import PageImg from '@/mixins/PageImg.js'
+export default {
+	mixins: [PageImg],
+	data() {
+		return {
+			text: '',
+			focus: true,
+			result: null
+		}
+	},
+	onLoad() {},
+	mounted() {
+		this.$loaded()
+	},
+	methods: {
+		make() {
+			this.focus = false
+			this.result = null
+			this.text = (this.text || '').trim()
+			if (this.text) {
+				this.$loading()
+				this.result = 'https://api.vvhan.com/api/qr?text=' + this.result
+			} else {
+				this.focus = true
+				this.$toast('请输入文字/网址')
 			}
 		}
 	}
+}
 </script>
 
-<style lang="scss" scoped>
-	.index {
-		height: 100%;
-
-		image {
-			width: 100%;
-		}
-	}
-</style>
+<style lang="scss" scoped></style>

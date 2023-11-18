@@ -10,7 +10,7 @@
 				</view>
 				<view class="cu-bar input">
 					<input v-model.trim="text" ref="input" :focus="focus" class="my_input" confirm-type="search"
-						placeholder="请输入手机号" type="number" @blur="focus = false" @confirm="make" />
+						placeholder="请输入垃圾名称" type="text" @blur="focus = false" @confirm="make" />
 					<text v-if="text" class="my_input_clear cuIcon-roundclosefill" @click="text = ''; make()"></text>
 					<button class="cu-btn lg shadow-blur" :class="'bg-' + $refs.Page.bgClass.split('-')[2]"
 						@click="make">查询</button>
@@ -48,7 +48,7 @@
 								</view>
 							</view>
 						</block>
-						<view class="cu-item flex text-grey text-sm">没有更多了...</view>
+						<view class="cu-item text-grey text-sm justify-center">没有更多了...</view>
 					</view>
 				</template>
 				<view v-else class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
@@ -65,7 +65,7 @@
 export default {
 	data() {
 		return {
-			text: '避孕套',
+			text: '',
 			focus: true,
 			result: null,
 			types: {
@@ -76,9 +76,7 @@ export default {
 			}
 		}
 	},
-	onLoad() {
-		this.make()
-	},
+	onLoad() { },
 	methods: {
 		make() {
 			this.focus = false
@@ -100,7 +98,7 @@ export default {
 				})
 			} else {
 				this.focus = true
-				this.$toast('请输入手机号')
+				this.$toast('请输入垃圾名称')
 			}
 		}
 	}
