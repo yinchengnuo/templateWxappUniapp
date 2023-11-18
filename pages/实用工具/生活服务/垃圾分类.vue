@@ -1,67 +1,110 @@
 <template>
-	<Page ref="Page">
-		<view class="index flexc">
-			<view class="w100">
-				<uni-section title="请输入垃圾名称:" type="line">
-					<view class="flex">
-						<uni-easyinput trim="all" focus confirmType="搜索" v-model="text" suffixIcon="search"
-							placeholder="请输入垃圾名称" @confirm="make" @iconClick="make"></uni-easyinput>
+	<Page ref="Page" bg>
+		<template v-slot:default="{ page }">
+			<template v-if="page">
+				<view class="cu-bar bg-white solid-bottom margin-top">
+					<view class="action">
+						<text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+						<text>输入垃圾名称即可查询垃圾分类</text>
 					</view>
-				</uni-section>
-				<button class="margin-top" type="primary" @click="make">查询垃圾分类信息</button>
-			</view>
-			<view class="w100 flex1 margin-top" style="overflow: auto;">
-				<uni-card v-if="result" title="查询结果" :margin="0" :padding="0">
-					<uni-group v-for="item in result" :key="item.name" :title="item.name">
-						<uni-section title="分类" type="line">{{ item.explain }}</uni-section>
-						<uni-section title="概述" type="line">{{ item.contain }}</uni-section>
-						<uni-section title="贴士" type="line">{{ item.tip }}</uni-section>
-					</uni-group>
-				</uni-card>
-			</view>
-		</view>
+				</view>
+				<view class="cu-bar input">
+					<input v-model.trim="text" ref="input" :focus="focus" class="my_input" confirm-type="search"
+						placeholder="请输入手机号" type="number" @blur="focus = false" @confirm="make" />
+					<text v-if="text" class="my_input_clear cuIcon-roundclosefill" @click="text = ''; make()"></text>
+					<button class="cu-btn lg shadow-blur" :class="'bg-' + $refs.Page.bgClass.split('-')[2]"
+						@click="make">查询</button>
+				</view>
+				<view class="cu-bar solid-bottom margin-top-xs">
+					<view class="action">
+						<text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+						<text class="text-bold">查询结果</text>
+					</view>
+				</view>
+				<template v-if="result">
+					<view class="cu-list menu sm-border card-menu margin-top margin-bottom">
+						<block v-for="(item, index) in result" :key="index">
+							<view class="cu-item">
+								<view class="content">
+									<text class="text-lg">{{ item.name }}</text>
+								</view>
+								<view class="action">
+									<text class="text-lg text-bold">{{ types[item.type] }}</text>
+								</view>
+							</view>
+							<view class="cu-item">
+								<view class="content">
+									<text class="text-sm text-black text-bold">分类描述：{{ item.explain }}</text>
+								</view>
+							</view>
+							<view class="cu-item">
+								<view class="content">
+									<text class="text-sm text-black text-bold">扩展知识：{{ item.contain }}</text>
+								</view>
+							</view>
+							<view class="cu-item">
+								<view class="content">
+									<text class="text-sm text-black text-bold">分类提示：{{ item.tip }}</text>
+								</view>
+							</view>
+						</block>
+						<view class="cu-item flex text-grey text-sm">没有更多了...</view>
+					</view>
+				</template>
+				<view v-else class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
+					<Empty />
+				</view>
+				<AD2 />
+				<AD3 />
+			</template>
+		</template>
 	</Page>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				// text: '',
-				text: '鱼泡',
-				result: null
+export default {
+	data() {
+		return {
+			text: '避孕套',
+			focus: true,
+			result: null,
+			types: {
+				0: '可回收垃圾',
+				1: '有害垃圾',
+				2: '湿垃圾',
+				3: '干垃圾'
 			}
-		},
-		methods: {
-			make() {
-				if ((this.text || '').trim()) {
-					this.$loading()
-					uni.request({
-						url: 'https://api.oioweb.cn/api/common/rubbish',
-						data: {
-							name: this.text
-						}
-					}).then((res) => {
-						if (res.data.result) {
-							this.result = res.data.result
-						} else {
-							this.$toast('查询不到内容，请重输试试')
-							this.result = null
-						}
-					}).finally(() => {
-						this.$loaded()
-					})
-				} else {
-					this.result = null
-					this.$toast('请输入文字')
-				}
+		}
+	},
+	onLoad() {
+		this.make()
+	},
+	methods: {
+		make() {
+			this.focus = false
+			this.result = null
+			this.text = (this.text || '').trim()
+			if (this.text) {
+				this.$loading()
+				uni.request({
+					url: 'https://api.oioweb.cn/api/common/rubbish?name=' + this.text
+				}).then(res => {
+					if (res.data.code === 200) {
+						this.result = res.data.result
+					} else {
+						this.focus = true
+						this.$toast(res.data.msg)
+					}
+				}).finally(() => {
+					this.$loaded()
+				})
+			} else {
+				this.focus = true
+				this.$toast('请输入手机号')
 			}
 		}
 	}
+}
 </script>
 
-<style lang="scss" scoped>
-	.index {
-		height: 100%;
-	}
-</style>
+<style lang="scss" scoped></style>

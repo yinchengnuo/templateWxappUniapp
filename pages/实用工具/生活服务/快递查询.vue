@@ -10,7 +10,7 @@
 				</view>
 				<view class="cu-bar input solid-bottom">
 					<input v-model.trim="text" ref="input" :focus="focus" class="my_input" confirm-type="search"
-						placeholder="请输入单号" type="text" @blur="focus = false" @confirm="make"></input>
+						placeholder="请输入单号" type="text" @blur="focus = false" @confirm="make" />
 					<text v-if="text" class="my_input_clear cuIcon-roundclosefill" @click="text = ''; make()"></text>
 					<button class="cu-btn lg shadow-blur" :class="'bg-' + $refs.Page.bgClass.split('-')[2]"
 						@click="make">查询</button>
@@ -66,8 +66,8 @@
 	export default {
 		data() {
 			return {
-				// text: '',
-				text: 'YT8934188937784',
+				text: '',
+				// text: 'YT8934188937784',
 				focus: true,
 				result: null
 			}

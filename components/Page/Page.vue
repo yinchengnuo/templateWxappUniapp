@@ -61,6 +61,7 @@ export default {
 	data() {
 		return {
 			time: 0,
+			page: {},
 			show: false,
 			favor: false,
 			nowScrollTop: 0,
@@ -69,9 +70,9 @@ export default {
 			animation: false,
 			refreshing: false,
 			interstitialAd: {},
-			title: 'ToolBox365',
 			rewardedVideoAd: {},
 			PageID: 'Page_' + Date.now(),
+			title: getCurrentPages().at(-1).route.split('/').at(-1),
 			inlet: 'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/树洞.jpg',
 			bgClass: this.bg ? getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)[0] : '',
 			height: this.$app().globalData.systemInfo.windowHeight - this.$app().globalData.navigationBarHeight,
@@ -102,26 +103,18 @@ export default {
 		this.interstitialAd.onError(e => {
 			console.log(e)
 		})
+
 		// this.rewardedVideoAd = uni.createRewardedVideoAd({
 		// 	adUnitId: 'adunit-02b562d4a8c16436'
 		// })
 
-		const PageStack = getCurrentPages()
-		console.log("👀  file: Page.vue:110  created  PageStack:", PageStack.at(-1))
-		// const types = ["实用工具", "每日随机", "数据集合"]
-		// const [type, name] = PageStack[PageStack.length - 1].route.replace(/^(.|)pages\//, '').split('/')
-		// this._type = type
-		// this._name = this.title = name
-		// types.includes(type) && this.$('/record', {
-		// 	type,
-		// 	name
-		// }).then((data) => {
-		// 		this.collected = data.collected
-		// 		this.$store.commit('app/UPDATE_FUNCTION', data)
-		// }).finally(() => {
-		// 	this.favor = true
-		// })
+		if (this.$store.state.user.openid) {
+			this.recordView()
+		} else {
+			uni.$on('LOGON', () => this.recordView())
+		}
 
+		// 进入页面开始计时，控制弹出广告
 		const times = [60, 180, 360, 600, 900, 1260, 1680, 2160, 2700]
 		this.timer = setInterval(() => {
 			this.time++
@@ -138,31 +131,41 @@ export default {
 	},
 	mounted() { },
 	methods: {
+		// 广告渲染状态变化，重新获取内容区域高度
 		getHeight() {
 			this.$offset(this.PageID).then(res => {
 				this.height = res.height
 				console.log("广告OK")
 			})
 		},
-		collect() {
-			this.$loading()
-			this.$('/collect', {
-				type: this._type,
-				name: this._name
-			}).then((data) => {
-				if (data) {
+		// 记录浏览及获取收藏状态
+		recordView() {
+			this.page = this.$store.state.app.list.find(e => e.page.includes(getCurrentPages().at(-1).route.split('?')[0]))
+			if (this.page) {
+				this.$('/record', this.page).then((data) => {
 					this.collected = data.collected
 					this.$store.commit('app/UPDATE_FUNCTION', data)
-					if (this.collected) {
-						this.$toast('收藏成功')
-					} else {
-						this.$toast('取消收藏成功')
-					}
+				}).finally(() => {
+					this.favor = true
+				})
+			}
+		},
+		// 点击收藏
+		collect() {
+			this.$loading()
+			this.$('/collect', this.page).then((data) => {
+				this.collected = data.collected
+				this.$store.commit('app/UPDATE_FUNCTION', data)
+				if (this.collected) {
+					this.$toast('收藏成功')
+				} else {
+					this.$toast('取消收藏成功')
 				}
 			}).finally(() => {
 				this.$loaded()
 			})
 		},
+		// 显示广告
 		showAD(type = 1, cb = () => { }) {
 			return new Promise((resolve, reject) => {
 				if (type === 1) {
@@ -177,15 +180,18 @@ export default {
 				}
 			})
 		},
+		// 滚动记录滚动距离
 		scroll(e) {
 			this.nowScrollTop = e.detail.scrollTop
 		},
+		// 回到顶部
 		toTop() {
 			this.willScrollTop = this.nowScrollTop
 			setTimeout(() => {
 				this.willScrollTop = 0
 			})
 		},
+		// 下拉刷新触发
 		refresherrefresh() {
 			this.refreshing = true
 			this.$emit('refresh')

@@ -8,7 +8,7 @@
 					<view class="flex justify-between" style="position: relative; z-index: 2;">
 						<view class="text-xl text-bold text-white">ToolBox AI 设置</view>
 						<view class="cu-capsule round margin-right">
-							<navigator url="/pages/用户中心/我的能量/我的能量" class="cu-tag bg-green">
+							<navigator url="/pages/用户中心/我的能量" class="cu-tag bg-green">
 								<text>我的能量</text>
 								<text class="cuIcon-lightauto"></text>
 							</navigator>
@@ -17,7 +17,7 @@
 							</view>
 						</view>
 					</view>
-					<navigator url="/pages/用户中心/我的能量/我的能量"
+					<navigator url="/pages/用户中心/我的能量"
 						class="flex justify-center align-end padding-tb cu-coupon-content text-white">
 						<text class="text-lg padding-bottom-xs text-black">余额</text>
 						<text class="text-sl text-bold text-shadow " style="text-shadow: 0px 0px 2rpx green">
@@ -25,7 +25,7 @@
 						<text class="text-lg text-green text-shadow cuIcon-lightauto">能量</text>
 					</navigator>
 					<view class="flex justify-around align-center margin-top-xl text-white">
-						<navigator url="/pages/用户中心/我的签到/我的签到">
+						<navigator url="/pages/用户中心/我的签到">
 							<button class="cu-btn round shadow bg-red">每日签到 +1000</button>
 						</navigator>
 						<button open-type="share" class="cu-btn round shadow bg-green" style="margin: 0 30rpx;">邀请好友
@@ -35,7 +35,7 @@
 				</view>
 			</view>
 		</view>
-		<navigator url="/pages/用户中心/我的能量/我的能量?action=buy">
+		<navigator url="/pages/用户中心/我的能量?action=buy">
 			<uni-notice-bar show-get-more show-icon :fontSize="16" scrollable text="能量不够用? 10,000 能量只需一元！多买多送，最低五折！点我立即充值"
 				style="margin-bottom: 0;" />
 		</navigator>
@@ -73,7 +73,7 @@
 					<text class="cuIcon-titles text-grey"></text>
 					<text class="text-bold">AI 行为设置</text>
 				</view>
-				<navigator url="/pages/用户中心/关于ToolBoxAI/关于ToolBoxAI" class='action'
+				<navigator url="/pages/用户中心/关于ToolBoxAI" class='action'
 					style="height: 100rpx; margin: 0; padding: 0 30rpx;">
 					<text>关于 ToolBox AI</text>
 					<text class="cuIcon-right"></text>

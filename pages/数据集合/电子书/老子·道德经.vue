@@ -2,6 +2,7 @@
 	<Page ref="Page">
 		<template v-slot:default="{ page }">
 			<template v-if="page">
+				<view class="text-xxl text-bold flex">老子·道德经</view>
 				<AD2 />
 				<AD3 />
 			</template>

@@ -24,11 +24,11 @@ Vue.prototype.$toasted = () => {
 };
 
 Vue.prototype.$loading = function () {
-  Vue.prototype.$store.app.loading = true;
+  Vue.prototype.$store.state.app.loading = true;
 };
 
 Vue.prototype.$loaded = function () {
-  Vue.prototype.$store.app.loading = false;
+  Vue.prototype.$store.state.app.loading = false;
 };
 
 Vue.prototype.$copy = data => {

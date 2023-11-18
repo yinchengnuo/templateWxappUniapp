@@ -1,26 +1,28 @@
 <template>
 	<Page ref="Page">
-		<view class="index">
-			关于小程序
-		</view>
+		<template v-slot:default="{ page }">
+			<template v-if="page">
+				<AD2 />
+				<AD3 />
+			</template>
+		</template>
 	</Page>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-
-			}
-		},
-		methods: {
+export default {
+	data() {
+		return {
 
 		}
+	},
+	onLoad() {
+
+	},
+	methods: {
+
 	}
+}
 </script>
 
-<style lang="scss" scoped>
-	.index {
-		height: 100%;
-	}
-</style>
+<style lang="scss" scoped></style>

@@ -1,12 +1,17 @@
 <template>
-	<view v-if="$store.state.app.loading" class="index flex">
+	<view v-if="loading" class="index flex">
 		<LoadingSpin />
 	</view>
 </template>
 
 <script>
 export default {
-	name: "Loading"
+	name: "Loading",
+	computed: {
+		loading() {
+			return this.$store.state.app.loading
+		}
+	}
 }
 </script>
 

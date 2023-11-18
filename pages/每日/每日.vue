@@ -80,9 +80,6 @@
 			}
 		},
 		onLoad() {
-			if (!this.$store.state.app.list.length) {
-				this.refreshing = true
-			}
 			this.interstitialAd = uni.createInterstitialAd({
 				adUnitId: 'adunit-e3f467955c2226a4'
 			})

@@ -12,7 +12,6 @@ export default {
       Object.keys(payload).forEach(key => {
         Vue.prototype.$set(state, key, payload[key]);
       });
-      setTimeout(() => uni.$emit("LOGON"));
     },
   },
   actions: {
@@ -24,6 +23,7 @@ export default {
           Vue.prototype
             .$("/login", { cid, code, openid: payload.openid })
             .then(data => {
+              setTimeout(() => uni.$emit("LOGON"));
               commit("app/SET_LIST", data.functions, { root: true });
               commit("SET_USER_INFO", { ...data, functions: undefined });
             })

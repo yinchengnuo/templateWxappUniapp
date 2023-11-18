@@ -60,11 +60,9 @@
 						url: option.query.path
 					})
 				} else {
-					uni.$on('LOGON', () => {
-						uni.navigateTo({
-							url: option.query.path
-						})
-					})
+					uni.$on('LOGON', () => uni.navigateTo({
+						url: option.query.path
+					}))
 				}
 			}
 			this.$store.dispatch('user/getCityWeather')

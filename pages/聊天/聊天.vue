@@ -5,7 +5,7 @@
 		<view class="flex" style="box-sizing: border-box; padding: 0 30rpx; position: relative;" :style="{
 				marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` 
 			}">
-			<navigator url="/pages/用户中心/我的能量/我的能量" class="flex h100"
+			<navigator url="/pages/用户中心/我的能量" class="flex h100"
 				style="position: absolute; top: 0; left: 0; padding: 0 30rpx; font-weight: bolder;">
 				<text class="cuIcon-lightauto text-purple text-shadow">{{ user.energy }}</text>
 				<text class="cuIcon-right text-purple text-shadow  text-blod" style="margin: 0 6rpx;"></text>

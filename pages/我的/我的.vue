@@ -7,7 +7,7 @@
 		<image class="w100;" mode="widthFix" style="position: fixed; top: 0 ; left: 0; opacity: 0.2; z-index: 0;"
 			src="https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/logo.png"></image>
 
-		<navigator url="/pages/每日随机/天气/天气" class="flex relative" style="box-sizing: border-box;" :style="{
+		<navigator url="/pages/每日随机/功能类/天气" class="flex relative" style="box-sizing: border-box;" :style="{
 				marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, 
 				height: `${$app().globalData.menuButtonBoundingClientRect.height}px`,
 				padding: `0 ${$app().globalData.menuButtonBoundingClientRect.width}px`
@@ -23,7 +23,7 @@
 			</swiper>
 		</navigator>
 
-		<navigator url="/pages/每日随机/天气/天气" class="relative flex flex_sb text-shadow relative"
+		<navigator url="/pages/每日随机/功能类/天气" class="relative flex flex_sb text-shadow relative"
 			style="box-sizing: border-box; padding: 0 20rpx;"
 			:style="{ height: `${$app().globalData.menuButtonBoundingClientRect.height}px`  }">
 			<view v-if="weather.city" class="flex">
@@ -67,31 +67,31 @@
 		</view>
 
 		<view class="relative cu-list menu card-menu sm-border margin-top-sm margin-bottom-sm shadow radius-lg">
-			<navigator url="/pages/用户中心/我的收藏/我的收藏" class="cu-item arrow">
+			<navigator url="/pages/用户中心/我的收藏" class="cu-item arrow">
 				<view class="content">
 					<text class="cuIcon-favorfill text-yellow"></text>
 					<text class="text-black">我的收藏</text>
 				</view>
 			</navigator>
-			<navigator url="/pages/用户中心/我的能量/我的能量" class="cu-item arrow">
+			<navigator url="/pages/用户中心/我的能量" class="cu-item arrow">
 				<view class="content">
 					<text class="cuIcon-lightauto text-green"></text>
 					<text class="text-black">我的能量</text>
 				</view>
 			</navigator>
-			<navigator url="/pages/用户中心/我的分享/我的分享" class="cu-item arrow">
+			<navigator url="/pages/用户中心/我的分享" class="cu-item arrow">
 				<view class="content">
 					<text class="cuIcon-wefill text-red"></text>
 					<text class="text-black">我的分享</text>
 				</view>
 			</navigator>
-			<navigator url="/pages/用户中心/找到组织/找到组织" class="cu-item arrow">
+			<navigator url="/pages/用户中心/找到组织" class="cu-item arrow">
 				<view class="content">
 					<text class="cuIcon-github text-black"></text>
 					<text class="text-black">找到组织</text>
 				</view>
 			</navigator>
-			<navigator url="/pages/用户中心/关于小程序/关于小程序" class="cu-item arrow">
+			<navigator url="/pages/用户中心/关于小程序" class="cu-item arrow">
 				<view class="content">
 					<text class="cuIcon-link text-green"></text>
 					<text class="text-black">关于小程序</text>
