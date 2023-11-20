@@ -61,9 +61,7 @@ export default {
 			result: null
 		}
 	},
-	onLoad() {
-		this.make()
-	},
+	onLoad() { },
 	methods: {
 		scan() {
 			uni.scanCode({

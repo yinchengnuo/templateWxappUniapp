@@ -9,8 +9,8 @@
 					</view>
 				</view>
 				<view class="cu-bar input solid-bottom">
-					<input v-model.trim="text" ref="input" :focus="focus" class="my_input" confirm-type="search"
-						placeholder="请输入单号" type="text" @blur="focus = false" @confirm="make" />
+					<input v-model.trim="text" ref="input" :focus="focus" class="my_input" confirm-type="search" placeholder="请输入单号"
+						type="text" @blur="focus = false" @confirm="make" />
 					<text v-if="text" class="my_input_clear cuIcon-roundclosefill" @click="text = ''; make()"></text>
 					<button class="cu-btn lg shadow-blur" :class="'bg-' + $refs.Page.bgClass.split('-')[2]"
 						@click="make">查询</button>
@@ -63,56 +63,54 @@
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				text: '',
-				// text: 'YT8934188937784',
-				focus: true,
-				result: null
-			}
-		},
-		onLoad() {},
-		methods: {
-			scan() {
-				uni.scanCode({
-					success: ({
-						result
-					}) => {
-						this.text = result
-						this.make()
-					}
-				});
-			},
-			make() {
-				this.focus = false
-				this.result = null
-				this.text = (this.text || '').trim()
-				if (this.text) {
-					this.$loading()
-					uni.request({
-						url: 'https://api.linhun.vip/api/express?apiKey=d1b5f5d56e81c4ec2a5c91c9a14ea186&nu=' +
-							this.text
-					}).then((res) => {
-						console.log(res)
-						if (res.data.code === 200) {
-							this.result = res.data
-						} else {
-							this.$toast(res.data.msg)
-						}
-					}).finally(() => {
-						this.$loaded()
-					})
-
-				} else {
-					this.focus = true
-					this.$toast('请输入单号')
+export default {
+	data() {
+		return {
+			text: '',
+			// text: 'YT8934188937784',
+			focus: true,
+			result: null
+		}
+	},
+	onLoad() { },
+	methods: {
+		scan() {
+			uni.scanCode({
+				success: ({
+					result
+				}) => {
+					this.text = result
+					this.make()
 				}
+			});
+		},
+		make() {
+			this.focus = false
+			this.result = null
+			this.text = (this.text || '').trim()
+			if (this.text) {
+				this.$loading()
+				uni.request({
+					url: 'https://api.linhun.vip/api/express?apiKey=d1b5f5d56e81c4ec2a5c91c9a14ea186&nu=' +
+						this.text
+				}).then((res) => {
+					console.log(res)
+					if (res.data.code === 200) {
+						this.result = res.data
+					} else {
+						this.$toast(res.data.msg)
+					}
+				}).finally(() => {
+					this.$loaded()
+				})
+
+			} else {
+				this.focus = true
+				this.$toast('请输入单号')
 			}
 		}
 	}
+}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

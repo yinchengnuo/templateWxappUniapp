@@ -90,43 +90,41 @@
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				text: '',
-				focus: true,
-				result: null
-			}
-		},
-		onLoad() {},
-		methods: {
-			make() {
-				this.focus = false
-				this.result = null
-				this.text = (this.text || '').trim()
-				if (this.text) {
-					this.$loading()
-					uni.request({
-						url: 'https://api.ooomn.com/api/phone?tel=' + this.text
-					}).then(res => {
-						if (res.data.code === 200) {
-							this.result = res.data
-						} else {
-							this.focus = true
-							this.$toast(res.data.msg)
-						}
-					}).finally(() => {
-						this.$loaded()
-					})
-				} else {
-					this.focus = true
-					this.$toast('请输入手机号')
-				}
+export default {
+	data() {
+		return {
+			text: '',
+			focus: true,
+			result: null
+		}
+	},
+	onLoad() { },
+	methods: {
+		make() {
+			this.focus = false
+			this.result = null
+			this.text = (this.text || '').trim()
+			if (this.text) {
+				this.$loading()
+				uni.request({
+					url: 'https://api.ooomn.com/api/phone?tel=' + this.text
+				}).then(res => {
+					if (res.data.code === 200) {
+						this.result = res.data
+					} else {
+						this.focus = true
+						this.$toast(res.data.msg)
+					}
+				}).finally(() => {
+					this.$loaded()
+				})
+			} else {
+				this.focus = true
+				this.$toast('请输入手机号')
 			}
 		}
 	}
+}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

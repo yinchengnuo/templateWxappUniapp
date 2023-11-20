@@ -8,12 +8,11 @@
 						<text>输入中&英文即可翻译</text>
 					</view>
 					<view class="action">
-						<text v-if="text" class="my_textarea_clear cuIcon-roundclosefill"
-							@click="text = ''; make()"></text>
+						<text v-if="text" class="my_textarea_clear cuIcon-roundclosefill" @click="text = ''; make()"></text>
 					</view>
 				</view>
 				<view class="cu-form-group padding-left-sm padding-right-sm">
-					<textarea v-model="text" class="my_textarea" :focus="focus" confirm-type="search" maxlength="-1"
+					<textarea v-model="text" class="my_textarea" auto-focus :focus="focus" confirm-type="search" maxlength="-1"
 						placeholder="请输入输入中&英文" @blur="focus = false" @confirm="make"></textarea>
 				</view>
 				<view class="cu-form-group padding-left-sm padding-right-sm">
@@ -50,38 +49,40 @@
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				text: '',
-				focus: true,
-				result: null
-			}
-		},
-		onLoad() {},
-		methods: {
-			make() {
-				this.focus = false
-				this.result = null
-				this.text = (this.text || '').trim()
-				if (this.text) {
-					this.$loading()
-					uni.request({
-						url: 'https://www.yuanxiapi.cn/api/translation/?text=' + this.text
-					}).then(res => {
-						this.result = res.data
-					}).finally(() => {
-						this.$loaded()
-					})
-				} else {
-					this.focus = true
-					this.$toast('请输入翻译内容')
-				}
+export default {
+	data() {
+		return {
+			text: '',
+			focus: true,
+			result: null
+		}
+	},
+	onLoad() {
+		setTimeout(() => this.focus = true, 1234)
+		setTimeout(() => this.focus = true, 2345)
+		setTimeout(() => this.focus = true, 3456)
+	},
+	methods: {
+		make() {
+			this.focus = false
+			this.result = null
+			this.text = (this.text || '').trim()
+			if (this.text) {
+				this.$loading()
+				uni.request({
+					url: 'https://www.yuanxiapi.cn/api/translation/?text=' + this.text
+				}).then(res => {
+					this.result = res.data
+				}).finally(() => {
+					this.$loaded()
+				})
+			} else {
+				this.focus = true
+				this.$toast('请输入翻译内容')
 			}
 		}
 	}
+}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

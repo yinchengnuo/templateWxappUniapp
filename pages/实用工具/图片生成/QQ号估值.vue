@@ -27,7 +27,7 @@
 				<template v-if="result">
 					<view class="cu-list menu sm-border card-menu margin-top margin-bottom" @click="$preview(result)">
 						<ErrorImage v-if="errored" />
-						<image v-else :src="result" mode="aspectFill" show-menu-by-longpress style="width: 686rpx; height: 686rpx;"
+						<image v-else :src="result" mode="aspectFill" show-menu-by-longpress style="width: 686rpx; height: 529rpx;"
 							@load="load()" @error="error()">
 						</image>
 					</view>

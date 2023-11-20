@@ -10,7 +10,7 @@ export default {
 	name: "ErrorImage",
 	data() {
 		return {
-			list: ['http://api.qqguaji.cn:1132/tp/mv.php', 'http://api.qqguaji.cn:1132/tp/hs.php', 'http://api.qqguaji.cn:1132/tp/bs.php', 'http://api.qqguaji.cn:1132/tp/dm.php']
+			list: ['https://api.tlyun.top/api/hs.php', 'https://api.tlyun.top/api/ksxjjtp.php', 'http://api.yujn.cn/api/heisi.php', 'http://hbkgds.com/api/youhuotu.php']
 		};
 	},
 	methods: {
