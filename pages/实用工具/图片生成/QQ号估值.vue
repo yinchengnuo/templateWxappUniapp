@@ -5,30 +5,29 @@
 				<view class="cu-bar bg-white solid-bottom margin-top">
 					<view class="action">
 						<text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-						<text>输入文字/网址即可生成</text>
+						<text>输入QQ号即可查询</text>
 					</view>
 					<view class="action">
 						<text v-if="text" class="my_textarea_clear cuIcon-roundclosefill" @click="text = ''; make()"></text>
 					</view>
 				</view>
-				<view class="cu-form-group padding-left-sm padding-right-sm">
-					<textarea v-model="text" class="my_textarea" :focus="focus" confirm-type="search" maxlength="-1"
-						placeholder="请输入文字/网址" @blur="focus = false" @confirm="make"></textarea>
-				</view>
-				<view class="cu-form-group padding-left-sm padding-right-sm">
-					<button class="w100 cu-btn block xxl shadow-blur margin-top-xs margin-bottom-xs"
-						:class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click="make">生成</button>
+				<view class="cu-bar input solid-bottom">
+					<input v-model.trim="text" ref="input" :focus="focus" class="my_input" confirm-type="search" placeholder="请输入单号"
+						type="digit" @blur="focus = false" @confirm="make" />
+					<text v-if="text" class="my_input_clear cuIcon-roundclosefill" @click="text = ''; make()"></text>
+					<button class="cu-btn lg shadow-blur" :class="'bg-' + $refs.Page.bgClass.split('-')[2]"
+						@click="make">查询</button>
 				</view>
 				<view class="cu-bar solid-bottom margin-top-xs">
 					<view class="action">
 						<text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-						<text class="text-bold">生成结果</text>
+						<text class="text-bold">查询结果</text>
 					</view>
 				</view>
 				<template v-if="result">
 					<view class="cu-list menu sm-border card-menu margin-top margin-bottom" @click="$preview(result)">
 						<ErrorImage v-if="errored" />
-						<image v-else :src="result" mode="aspectFill" show-menu-by-longpress style="width: 686rpx; height: 529rpx;"
+						<image v-else :src="result" mode="aspectFill" show-menu-by-longpress style="width: 686rpx; height: 686rpx;"
 							@load="load()" @error="error()">
 						</image>
 					</view>
@@ -65,10 +64,10 @@ export default {
 			this.text = (this.text || '').trim()
 			if (this.text) {
 				this.$loading()
-				this.result = 'https://api.vvhan.com/api/qr?text=' + this.text
+				this.result = 'https://api.gqr5.cn/api/pinggu.php?qq=' + this.text
 			} else {
 				this.focus = true
-				this.$toast('请输入文字/网址')
+				this.$toast('请输入QQ号')
 			}
 		}
 	}

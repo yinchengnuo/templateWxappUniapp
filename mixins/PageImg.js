@@ -23,7 +23,7 @@ export default {
       this.$loaded();
       this.errored = true;
       this.$refs.Page.refreshing = false;
-      this.$toast("哎呀！加载失败了...请稍后再试或下拉刷新重试，或者先看看美女...");
+      this.$toast("哎呀！加载失败了...先看看美女叭...");
     },
     refresh() {
       this.src = "";

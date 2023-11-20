@@ -67,11 +67,11 @@
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/生活服务/食物营养查询",
+      "path": "pages/实用工具/图片生成/QQ号估值",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/实用工具/生活服务/米游社随机头像",
+      "path": "pages/实用工具/生活服务/食物营养查询",
       "style": { "disableScroll": true }
     },
     {
@@ -161,15 +161,15 @@
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/美女",
+      "path": "pages/每日随机/图片类/美女图片",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/白丝",
+      "path": "pages/每日随机/图片类/白丝图片",
       "style": { "disableScroll": true }
     },
     {
-      "path": "pages/每日随机/图片类/黑丝",
+      "path": "pages/每日随机/图片类/黑丝图片",
       "style": { "disableScroll": true }
     },
 

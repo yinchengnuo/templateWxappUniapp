@@ -24,7 +24,7 @@ export default {
 <style lang="scss" scoped>
 .flex {
 	.img {
-		width: 375rpx;
+		width: 50%;
 		height: 567rpx
 	}
 }
