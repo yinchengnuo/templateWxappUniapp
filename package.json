@@ -23,6 +23,7 @@
 	"homepage": "https://github.com/yinchengnuo/templateWxappUniapp#readme",
 	"dependencies": {
 		"dayjs": "^1.11.10",
+		"nzh": "^1.0.11",
 		"webpack": "^5.89.0"
 	}
 }

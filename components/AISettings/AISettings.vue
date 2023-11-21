@@ -198,7 +198,7 @@ export default {
 			if (e.detail.value) {
 				uni.showModal({
 					title: '开启AI回答完成自动播放语音？',
-					content: '每次开启需要耗费100能量，是否开启？',
+					content: '每次开启需要耗费1000能量，是否开启？',
 					success: res => {
 						if (res.confirm) {
 							this.$store.state.user.energy -= 100
@@ -216,7 +216,7 @@ export default {
 			} else {
 				uni.showModal({
 					title: '关闭AI回答完成自动播放语音？',
-					content: '再次开启需要耗费100能量，是否关闭？',
+					content: '再次开启需要耗费1000能量，是否关闭？',
 					success: res => {
 						if (res.confirm) {
 							this.$store.state.user.ai_reply_sound_auto = false

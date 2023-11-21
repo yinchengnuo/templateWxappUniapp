@@ -24,7 +24,7 @@
 				<template v-if="result">
 					<view class="cu-list menu sm-border card-menu margin-bottom">
 						<view class="cu-list menu-avatar bg-white">
-							<view v-for="(item, index) in result" :key="index" class="cu-item" @click="$preview(item.img)">
+							<view v-for="(item, index) in result" :key="index" class="cu-item">
 								<view class="cu-avatar round lg" style="overflow: hidden;">
 									<image class="w100 h100" :src="item.img" mode="aspectFill"></image>
 								</view>

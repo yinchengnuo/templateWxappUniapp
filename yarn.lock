@@ -395,6 +395,11 @@
   "resolved" "https://registry.npmmirror.com/node-releases/-/node-releases-2.0.13.tgz"
   "version" "2.0.13"
 
+"nzh@^1.0.11":
+  "integrity" "sha512-Hmx1wuoj5zoFCEhfic4zW/2csg/vb5BxXAUGUNIyBlSu7ZtZezGVGloqNCnRcHVU1fMC9ZTfvbi6ayPWC1sRSQ=="
+  "resolved" "https://registry.npmmirror.com/nzh/-/nzh-1.0.11.tgz"
+  "version" "1.0.11"
+
 "picocolors@^1.0.0":
   "integrity" "sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ=="
   "resolved" "https://registry.npmmirror.com/picocolors/-/picocolors-1.0.0.tgz"

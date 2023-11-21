@@ -24,16 +24,15 @@
 						<text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
 						<text class="text-bold">翻译结果</text>
 					</view>
+					<view class="action" @click="$copy(result.result)">
+						<text class="cuIcon-copy margin-left-xs text-bold"></text>
+					</view>
 				</view>
 				<template v-if="result">
 					<view class="cu-list menu sm-border card-menu margin-top margin-bottom">
 						<view class="cu-item">
 							<view class="content">
-								<text class="text-lg text-black text-bold">{{ result.result }}</text>
-							</view>
-							<view class="action" @click="$copy(result.result)">
-								<text></text>
-								<text class="cuIcon-copy margin-left-xs"></text>
+								<text class="text-lg text-black text-bold padding-top-xs padding-bottom-xs">{{ result.result }}</text>
 							</view>
 						</view>
 					</view>

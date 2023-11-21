@@ -26,7 +26,7 @@
 					<view class="cu-list menu sm-border card-menu margin-top margin-bottom">
 						<view class="cu-item">
 							<view class="content">
-								<text class="text-lg">收否为骚扰电话</text>
+								<text class="text-lg">是否为骚扰电话</text>
 							</view>
 							<view class="action">
 								<text class="text-lg text-bold">{{ result.status ? '是' : '否' }}</text>
