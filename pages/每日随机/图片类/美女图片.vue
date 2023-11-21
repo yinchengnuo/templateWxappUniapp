@@ -2,7 +2,7 @@
 	<Page ref="Page" refresh @refresh="refresh">
 		<template v-slot:default="{ page }">
 			<template v-if="page">
-				<image v-if="src" class="w100" :src="src" mode="widthFix" show-menu-by-longpress @load="load()" @error="error()"
+				<image v-if="src" class="w100" :src="src" mode="widthFix" show-menu-by-longpress @load="load" @error="error"
 					@click="$preview(src)" />
 				<ErrorImage v-if="errored" />
 				<AD2 />
@@ -25,6 +25,8 @@ export default {
 	},
 	methods: {
 		refresh() {
+			this.$loading();
+			this.$loading()
 			this.errored = false
 			uni.request({
 				url: 'https://jkapi.com/api/meinv_img?type=json&apiKey=385c3a57e003ecbe19aa0abc8a87ec3a'

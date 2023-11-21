@@ -10,13 +10,13 @@ export default {
       this.src = this.SRC;
     }
   },
-  mounted() {
-    this.$loading();
-  },
   methods: {
-    load() {
+    load(e) {
       this.$loaded();
       this.$refs.Page.refreshing = false;
+      if (typeof this._load === "function") {
+        this._load(e);
+      }
     },
     error() {
       this.src = "";
@@ -29,7 +29,7 @@ export default {
       this.src = "";
       this.$loading();
       this.errored = false;
-      setTimeout(() => (this.src = this.SRC));
+      setTimeout(() => (this.src = `${this.SRC}?=t=${Date.now()}`));
     },
   },
 };

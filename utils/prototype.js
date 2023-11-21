@@ -67,3 +67,16 @@ Vue.prototype.$clone = object => {
   if (!(typeof object === "object")) return object;
   return JSON.parse(JSON.stringify(object));
 };
+
+Vue.prototype.$choose = object => {
+  return new Promise((success, fail) => {
+    object = {
+      fail,
+      success,
+      count: 1,
+      mediaType: ['image'],
+      ...object
+    }
+    uni.chooseMedia(object)
+  })
+};
