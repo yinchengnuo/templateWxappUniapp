@@ -61,7 +61,7 @@ export default {
 		make() {
 			this.focus = false
 			this.result = null
-			this.text = (this.text || '').trim()
+			this.text = (this.text || '').toString().trim()
 			if (this.text) {
 				this.$loading()
 				this.result = 'https://api.gqr5.cn/api/pinggu.php?qq=' + this.text

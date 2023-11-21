@@ -32,7 +32,7 @@
 					<view class="cu-list menu sm-border card-menu margin-top margin-bottom">
 						<view class="cu-item">
 							<view class="content">
-								<text class="text-lg text-black text-bold padding-top-xs padding-bottom-xs">{{ result.result }}</text>
+								<view class="text-lg text-black text-bold padding-top-sm padding-bottom-sm">{{ result.result }}</view>
 							</view>
 						</view>
 					</view>
@@ -65,7 +65,7 @@ export default {
 		make() {
 			this.focus = false
 			this.result = null
-			this.text = (this.text || '').trim()
+			this.text = (this.text || '').toString().trim()
 			if (this.text) {
 				this.$loading()
 				uni.request({

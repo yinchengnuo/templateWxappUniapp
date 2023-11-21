@@ -38,6 +38,7 @@
 									</view>
 								</view>
 							</view>
+							<view class="cu-item text-grey text-sm justify-center">没有更多了...</view>
 						</view>
 					</view>
 				</template>
@@ -76,7 +77,7 @@ export default {
 		make() {
 			this.focus = false
 			this.result = null
-			this.text = (this.text || '').trim()
+			this.text = (this.text || '').toString().trim()
 			if (this.text) {
 				this.$loading()
 				uni.request({
