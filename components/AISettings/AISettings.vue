@@ -92,15 +92,6 @@
 				</button>
 				<view class="text-grey cuIcon-infofill margin-left" style="font-size: 42rpx" @click="showModal2"></view>
 			</view>
-			<view class="cu-item margin-bottom-sm">
-				<view class="content">
-					<text>AI回答完成自动播放语音</text>
-				</view>
-				<view class="">
-					<switch v-if="switchShow" class="green radius" :checked="user.ai_reply_sound_auto" @change="switchChange">
-					</switch>
-				</view>
-			</view>
 			<button class="cu-btn block bg-grey margin-tb-sm lg" @click="$parent.page_container_show = false">退出 ToolBox
 				AI 设置</button>
 		</view>
@@ -193,44 +184,6 @@ export default {
 				showCancel: false,
 				confirmText: '我知道了'
 			});
-		},
-		switchChange(e) {
-			if (e.detail.value) {
-				uni.showModal({
-					title: '开启AI回答完成自动播放语音？',
-					content: '每次开启需要耗费1000能量，是否开启？',
-					success: res => {
-						if (res.confirm) {
-							this.$store.state.user.energy -= 100
-							this.$store.state.user.ai_reply_sound_auto = true
-							this.setting({
-								ai_reply_sound_auto: this.$store.state.user.ai_reply_sound_auto
-							})
-						} else {
-							this.$store.state.user.ai_reply_sound_auto = false
-						}
-						this.switchShow = false
-						setTimeout(() => this.switchShow = true)
-					}
-				});
-			} else {
-				uni.showModal({
-					title: '关闭AI回答完成自动播放语音？',
-					content: '再次开启需要耗费1000能量，是否关闭？',
-					success: res => {
-						if (res.confirm) {
-							this.$store.state.user.ai_reply_sound_auto = false
-							this.setting({
-								ai_reply_sound_auto: this.$store.state.user.ai_reply_sound_auto
-							})
-						} else {
-							this.$store.state.user.ai_reply_sound_auto = true
-						}
-						this.switchShow = false
-						setTimeout(() => this.switchShow = true)
-					}
-				});
-			}
 		},
 		input(e) {
 			let ai_memory_count = Number(e.detail.value)
