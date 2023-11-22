@@ -5,7 +5,7 @@
 				<view class="cu-bar bg-white solid-bottom margin-top">
 					<view class="action">
 						<text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-						<text>选择图片即可搜索番剧</text>
+						<text>选择图片即可识别</text>
 					</view>
 				</view>
 				<view class="cu-bar input">
@@ -15,37 +15,19 @@
 				<view class="cu-bar solid-bottom margin-top-xs">
 					<view class="action">
 						<text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-						<text class="text-bold">搜索结果</text>
+						<text class="text-bold">识别结果</text>
+					</view>
+					<view class="action" @click="result && $copy(result)">
+						<text class="cuIcon-copy margin-left-xs text-bold"></text>
 					</view>
 				</view>
 				<template v-if="result">
 					<button class="block cu-btn shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]"
 						@click.stop="$preview(text)">查看原图</button>
-					<view v-for="(item, index) in result" :key="index" class="cu-card case margin">
-						<view class="cu-item shadow">
-							<view class="image">
-								<image :src="item.image" mode="aspectFill" @click="$preview(item.image)" style="max-height: 360rpx;">
-								</image>
-								<view class="cu-tag bg-blue">相似度：{{ item.similarity }}</view>
-								<view class="cu-bar bg-shadeBottom">
-									<text class="text-cut">第{{ item.episode }}集{{ ' ' }}{{ item.from }}S~{{ item.to }}S</text>
-								</view>
-							</view>
-							<view class="cu-list menu-avatar">
-								<view class="cu-item">
-									<view class="cu-avatar round lg">
-										<image class="w100 h100 radius" :src="item.image" mode="aspectFill"></image>
-									</view>
-									<view class="content flex-sub">
-										<view class="text-grey">{{ item.anilist.title.native }}</view>
-										<view class="text-gray text-sm flex justify-between">
-											<text>{{ item.anilist.title.english }}</text>
-											<view class="text-blue text-sm" @click="$copy(item.video, '复制成功，请粘贴至浏览器打开即可观看预览视频')">
-												<text class="cuIcon-copy">点击复制预览播放地址</text>
-											</view>
-										</view>
-									</view>
-								</view>
+					<view class="cu-list menu sm-border card-menu margin-top margin-bottom">
+						<view class="cu-item">
+							<view class="content">
+								<view class="text-lg text-black text-bold padding-top-sm padding-bottom-sm" style="word-break: break-all;">{{ result }}</view>
 							</view>
 						</view>
 					</view>
@@ -61,12 +43,14 @@
 </template>
 
 <script>
+import PageImg from '@/mixins/PageImg.js'
 export default {
+	mixins: [PageImg],
 	data() {
 		return {
 			text: '',
 			focus: true,
-			result: null
+			result: ''
 		}
 	},
 	onLoad() { },
@@ -75,7 +59,7 @@ export default {
 			this.$choose().then(({ tempFiles: [{ tempFilePath: filePath }] }) => {
 				this.$loading()
 				this.text = filePath
-				uni.uploadFile({ filePath, name: 'file', url: 'https://api.oioweb.cn/api/search/anilistInfo' }).then(({ data }) => {
+				uni.uploadFile({ filePath, name: 'file', url: 'https://api.oioweb.cn/api/qrcode/decode' }).then(({ data }) => {
 					data = JSON.parse(data)
 					if (data.code === 200) {
 						this.result = data.result

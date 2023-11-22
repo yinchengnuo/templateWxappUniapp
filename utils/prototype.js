@@ -31,9 +31,14 @@ Vue.prototype.$loaded = function () {
   Vue.prototype.$store.state.app.loading = false;
 };
 
-Vue.prototype.$copy = data => {
+Vue.prototype.$copy = (data, message = "") => {
   data = data.toString();
-  uni.setClipboardData({ data });
+  uni.setClipboardData({
+    data,
+    complete() {
+      message && Vue.prototype.$toast(message);
+    },
+  });
 };
 
 Vue.prototype.$call = phoneNumber => {
@@ -74,9 +79,9 @@ Vue.prototype.$choose = object => {
       fail,
       success,
       count: 1,
-      mediaType: ['image'],
-      ...object
-    }
-    uni.chooseMedia(object)
-  })
+      mediaType: ["image"],
+      ...object,
+    };
+    uni.chooseMedia(object);
+  });
 };

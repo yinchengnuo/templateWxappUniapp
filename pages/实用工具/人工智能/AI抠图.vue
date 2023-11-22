@@ -53,20 +53,24 @@ export default {
 	methods: {
 		chooseImg() {
 			this.$choose().then(({ tempFiles: [{ tempFilePath: filePath }] }) => {
-				this.text = filePath
 				this.$loading()
-				uni.uploadFile({
-					filePath,
-					name: 'file',
-					url: 'https://api.oioweb.cn/api/ai/matting',
-				}).then(({ data }) => {
-					this.result = JSON.parse(data).result
-				}).catch(e => {
-					console.log(e)
+				this.text = filePath
+				uni.uploadFile({ filePath, name: 'file', url: 'https://api.oioweb.cn/api/ai/matting' }).then(({ data }) => {
+					data = JSON.parse(data)
+					if (data.code === 200) {
+						this.result = data.result
+					} else {
+						this.$toast(data.msg || '当前图片无法处理')
+					}
+				}).catch(() => {
+					this.$toast('当前图片无法处理')
 				}).finally(() => {
 					this.$loaded()
 				})
-			}).catch(({ errMsg }) => this.$toast(errMsg))
+			}).catch(({ errMsg }) => {
+				this.$loaded()
+				this.$toast(errMsg)
+			})
 		}
 	}
 }
