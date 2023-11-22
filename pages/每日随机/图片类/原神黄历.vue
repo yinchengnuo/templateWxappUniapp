@@ -2,7 +2,7 @@
 	<Page ref="Page" refresh @refresh="refresh">
 		<template v-slot:default="{ page }">
 			<template v-if="page">
-				<image v-if="src" class="w100" :src="src" mode="widthFix" @load="load" @error="error" />
+				<image v-if="src" class="w100" :src="src" mode="widthFix" show-menu-by-longpress @load="load" @error="error" />
 				<ErrorImage v-if="errored" />
 				<AD2 />
 				<AD3 />

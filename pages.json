@@ -108,7 +108,7 @@
     },
 
     {
-      "path": "pages/每日随机/功能类/天气",
+      "path": "pages/每日随机/图片类/早晚安图片",
       "style": { "disableScroll": true }
     },
 

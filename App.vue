@@ -52,7 +52,7 @@
 			this.$store.dispatch('user/login', {
 				openid: option.query.openid
 			})
-			this.$store.dispatch('user/getCityWeather')
+			// this.$store.dispatch('user/getCityWeather')
 		},
 		async onShow(option) {
 			if (option.query.path) {

@@ -7,7 +7,7 @@
 		<image class="w100;" mode="widthFix" style="position: fixed; top: 0 ; left: 0; opacity: 0.2; z-index: 0;"
 			src="https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/logo.png"></image>
 
-		<navigator url="/pages/每日随机/功能类/天气" class="flex relative" style="box-sizing: border-box;" :style="{
+		<!-- <navigator url="/pages/每日随机/功能类/天气" class="flex relative" style="box-sizing: border-box;" :style="{
 				marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, 
 				height: `${$app().globalData.menuButtonBoundingClientRect.height}px`,
 				padding: `0 ${$app().globalData.menuButtonBoundingClientRect.width}px`
@@ -38,7 +38,7 @@
 			<view v-if="weather.city">
 				{{ weather.current.wind }}{{ ' ' }}{{ weather.current.windSpeed }}{{ ' ' }}
 			</view>
-		</navigator>
+		</navigator> -->
 
 		<view class="relative UCenter-bg">
 			<image v-if="user.avatar" :src="user.avatar" class="png bg-white shadow" mode="scaleToFill"></image>

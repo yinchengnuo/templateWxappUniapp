@@ -1,11 +1,11 @@
 <template>
-	<Page ref="Page" type="S1" refresh @refresh="refresh">
+	<Page ref="Page" refresh @refresh="refresh">
 		<template v-slot:default="{ page }">
 			<template v-if="page">
-				<image v-if="src" class="w100" :src="src" mode="widthFix" show-menu-by-longpress @load="load" @error="error" />
+				<image v-if="src" class="w100" show-menu-by-longpress :src="src" mode="widthFix" @load="load" @error="error" />
 				<ErrorImage v-if="errored" />
-				<AD1 />
 				<AD2 />
+				<AD3 />
 			</template>
 		</template>
 
@@ -18,7 +18,7 @@ export default {
 	mixins: [PageImg],
 	data() {
 		return {
-			SRC: 'http://api.caonmtx.cn/api/tgbjtp.php'
+			SRC: 'https://api.lolimi.cn/API/image-zw/'
 		}
 	}
 }
