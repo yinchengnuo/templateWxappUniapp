@@ -7,12 +7,12 @@
 		<image class="w100;" mode="widthFix" style="position: fixed; top: 0 ; left: 0; opacity: 0.2; z-index: 0;"
 			src="https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/logo.png"></image>
 
-		<!-- <navigator url="/pages/每日随机/功能类/天气" class="flex relative" style="box-sizing: border-box;" :style="{
-				marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, 
-				height: `${$app().globalData.menuButtonBoundingClientRect.height}px`,
-				padding: `0 ${$app().globalData.menuButtonBoundingClientRect.width}px`
-			}">
-			<view class="flex h100" style="position: absolute; top: 0; left: 0; padding: 0 20rpx; font-weight: bolder;">
+		<view url="/pages/每日随机/功能类/天气" class="flex relative" style="box-sizing: border-box;" :style="{
+			marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`,
+			height: `${$app().globalData.menuButtonBoundingClientRect.height}px`,
+			padding: `0 ${$app().globalData.menuButtonBoundingClientRect.width}px`
+		}">
+			<!-- <view class="flex h100" style="position: absolute; top: 0; left: 0; padding: 0 20rpx; font-weight: bolder;">
 				<text v-if="user.city"
 					class="cuIcon-locationfill text-blue text-shadow">{{ ' ' + (weather.city || user.city || '') }}</text>
 			</view>
@@ -20,13 +20,13 @@
 				<swiper-item class="h100 flex text-center" v-for="item in (weather.living || [])" :key="item.name">
 					<text class="page_title text-black text-bold text-shadow text-sm">{{ item.tips }}</text>
 				</swiper-item>
-			</swiper>
-		</navigator>
+			</swiper> -->
+		</view>
 
-		<navigator url="/pages/每日随机/功能类/天气" class="relative flex flex_sb text-shadow relative"
+		<view url="/pages/每日随机/功能类/天气" class="relative flex flex_sb text-shadow relative"
 			style="box-sizing: border-box; padding: 0 20rpx;"
-			:style="{ height: `${$app().globalData.menuButtonBoundingClientRect.height}px`  }">
-			<view v-if="weather.city" class="flex">
+			:style="{ height: `${$app().globalData.menuButtonBoundingClientRect.height}px` }">
+			<!-- <view v-if="weather.city" class="flex">
 				<image class="margin-right-xs" :src="weather.current.image" :style="{
 						width: `${$app().globalData.menuButtonBoundingClientRect.height / 2}px`,
 						height: `${$app().globalData.menuButtonBoundingClientRect.height / 2}px`,
@@ -37,8 +37,8 @@
 				class="text-bold">{{ weather.warning.wind }}{{ weather.warning.color }}预警</text>
 			<view v-if="weather.city">
 				{{ weather.current.wind }}{{ ' ' }}{{ weather.current.windSpeed }}{{ ' ' }}
-			</view>
-		</navigator> -->
+			</view> -->
+		</view>
 
 		<view class="relative UCenter-bg">
 			<image v-if="user.avatar" :src="user.avatar" class="png bg-white shadow" mode="scaleToFill"></image>
@@ -50,8 +50,8 @@
 				@chooseavatar="chooseavatar"></button>
 			<view class="margin text-xxl text-black text-bold" @click="focus = true">
 				<view v-if="focus" class="flex" style="background: rgba(0, 0, 0, .1); border-radius: 32rpx;">
-					<input v-model="nickname" type="nickname" focus placeholder="请输入昵称"
-						style="width: 400rpx; padding: 0 24rpx;" @confirm="saveNickname()" />
+					<input v-model="nickname" type="nickname" focus placeholder="请输入昵称" style="width: 400rpx; padding: 0 24rpx;"
+						@confirm="saveNickname()" />
 					<button class="cu-btn round margin-left bg-green shadow" @click="saveNickname()">保存昵称</button>
 				</view>
 				<template v-else>
@@ -122,144 +122,144 @@
 </template>
 
 <script>
-	import dayjs from 'dayjs'
-	export default {
-		data() {
-			return {
-				show: 0,
-				focus: false,
-				nickname: '',
+import dayjs from 'dayjs'
+export default {
+	data() {
+		return {
+			show: 0,
+			focus: false,
+			nickname: '',
+		}
+	},
+	computed: {
+		user() {
+			return this.$store.state.user || {}
+		},
+		weather() {
+			return (this.$store.state.user || {}).weather || {}
+		},
+	},
+	onShow() {
+		this.show++
+		if ((this.show !== 0) && (this.show % 4 === 0)) {
+			this.interstitialAd.show()
+		}
+	},
+	onLoad() {
+		this.interstitialAd = uni.createInterstitialAd({
+			adUnitId: 'adunit-e3f467955c2226a4'
+		})
+		uni.$on('LOGON', () => {
+			uni.stopPullDownRefresh()
+		})
+	},
+	onPullDownRefresh() {
+		this.$store.dispatch('user/login')
+	},
+	methods: {
+		async chooseavatar(e) {
+			const filePath = e.target.avatarUrl
+			this.$loading()
+			if (this.user.avatar) {
+				await this.$('/delete_file', {
+					file: this.user.avatar
+				})
 			}
+			uniCloud.uploadFile({
+				filePath: filePath,
+				cloudPathAsRealPath: true,
+				cloudPath: `/ToolBox365/avatar/${dayjs().format('YYYY-MM-DD_HH:mm:ss')}_${this.user.openid}.png`,
+			}).then(res => {
+				this.$store.state.user.avatar = res.fileID
+				this.setting({
+					avatar: this.$store.state.user.avatar
+				})
+			}).catch(() => this.$loaded())
 		},
-		computed: {
-			user() {
-				return this.$store.state.user || {}
-			},
-			weather() {
-				return (this.$store.state.user || {}).weather || {}
-			},
-		},
-		onShow() {
-			this.show++
-			if ((this.show !== 0) && (this.show % 4 === 0)) {
-				this.interstitialAd.show()
-			}
-		},
-		onLoad() {
-			this.interstitialAd = uni.createInterstitialAd({
-				adUnitId: 'adunit-e3f467955c2226a4'
-			})
-			uni.$on('LOGON', () => {
-				uni.stopPullDownRefresh()
-			})
-		},
-		onPullDownRefresh() {
-			this.$store.dispatch('user/login')
-		},
-		methods: {
-			async chooseavatar(e) {
-				const filePath = e.target.avatarUrl
+		saveNickname() {
+			if ((this.nickname || '').trim()) {
 				this.$loading()
-				if (this.user.avatar) {
-					await this.$('/delete_file', {
-						file: this.user.avatar
-					})
-				}
-				uniCloud.uploadFile({
-					filePath: filePath,
-					cloudPathAsRealPath: true,
-					cloudPath: `/ToolBox365/avatar/${dayjs().format('YYYY-MM-DD_HH:mm:ss')}_${this.user.openid}.png`,
+				this.$('/msg_sec_check', {
+					content: this.nickname.trim()
 				}).then(res => {
-					this.$store.state.user.avatar = res.fileID
+					this.$store.state.user.nickname = this.nickname.trim()
 					this.setting({
-						avatar: this.$store.state.user.avatar
+						nickname: this.$store.state.user.nickname
 					})
-				}).catch(() => this.$loaded())
-			},
-			saveNickname() {
-				if ((this.nickname || '').trim()) {
-					this.$loading()
-					this.$('/msg_sec_check', {
-						content: this.nickname.trim()
-					}).then(res => {
-						this.$store.state.user.nickname = this.nickname.trim()
-						this.setting({
-							nickname: this.$store.state.user.nickname
-						})
 
-					}).finally(() => {
-						this.nickname = ''
-						this.focus = false
-						this.$loaded()
-					})
-				} else {
-					this.$toast('请输入昵称')
-				}
-			},
-			setting(payload) {
-				this.$('/setting', payload).finally(() => {
+				}).finally(() => {
+					this.nickname = ''
+					this.focus = false
 					this.$loaded()
 				})
-			},
-		}
+			} else {
+				this.$toast('请输入昵称')
+			}
+		},
+		setting(payload) {
+			this.$('/user_setting', payload).finally(() => {
+				this.$loaded()
+			})
+		},
 	}
+}
 </script>
 
 <style lang="scss" scoped>
-	.index {
-		.page_bg {
-			top: 0;
-			left: 0;
-			z-index: 0;
-			width: 100%;
-			height: 100vh;
-			position: fixed;
-		}
-
-		.page_title {
-			// font-size: 13pt;
-			// font-weight: bold;
-		}
-
-		.relative {
-			z-index: 2;
-			position: relative;
-		}
-
-		.UCenter-bg {
-			/* background-image: url(https://image.weilanwl.com/color2.0/index.jpg); */
-			background-size: cover;
-			display: flex;
-			justify-content: center;
-			overflow: hidden;
-			position: relative;
-			flex-direction: column;
-			align-items: center;
-			color: #fff;
-			font-weight: 300;
-			overflow: hidden;
-			text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-		}
-
-		.UCenter-bg .text {
-			opacity: 0.8;
-		}
-
-		.png {
-			width: 200rpx !important;
-			height: 200rpx !important;
-			overflow: hidden;
-			border-radius: 50%;
-		}
-
-		.UCenter-bg .gif-wave {
-			position: absolute;
-			width: 100%;
-			bottom: 0;
-			left: 0;
-			z-index: 99;
-			mix-blend-mode: screen;
-			height: 100rpx;
-		}
+.index {
+	.page_bg {
+		top: 0;
+		left: 0;
+		z-index: 0;
+		width: 100%;
+		height: 100vh;
+		position: fixed;
 	}
+
+	.page_title {
+		// font-size: 13pt;
+		// font-weight: bold;
+	}
+
+	.relative {
+		z-index: 2;
+		position: relative;
+	}
+
+	.UCenter-bg {
+		/* background-image: url(https://image.weilanwl.com/color2.0/index.jpg); */
+		background-size: cover;
+		display: flex;
+		justify-content: center;
+		overflow: hidden;
+		position: relative;
+		flex-direction: column;
+		align-items: center;
+		color: #fff;
+		font-weight: 300;
+		overflow: hidden;
+		text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+	}
+
+	.UCenter-bg .text {
+		opacity: 0.8;
+	}
+
+	.png {
+		width: 200rpx !important;
+		height: 200rpx !important;
+		overflow: hidden;
+		border-radius: 50%;
+	}
+
+	.UCenter-bg .gif-wave {
+		position: absolute;
+		width: 100%;
+		bottom: 0;
+		left: 0;
+		z-index: 99;
+		mix-blend-mode: screen;
+		height: 100rpx;
+	}
+}
 </style>

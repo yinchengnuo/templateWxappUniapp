@@ -165,7 +165,7 @@ export default {
 		// 保存模型设置
 		setting(payload) {
 			this.$loading()
-			this.$('/setting', payload).finally(() => {
+			this.$('/user_setting', payload).finally(() => {
 				this.$loaded()
 			})
 		},

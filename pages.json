@@ -153,6 +153,10 @@
       "style": { "disableScroll": true }
     },
     {
+      "path": "pages/每日随机/图片类/12星座",
+      "style": { "disableScroll": true }
+    },
+    {
       "path": "pages/每日随机/图片类/舔狗日记",
       "style": { "disableScroll": true }
     },
@@ -247,6 +251,10 @@
     },
     {
       "path": "pages/数据集合/电子书/黄帝内经",
+      "style": { "disableScroll": true }
+    },
+    {
+      "path": "pages/数据集合/电子书/诗经",
       "style": { "disableScroll": true }
     },
     {

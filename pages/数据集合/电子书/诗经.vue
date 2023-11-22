@@ -2,7 +2,7 @@
 	<Page ref="Page">
 		<template v-slot:default="{ page }">
 			<template v-if="page">
-				<Book />
+				<view class="text-xxl text-bold flex">诗经</view>
 				<AD2 />
 				<AD3 />
 			</template>

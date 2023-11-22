@@ -128,6 +128,9 @@ export default {
 	},
 	beforeDestroy() {
 		clearInterval(this.timer)
+		if (this.$store.state.app.loading) {
+			this.$store.commit("app/LOADED")
+		}
 	},
 	mounted() { },
 	methods: {
@@ -142,7 +145,7 @@ export default {
 		recordView() {
 			this.page = this.$store.state.app.list.find(e => e.page.includes(getCurrentPages().at(-1).route.split('?')[0]))
 			if (this.page) {
-				this.$('/record', this.page).then((data) => {
+				this.$('/record_view', this.page).then((data) => {
 					this.collected = data.collected
 					this.$store.commit('app/UPDATE_FUNCTION', data)
 				}).finally(() => {
@@ -153,7 +156,7 @@ export default {
 		// 点击收藏
 		collect() {
 			this.$loading()
-			this.$('/collect', this.page).then((data) => {
+			this.$('/record_collect', this.page).then((data) => {
 				this.collected = data.collected
 				this.$store.commit('app/UPDATE_FUNCTION', data)
 				if (this.collected) {

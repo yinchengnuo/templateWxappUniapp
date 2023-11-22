@@ -9,9 +9,12 @@
 export default {
 	name: "ErrorImage",
 	data() {
-		return {
-			list: ['https://api.tlyun.top/api/hs.php', 'https://api.tlyun.top/api/ksxjjtp.php', 'http://api.yujn.cn/api/heisi.php', 'http://hbkgds.com/api/youhuotu.php']
-		};
+		return {};
+	},
+	computed: {
+		list() {
+			return (this.$store.state.user.images || []).map(e => e.src)
+		}
 	},
 	methods: {
 		t() {
