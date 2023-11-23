@@ -17,8 +17,7 @@
 							</view>
 						</view>
 					</view>
-					<navigator url="/pages/用户中心/我的能量"
-						class="flex justify-center align-end padding-tb cu-coupon-content text-white">
+					<navigator url="/pages/用户中心/我的能量" class="flex justify-center align-end padding-tb cu-coupon-content text-white">
 						<text class="text-lg padding-bottom-xs text-black">余额</text>
 						<text class="text-sl text-bold text-shadow " style="text-shadow: 0px 0px 2rpx green">
 							{{ user.energy }} </text>
@@ -36,7 +35,7 @@
 			</view>
 		</view>
 		<navigator url="/pages/用户中心/我的能量?action=buy">
-			<uni-notice-bar show-get-more show-icon :fontSize="16" scrollable text="能量不够用? 10,000 能量只需一元！多买多送，最低五折！点我立即充值"
+			<uni-notice-bar show-get-more show-icon :fontSize="16" scrollable text="能量不够用? 10,000 能量只需一元！多买多送，最低3.3折！点我立即充值"
 				style="margin-bottom: 0;" />
 		</navigator>
 		<view class="cu-coupon-box2 radius-lg " :class="bg" style="margin-top: 0;margin-bottom: 0;">
@@ -73,8 +72,7 @@
 					<text class="cuIcon-titles text-grey"></text>
 					<text class="text-bold">AI 行为设置</text>
 				</view>
-				<navigator url="/pages/用户中心/关于ToolBoxAI" class='action'
-					style="height: 100rpx; margin: 0; padding: 0 30rpx;">
+				<navigator url="/pages/用户中心/关于ToolBoxAI" class='action' style="height: 100rpx; margin: 0; padding: 0 30rpx;">
 					<text>关于 ToolBox AI</text>
 					<text class="cuIcon-right"></text>
 				</navigator>
@@ -92,6 +90,7 @@
 				</button>
 				<view class="text-grey cuIcon-infofill margin-left" style="font-size: 42rpx" @click="showModal2"></view>
 			</view>
+			<button class="cu-btn block bg-red margin-tb-sm lg" @click="clearRecord()">清空聊天记录</button>
 			<button class="cu-btn block bg-grey margin-tb-sm lg" @click="$parent.page_container_show = false">退出 ToolBox
 				AI 设置</button>
 		</view>
@@ -210,6 +209,22 @@ export default {
 					ai_memory_count: this.$store.state.user.ai_memory_count
 				})
 			}
+		},
+		clearRecord() {
+			uni.showModal({
+				title: '提示',
+				content: '确定清空所有聊天记录？删除后将无法恢复！',
+				success: ({ confirm }) => {
+					if (confirm) {
+						this.$loading()
+						this.$('/chat_delete').then(data => {
+							this.$parent.getList(data)
+						}).finally(() => {
+							this.$loaded()
+						})
+					}
+				}
+			});
 		}
 	}
 }

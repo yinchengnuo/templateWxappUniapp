@@ -1,8 +1,8 @@
 <template>
-	<Page ref="Page">
+	<Page ref="Page" bg>
 		<template v-slot:default="{ page }">
 			<template v-if="page">
-				<view class="text-xxl text-bold flex">庄子</view>
+				<BookDict :color="$refs.Page.bgClass.split('-')[2]" />
 				<AD2 />
 				<AD3 />
 			</template>
@@ -13,16 +13,10 @@
 <script>
 export default {
 	data() {
-		return {
-
-		}
+		return {}
 	},
-	onLoad() {
-
-	},
-	methods: {
-
-	}
+	onLoad() { },
+	methods: {}
 }
 </script>
 

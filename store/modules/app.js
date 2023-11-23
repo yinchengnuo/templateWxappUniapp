@@ -12,6 +12,9 @@ export default {
     },
     LOADING(state) {
       state.loading = true;
+      setTimeout(() => {
+        state.loading = false;
+      }, 3456)
     },
     SET_LIST(state, payload) {
       state.list = payload;

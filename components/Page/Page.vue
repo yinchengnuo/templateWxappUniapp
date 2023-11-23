@@ -128,9 +128,9 @@ export default {
 	},
 	beforeDestroy() {
 		clearInterval(this.timer)
-		if (this.$store.state.app.loading) {
-			this.$store.commit("app/LOADED")
-		}
+		// if (this.$store.state.app.loading) {
+		// 	this.$store.commit("app/LOADED")
+		// }
 	},
 	mounted() { },
 	methods: {
