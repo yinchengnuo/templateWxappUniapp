@@ -1,6 +1,6 @@
 <template>
-	<Page :classList="['bg-gradual-blue-light']" ref="Page">
-		<view class="index text-black text-black text-lg" style=" overflow: auto;">
+	<Page bg ref="Page">
+		<view class="text-black">
 			<view class="bg-white padding-xs margin-sm align-center radius-df">
 				<view class="padding-xs" style="text-indent: 2em;">
 					ToolBox AI 基于 uni-ai 开发。聚合了国内外各种流行的 AI 能力，其中大语言模型 LLM（全称为Large Language Models，指大语言模型）
@@ -107,20 +107,16 @@
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-
-			}
-		},
-		methods: {
+export default {
+	data() {
+		return {
 
 		}
+	},
+	methods: {
+
 	}
+}
 </script>
 
-<style lang="scss" scoped>
-	.index {
-		height: 100%;
-	}
-</style>
+<style lang="scss" scoped></style>

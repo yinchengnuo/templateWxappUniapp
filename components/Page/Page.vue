@@ -104,10 +104,6 @@ export default {
 			console.log(e)
 		})
 
-		// this.rewardedVideoAd = uni.createRewardedVideoAd({
-		// 	adUnitId: 'adunit-02b562d4a8c16436'
-		// })
-
 		if (this.$store.state.user.openid) {
 			this.recordView()
 		} else {
@@ -128,9 +124,9 @@ export default {
 	},
 	beforeDestroy() {
 		clearInterval(this.timer)
-		// if (this.$store.state.app.loading) {
-		// 	this.$store.commit("app/LOADED")
-		// }
+		if (this.$store.state.app.loading) {
+			this.$store.commit("app/LOADED")
+		}
 	},
 	mounted() { },
 	methods: {

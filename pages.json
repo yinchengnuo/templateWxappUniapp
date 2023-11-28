@@ -275,6 +275,10 @@
       "style": { "disableScroll": true }
     },
     {
+      "path": "pages/用户中心/我的签到记录",
+      "style": { "disableScroll": true }
+    },
+    {
       "path": "pages/用户中心/我的分享",
       "style": { "disableScroll": true }
     },

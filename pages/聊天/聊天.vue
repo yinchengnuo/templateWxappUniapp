@@ -15,7 +15,7 @@
 		<swiper class="tips-swiperitem" autoplay circular interval="5432" duration="4321" style="height: 64rpx;">
 			<swiper-item v-for="(item, index) in swiper_list" :key="index">
 				<view class="bg-blue light">
-					<view class='padding-xs text-xl padding-left flex' @click="item.function">
+					<view class='padding-xs text-xl padding-left flex' @click="() => item.func()">
 						<text class='cuIcon-lightauto text-blue margin-right-xs'></text>
 						<text class="text-df">{{ item.content }}</text>
 					</view>
@@ -24,10 +24,8 @@
 		</swiper>
 		<scroll-view scroll-y show-scrollbar enhanced scroll-with-animation enable-passive :scroll-top="scroll"
 			:style="{ height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px - 164rpx)` }">
-			<view class="cu-chat">
-
+			<view class="cu-chat padding-bottom-sm">
 				<template v-for="(item, index) in list">
-
 					<view v-if="item.type === 'chat'" :key="item.id" class="cu-item self" style="padding: 12rpx 24rpx 48rpx;">
 						<view class="main" style="margin: 0 24rpx 0 0; max-width: 494rpx;">
 							<view class="content bg-green shadow">
@@ -66,6 +64,7 @@
 						</view>
 					</view>
 				</template>
+				<AIRandomBox v-if="randomBox" @chat="randomChat" />
 			</view>
 		</scroll-view>
 		<view class="cu-bar foot input" style="bottom: 1rpx;">
@@ -94,6 +93,7 @@ export default {
 			show: 0,
 			list: [],
 			chat: '',
+			randomBox: false,
 			generating: false,
 			scroll: 999999999,
 			interstitialAd: {},
@@ -102,11 +102,11 @@ export default {
 			page_container_ai_questions_show: false,
 			bg: getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)[0],
 			swiper_list: [
-				{ content: '10,000 能量只需一元！多买多送，最低3.3折！', function: () => uni.navigateTo({ url: '/pages/用户中心/我的能量' }) },
-				{ content: '每日签到、邀请新用户、看视频广告都可以获取能量', function: () => uni.navigateTo({ url: '/pages/用户中心/我的能量' }) },
-				{ content: '对话不智能？试试切换AI厂商&大语音模型？', function: this.showSettings },
-				{ content: '不知道问什么？看看大家怎么问', function: this.showQuestions },
-				{ content: '设置【连续对话记忆次数】，让AI理解对话上下文', function: this.showSettings },
+				{ content: '10,000 能量只需一元！多买多送，最低3.3折！', func: () => uni.navigateTo({ url: '/pages/用户中心/我的能量' }) },
+				{ content: '每日签到、邀请新用户、看视频广告都可以获取能量', func: () => uni.navigateTo({ url: '/pages/用户中心/我的能量' }) },
+				{ content: '对话不智能？试试切换AI厂商&大语音模型？', func: () => this.showSettings() },
+				{ content: '不知道问什么？看看大家怎么问', func: () => this.showQuestions() },
+				{ content: '设置【连续对话记忆次数】，让AI理解对话上下文', func: () => this.showSettings() },
 			]
 		}
 	},
@@ -161,6 +161,9 @@ export default {
 						setTimeout(() => this.scroll++)
 					})
 				}
+				if (this.list.length === 0) {
+					this.randomBox = true
+				}
 			}
 			this.list = []
 			if (data) {
@@ -206,6 +209,12 @@ export default {
 				setTimeout(() => this.scroll++)
 				this.$('/chat', {
 					chat: this.chat
+				}).catch(() => {
+					this.list.pop()
+					this.list.pop()
+					if (this.list.length === 0) {
+						this.randomBox = true
+					}
 				}).then(data => {
 					chat.time = data.chat_time
 					reply.content = data.reply
@@ -223,6 +232,11 @@ export default {
 			} else {
 				this.$toast('请输入问题')
 			}
+		},
+		randomChat(chat) {
+			this.chat = chat
+			this.send()
+			this.randomBox = false
 		}
 	}
 }

@@ -26,7 +26,7 @@ export default async (url = "/", data = {}, config = {}) => {
           if (data.success) {
             resolve(data.result);
           } else {
-            const message = data.message || (data.error ? `${data.error.code}: ${data.error.message}` : "网络出问题了，请稍后重试");
+            const message = data.message || (data.error ? data.error.message : "网络出问题了，请稍后重试");
             Vue.prototype.$toast(message);
             reject(message);
           }
