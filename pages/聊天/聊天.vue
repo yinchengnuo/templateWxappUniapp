@@ -24,7 +24,7 @@
 		</swiper>
 		<scroll-view scroll-y show-scrollbar enhanced scroll-with-animation enable-passive :scroll-top="scroll"
 			:style="{ height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px - 164rpx)` }">
-			<view class="cu-chat padding-bottom-sm">
+			<view class="cu-chat padding-bottom-xs">
 				<template v-for="(item, index) in list">
 					<view v-if="item.type === 'chat'" :key="item.id" class="cu-item self" style="padding: 12rpx 24rpx 48rpx;">
 						<view class="main" style="margin: 0 24rpx 0 0; max-width: 494rpx;">
@@ -64,7 +64,7 @@
 						</view>
 					</view>
 				</template>
-				<AIRandomBox v-if="randomBox" @chat="randomChat" />
+				<AIRandomBox v-if="show_random_box" @chat="randomChat" />
 			</view>
 		</scroll-view>
 		<view class="cu-bar foot input" style="bottom: 1rpx;">
@@ -93,7 +93,6 @@ export default {
 			show: 0,
 			list: [],
 			chat: '',
-			randomBox: false,
 			generating: false,
 			scroll: 999999999,
 			interstitialAd: {},
@@ -114,6 +113,14 @@ export default {
 		user() {
 			return this.$store.state.user
 		},
+		show_random_box() {
+			return this.user.show_random_box
+		}
+	},
+	watch: {
+		show_random_box() {
+			setTimeout(() => this.scroll++)
+		}
 	},
 	onShow() {
 		this.show++
@@ -162,7 +169,7 @@ export default {
 					})
 				}
 				if (this.list.length === 0) {
-					this.randomBox = true
+					this.$store.state.user.show_random_box = true
 				}
 			}
 			this.list = []
@@ -209,12 +216,6 @@ export default {
 				setTimeout(() => this.scroll++)
 				this.$('/chat', {
 					chat: this.chat
-				}).catch(() => {
-					this.list.pop()
-					this.list.pop()
-					if (this.list.length === 0) {
-						this.randomBox = true
-					}
 				}).then(data => {
 					chat.time = data.chat_time
 					reply.content = data.reply
@@ -225,6 +226,12 @@ export default {
 					reply.energy = data.completionTokens
 					setTimeout(() => this.scroll++)
 					this.$store.state.user.energy -= data.totalTokens
+				}).catch(() => {
+					this.list.pop()
+					this.list.pop()
+					if (this.list.length === 0) {
+						this.$store.state.user.show_random_box = true
+					}
 				}).finally(() => {
 					this.generating = false
 				})
@@ -236,7 +243,7 @@ export default {
 		randomChat(chat) {
 			this.chat = chat
 			this.send()
-			this.randomBox = false
+			this.$store.state.user.show_random_box = false
 		}
 	}
 }

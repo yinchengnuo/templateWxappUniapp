@@ -4,6 +4,7 @@ export default {
   namespaced: true,
   state: {
     openid: "",
+    show_random_box: false,
   },
   mutations: {
     // 设置用户信息

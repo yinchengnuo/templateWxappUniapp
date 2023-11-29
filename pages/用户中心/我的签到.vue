@@ -34,8 +34,8 @@
 							</view>
 						</view>
 					</view>
-					<view class="padding-tb flex justify-center align-center" @click="$copy(user.ip)">
-						<text>当前IP：</text>
+					<view class="padding-tb flex justify-center align-center text-grey" @click="$copy(user.ip)">
+						<text>当前ip：</text>
 						<text class="cuIcon-location">{{ user.ip }}</text>
 						<text class="cuIcon-copy"></text>
 					</view>
@@ -51,21 +51,21 @@
 				<view class="cu-list grid col-5">
 					<view class="cu-item" v-for="item in 7" :key="item">
 						<view :class="result && result.continuous > item ? 'text-green' : ''">第{{ item + 1 }}天</view>
-						<text :class="result && result.continuous > item ? 'text-green' : ''" class="text-bold">+{{ 100 + item * 100
+						<view :class="result && result.continuous > item ? 'text-green' : ''" class="text-bold">+{{ 100 + item * 100
 						}}
-						</text>
+						</view>
 					</view>
 					<view class="cu-item">
-						<view class="text-bold">...</view>
-						<text class="text-bold">...</text>
+						<view :class="result && result.continuous > 7 ? 'text-green' : ''" class="text-bold">...</view>
+						<view :class="result && result.continuous > 7 ? 'text-green' : ''" class="text-bold">...</view>
 					</view>
 					<view class="cu-item">
-						<view :class="result && result.continuous === 10 ? 'text-green' : ''">第10天</view>
-						<text :class="result && result.continuous === 10 ? 'text-green' : ''" class="text-bold">+1000</text>
+						<view :class="result && result.continuous >= 10 ? 'text-green' : ''">第10天</view>
+						<view :class="result && result.continuous >= 10 ? 'text-green' : ''" class="text-bold">+1000</view>
 					</view>
 					<view class="cu-item">
 						<view :class="result && result.continuous > 10 ? 'text-green' : ''">第10+天</view>
-						<text :class="result && result.continuous > 10 ? 'text-green' : ''" class="text-bold">+1000</text>
+						<view :class="result && result.continuous > 10 ? 'text-green' : ''" class="text-bold">+1000</view>
 					</view>
 				</view>
 				<AD1 />

@@ -44,9 +44,7 @@ export default {
 			"bg-gradual-purple-light", "bg-gradual-pink-light", "bg-gradual-blue-light",
 			"bg-gradual-pinknew-light", "bg-gradual-cyan-light"
 		],
-		colors: ["red", "orange", "yellow", "olive", "green", "cyan", "blue", "purple", "mauve", "pink",
-			"brown", "grey"
-		],
+		colors: ["red", "orange", "yellow", "olive", "green", "cyan", "blue", "purple", "mauve", "pink", "brown", "grey"],
 	},
 	onLaunch(option) {
 		this.$store.dispatch('user/login', { openid: option.query.openid })
@@ -55,9 +53,7 @@ export default {
 	async onShow(option) {
 		if (option.query.path) {
 			if (this.$store.state.user.openid) {
-				uni.navigateTo({
-					url: option.query.path
-				})
+				uni.navigateTo({ url: option.query.path })
 			} else {
 				uni.$on('LOGON', () => uni.navigateTo({ url: option.query.path }))
 			}

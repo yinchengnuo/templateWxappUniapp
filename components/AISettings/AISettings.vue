@@ -90,6 +90,15 @@
 				</button>
 				<view class="text-grey cuIcon-infofill margin-left" style="font-size: 42rpx" @click="showModal2"></view>
 			</view>
+			<view class="cu-item margin-bottom-sm">
+				<view class="content">
+					<text>ToolBox AI 随机推荐</text>
+				</view>
+				<view class="">
+					<switch class="green radius" :checked="user.show_random_box" @change="switchChange">
+					</switch>
+				</view>
+			</view>
 			<button class="cu-btn block bg-red margin-tb-sm lg" @click="clearRecord()">清空聊天记录</button>
 			<button class="cu-btn block bg-grey margin-tb-sm lg" @click="$parent.page_container_show = false">退出 ToolBox
 				AI 设置</button>
@@ -143,8 +152,24 @@ export default {
 		this.rewardedVideoAd.onError((res) => {
 			console.log(res)
 		})
-		this.rewardedVideoAd.onClose(res => {
-			console.log(res)
+		this.rewardedVideoAd.onClose(({ isEnded }) => {
+			if (isEnded) {
+				this.$loading()
+				this.$('/ad').then(({ total, num, energy }) => {
+					uni.showModal({
+						title: '观看视频广告成功',
+						content: `免费赠送${energy}能量已到账，请查收（今日已领取${num}/${total}）次`,
+						showCancel: false,
+						confirmText: '好的',
+						complete: () => {
+							this.$parent.interstitialAd.show()
+						}
+					});
+					this.$store.dispatch('user/login')
+				}).finally(() => {
+					this.$loaded()
+				})
+			}
 		})
 	},
 	methods: {
@@ -239,6 +264,10 @@ export default {
 				}
 			});
 		},
+		switchChange(e) {
+			this.$store.state.user.show_random_box = e.detail.value
+		},
+		// 显示聊天页面插屏广告
 		showAD() {
 			this.rewardedVideoAd.show().then(res => {
 				console.log(res)
