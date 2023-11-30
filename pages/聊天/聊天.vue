@@ -22,9 +22,9 @@
 				</view>
 			</swiper-item>
 		</swiper>
-		<scroll-view scroll-y show-scrollbar enhanced scroll-with-animation enable-passive :scroll-top="scroll"
+		<scroll-view scroll-y show-scrollbar enhanced enable-passive :scroll-top="scroll"
 			:style="{ height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px - 164rpx)` }">
-			<view class="cu-chat padding-bottom-xs">
+			<view class="cu-chat">
 				<template v-for="(item, index) in list">
 					<view v-if="item.type === 'chat'" :key="item.id" class="cu-item self" style="padding: 12rpx 24rpx 48rpx;">
 						<view class="main" style="margin: 0 24rpx 0 0; max-width: 494rpx;">
@@ -64,7 +64,8 @@
 						</view>
 					</view>
 				</template>
-				<AIRandomBox v-if="show_random_box" @chat="randomChat" />
+				<AIRandomBox v-if="show_random_box" :len="list.length" />
+				<view v-else style="height: 28rpx;"></view>
 			</view>
 		</scroll-view>
 		<view class="cu-bar foot input" style="bottom: 1rpx;">
@@ -80,21 +81,22 @@
 		</view>
 		<page-container :show="page_container_show" :z-index="2048" round
 			@afterleave="page_container_show = page_container_ai_settings_show = page_container_ai_questions_show = false">
-			<AISettings v-if="page_container_ai_settings_show" />
-			<AIQuestions v-if="page_container_ai_questions_show" />
+			<AISettings v-show="page_container_ai_settings_show" />
+			<AIQuestions v-show="page_container_ai_questions_show" />
 		</page-container>
 	</view>
 </template>
 
 <script>
+import dayjs from 'dayjs'
 export default {
 	data() {
 		return {
 			show: 0,
 			list: [],
 			chat: '',
-			generating: false,
 			scroll: 999999999,
+			generating: false,
 			interstitialAd: {},
 			page_container_show: false,
 			page_container_ai_settings_show: false,
@@ -135,14 +137,17 @@ export default {
 		this.getList()
 	},
 	methods: {
+		// 显示设置
 		showSettings() {
 			this.page_container_show = true
 			this.page_container_ai_settings_show = true
 		},
+		// 显示百宝箱
 		showQuestions() {
 			this.page_container_show = true
 			this.page_container_ai_questions_show = true
 		},
+		// 获取聊天记录
 		getList(data) {
 			const make = (data) => {
 				if (data.length) {
@@ -168,9 +173,7 @@ export default {
 						setTimeout(() => this.scroll++)
 					})
 				}
-				if (this.list.length === 0) {
-					this.$store.state.user.show_random_box = true
-				}
+				this.check()
 			}
 			this.list = []
 			if (data) {
@@ -229,9 +232,7 @@ export default {
 				}).catch(() => {
 					this.list.pop()
 					this.list.pop()
-					if (this.list.length === 0) {
-						this.$store.state.user.show_random_box = true
-					}
+					this.check()
 				}).finally(() => {
 					this.generating = false
 				})
@@ -240,10 +241,15 @@ export default {
 				this.$toast('请输入问题')
 			}
 		},
-		randomChat(chat) {
-			this.chat = chat
-			this.send()
-			this.$store.state.user.show_random_box = false
+		check() {
+			if (this.list.length === 0) {
+				this.$store.state.user.show_random_box = true
+			} else {
+				const hide = uni.getStorageSync('hide_random_box');
+				if (!(hide && hide === dayjs().format('YYYY-MM-DD'))) {
+					this.$store.state.user.show_random_box = true
+				}
+			}
 		}
 	}
 }

@@ -266,6 +266,13 @@ export default {
 		},
 		switchChange(e) {
 			this.$store.state.user.show_random_box = e.detail.value
+			if (this.$store.state.user.show_random_box) {
+				uni.removeStorageSync('hide_random_box');
+				this.$toast('打开成功')
+			} else {
+				this.$toast('关闭成功，今日不再显示，可以在设置中再次打开')
+				uni.setStorageSync('hide_random_box', dayjs().format('YYYY-MM-DD'));
+			}
 		},
 		// 显示聊天页面插屏广告
 		showAD() {

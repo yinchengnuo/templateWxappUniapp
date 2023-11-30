@@ -80,15 +80,15 @@ export default {
 }
 
 .flex {
-	display: flex;
 	align-items: center;
+	display: flex!important;
 	justify-content: center;
 }
 
 .flexc {
-	display: flex;
 	align-items: center;
 	flex-direction: column;
+	display: flex!important;
 	justify-content: center;
 }
 
