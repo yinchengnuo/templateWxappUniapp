@@ -91,7 +91,7 @@
 					<text class="text-black">找到组织</text>
 				</view>
 			</navigator>
-			<navigator url="/pages/用户中心/关于小程序" class="cu-item arrow">
+			<navigator url="/pages/应用相关/关于小程序" class="cu-item arrow">
 				<view class="content">
 					<text class="cuIcon-link text-green"></text>
 					<text class="text-black">关于小程序</text>
@@ -113,11 +113,9 @@
 				</button>
 			</view>
 		</view>
-		<view v-if="user.ip" class="relative text-center" @click="$copy(user.ip)">
-			<text>本机IP：{{ user.ip }}</text>
-			<text class="cuIcon-copy"></text>
-		</view>
-		<ad unit-id="adunit-bb0d1a5ba7a52eac"></ad>
+		<AD1 />
+		<AD2 />
+		<AD3 />
 	</view>
 </template>
 

@@ -8,7 +8,7 @@
 			<navigator url="/pages/用户中心/我的能量" class="flex h100"
 				style="position: absolute; top: 0; left: 0; padding: 0 30rpx; font-weight: bolder;">
 				<text class="cuIcon-lightauto text-purple text-shadow">{{ user.energy }}</text>
-				<text class="cuIcon-right text-purple text-shadow  text-blod" style="margin: 0 6rpx;"></text>
+				<text class="cuIcon-right text-purple text-shadow  text-bold" style="margin: 0 6rpx;"></text>
 			</navigator>
 			<text class="page_title text-black text-shadow">有问题，问AI</text>
 		</view>
@@ -22,9 +22,14 @@
 				</view>
 			</swiper-item>
 		</swiper>
-		<scroll-view scroll-y show-scrollbar enhanced enable-passive :scroll-top="scroll"
+		<scroll-view v-if="list.length" scroll-y show-scrollbar enhanced enable-passive :scroll-top="scroll"
 			:style="{ height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px - 164rpx)` }">
 			<view class="cu-chat">
+				<navigator v-if="total > 100" url="/pages/聊天管理/聊天管理" class="cu-info">
+					<text>更多对话记录，请至</text>
+					<text class="text-blue margin-lr-xs">聊天管理</text>
+					<text>查看</text>
+				</navigator>
 				<template v-for="(item, index) in list">
 					<view v-if="item.type === 'chat'" :key="item.id" class="cu-item self" style="padding: 12rpx 24rpx 48rpx;">
 						<view class="main" style="margin: 0 24rpx 0 0; max-width: 494rpx;">
@@ -68,6 +73,11 @@
 				<view v-else style="height: 28rpx;"></view>
 			</view>
 		</scroll-view>
+		<view class="flexc" v-else
+			:style="{ height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px - 164rpx)` }"
+			style="justify-content: flex-end; overflow: auto;">
+			<AIRandomBox />
+		</view>
 		<view class="cu-bar foot input" style="bottom: 1rpx;">
 			<view class="action" @click="showSettings()" style="margin: 0;padding: 0 20rpx;">
 				<text class="cuIcon-settings text-grey" style="margin: 0;"></text>
@@ -93,6 +103,7 @@ export default {
 	data() {
 		return {
 			show: 0,
+			total: 0,
 			list: [],
 			chat: '',
 			scroll: 999999999,
@@ -188,7 +199,8 @@ export default {
 			} else {
 				this.$loading()
 				this.$('/chat_record').then(data => {
-					make(data)
+					make(data.records)
+					this.total = data.total
 				}).finally(() => {
 					this.$loaded()
 				})
@@ -222,6 +234,7 @@ export default {
 				}
 				this.list.push(chat)
 				this.list.push(reply)
+				this.$store.state.user.show_random_box = false
 				setTimeout(() => this.scroll++)
 				this.$('/chat', {
 					chat: this.chat
@@ -234,7 +247,9 @@ export default {
 					reply._energy = data.totalTokens
 					reply.energy = data.completionTokens
 					setTimeout(() => this.scroll++)
+					this.$store.state.user.total_chat_count++
 					this.$store.state.user.energy -= data.totalTokens
+					this.$store.state.user.total_payout += data.totalTokens
 				}).catch(() => {
 					this.list.pop()
 					this.list.pop()

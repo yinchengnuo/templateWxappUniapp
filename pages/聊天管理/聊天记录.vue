@@ -2,6 +2,7 @@
 	<Page ref="Page">
 		<template v-slot:default="{ page }">
 			<template v-if="page">
+				聊天记录
 				<AD2 />
 				<AD3 />
 			</template>

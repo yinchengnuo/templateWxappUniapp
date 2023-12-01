@@ -11,293 +11,90 @@
     ]
   },
   "pages": [
-    {
-      "path": "pages/首页/首页",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日/每日",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/聊天/聊天",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据/数据",
-      "style": {
-        "navigationStyle": "default",
-        "enablePullDownRefresh": true,
-        "navigationBarTitleText": "数据集"
-      }
-    },
-    {
-      "path": "pages/我的/我的",
-      "style": {
-        "enablePullDownRefresh": true
-      }
-    },
+    { "path": "pages/首页/首页", "style": { "disableScroll": true } },
+    { "path": "pages/每日/每日", "style": { "disableScroll": true } },
+    { "path": "pages/聊天/聊天", "style": { "disableScroll": true } },
+    { "path": "pages/数据/数据", "style": { "navigationStyle": "default", "enablePullDownRefresh": true, "navigationBarTitleText": "数据集" } },
+    { "path": "pages/我的/我的", "style": { "enablePullDownRefresh": true } },
 
-    {
-      "path": "pages/实用工具/生活服务/滚动君",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/滚动君/滚动君"
-    },
+    { "path": "pages/滚动君/滚动君" },
+    { "path": "pages/实用工具/生活服务/滚动君", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/生活服务/手机号信息查询", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/生活服务/翻译", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/生活服务/快递查询", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/生活服务/垃圾分类", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/图片生成/二维码生成", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/图片生成/QQ号估值", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/生活服务/食物营养查询", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/生活服务/骚扰电话查询", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/生活服务/中文数字", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/生活服务/表情包搜索", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/人工智能/AI抠图", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/人工智能/AI以图搜番", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/人工智能/AI图片文字识别", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/人工智能/AI万物识别", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/生活服务/二维码解析", "style": { "disableScroll": true } },
 
-    {
-      "path": "pages/实用工具/生活服务/手机号信息查询",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/实用工具/生活服务/翻译",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/实用工具/生活服务/快递查询",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/实用工具/生活服务/垃圾分类",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/实用工具/图片生成/二维码生成",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/实用工具/图片生成/QQ号估值",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/实用工具/生活服务/食物营养查询",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/实用工具/生活服务/骚扰电话查询",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/实用工具/生活服务/中文数字",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/实用工具/生活服务/表情包搜索",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/实用工具/人工智能/AI抠图",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/实用工具/人工智能/AI以图搜番",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/实用工具/人工智能/AI图片文字识别",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/实用工具/人工智能/AI万物识别",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/实用工具/生活服务/二维码解析",
-      "style": { "disableScroll": true }
-    },
+    { "path": "pages/每日随机/图片类/早晚安图片", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/历史上的今天", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/摸鱼人日历", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/职场人日历", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/60秒看世界", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/明星吃瓜", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/摸鱼日报", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/内涵段子", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/情感花园", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/微语简报", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/星座运势", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/12星座", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/舔狗日记", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/全国降雨量", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/美女图片", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/白丝图片", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/黑丝图片", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/罩杯图片", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/唯美女生图片", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/舔狗笔记", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/原神黄历", "style": { "disableScroll": true } },
 
-    {
-      "path": "pages/每日随机/图片类/早晚安图片",
-      "style": { "disableScroll": true }
-    },
+    { "path": "pages/电子书/电子书", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/三国志", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/山海经", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/世说新语", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/吕氏春秋", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/古文观止", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/梦溪笔谈", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/庄子", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/史记", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/论语", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/老子·道德经", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/孟子", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/元曲三百首", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/宋词三百首", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/唐诗三百首", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/黄帝内经", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书/诗经", "style": { "disableScroll": true } },
 
-    {
-      "path": "pages/每日随机/图片类/历史上的今天",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/摸鱼人日历",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/职场人日历",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/60秒看世界",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/明星吃瓜",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/摸鱼日报",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/内涵段子",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/情感花园",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/微语简报",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/星座运势",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/12星座",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/舔狗日记",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/全国降雨量",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/美女图片",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/白丝图片",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/黑丝图片",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/罩杯图片",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/唯美女生图片",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/舔狗笔记",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/每日随机/图片类/原神黄历",
-      "style": { "disableScroll": true }
-    },
+    { "path": "pages/聊天管理/聊天管理", "style": { "disableScroll": true } },
+    { "path": "pages/聊天管理/聊天记录", "style": { "disableScroll": true } },
+    { "path": "pages/聊天管理/聊天收藏", "style": { "disableScroll": true } },
 
-    {
-      "path": "pages/数据集合/电子书/三国志",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/山海经",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/世说新语",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/吕氏春秋",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/古文观止",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/梦溪笔谈",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/庄子",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/史记",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/论语",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/老子·道德经",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/孟子",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/元曲三百首",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/宋词三百首",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/唐诗三百首",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/黄帝内经",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/数据集合/电子书/诗经",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/电子书/电子书",
-      "style": { "disableScroll": true }
-    },
+    { "path": "pages/用户中心/我的收藏", "style": { "disableScroll": true } },
+    { "path": "pages/用户中心/我的能量", "style": { "disableScroll": true } },
+    { "path": "pages/用户中心/我的能量记录", "style": { "disableScroll": true } },
+    { "path": "pages/用户中心/我的购买记录", "style": { "disableScroll": true } },
+    { "path": "pages/用户中心/我的签到", "style": { "disableScroll": true } },
+    { "path": "pages/用户中心/我的签到记录", "style": { "disableScroll": true } },
+    { "path": "pages/用户中心/我的分享", "style": { "disableScroll": true } },
+    { "path": "pages/用户中心/找到组织", "style": { "disableScroll": true } },
 
-    {
-      "path": "pages/用户中心/我的能量",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/用户中心/关于能量",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/用户中心/我的签到",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/用户中心/我的签到记录",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/用户中心/我的分享",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/用户中心/我的收藏",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/用户中心/找到组织",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/用户中心/关于ToolBoxAI",
-      "style": { "disableScroll": true }
-    },
-    {
-      "path": "pages/用户中心/关于小程序",
-      "style": { "disableScroll": true }
-    }
+    { "path": "pages/应用相关/加载效果", "style": { "disableScroll": true } },
+    { "path": "pages/应用相关/关于广告", "style": { "disableScroll": true } },
+    { "path": "pages/应用相关/关于能量", "style": { "disableScroll": true } },
+    { "path": "pages/应用相关/关于小程序", "style": { "disableScroll": true } },
+    { "path": "pages/应用相关/关于ToolBoxAI", "style": { "disableScroll": true } },
+    { "path": "pages/应用相关/更新记录", "style": { "disableScroll": true } },
+    { "path": "pages/应用相关/需求墙", "style": { "disableScroll": true } }
   ],
   "globalStyle": {
     "navigationStyle": "custom",

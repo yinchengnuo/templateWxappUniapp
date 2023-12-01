@@ -2,7 +2,7 @@
 	<view v-show="showList.length" class="index padding bg-white shadow margin radius">
 		<view class="text-bold text-black text-lg flex flex_sb">
 			<text>你好，我是 ToolBox AI </text>
-			<view v-show="len" class="flex bg-gray" style="width: 42rpx; height: 42rpx;" @click="close">
+			<view v-if="len" class="flex bg-gray" style="width: 42rpx; height: 42rpx;" @click="close">
 				<text class="cuIcon-close"></text>
 			</view>
 		</view>
@@ -63,7 +63,6 @@ export default {
 			this.$parent.chat = content.replace(/\<.+?\>/g, '').replaceAll('[', '').replaceAll(']', '')
 			this.$parent.send()
 			this.$store.state.user.show_random_box = false
-			uni.setStorageSync('hide_random_box', dayjs().format('YYYY-MM-DD'));
 		},
 		// 点击关闭
 		close() {

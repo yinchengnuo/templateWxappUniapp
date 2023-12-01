@@ -2,32 +2,33 @@
 	<Page type="no" ref="Page">
 		<template v-slot:default="{ page }">
 			<template v-if="page">
-				<view class="flex solid-bottom justify-center">
+				<view class="flex solid-bottom margin-top justify-center">
 					<view class="cu-coupon-box radius-lg padding-sm">
 						<view class="flex justify-between">
 							<view class="text-white text-xl text-bold">ToolBox 能量卡</view>
-							<view class="cu-tag line-white round text-df padding-lr-sm text-grey">
+							<navigator url="/pages/用户中心/我的能量记录" class="cu-tag line-white round text-df padding-lr-sm text-grey">
 								<text>消费明细 </text>
 								<text class="cuIcon-right"></text>
-							</view>
+							</navigator>
 						</view>
 						<view class="flex justify-center align-end padding-tb cu-coupon-content text-white">
 							<text class="text-lg padding-bottom-xs">余额</text>
-							<text class="text-sl"> {{ user.energy || 0 }} </text>
-							<text class="text-lg padding-bottom-xs"></text>
+							<text class="text-sl text-bold text-shadow" style="text-shadow: 0px 0px 2rpx black"> {{ user.energy || 0 }}
+							</text>
+							<text class="text-lg text-shadow cuIcon-lightauto">能量</text>
 						</view>
 						<view class="flex justify-around align-center margin-top-xl text-white">
 							<view class="text-center">
 								<view>总入账</view>
-								<view>{{ user.total_income || 0 }}</view>
+								<view class="text-bold text-shadow">{{ user.total_income || 0 }}</view>
 							</view>
 							<view class="text-center">
 								<view>总出账</view>
-								<view>{{ user.total_payout || 0 }}</view>
+								<view class="text-bold text-shadow">{{ user.total_payout || 0 }}</view>
 							</view>
 							<view class="text-center">
 								<view>已使用</view>
-								<view>{{ user.total_chat_count || 0 }}次</view>
+								<view class="text-bold text-shadow">{{ user.total_chat_count || 0 }}次</view>
 							</view>
 						</view>
 					</view>
@@ -35,22 +36,31 @@
 				<view class="cu-bar bg-white solid-bottom margin-top">
 					<view class="action">
 						<text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-						<text class="text-bold">能量充值</text>
+						<text class="text-bold">
+							<text>能量充值</text>
+							<text class="text-grey" style="font-size: 24rpx; font-weight: normal">
+								<text class="margin-lr-xs">充值赠送免广告</text>
+								<text class="cuIcon-questionfill"></text>
+							</text>
+						</text>
 					</view>
-					<view class="action text-grey">
-						<text>充值记录</text>
+					<navigator url="/pages/用户中心/我的购买记录" class="action text-grey">
+						<text>购买记录</text>
 						<text class="cuIcon-right"></text>
-					</view>
+					</navigator>
 				</view>
 				<view class="cu-list no-border grid col-3">
 					<view v-for="(item, index) in PAY" :key="item.num" class="cu-item radius light"
-						:class="[active === index ? 'bg-' + className : '', active === index ? active : '']" @click="active = index">
+						:class="[active === index ? 'bg-' + color : '', active === index ? active : '']" @click="active = index">
 						<view class="flex text-bold text-xl text-shadow margin-top-sm">
 							{{ (item.num * 10000).toFixed(0) }}
+							<text class="text-green text-shadow cuIcon-lightauto"
+								style="font-size: 24rpx; display: inline; width: auto;"></text>
 						</view>
-						<view style="position: absolute; top: 0rpx; right: 4rpx" class="radius text-xs text-bold padding-lr-xs"
-							:class="[active === index ? 'bg-' + className : '', active === index ? 'text-white' : 'text-grey']">{{
-								item.num }}万 </view>
+						<view style="position: absolute; top: 0rpx; right: 0rpx; border-radius: 0rpx 8rpx 0rpx 8rpx;"
+							class="text-xs text-bold padding-lr-xs"
+							:class="[active === index ? 'bg-' + color : '', active === index ? 'text-white' : 'text-grey']">{{ item.num
+							}}万 </view>
 						<view class="flex text-price text-lg text-bold" :class="active === index ? '' : 'text-orange'">{{ item.price
 						}}
 							<text class="text-price margin-left-xs" style="text-decoration: line-through; font-weight: normal">{{
@@ -60,7 +70,12 @@
 							style="position: absolute; right: 4rpx; bottom: 2rpx">{{ item.discount }}折</view>
 					</view>
 				</view>
-				<button class="margin cu-btn round xxl block bg-black">立即充值</button>
+				<button class="margin cu-btn round xxl block" :class="'bg-' + color">
+					<text>立即充值</text>
+					<text class="text-price margin-left-xs">{{ PAY[active] ? PAY[active].price : "" }}</text>
+					<text class="text-sm" style="position: absolute; right: 50rpx; bottom: 8rpx; font-style: italic"> 赠送{{
+						PAY[active] ? PAY[active].price : "" }}天免广告 </text>
+				</button>
 			</template>
 		</template>
 	</Page>
@@ -71,7 +86,7 @@ export default {
 	data() {
 		return {
 			active: 4,
-			className: "",
+			color: "",
 		};
 	},
 	computed: {
@@ -91,16 +106,16 @@ export default {
 		this.getClass();
 	},
 	mounted() {
+		this.$refs.Page.getHeight();
 		this.$refs.ADFloat.show = false;
 		clearInterval(this.$refs.Page.timer);
 	},
-	onLoad() {
-		// this.pay()
-	},
+	onLoad() { },
 	methods: {
 		getClass() {
-			this.className = getApp()
+			this.color = getApp()
 				.globalData.bgClass.slice()
+				.filter(e => e !== "bg-gradual-pinknew-light")
 				.sort(() => Math.random() - 0.5)[0]
 				.split("-")[2];
 		},
@@ -108,11 +123,6 @@ export default {
 			this.$loading();
 			this.$("/pay")
 				.then(data => {
-					// uni.showModal({
-					// 	title: '提示',
-					// 	content: JSON.stringify(data),
-					// 	showCancel: false
-					// })
 					uni.requestPayment({
 						...data,
 						success: e => {
