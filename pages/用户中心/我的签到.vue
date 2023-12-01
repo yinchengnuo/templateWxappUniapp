@@ -135,7 +135,10 @@ export default {
 			this.animationData = animationData.export()
 			this.$('/clock').then(data => {
 				this.result = data
-				this.$store.commit('user/SET_USER_INFO', { energy: this.$store.state.user.energy + data.energy })
+				this.$store.commit('user/SET_USER_INFO', {
+					energy: this.$store.state.user.energy + data.energy,
+					total_chat_count: this.$store.state.user.total_chat_count + data.energy
+				})
 				uni.setStorageSync('clock_records', data.records);
 				uni.showModal({
 					title: '签到成功',

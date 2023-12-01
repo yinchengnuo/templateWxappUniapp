@@ -19,15 +19,15 @@
 						<view class="flex justify-around align-center margin-top-xl text-white">
 							<view class="text-center">
 								<view>总入账</view>
-								<view>{{ user.energy || 0 }}</view>
+								<view>{{ user.total_income || 0 }}</view>
 							</view>
 							<view class="text-center">
 								<view>总出账</view>
-								<view>{{ user.energy || 0 }}</view>
+								<view>{{ user.total_payout || 0 }}</view>
 							</view>
 							<view class="text-center">
 								<view>已使用</view>
-								<view>{{ user.energy || 0 }}</view>
+								<view>{{ user.total_chat_count || 0 }}次</view>
 							</view>
 						</view>
 					</view>

@@ -279,11 +279,16 @@ export default {
 		},
 		// 显示聊天页面插屏广告
 		showAD() {
-			this.rewardedVideoAd.show().then(res => {
-				console.log(res)
-			}).catch(e => {
-				console.log(e)
-			})
+			if (!this.ing) {
+				this.ing = true
+				this.rewardedVideoAd.show().then(res => {
+					console.log(res)
+				}).catch(e => {
+					console.log(e)
+				}).finally(() => {
+					this.ing = false
+				})
+			}
 		}
 	}
 }
