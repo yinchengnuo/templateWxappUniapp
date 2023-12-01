@@ -15,7 +15,7 @@
 		<swiper class="tips-swiperitem" autoplay circular interval="5432" duration="4321" style="height: 64rpx;">
 			<swiper-item v-for="(item, index) in swiper_list" :key="index">
 				<view class="bg-blue light">
-					<view class='padding-xs text-xl padding-left flex' @click="() => item.func()">
+					<view class='padding-xs text-xl padding-left flex' @click="swiperDetail(item)">
 						<text class='cuIcon-lightauto text-blue margin-right-xs'></text>
 						<text class="text-df">{{ item.content }}</text>
 					</view>
@@ -32,8 +32,8 @@
 								<text>{{ item.content }}</text>
 							</view>
 						</view>
-						<view v-if="user.avatar" class="cu-avatar radius" type="userAvatarUrl">
-							<image class="w100 h100" :src="user.avatar" mode="scaleToFill" />
+						<view v-if="user.avatar" class="cu-avatar" type="userAvatarUrl">
+							<image class="w100 h100 radius" :src="user.avatar" mode="aspectFill" />
 						</view>
 						<open-data v-else class="cu-avatar radius" type="userAvatarUrl"></open-data>
 						<view class="date" style="bottom: 8rpx; left: auto; right: 128rpx;">
@@ -81,8 +81,8 @@
 		</view>
 		<page-container :show="page_container_show" :z-index="2048" round
 			@afterleave="page_container_show = page_container_ai_settings_show = page_container_ai_questions_show = false">
-			<AISettings v-show="page_container_ai_settings_show" />
-			<AIQuestions v-show="page_container_ai_questions_show" />
+			<AISettings v-if="page_container_ai_settings_show" />
+			<AIQuestions :show="page_container_ai_questions_show" v-show="page_container_ai_questions_show" />
 		</page-container>
 	</view>
 </template>
@@ -102,13 +102,7 @@ export default {
 			page_container_ai_settings_show: false,
 			page_container_ai_questions_show: false,
 			bg: getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)[0],
-			swiper_list: [
-				{ content: '10,000 能量只需一元！多买多送，最低3.3折！', func: () => uni.navigateTo({ url: '/pages/用户中心/我的能量' }) },
-				{ content: '每日签到、邀请新用户、看视频广告都可以获取能量', func: () => uni.navigateTo({ url: '/pages/用户中心/我的能量' }) },
-				{ content: '对话不智能？试试切换AI厂商&大语音模型？', func: () => this.showSettings() },
-				{ content: '不知道问什么？看看大家怎么问', func: () => this.showQuestions() },
-				{ content: '设置【连续对话记忆次数】，让AI理解对话上下文', func: () => this.showSettings() },
-			]
+			swiper_list: []
 		}
 	},
 	computed: {
@@ -135,8 +129,19 @@ export default {
 			adUnitId: 'adunit-e3f467955c2226a4'
 		})
 		this.getList()
+
+		this.swiper_list = [
+			{ content: '10,000 能量只需一元！多买多送，最低3折！', func: () => uni.navigateTo({ url: '/pages/用户中心/我的能量' }) },
+			{ content: '每日签到、邀请新用户、看视频广告都可以获取能量', func: () => this.showSettings() },
+			{ content: '对话不智能？试试切换AI厂商&大语音模型？', func: () => this.showSettings() },
+			{ content: '不知道问什么？看看大家怎么问', func: () => this.showQuestions() },
+			{ content: '设置【连续对话记忆次数】，让AI理解对话上下文', func: () => this.showSettings() },
+		]
 	},
 	methods: {
+		swiperDetail(item) {
+			item.func()
+		},
 		// 显示设置
 		showSettings() {
 			this.page_container_show = true
@@ -189,6 +194,7 @@ export default {
 				})
 			}
 		},
+		// 发送问题
 		async send() {
 			if (this.generating) {
 				return this.$toast('AI正在生成对话，请稍后再试')

@@ -6,7 +6,7 @@
 					<view class="flex">
 						<view class="padding-lr-xs">
 							<view class="cu-avatar lg round">
-								<image v-if="user.avatar" class="w100 h100" :src="user.avatar" mode="scaleToFill" />
+								<image v-if="user.avatar" class="w100 h100" :src="user.avatar" mode="aspectFill" />
 								<open-data v-else class="w100 h100" type="userAvatarUrl"></open-data>
 							</view>
 						</view>
@@ -136,6 +136,7 @@ export default {
 			this.$('/clock').then(data => {
 				this.result = data
 				this.$store.commit('user/SET_USER_INFO', { energy: this.$store.state.user.energy + data.energy })
+				uni.setStorageSync('clock_records', data.records);
 				uni.showModal({
 					title: '签到成功',
 					content: `已连续签到${data.continuous}天，今日签到免费赠送${data.energy}能量已到账，请查收`,

@@ -1,43 +1,46 @@
 <template>
-	<view style="background: #efefef;overflow: hidden;">
-		<view class="flex solid-bottom margin-top justify-center" style="margin-bottom: 20rpx;">
-			<view class="cu-coupon-box bg-img bg-mask radius-lg padding-sm">
-				<image class="w100 h100" :src="image" mode="aspectFill"
-					style="position: absolute; top: 0; left: 0; z-index: 1; opacity: .6;"></image>
-				<view class="w100 h100 padding-sm" style="position: absolute; top: 0; left: 0; z-index: 1;">
-					<view class="flex justify-between" style="position: relative; z-index: 2;">
-						<view class="text-xl text-bold text-white">ToolBox AI 设置</view>
-						<view class="cu-capsule round margin-right">
-							<navigator url="/pages/用户中心/我的能量" class="cu-tag bg-green">
-								<text>我的能量</text>
-								<text class="cuIcon-lightauto"></text>
-							</navigator>
-							<view class="cu-tag line-green">
-								<text class="cuIcon-right text-bold"></text>
+	<view style="background: #efefef;overflow: auto; max-height: 85vh;">
+		<view style="position: sticky; top: 30rpx; z-index: 2;">
+			<view class="flex solid-bottom margin-top justify-center">
+				<view class="cu-coupon-box bg-img bg-mask radius-lg padding-sm">
+					<image class="w100 h100" :src="image" mode="aspectFill"
+						style="position: absolute; top: 0; left: 0; z-index: 1; opacity: .6;"></image>
+					<view class="w100 h100 padding-sm" style="position: absolute; top: 0; left: 0; z-index: 1;">
+						<view class="flex justify-between" style="position: relative; z-index: 2;">
+							<view class="text-xl text-bold text-white">ToolBox AI 设置</view>
+							<view class="cu-capsule round margin-right">
+								<navigator url="/pages/用户中心/我的能量" class="cu-tag bg-green">
+									<text>我的能量</text>
+									<text class="cuIcon-lightauto"></text>
+								</navigator>
+								<view class="cu-tag line-green">
+									<text class="cuIcon-right text-bold"></text>
+								</view>
 							</view>
 						</view>
-					</view>
-					<navigator url="/pages/用户中心/我的能量" class="flex justify-center align-end padding-tb cu-coupon-content text-white">
-						<text class="text-lg padding-bottom-xs text-black">余额</text>
-						<text class="text-sl text-bold text-shadow " style="text-shadow: 0px 0px 2rpx green">
-							{{ user.energy }} </text>
-						<text class="text-lg text-green text-shadow cuIcon-lightauto">能量</text>
-					</navigator>
-					<view class="flex justify-around align-center margin-top-xl text-white">
-						<navigator url="/pages/用户中心/我的签到">
-							<button class="cu-btn round shadow bg-red">每日签到 +1000</button>
+						<navigator url="/pages/用户中心/我的能量"
+							class="flex justify-center align-end padding-tb cu-coupon-content text-white">
+							<text class="text-lg padding-bottom-xs text-black">余额</text>
+							<text class="text-sl text-bold text-shadow " style="text-shadow: 0px 0px 2rpx green">
+								{{ user.energy }} </text>
+							<text class="text-lg text-green text-shadow cuIcon-lightauto">能量</text>
 						</navigator>
-						<button open-type="share" class="cu-btn round shadow bg-green" style="margin: 0 30rpx;">邀请好友
-							+1000</button>
-						<button class="cu-btn round shadow bg-blue" @click="showAD()">看30S广告+1000</button>
+						<view class="flex justify-around align-center margin-top-xl text-white">
+							<navigator url="/pages/用户中心/我的签到">
+								<button class="cu-btn round shadow bg-red">每日签到 +1000</button>
+							</navigator>
+							<button open-type="share" class="cu-btn round shadow bg-green" style="margin: 0 30rpx;">邀请好友
+								+1000</button>
+							<button class="cu-btn round shadow bg-blue" @click="showAD()">看30S广告+1000</button>
+						</view>
 					</view>
 				</view>
 			</view>
+			<navigator url="/pages/用户中心/我的能量">
+				<uni-notice-bar show-get-more show-icon :fontSize="16" scrollable text="能量不够用? 10,000 能量只需一元！多买多送，最低至3折！点我立即充值"
+					style="margin-bottom: 0;" />
+			</navigator>
 		</view>
-		<navigator url="/pages/用户中心/我的能量">
-			<uni-notice-bar show-get-more show-icon :fontSize="16" scrollable text="能量不够用? 10,000 能量只需一元！多买多送，最低至3.3折！点我立即充值"
-				style="margin-bottom: 0;" />
-		</navigator>
 		<view class="cu-coupon-box2 radius-lg " :class="bg" style="margin-top: 0;margin-bottom: 0;">
 			<view class="cu-tag bg-orange radius text-df padding-lr-sm">
 				{{ user.ai_provider === 'azure' ? 'OpenAI' : '国产大模型' }}
@@ -286,4 +289,8 @@ export default {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.cu-coupon-box::after {
+	background: transparent;
+}
+</style>

@@ -2,7 +2,7 @@
 	<view class="Page" :class="classList.length ? classList : (bg ? bgClass : '')">
 		<view class="cu-drawer-page flex flexc" :class="show ? 'show' : ''">
 			<image v-if="favor" class="inlet animation-shake" :src="inlet" @click="show = true"></image>
-			<NavigationBar :bg="bg" :title="title" :favor="favor" :collected="collected" @collect="collect" />
+			<NavigationBar :bg="classList.length || bg" :title="title" :favor="favor" :collected="collected" @collect="collect" />
 			<view :id="PageID" class="flex1 w100" style="position: relative;">
 				<view class="w100 h100" style="position: absolute; top: 0; left: 0; overflow: hidden;">
 					<scroll-view scroll-y show-scrollbar enhanced scroll-with-animation enable-passive using-sticky :bounces="false"

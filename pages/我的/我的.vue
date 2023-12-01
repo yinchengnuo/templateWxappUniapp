@@ -41,7 +41,7 @@
 		</view>
 
 		<view class="relative UCenter-bg">
-			<image v-if="user.avatar" :src="user.avatar" class="png bg-white shadow" mode="scaleToFill"></image>
+			<image v-if="user.avatar" :src="user.avatar" class="png bg-white shadow" mode="aspectFill"></image>
 			<open-data v-else class="png bg-white shadow" type="userAvatarUrl"></open-data>
 			<text class="cuIcon-camera margin-left-xs text-black"
 				style="text-shadow: none; position: absolute; top: 140rpx; left: calc(50% + 40rpx); font-size: 48rpx;"></text>

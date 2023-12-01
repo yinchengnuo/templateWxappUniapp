@@ -14,13 +14,13 @@
 			<swiper-item class="h">
 				<scroll-view scroll-y show-scrollbar enhanced scroll-with-animation enable-passive using-sticky :bounces="false"
 					class="h" style="background: linear-gradient(rgba(255, 255, 255, .318), rgba(255, 255, 255, 0));">
-					<view class=" flex flex-wrap justify-between padding-sm">
+					<view class="flex flex-wrap justify-between padding-sm">
 						<view v-for="(item, index) in list1" :key="index"
 							class="margin-bottom-sm radius padding-sm padding-right-xs shadow" :class="item.bg"
-							style="width: 348rpx; position: relative; min-height: 200rpx;" @click="chat(item)">
+							style="width: 348rpx; position: relative; min-height: 188rpx;" @click="chat(item)">
 							<view class="text-bold text-black flex justify-start">
 								<image v-if="item.icon" class="margin-right-xs radius" style="width: 34rpx; height: 34rpx;"
-									:src="item.icon" mode="scaleToFill" />
+									:src="item.icon" mode="aspectFill" />
 								<view class="text-cut text-df" style="width: calc(100% - 28rpx);"> {{ item.tag }}</view>
 							</view>
 							<rich-text :nodes="item.content" class="margin-top-sm text-sm text-cut-2 text-bold"></rich-text>
@@ -31,13 +31,13 @@
 			<swiper-item class="h100">
 				<scroll-view scroll-y show-scrollbar enhanced scroll-with-animation enable-passive using-sticky :bounces="false"
 					class="h" style="background: rgba(255, 255, 255, .618);">
-					<view class=" flex flex-wrap justify-between padding-xs">
+					<view class="flex flex-wrap justify-between padding-sm">
 						<view v-for="(item, index) in list2" :key="index"
-							class="margin-bottom-xs radius padding-sm padding-right-xs shadow" :class="item.bg"
-							style="width: 348rpx; position: relative; min-height: 200rpx;" @click="chat(item)">
+							class="margin-bottom-sm radius padding-sm padding-right-xs shadow" :class="item.bg"
+							style="width: 348rpx; position: relative; min-height: 188rpx;" @click="chat(item)">
 							<view class="text-bold text-black flex justify-start">
 								<image v-if="item.icon" class="margin-right-xs radius" style="width: 34rpx; height: 34rpx;"
-									:src="item.icon" mode="scaleToFill" />
+									:src="item.icon" mode="aspectFill" />
 								<view class="text-cut text-df" style="width: calc(100% - 28rpx);"> {{ item.tag }}</view>
 							</view>
 							<rich-text :nodes="item.content" class="margin-top-sm text-sm text-cut-2 text-bold"></rich-text>
@@ -48,13 +48,13 @@
 			<swiper-item class="h100">
 				<scroll-view scroll-y show-scrollbar enhanced scroll-with-animation enable-passive using-sticky :bounces="false"
 					class="h" style="background: rgba(255, 255, 255, .618);">
-					<view class=" flex flex-wrap justify-between padding-xs">
+					<view class="flex flex-wrap justify-between padding-sm">
 						<view v-for="(item, index) in list3" :key="index"
-							class="margin-bottom-xs radius padding-sm padding-right-xs shadow" :class="item.bg"
-							style="width: 348rpx; position: relative; min-height: 200rpx;" @click="chat(item)">
+							class="margin-bottom-sm radius padding-sm padding-right-xs shadow" :class="item.bg"
+							style="width: 348rpx; position: relative; min-height: 188rpx;" @click="chat(item)">
 							<view class="text-bold text-black flex justify-start">
 								<image v-if="item.icon" class="margin-right-xs radius" style="width: 34rpx; height: 34rpx;"
-									:src="item.icon" mode="scaleToFill" />
+									:src="item.icon" mode="aspectFill" />
 								<view class="text-cut text-df" style="width: calc(100% - 28rpx);"> {{ item.tag }}</view>
 							</view>
 							<rich-text :nodes="item.content" class="margin-top-sm text-sm text-cut-2 text-bold"></rich-text>
@@ -71,13 +71,13 @@
 			<swiper-item class="h100">
 				<scroll-view scroll-y show-scrollbar enhanced scroll-with-animation enable-passive using-sticky :bounces="false"
 					class="h" style="background: rgba(255, 255, 255, .618);">
-					<view class=" flex flex-wrap justify-between padding-xs">
+					<view class="flex flex-wrap justify-between padding-sm">
 						<view v-for="(item, index) in list4" :key="index"
-							class="margin-bottom-xs radius padding-sm padding-right-xs shadow" :class="item.bg"
-							style="width: 348rpx; position: relative; min-height: 200rpx;" @click="chat(item)">
+							class="margin-bottom-sm radius padding-sm padding-right-xs shadow" :class="item.bg"
+							style="width: 348rpx; position: relative; min-height: 188rpx;" @click="chat(item)">
 							<view class="text-bold text-black flex justify-start">
 								<image v-if="item.icon" class="margin-right-xs radius" style="width: 34rpx; height: 34rpx;"
-									:src="item.icon" mode="scaleToFill" />
+									:src="item.icon" mode="aspectFill" />
 								<view class="text-cut text-df" style="width: calc(100% - 28rpx);"> {{ item.tag }}</view>
 							</view>
 							<rich-text :nodes="item.content" class="margin-top-sm text-sm text-cut-2 text-bold"></rich-text>
@@ -124,6 +124,12 @@
 <script>
 export default {
 	name: "AIQuestions",
+	props: {
+		show: {
+			type: Boolean,
+			default: false
+		}
+	},
 	data() {
 		return {
 			list1: [],
@@ -136,28 +142,30 @@ export default {
 			className: '',
 		};
 	},
-	created() {
-		this.$loading()
-		this.$('/box/chosen').then(data => {
-			let bgs = getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)
-			this.list1 = data.filter(e => e.type === 'hot').map((e, i) => ({ ...e, bg: bgs[(i % 8)] }))
-			bgs = getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)
-			this.list2 = data.filter(e => e.type === 'everyone').map((e, i) => ({ ...e, bg: bgs[(i % 8)] }))
-			bgs = getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)
-			this.list3 = data.filter(e => e.type === 'max').map((e, i) => ({ ...e, bg: bgs[(i % 8)] }))
-			bgs = getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)
-			this.list4 = data.filter(e => e.type === 'recent').map((e, i) => ({ ...e, bg: bgs[(i % 8)] }))
-		}).finally(() => {
-			this.$loaded()
-		})
-		this.$('/box/scene').then(data => {
-			this.scene = data
-		})
-		this.$('/box/career').then(data => {
-			this.career = data
-		})
-	},
 	watch: {
+		show() {
+			if (!this.list1.length) {
+				this.$loading()
+				this.$('/box/chosen').then(data => {
+					let bgs = getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)
+					this.list1 = data.filter(e => e.type === 'hot').map((e, i) => ({ ...e, bg: bgs[(i % 8)] }))
+					bgs = getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)
+					this.list2 = data.filter(e => e.type === 'everyone').map((e, i) => ({ ...e, bg: bgs[(i % 8)] }))
+					bgs = getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)
+					this.list3 = data.filter(e => e.type === 'max').map((e, i) => ({ ...e, bg: bgs[(i % 8)] }))
+					bgs = getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)
+					this.list4 = data.filter(e => e.type === 'recent').map((e, i) => ({ ...e, bg: bgs[(i % 8)] }))
+				}).finally(() => {
+					this.$loaded()
+				})
+				this.$('/box/scene').then(data => {
+					this.scene = data
+				})
+				this.$('/box/career').then(data => {
+					this.career = data
+				})
+			}
+		},
 		active: {
 			handler() {
 				this.className = getApp().globalData.bgClass.slice().sort(() => Math.random() - 0.5)[0]

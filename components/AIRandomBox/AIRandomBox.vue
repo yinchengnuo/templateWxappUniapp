@@ -16,7 +16,7 @@
 				style="width: 312rpx; position: relative; min-height: 160rpx;" @click="chat(item)">
 				<view class="text-bold text-black flex justify-start">
 					<image v-if="item.categoryIcon" class="margin-right-xs" style="width: 34rpx; height: 34rpx;"
-						:src="item.categoryIcon" mode="scaleToFill" />
+						:src="item.categoryIcon" mode="aspectFill" />
 					<view class="text-cut text-df" style="width: calc(100% - 28rpx);"> {{ item.tag }}</view>
 				</view>
 				<rich-text :nodes="item.content" class="margin-top-sm text-cut-2 text-sm text-bold"></rich-text>
