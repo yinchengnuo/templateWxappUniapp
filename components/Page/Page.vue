@@ -107,7 +107,7 @@ export default {
 		if (this.$store.state.user.openid) {
 			this.recordView()
 		} else {
-			uni.$on('LOGON', () => this.recordView())
+			uni.$once('LOGON', () => this.recordView())
 		}
 
 		// 进入页面开始计时，控制弹出广告

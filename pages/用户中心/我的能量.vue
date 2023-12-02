@@ -70,12 +70,13 @@
 							style="position: absolute; right: 4rpx; bottom: 2rpx">{{ item.discount }}折</view>
 					</view>
 				</view>
-				<button class="margin cu-btn round xxl block" :class="'bg-' + color">
+				<button class="margin cu-btn xxl block" :class="'bg-' + color" @click="pay()">
 					<text>立即充值</text>
 					<text class="text-price margin-left-xs">{{ PAY[active] ? PAY[active].price : "" }}</text>
 					<text class="text-sm" style="position: absolute; right: 50rpx; bottom: 8rpx; font-style: italic"> 赠送{{
 						PAY[active] ? PAY[active].price : "" }}天免广告 </text>
 				</button>
+				<navigator url="/pages/应用相关/关于能量" class="flex text-blue margin">关于能量</navigator>
 			</template>
 		</template>
 	</Page>
@@ -109,9 +110,31 @@ export default {
 		this.$refs.Page.getHeight();
 		this.$refs.ADFloat.show = false;
 		clearInterval(this.$refs.Page.timer);
+		// uni.onPushMessage(({ data: { payload } }) => {
+		// 		console.log('onPushMessage', payload)
+		// 	})
+		uni.onPushMessage(this.onPush)
+	},
+	beforeDestroy() {
+		uni.offPushMessage(this.onPush)
 	},
 	onLoad() { },
 	methods: {
+		onPush({ data: { payload } }) {
+			if (payload.type === 'pay') {
+				const energy = data.num * 10000
+				this.$store.commit('user/SET_USER_INFO', {
+					energy: this.$store.state.user.energy + energy,
+					total_chat_count: this.$store.state.user.total_chat_count + energy
+				})
+				uni.showModal({
+					title: '购买成功',
+					content: `您购买的${energy}能量已到账，请查收`,
+					showCancel: false,
+					confirmText: '好的'
+				});
+			}
+		},
 		getClass() {
 			this.color = getApp()
 				.globalData.bgClass.slice()
@@ -121,7 +144,7 @@ export default {
 		},
 		pay() {
 			this.$loading();
-			this.$("/pay")
+			this.$("/pay", this.PAY[this.active])
 				.then(data => {
 					uni.requestPayment({
 						...data,
@@ -129,8 +152,8 @@ export default {
 							this.$toast("支付成功");
 							console.log(e);
 						},
-						fail: e => {
-							this.$copy(JSON.stringify(e));
+						fail: (e) => {
+							this
 						},
 						complete: () => {
 							this.$loaded();

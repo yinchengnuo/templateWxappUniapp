@@ -47,7 +47,11 @@ export default {
 		colors: ["red", "orange", "yellow", "olive", "green", "cyan", "blue", "purple", "mauve", "pink", "brown", "grey"],
 	},
 	onLaunch(option) {
-		this.$store.dispatch('user/login', { openid: option.query.openid })
+		this.$store.dispatch('user/login', { openid: option.query.openid }).then(() => {
+			uni.onPushMessage(({ data: { payload } }) => {
+				console.log('onPushMessage', payload)
+			})
+		})
 		// this.$store.dispatch('user/getCityWeather')
 	},
 	async onShow(option) {
@@ -55,7 +59,7 @@ export default {
 			if (this.$store.state.user.openid) {
 				uni.navigateTo({ url: option.query.path })
 			} else {
-				uni.$on('LOGON', () => uni.navigateTo({ url: option.query.path }))
+				uni.$once('LOGON', () => uni.navigateTo({ url: option.query.path }))
 			}
 		}
 		// this.$store.dispatch('user/getCityWeather')
@@ -81,14 +85,14 @@ export default {
 
 .flex {
 	align-items: center;
-	display: flex!important;
+	display: flex !important;
 	justify-content: center;
 }
 
 .flexc {
 	align-items: center;
 	flex-direction: column;
-	display: flex!important;
+	display: flex !important;
 	justify-content: center;
 }
 

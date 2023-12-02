@@ -7,6 +7,7 @@
 						<view class="content padding-tb-sm">
 							<view>
 								<text v-if="item.type === 'ad'" class="text-black margin-right-xs">观看视频广告奖励</text>
+								<text v-if="item.type === 'pay'" class="text-black margin-right-xs">购买</text>
 								<text v-if="item.type === 'chat'" class="text-black margin-right-xs">AI对话消耗</text>
 								<text v-if="item.type === 'clock'" class="text-black margin-right-xs">当日签到</text>
 								<text v-if="item.type === 'logon'" class="text-black margin-right-xs">新用户赠送1000</text>

@@ -19,12 +19,14 @@ export default {
   actions: {
     // 登录接口
     async login({ commit }, payload = {}) {
-      commit("app/LOADING", null, { root: true });
+      return new Promise((resolve, reject) => {
+        commit("app/LOADING", null, { root: true });
       Promise.all([uni.getPushClientId(), uni.login()])
         .then(([{ cid }, { code }]) => {
           Vue.prototype
             .$("/login", { cid, code, openid: payload.openid })
             .then(data => {
+              resolve(data)
               setTimeout(() => uni.$emit("LOGON"));
               commit("app/SET_LIST", data.functions, { root: true });
               commit("SET_USER_INFO", { ...data, functions: undefined });
@@ -32,13 +34,15 @@ export default {
             .finally(() => commit("app/LOADED", null, { root: true }));
         })
         .catch(e => {
+          reject(e)
           Vue.prototype.$toast(e.message);
           commit("app/LOADED", null, { root: true });
         });
+      })
     },
     // 获取地理位置、天气
     async getCityWeather({ state, commit }) {
-      if (!state.openid) await new Promise(resolve => uni.$on("LOGON", resolve));
+      if (!state.openid) await new Promise(resolve => uni.$once("LOGON", resolve));
       uni.request({ url: "https://api.oioweb.cn/api/weather/GetWeather" }).then(({ data: { result } }) => {
         const cpca = { country: result.city.country, province: result.city.economize, city: result.city.city_name, area: "" };
         commit("SET_USER_INFO", cpca);
