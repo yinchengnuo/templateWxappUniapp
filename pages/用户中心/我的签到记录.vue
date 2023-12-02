@@ -16,6 +16,7 @@
 							<text class="text-lg text-bold text-green">+{{ item.energy }}</text>
 						</view>
 					</view>
+					<view class="flex text-grey text-sm">仅展示最新100条记录...</view>
 				</view>
 				<AD1 />
 				<AD2 />

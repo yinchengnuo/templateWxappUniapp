@@ -4,6 +4,7 @@ export default {
   namespaced: true,
   state: {
     openid: "",
+    random_box_list: [],
     show_random_box: false,
   },
   mutations: {

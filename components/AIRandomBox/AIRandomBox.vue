@@ -44,10 +44,16 @@ export default {
 		};
 	},
 	created() {
-		this.$('/box/refresh').then(data => {
-			this.list = data
+		if (this.$store.state.user.random_box_list.length) {
+			this.list = this.$store.state.user.random_box_list
 			this.refersh()
-		})
+		} else {
+			this.$('/box/refresh').then(data => {
+				this.list = data
+				this.$store.state.user.random_box_list = data
+				this.refersh()
+			})
+		}
 	},
 	methods: {
 		// 点击换一换

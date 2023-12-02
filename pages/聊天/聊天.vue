@@ -73,7 +73,7 @@
 				<view v-else style="height: 28rpx;"></view>
 			</view>
 		</scroll-view>
-		<view class="flexc" v-else
+		<view class="flexc" v-if="!list.length && show_random_box"
 			:style="{ height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px - 164rpx)` }"
 			style="justify-content: flex-end; overflow: auto;">
 			<AIRandomBox />

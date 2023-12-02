@@ -108,7 +108,6 @@ if (H >= 12 && H < 15) image = getApp().globalData.images[4];
 if (H >= 15 && H < 17) image = getApp().globalData.images[5];
 if (H >= 17 && H < 19) image = getApp().globalData.images[6];
 if (H >= 19) image = getApp().globalData.images[7];
-console.log(image);
 export default {
   name: "AISettings",
   data() {
@@ -158,7 +157,6 @@ export default {
                 this.$parent.interstitialAd.show();
               },
             });
-            this.$store.dispatch("user/login");
           })
           .finally(() => {
             this.$loaded();

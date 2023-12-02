@@ -4,7 +4,7 @@
 			src='https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/page_bg.png'></image>
 		<view class="page_bg bg-gradual-blue-light"></view>
 
-		<image class="w100;" mode="widthFix" style="position: fixed; top: 0 ; left: 0; opacity: 0.2; z-index: 0;"
+		<image class="w100;" mode="widthFix" style="position: absolute; top: 0 ; left: 0; opacity: 0.2; z-index: 0;"
 			src="https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/logo.png"></image>
 
 		<view url="/pages/每日随机/功能类/天气" class="flex relative" style="box-sizing: border-box;" :style="{
@@ -211,7 +211,7 @@ export default {
 		z-index: 0;
 		width: 100%;
 		height: 100vh;
-		position: fixed;
+		position: absolute;
 	}
 
 	.page_title {
