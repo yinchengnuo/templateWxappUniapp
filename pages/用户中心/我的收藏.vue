@@ -23,6 +23,7 @@
 						</navigator>
 					</view>
 				</template>
+				<Empty v-if="empty" />
 			</template>
 		</template>
 	</Page>
@@ -44,6 +45,9 @@ export default {
 	onShow() {
 		uni.$once('COLLECT_CANCEL', _id => {
 			this.records.splice(this.records.findIndex(e => e._id === _id), 1)
+			if (!this.records.length) {
+				this.empty = true
+			}
 		})
 	},
 	created() {
