@@ -151,8 +151,8 @@ export default {
     this.rewardedVideoAd = uni.createRewardedVideoAd({
       adUnitId: "adunit-02b562d4a8c16436",
     });
-    this.rewardedVideoAd.onError(res => {
-      console.log(res);
+    this.rewardedVideoAd.onError(e => {
+      this.$toast(e.errMsg)
     });
     this.rewardedVideoAd.onClose(({ isEnded }) => {
       if (isEnded) {
@@ -170,6 +170,8 @@ export default {
                 this.$parent.interstitialAd.show();
               },
             });
+          }).catch(e => {
+            this.$toast(e.errMsg)
           })
           .finally(() => {
             this.$loaded();
@@ -282,7 +284,7 @@ export default {
         uni.setStorageSync("hide_random_box", dayjs().format("YYYY-MM-DD"));
       }
     },
-    // 显示聊天页面插屏广告
+    // 显示聊天页面激励视频广告
     showAD() {
       if (!this.ing) {
         this.ing = true;
@@ -292,7 +294,7 @@ export default {
             console.log(res);
           })
           .catch(e => {
-            console.log(e);
+            this.$toast(e.errMsg)
           })
           .finally(() => {
             this.ing = false;
@@ -303,6 +305,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>.cu-coupon-box::after {
+<style lang="scss" scoped>
+.cu-coupon-box::after {
   background: transparent;
-}</style>
+}
+</style>
