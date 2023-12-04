@@ -148,12 +148,12 @@ export default {
   },
   created() {
     this.ai_memory_count = this.user.ai_memory_count ? this.user.ai_memory_count : "";
-    this.rewardedVideoAd = uni.createRewardedVideoAd({
-      adUnitId: "adunit-02b562d4a8c16436",
+    this.rewardedVideoAd = uni.createRewardedVideoAd({ adUnitId: "adunit-02b562d4a8c16436" });
+
+    this.rewardedVideoAd.onError(() => {
+      this.$toast('视频广告拉取失败，请稍后再试')
     });
-    this.rewardedVideoAd.onError(e => {
-      this.$toast(e.errMsg)
-    });
+
     this.rewardedVideoAd.onClose(({ isEnded }) => {
       if (isEnded) {
         this.$loading();
@@ -170,10 +170,7 @@ export default {
                 this.$parent.interstitialAd.show();
               },
             });
-          }).catch(e => {
-            this.$toast(e.errMsg)
-          })
-          .finally(() => {
+          }).finally(() => {
             this.$loaded();
           });
       }
@@ -293,8 +290,8 @@ export default {
           .then(res => {
             console.log(res);
           })
-          .catch(e => {
-            this.$toast(e.errMsg)
+          .catch(() => {
+            this.$toast('视频广告拉取失败，请稍后再试')
           })
           .finally(() => {
             this.ing = false;
