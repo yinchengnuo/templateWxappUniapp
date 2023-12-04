@@ -2,32 +2,11 @@
 	<Page ref="Page">
 		<template v-slot:default="{ page }">
 			<template v-if="page">
-				<view v-if="result.content" class="cu-bar bg-white solid-bottom margin-top">
-					<view class="action">
-						<text class="cuIcon-titles"></text>
-						<text>内容</text>
-					</view>
-				</view>
 				<view v-if="result.content" class="cu-list menu sm-border card-menu margin-top margin-bottom">
 					<view class="cu-item">
 						<view class="content">
 							<view class="text-black text-bold padding-top-sm padding-bottom-sm">
 								<rich-text :nodes="result.content"></rich-text>
-							</view>
-						</view>
-					</view>
-				</view>
-				<view v-if="result.commentary" class="cu-bar bg-white solid-bottom margin-top">
-					<view class="action">
-						<text class="cuIcon-titles"></text>
-						<text>注释</text>
-					</view>
-				</view>
-				<view v-if="result.commentary" class="cu-list menu sm-border card-menu margin-top margin-bottom">
-					<view class="cu-item">
-						<view class="content">
-							<view class="text-black text-bold padding-top-sm padding-bottom-sm">
-								<rich-text :nodes="result.commentary"></rich-text>
 							</view>
 						</view>
 					</view>
@@ -73,6 +52,21 @@
 						<view class="content">
 							<view class="text-black text-bold padding-top-sm padding-bottom-sm">
 								<rich-text :nodes="result.interpretation"></rich-text>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view v-if="result.commentary" class="cu-bar bg-white solid-bottom margin-top">
+					<view class="action">
+						<text class="cuIcon-titles"></text>
+						<text>注释</text>
+					</view>
+				</view>
+				<view v-if="result.commentary" class="cu-list menu sm-border card-menu margin-top margin-bottom">
+					<view class="cu-item">
+						<view class="content">
+							<view class="text-black text-bold padding-top-sm padding-bottom-sm">
+								<rich-text :nodes="result.commentary"></rich-text>
 							</view>
 						</view>
 					</view>

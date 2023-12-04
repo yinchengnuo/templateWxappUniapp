@@ -1,12 +1,6 @@
 <template>
 	<view>
-		<view class="cu-bar bg-white solid-bottom margin-top">
-			<view class="action">
-				<text class="cuIcon-titles" :class="'text-' + color"></text>
-				<text>简介</text>
-			</view>
-		</view>
-		<view v-if="result" class="cu-list menu sm-border card-menu margin-top margin-bottom">
+		<view v-if="result.desc" class="cu-list menu sm-border card-menu margin-top margin-bottom">
 			<view class="cu-item">
 				<view class="content">
 					<view class="text-black text-bold padding-top-sm padding-bottom-sm">{{ result.desc }}</view>
