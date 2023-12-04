@@ -66,7 +66,7 @@
 export default {
 	data() {
 		return {
-			text: '',
+			text: uni.getStorageSync('express') || '',
 			// text: 'YT8934188937784',
 			focus: true,
 			result: null
@@ -108,6 +108,7 @@ export default {
 				this.focus = true
 				this.$toast('请输入单号')
 			}
+			uni.setStorageSync('express', this.text || '')
 		}
 	}
 }

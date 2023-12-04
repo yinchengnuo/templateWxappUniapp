@@ -44,11 +44,14 @@ export default {
 		}
 	},
 	created() {
+		this.$loading()
 		this.$("/pay/pay_record").then(data => {
 			this.records = data;
 			if (!this.records.length) {
 				this.empty = true
 			}
+		}).finally(() => {
+			this.$loaded()
 		});
 	},
 	mounted() {

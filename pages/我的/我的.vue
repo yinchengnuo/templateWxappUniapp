@@ -85,9 +85,9 @@
 					<text class="text-black">我的分享</text>
 				</view>
 			</navigator>
-			<navigator url="/pages/用户中心/找到组织" class="cu-item arrow">
+			<navigator v-if="user.vip" url="/pages/用户中心/找到组织" class="cu-item arrow">
 				<view class="content">
-					<text class="cuIcon-github text-black"></text>
+					<text class="cuIcon-communityfill text-black"></text>
 					<text class="text-black">找到组织</text>
 				</view>
 			</navigator>
@@ -99,14 +99,14 @@
 			</navigator>
 		</view>
 
-		<view class="relative cu-list menu card-menu sm-border margin-top-sm shadow-lg">
-			<view class="cu-item">
+		<view v-if="user.contact || user.feedback" class="relative cu-list menu card-menu sm-border margin-tb-sm shadow-lg">
+			<view v-if="user.contact" class="cu-item arrow">
 				<button class='cu-btn content' open-type='contact'>
 					<text class='cuIcon-service text-orange text-xl'></text>
 					<text class='text-l text-black'>联系作者</text>
 				</button>
 			</view>
-			<view class="cu-item">
+			<view v-if="user.feedback" class="cu-item arrow">
 				<button class='cu-btn content' open-type='feedback'>
 					<text class='cuIcon-write text-cyan text-xl'></text>
 					<text class='text-l text-black'>意见反馈</text>
