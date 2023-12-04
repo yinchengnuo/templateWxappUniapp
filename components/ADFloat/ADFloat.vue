@@ -1,5 +1,5 @@
 <template>
-	<view class="index">
+	<view v-show="show" class="index">
 		<ad-custom v-if="show" unit-id="adunit-8b304cf8af7361f2" @error="error"></ad-custom>
 	</view>
 </template>

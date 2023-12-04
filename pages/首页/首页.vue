@@ -101,7 +101,7 @@ export default {
 	onShow() {
 		this.show++
 		if ((this.show !== 0) && (this.show % 4 === 0)) {
-			this.interstitialAd.show()
+			!this.$store.state.user.vip && this.interstitialAd.show()
 		}
 	},
 	onLoad() {

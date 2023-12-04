@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view v-show="show">
 		<ad v-if="show" unit-id="adunit-42238affd4939e6a" ad-type="video" ad-theme="white" @load="load" @error="error"
 			@close="close"></ad>
 	</view>

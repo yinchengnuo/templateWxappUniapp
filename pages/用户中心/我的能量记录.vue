@@ -21,7 +21,7 @@
 							<text v-else class="text-lg text-bold text-red">{{ item.energy }}</text>
 						</view>
 					</view>
-					<view class="flex text-grey text-sm">仅展示最新100条记录...</view>
+					<view class="margin flex text-grey text-sm">仅展示最新100条记录...</view>
 				</view>
 				<AD2 />
 				<AD3 />

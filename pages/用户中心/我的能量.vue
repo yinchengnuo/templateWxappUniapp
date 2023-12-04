@@ -38,7 +38,7 @@
 						<text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
 						<text class="text-bold">
 							<text>能量充值</text>
-							<text class="text-grey" style="font-size: 24rpx; font-weight: normal">
+							<text class="text-grey" style="font-size: 24rpx; font-weight: normal" @click="toAD">
 								<text class="margin-lr-xs">充值赠送免广告</text>
 								<text class="cuIcon-questionfill"></text>
 							</text>
@@ -88,6 +88,7 @@ export default {
 		return {
 			active: 4,
 			color: "",
+			payMessage: null
 		};
 	},
 	computed: {
@@ -110,13 +111,6 @@ export default {
 		this.$refs.Page.getHeight();
 		this.$refs.ADFloat.show = false;
 		clearInterval(this.$refs.Page.timer);
-		// uni.onPushMessage(({ data: { payload } }) => {
-		// 		console.log('onPushMessage', payload)
-		// 	})
-		uni.onPushMessage(this.onPush)
-	},
-	beforeDestroy() {
-		uni.offPushMessage(this.onPush)
 	},
 	onLoad() { },
 	methods: {
@@ -148,13 +142,8 @@ export default {
 				.then(data => {
 					uni.requestPayment({
 						...data,
-						success: e => {
-							this.$toast("支付成功");
-							console.log(e);
-						},
-						fail: (e) => {
-							this
-						},
+						success: () => { },
+						fail: (e) => { },
 						complete: () => {
 							this.$loaded();
 						},
@@ -164,6 +153,9 @@ export default {
 					this.$loaded();
 				});
 		},
+		toAD() {
+			uni.navigateTo({ url: '/pages/应用相关/关于广告' });
+		}
 	},
 };
 </script>

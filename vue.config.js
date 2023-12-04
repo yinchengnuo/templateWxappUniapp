@@ -5,6 +5,7 @@ module.exports = {
 			options.compiler.compile = (template, ...args) => {
 				if (args[0].resourcePath.match(/^pages/)) {
 					template = template.replace(/[\s\S]+?<[\d\D]+?>/, _ => `${_}
+						<Notify ref="Notify" />
 						<Loading ref="Loading" />
 						<ADFloat ref="ADFloat" />
 					`)

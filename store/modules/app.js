@@ -4,7 +4,10 @@ export default {
   namespaced: true,
   state: {
     list: [],
+    notify: [],
     loading: false,
+    notifyRoute: '',
+    currentRoute: '',
   },
   mutations: {
     LOADED(state) {

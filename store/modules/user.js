@@ -3,6 +3,7 @@ import Vue from "vue";
 export default {
   namespaced: true,
   state: {
+    vip: true,
     openid: "",
     random_box_list: [],
     show_random_box: false,
@@ -29,7 +30,7 @@ export default {
               resolve(data)
               setTimeout(() => uni.$emit("LOGON"));
               commit("app/SET_LIST", data.functions, { root: true });
-              commit("SET_USER_INFO", { ...data, functions: undefined });
+              commit("SET_USER_INFO", { ...data, functions: undefined, vip: undefined });
             })
             .finally(() => commit("app/LOADED", null, { root: true }));
         })

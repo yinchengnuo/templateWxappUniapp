@@ -1,13 +1,12 @@
 <script>
-const getNames = (name, num) => {
-	return Array(num).fill(0).map((e, i) => `${name}${(i + 1).toString().padStart(2, '0')}`)
-}
+import dayjs from 'dayjs'
 const appBaseInfo = uni.getAppBaseInfo()
 const systemInfo = uni.getSystemInfoSync()
 const statusBarHeight = systemInfo.statusBarHeight
 const menuButtonBoundingClientRect = uni.getMenuButtonBoundingClientRect()
 const navigationBarHeight = menuButtonBoundingClientRect.bottom + (menuButtonBoundingClientRect.top -
 	statusBarHeight)
+const getNames = (name, num) => Array(num).fill(0).map((e, i) => `${name}${(i + 1).toString().padStart(2, '0')}`)
 export default {
 	globalData: {
 		systemInfo,
@@ -47,11 +46,35 @@ export default {
 		colors: ["red", "orange", "yellow", "olive", "green", "cyan", "blue", "purple", "mauve", "pink", "brown", "grey"],
 	},
 	onLaunch(option) {
-		this.$store.dispatch('user/login', { openid: option.query.openid }).then(() => {
-			uni.onPushMessage(({ data: { payload } }) => {
-				console.log('onPushMessage', payload)
-			})
+		// 小程序启动即登录
+		this.$store.dispatch('user/login', { openid: option.query.openid, date: option.query.date })
+		// 监听消息推送
+		uni.onPushMessage(({ data: { payload } }) => {
+			// 如果是支付消息
+			if (payload.type === 'pay') {
+				const energy = payload.data.num * 10000
+				this.$store.commit('user/SET_USER_INFO', {
+					vip_time: payload.data.vip_end_time, // 更新 VIP 时间
+					energy: this.$store.state.user.energy + energy, // 更新总能量
+					total_income: this.$store.state.user.total_income + energy // 更新总入账能量
+				})
+			}
+			uni.vibrateLong(); // 震动一下
+			this.$store.state.app.notify.push(payload) // 弹出系统消息提示框
+			this.$store.state.app.notifyRoute = this.$store.state.app.currentRoute // 标记弹出系统消息提示框的页面
 		})
+		// 检查用户是否 VIP
+		const check = () => {
+			if (this.$store.state.user.vip_time) {
+				if (Date.now() > (dayjs(this.$store.state.user.vip_time).valueOf())) {
+					this.$store.commit('user/SET_USER_INFO', { vip: false })
+				} else {
+					this.$store.commit('user/SET_USER_INFO', { vip: true })
+				}
+				console.log(this.$store.state.user.vip)
+			}
+		}
+		setInterval(check, 1000) // 1秒钟检查一次，时间一到立马切换状态
 		// this.$store.dispatch('user/getCityWeather')
 	},
 	async onShow(option) {
