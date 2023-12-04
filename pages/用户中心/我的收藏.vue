@@ -41,6 +41,11 @@ export default {
 			return this.$store.state.app.loading
 		}
 	},
+	onShow() {
+		uni.$once('COLLECT_CANCEL', _id => {
+			this.records.splice(this.records.findIndex(e => e._id === _id), 1)
+		})
+	},
 	created() {
 		this.$loading()
 		this.$("/collect_record").then(data => {

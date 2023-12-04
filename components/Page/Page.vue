@@ -160,6 +160,7 @@ export default {
 					this.$toast('收藏成功')
 				} else {
 					this.$toast('取消收藏成功')
+					uni.$emit('COLLECT_CANCEL', data._id)
 				}
 			}).finally(() => {
 				this.$loaded()
