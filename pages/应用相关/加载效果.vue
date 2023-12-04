@@ -4,7 +4,7 @@
 			<template v-if="page">
 				<view class="flex" style="flex-wrap: wrap;">
 					<view class="flexc" style="width: 250rpx; height: 250rpx;" v-for="(item, index) in list" :key="index"
-						@click="choose(item)">
+						@click="choose(item)" :style="{ background: chooseed.includes(item) ? '#dedede' : '' }">
 						<LoadingSpin :loading="item" />
 					</view>
 				</view>
@@ -31,7 +31,7 @@ export default {
 			} else {
 				this.chooseed.push(e)
 			}
-			// this.$copy(JSON.stringify(this.chooseed))
+			console.log(this.chooseed)
 		}
 	}
 }
