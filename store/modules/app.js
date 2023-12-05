@@ -6,8 +6,8 @@ export default {
     list: [],
     notify: [],
     loading: false,
-    notifyRoute: '',
-    currentRoute: '',
+    notifyRoute: "",
+    currentRoute: "",
   },
   mutations: {
     LOADED(state) {
@@ -17,7 +17,7 @@ export default {
       state.loading = true;
       setTimeout(() => {
         state.loading = false;
-      }, 3456)
+      }, 3456);
     },
     SET_LIST(state, payload) {
       state.list = payload;

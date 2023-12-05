@@ -3,8 +3,7 @@
     <view style="position: sticky; top: 30rpx; z-index: 2">
       <view class="flex solid-bottom margin-top justify-center">
         <view class="cu-coupon-box bg-img bg-mask radius-lg padding-sm">
-          <image class="w100 h100" :src="image" mode="aspectFill"
-            style="position: absolute; top: 0; left: 0; z-index: 1; opacity: 0.6"></image>
+          <image class="w100 h100" :src="image" mode="aspectFill" style="position: absolute; top: 0; left: 0; z-index: 1; opacity: 0.6"></image>
           <view class="w100 h100 padding-sm" style="position: absolute; top: 0; left: 0; z-index: 1">
             <view class="flex justify-between" style="position: relative; z-index: 2">
               <view class="text-xl text-bold text-white">ToolBox AI 设置</view>
@@ -18,11 +17,9 @@
                 </view>
               </view>
             </view>
-            <navigator url="/pages/用户中心/我的能量"
-              class="flex justify-center align-end padding-tb cu-coupon-content text-white">
+            <navigator url="/pages/用户中心/我的能量" class="flex justify-center align-end padding-tb cu-coupon-content text-white">
               <text class="text-lg padding-bottom-xs text-black">余额</text>
-              <text class="text-sl text-bold text-shadow" style="text-shadow: 0px 0px 4rpx green"> {{ user.energy }}
-              </text>
+              <text class="text-sl text-bold text-shadow" style="text-shadow: 0px 0px 4rpx green"> {{ user.energy }} </text>
               <text class="text-lg text-green text-shadow cuIcon-lightauto">能量</text>
             </navigator>
             <view class="flex justify-around align-center margin-top-xl text-white">
@@ -36,8 +33,7 @@
         </view>
       </view>
       <navigator url="/pages/用户中心/我的能量">
-        <uni-notice-bar show-get-more show-icon :fontSize="16" scrollable text="能量不够用? 10,000 能量只需一元！多买多送，最低至3折！点我立即充值"
-          style="margin-bottom: 0" />
+        <uni-notice-bar show-get-more show-icon :fontSize="16" scrollable text="能量不够用? 10,000 能量只需一元！多买多送，最低至3折！点我立即充值" style="margin-bottom: 0" />
       </navigator>
     </view>
     <view class="cu-coupon-box2 radius-lg" :class="bg" style="margin-top: 0; margin-bottom: 0">
@@ -46,17 +42,14 @@
       </view>
       <view class="flex p-xs margin-bottom-sm mb-sm shadow">
         <view class="cu-avatar xl radius margin-left margin-right">
-          <image v-if="user.ai_provider" mode="aspectFit"
-            :src="'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/' + user.ai_provider + '.jpg'"
-            class="w100 h100"></image>
+          <image v-if="user.ai_provider" mode="aspectFit" :src="'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/' + user.ai_provider + '.jpg'" class="w100 h100"></image>
         </view>
         <view class="flex-treble padding-left-sm margin-left">
           <picker class="text-black text-xxl text-bold" :value="aiNameIndex" :range="aiNameList" @change="chooseProvider">
             <text class="margin-right">{{ ai.name }}</text>
             <text class="cuIcon-right"></text>
           </picker>
-          <picker v-if="modelList && modelList.length > 1" class="text-grey padding-top-xs"
-            :value="modelList.indexOf(user.ai_model)" :range="modelList" @change="chooseModel">
+          <picker v-if="modelList && modelList.length > 1" class="text-grey padding-top-xs" :value="modelList.indexOf(user.ai_model)" :range="modelList" @change="chooseModel">
             <text class="margin-right">{{ user.ai_model }}</text>
             <text class="cuIcon-right"></text>
           </picker>
@@ -67,8 +60,7 @@
       </view>
     </view>
 
-    <view class="cu-list menu card-menu sm-border margin-top-sm shadow radius-lg"
-      style="margin-left: 25rpx; margin-right: 25rpx">
+    <view class="cu-list menu card-menu sm-border margin-top-sm shadow radius-lg" style="margin-left: 25rpx; margin-right: 25rpx">
       <view class="cu-bar bg-white">
         <view class="action">
           <text class="cuIcon-titles text-grey"></text>
@@ -83,10 +75,8 @@
       <view class="cu-form-group">
         <view class="title">连续对话记忆次数</view>
         <view class="cuIcon-questionfill text-gray margin-right" style="font-size: 42rpx" @click="showModal1"> </view>
-        <input placeholder="请输入0~9" type="number" :value="ai_memory_count" @input="input" @confirm="confirm"
-          style="border: 1px solid #efefef; border-radius: 8rpx; padding: 10rpx 20rpx; height: 80rpx" />
-        <button class="cu-btn round margin-left bg-green shadow" v-if="Number(ai_memory_count) !== user.ai_memory_count"
-          @click="confirm">保存</button>
+        <input placeholder="请输入0~9" type="number" :value="ai_memory_count" @input="input" @confirm="confirm" style="border: 1px solid #efefef; border-radius: 8rpx; padding: 10rpx 20rpx; height: 80rpx" />
+        <button class="cu-btn round margin-left bg-green shadow" v-if="Number(ai_memory_count) !== user.ai_memory_count" @click="confirm">保存</button>
         <view class="text-grey cuIcon-infofill margin-left" style="font-size: 42rpx" @click="showModal2"></view>
       </view>
       <view class="cu-item">
@@ -101,8 +91,7 @@
         <view class="content">聊天管理</view>
       </navigator>
       <!-- <button class="cu-btn block bg-red margin-tb-sm lg" @click="clearRecord()">清空聊天记录</button> -->
-      <button class="cu-btn block bg-grey margin-tb-sm lg" @click="$parent.page_container_show = false">退出 ToolBox AI
-        设置</button>
+      <button class="cu-btn block bg-grey margin-tb-sm lg" @click="$parent.page_container_show = false">退出 ToolBox AI 设置</button>
     </view>
   </view>
 </template>
@@ -151,7 +140,7 @@ export default {
     this.rewardedVideoAd = uni.createRewardedVideoAd({ adUnitId: "adunit-02b562d4a8c16436" });
 
     this.rewardedVideoAd.onError(() => {
-      this.$toast('视频广告拉取失败，请稍后再试')
+      this.$toast("视频广告拉取失败，请稍后再试");
     });
 
     this.rewardedVideoAd.onClose(({ isEnded }) => {
@@ -159,8 +148,8 @@ export default {
         this.$loading();
         this.$("/ad")
           .then(({ total, num, energy }) => {
-            this.$store.state.user.energy += energy
-            this.$store.state.user.total_income += energy
+            this.$store.state.user.energy += energy;
+            this.$store.state.user.total_income += energy;
             uni.showModal({
               title: "观看视频广告成功",
               content: `免费赠送${energy}能量已到账，请查收（今日已领取${num}/${total}）次`,
@@ -170,7 +159,8 @@ export default {
                 this.$parent.interstitialAd.show();
               },
             });
-          }).finally(() => {
+          })
+          .finally(() => {
             this.$loaded();
           });
       }
@@ -291,7 +281,7 @@ export default {
             console.log(res);
           })
           .catch(() => {
-            this.$toast('视频广告拉取失败，请稍后再试')
+            this.$toast("视频广告拉取失败，请稍后再试");
           })
           .finally(() => {
             this.ing = false;

@@ -4,7 +4,7 @@ Vue.mixin({
   onShow() {
     const pages = getCurrentPages();
     if (pages && pages.length) {
-      console.log(pages.at(-1))
+      console.log(pages.at(-1));
       Vue.prototype.$store.state.app.currentRoute = pages.at(-1).route;
     }
     uni.showShareMenu({
