@@ -157,28 +157,33 @@ export default {
     this.rewardedVideoAd.onError(() => {
       this.$toast("视频广告拉取失败，请稍后再试");
     });
-
+    this.lock = false;
     this.rewardedVideoAd.onClose(res => {
-      this.rewardedVideoAd.offClose();
       if (res && res.isEnded) {
-        this.$loading();
-        this.$("/ad")
-          .then(({ total, num, energy }) => {
-            this.$store.state.user.energy += energy;
-            this.$store.state.user.total_income += energy;
-            uni.showModal({
-              title: "观看视频广告成功",
-              content: `免费赠送${energy}能量已到账，请查收（今日已领取${num}/${total}）次`,
-              showCancel: false,
-              confirmText: "好的",
-              complete: () => {
-                this.$parent.interstitialAd.show();
-              },
-            });
+        if (!this.lock) {
+          this.lock = true
+          setTimeout(() => {
+            this.lock = false
           })
-          .finally(() => {
-            this.$loaded();
-          });
+          this.$loading();
+          this.$("/ad")
+            .then(({ total, num, energy }) => {
+              this.$store.state.user.energy += energy;
+              this.$store.state.user.total_income += energy;
+              uni.showModal({
+                title: "观看视频广告成功",
+                content: `免费赠送${energy}能量已到账，请查收（今日已领取${num}/${total}）次`,
+                showCancel: false,
+                confirmText: "好的",
+                complete: () => {
+                  this.$parent.interstitialAd.show();
+                },
+              });
+            })
+            .finally(() => {
+              this.$loaded();
+            });
+        }
       }
     });
   },
