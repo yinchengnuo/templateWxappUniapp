@@ -1,5 +1,5 @@
 <template>
-  <Page ref="Page" bg type="no">
+  <Page ref="Page" bg>
     <template v-slot:default="{ page }">
       <template v-if="page">
         <template v-if="records.length">

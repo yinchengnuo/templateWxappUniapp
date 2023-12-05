@@ -33,7 +33,21 @@
         </view>
       </view>
       <navigator url="/pages/用户中心/我的能量">
-        <uni-notice-bar show-get-more show-icon :fontSize="16" scrollable text="能量不够用? 10,000 能量只需一元！多买多送，最低至3折！点我立即充值" style="margin-bottom: 0" />
+        <swiper class="swiperitem margin-lr" autoplay="true" vertical="true" circular="true" interval="3210" duration="500" style="height: 80rpx">
+          <block v-for="message in messages" :key="message">
+            <swiper-item catchtouchmove="false">
+              <view class="cu-bar radius bg-orange light" style="display: flex; position: relative; align-items: center; min-height: 60rpx; justify-content: space-between">
+                <view class="action flex w100">
+                  <view class="flex1">
+                    <text class="cuIcon-lightauto text-green margin-right-xs"></text>
+                    <text class="text-bold">{{ message }}</text>
+                  </view>
+                  <text class="cuIcon-right text-orange"></text>
+                </view>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
       </navigator>
     </view>
     <view class="cu-coupon-box2 radius-lg" :class="bg" style="margin-top: 0; margin-bottom: 0">
@@ -116,6 +130,7 @@ export default {
       modelList: [],
       switchShow: true,
       ai_memory_count: 0,
+      messages: ["10,000 能量只需一元 立即充值", "多买多送，最低至 3 折 立即充值", "充值能量赠送免广告 VIP 立即充值"],
       bg: getApp()
         .globalData.bgClass.slice()
         .sort(() => Math.random() - 0.5)[0],

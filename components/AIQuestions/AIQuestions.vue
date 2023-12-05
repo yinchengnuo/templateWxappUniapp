@@ -89,12 +89,12 @@
       <view class="flexc radius flex1 h100" :class="active === 3 ? className : ''" @click="active = 3">
         <view class="cu-tag badge bg-red">{{ scene.reduce((t, e) => t + e.promptLibs.length, 0) }}</view>
         <text class="text-lg" :class="active === 3 ? 'cuIcon-cardboardfill' : 'cuIcon-cardboard'"></text>
-        <text class="text-sm text-bold">18大场景</text>
+        <text class="text-sm text-bold">{{ scene.length }}大场景</text>
       </view>
       <view class="flexc radius flex1 h100" :class="active === 4 ? className : ''" @click="active = 4">
         <view class="cu-tag badge bg-red">{{ career.reduce((t, e) => t + e.promptLibs.length, 0) }}</view>
         <text class="text-lg" :class="active === 4 ? 'cuIcon-discoverfill' : 'cuIcon-discover'"></text>
-        <text class="text-sm text-bold">10大职业</text>
+        <text class="text-sm text-bold">{{ career.length }}大职业</text>
       </view>
       <view class="flexc radius flex1 h100" :class="active === 5 ? className : ''" @click="active = 5">
         <view class="cu-tag badge bg-red">{{ list4.length }}</view>

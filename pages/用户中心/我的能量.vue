@@ -37,7 +37,7 @@
             <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
             <text class="text-bold">
               <text>能量充值</text>
-              <text class="text-grey" style="font-size: 24rpx; font-weight: normal" @click="toAD">
+              <text class="text-grey" style="font-size: 24rpx; font-weight: normal;line-height: 2;" @click="toAD">
                 <text class="margin-lr-xs">充值赠送免广告</text>
                 <text class="cuIcon-questionfill"></text>
               </text>
@@ -69,7 +69,7 @@
           <text class="text-price margin-left-xs">{{ PAY[active] ? PAY[active].price : "" }}</text>
           <text class="text-sm" style="position: absolute; right: 50rpx; bottom: 8rpx; font-style: italic"> 赠送{{ PAY[active] ? PAY[active].price : "" }}天免广告 </text>
         </button>
-        <navigator url="/pages/应用相关/关于能量" class="flex text-blue margin">关于能量</navigator>
+        <navigator url="/pages/应用相关/关于能量" class="flex text-blue padding">关于能量</navigator>
       </template>
     </template>
   </Page>

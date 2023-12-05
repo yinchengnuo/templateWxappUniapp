@@ -82,7 +82,8 @@ export default {
         { api: "美叶", doc: "https://www.meiye.art/inspiration" },
       ];
       const func = this.$store.state.app.list.filter(e => e.api && e.api !== "自研API" && e.api !== "极速数据");
-      return [...apis, ...func, ...(this.$store.state.user.images || [])];
+      // return [...apis, ...func, ...(this.$store.state.user.images || [])];
+      return apis;
     },
   },
   onLoad() {},
