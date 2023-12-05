@@ -16,10 +16,10 @@
         <ad unit-id="adunit-bb0d1a5ba7a52eac"></ad>
         <ad unit-id="adunit-42238affd4939e6a" ad-type="video" ad-theme="white"></ad>
         <view style="right: 8rpx; top: 38.2%; position: fixed; z-index: 9999999999">
-          <ad-custom unit-id="adunit-8b304cf8af7361f2" @error="error"></ad-custom>
+          <ad-custom unit-id="adunit-8b304cf8af7361f2"></ad-custom>
         </view>
         <view style="left: 8rpx; bottom: 38.2%; position: fixed; z-index: 9999999999">
-          <ad-custom unit-id="adunit-8b304cf8af7361f2" @error="error"></ad-custom>
+          <ad-custom unit-id="adunit-8b304cf8af7361f2"></ad-custom>
         </view>
       </template>
     </template>
@@ -31,7 +31,7 @@ export default {
   data() {
     return {};
   },
-  onLoad() { },
+  onLoad() {},
   mounted() {
     this.$refs.Page.getHeight();
   },

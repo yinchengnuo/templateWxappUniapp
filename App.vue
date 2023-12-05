@@ -45,22 +45,6 @@ export default {
     colors: ["red", "orange", "yellow", "olive", "green", "cyan", "blue", "purple", "mauve", "pink", "brown", "grey"],
   },
   onLaunch(option) {
-    // 小程序启动即登录
-    this.$store.dispatch("user/login", { openid: option.query.openid, date: option.query.date }).then(() => {
-      // 检查用户是否 VIP
-      const check = () => {
-        if (this.$store.state.user.vip_time) {
-          if (Date.now() > dayjs(this.$store.state.user.vip_time).valueOf()) {
-            this.$store.state.user.vip = false;
-          } else {
-            this.$store.state.user.vip = true;
-          }
-        } else {
-          this.$store.state.user.vip = false;
-        }
-      };
-      setInterval(() => check(), 1000); // 1秒钟检查一次，时间一到立马切换状态
-    });
     // 监听消息推送
     uni.onPushMessage(({ data: { payload } }) => {
       // 如果是支付消息
@@ -76,16 +60,25 @@ export default {
       this.$store.state.app.notify.push(payload); // 弹出系统消息提示框
       this.$store.state.app.notifyRoute = this.$store.state.app.currentRoute; // 标记弹出系统消息提示框的页面
     });
+    // 小程序启动即登录
+    this.$store.dispatch("user/login", { openid: option.query.openid, date: option.query.date }).then(async () => {
+      // 检查用户是否 VIP
+      const check = () => {
+        if (this.$store.state.user.vip_time) {
+          if (Date.now() > dayjs(this.$store.state.user.vip_time).valueOf()) {
+            this.$store.state.user.vip = false;
+          } else {
+            this.$store.state.user.vip = true;
+          }
+        } else {
+          this.$store.state.user.vip = false;
+        }
+      };
+      setInterval(() => check(), 1000); // 1秒钟检查一次，时间一到立马切换状态
+    });
     // this.$store.dispatch('user/getCityWeather')
   },
-  async onShow(option) {
-    if (option.query.path) {
-      if (this.$store.state.user.openid) {
-        uni.navigateTo({ url: option.query.path });
-      } else {
-        uni.$once("LOGON", () => uni.navigateTo({ url: option.query.path }));
-      }
-    }
+  async onShow() {
     // this.$store.dispatch('user/getCityWeather')
   },
   onHide() {

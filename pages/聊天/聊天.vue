@@ -127,6 +127,12 @@ export default {
     if (this.show !== 0 && this.show % 4 === 0) {
       !this.$store.state.user.vip && this.interstitialAd.show();
     }
+
+    if (uni.getStorageSync("showSettings")) {
+      uni.removeStorageSync("showSettings");
+      this.page_container_ai_questions_show = false;
+      this.showSettings();
+    }
   },
   onLoad() {
     this.interstitialAd = uni.createInterstitialAd({
@@ -142,9 +148,9 @@ export default {
       { content: "设置【连续对话记忆次数】，让AI理解对话上下文", func: () => this.showSettings() },
     ];
 
-    setTimeout(() => {
-        this.showQuestions()
-    }, 2333)
+    // setTimeout(() => {
+    //     this.showQuestions()
+    // }, 2333)
   },
   methods: {
     swiperDetail(item) {

@@ -11,7 +11,6 @@ export default {
   mutations: {
     // 设置用户信息
     SET_USER_INFO(state, payload) {
-      uni.setStorageSync("openid", payload.openid);
       Object.keys(payload).forEach(key => {
         Vue.prototype.$set(state, key, payload[key]);
       });
@@ -25,7 +24,7 @@ export default {
         Promise.all([uni.getPushClientId(), uni.login()])
           .then(([{ cid }, { code }]) => {
             Vue.prototype
-              .$("/login", { cid, code, openid: payload.openid })
+              .$("/login", { cid, code, ...payload })
               .then(data => {
                 resolve(data);
                 setTimeout(() => uni.$emit("LOGON"));

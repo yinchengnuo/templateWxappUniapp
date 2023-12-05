@@ -62,13 +62,13 @@ export default {
   // 		path: '/' + this.$scope.route + '?openid=' + this.$store.state.user.openid
   // 	}
   // },
-  onShareAppMessage(res) {
-    const item = this.$store.state.app.list.find(e => e.page === "/pages/实用工具/滚动君/滚动君");
-    return {
-      title: "叮当工具箱ToolBox365_滚动君_" + item.desc,
-      path: `/pages/首页/首页?openid=${this.$store.state.user.openid}&path=/pages/实用工具/滚动君/滚动君`,
-    };
-  },
+  // onShareAppMessage(res) {
+  //   const item = this.$store.state.app.list.find(e => e.page === "/pages/实用工具/滚动君/滚动君");
+  //   return {
+  //     title: "叮当工具箱ToolBox365_滚动君_" + item.desc,
+  //     path: `/pages/首页/首页?openid=${this.$store.state.user.openid}&path=/pages/实用工具/滚动君/滚动君`,
+  //   };
+  // },
   onLoad(opt) {
     // if (!opt.fromRollMan) { // 表示不是从分享页面进入
     // 	delete opt.fromRollMan

@@ -27,12 +27,11 @@ export default {
       this.errored = false;
       uni
         .request({
-          url: "http://api.tangdouz.com/60.php",
+          url: "https://api.tangdouz.com/60.php",
         })
         .then(res => {
-          this.src = "";
           setTimeout(() => {
-            this.src = res.data;
+            this.src = res.data + '?t=' + Date.now();
           });
         })
         .catch(() => {

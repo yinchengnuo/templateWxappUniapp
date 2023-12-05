@@ -159,6 +159,7 @@ export default {
     });
 
     this.rewardedVideoAd.onClose(({ isEnded }) => {
+      this.rewardedVideoAd.offClose();
       if (isEnded) {
         this.$loading();
         this.$("/ad")
@@ -180,6 +181,9 @@ export default {
           });
       }
     });
+  },
+  beforeDestroy() {
+    this.rewardedVideoAd.destroy();
   },
   methods: {
     // 切换厂商
@@ -292,14 +296,27 @@ export default {
         this.ing = true;
         this.rewardedVideoAd
           .show()
-          .then(res => {
-            console.log(res);
+          .then(() => {
+            setTimeout(() => (this.ing = false), 1234);
           })
           .catch(() => {
-            this.$toast("视频广告拉取失败，请稍后再试");
-          })
-          .finally(() => {
-            this.ing = false;
+            this.rewardedVideoAd
+              .load()
+              .then(() => {
+                this.rewardedVideoAd
+                  .show()
+                  .then(() => {
+                    setTimeout(() => (this.ing = false), 1234);
+                  })
+                  .catch(() => {
+                    setTimeout(() => (this.ing = false), 1234);
+                    this.$toast("视频广告拉取失败，请稍后再试");
+                  });
+              })
+              .catch(() => {
+                setTimeout(() => (this.ing = false), 1234);
+                this.$toast("视频广告拉取失败，请稍后再试");
+              });
           });
       }
     },
