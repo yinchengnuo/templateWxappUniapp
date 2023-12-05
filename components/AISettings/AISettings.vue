@@ -158,9 +158,9 @@ export default {
       this.$toast("视频广告拉取失败，请稍后再试");
     });
 
-    this.rewardedVideoAd.onClose(({ isEnded }) => {
+    this.rewardedVideoAd.onClose(res => {
       this.rewardedVideoAd.offClose();
-      if (isEnded) {
+      if (res && res.isEnded) {
         this.$loading();
         this.$("/ad")
           .then(({ total, num, energy }) => {
