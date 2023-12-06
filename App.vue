@@ -52,6 +52,12 @@ export default {
     uni.onPushMessage(({ data: { payload } }) => {
       // 如果是支付消息
       if (payload.type === "pay") {
+        this.$store.commit("user/SET_USER_INFO", {
+          energy: this.$store.state.user.energy + payload.energy, // 更新总能量
+          total_income: this.$store.state.user.total_income + payload.energy, // 更新总入账能量
+        });
+      }
+      if (payload.type === "share") {
         const energy = payload.data.num * 10000;
         this.$store.commit("user/SET_USER_INFO", {
           vip_time: payload.data.vip_end_time, // 更新 VIP 时间
