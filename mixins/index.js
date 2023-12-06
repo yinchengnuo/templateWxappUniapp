@@ -1,7 +1,7 @@
 import Vue from "vue";
 import dayjs from "dayjs";
 
-function onShare({ target }) {
+function onShare({ from }) {
   let title = "";
   const route = this.$store.state.app.currentRoute;
   let path = "/" + this.$store.state.app.currentRoute;
@@ -25,12 +25,9 @@ function onShare({ target }) {
 
   if (!title) title = route.split("/").at(-1);
 
-  console.log(title);
-  console.log(`${path}?openid=${this.$store.state.user.openid}&date=${target ? dayjs().format("YYYY-MM-DD") : ""}`);
-
   return {
     title,
-    path: `${path}?openid=${this.$store.state.user.openid}&date=${target ? dayjs().format("YYYY-MM-DD") : ""}`,
+    path: `${path}?openid=${this.$store.state.user.openid}&t=${dayjs().valueOf()}&from=${from}`
   };
 }
 

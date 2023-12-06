@@ -44,6 +44,9 @@ export default {
     bgClass: ["bg-gradual-red-light", "bg-gradual-orange-light", "bg-gradual-green-light", "bg-gradual-purple-light", "bg-gradual-pink-light", "bg-gradual-blue-light", "bg-gradual-pinknew-light", "bg-gradual-cyan-light"],
     colors: ["red", "orange", "yellow", "olive", "green", "cyan", "blue", "purple", "mauve", "pink", "brown", "grey"],
   },
+  onPageNotFound() {
+    uni.reLaunch({ url: "/pages/首页/首页" });
+  },
   onLaunch(option) {
     // 监听消息推送
     uni.onPushMessage(({ data: { payload } }) => {
@@ -61,7 +64,7 @@ export default {
       this.$store.state.app.notifyRoute = this.$store.state.app.currentRoute; // 标记弹出系统消息提示框的页面
     });
     // 小程序启动即登录
-    this.$store.dispatch("user/login", { openid: option.query.openid, date: option.query.date }).then(async () => {
+    this.$store.dispatch("user/login", { ...option.query, path: option.path }).then(async () => {
       // 检查用户是否 VIP
       const check = () => {
         if (this.$store.state.user.vip_time) {
