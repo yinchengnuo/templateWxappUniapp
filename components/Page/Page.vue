@@ -126,13 +126,13 @@ export default {
     }
 
     // 进入页面开始计时，控制弹出广告
-    const times = [60, 180, 360, 600, 900, 1260, 1680, 2160, 2700];
+    const times = [30, 90, 150, 210, 330, 450, 570, 750, 930];
     this.timer = setInterval(() => {
       this.time++;
       if (times.includes(this.time)) {
         !this.vip && this.showAD();
       }
-      if (this.time > times[times.length - 1]) {
+      if (this.time > times.at(-1)) {
         clearInterval(this.timer);
       }
     }, 1000);

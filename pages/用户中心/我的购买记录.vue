@@ -38,11 +38,6 @@ export default {
       empty: false,
     };
   },
-  computed: {
-    loading() {
-      return this.$store.state.app.loading;
-    },
-  },
   created() {
     this.$loading();
     this.$("/pay/pay_record")

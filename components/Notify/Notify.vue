@@ -1,8 +1,10 @@
 <template>
   <view class="cu-modal" :class="list.length && notifyRoute === currentRoute ? 'show' : ''">
-    <view class="cu-dialog">
+    <view class="cu-dialog" style="width: 567rpx">
       <view class="cu-bar bg-white justify-end">
-        <view class="content text-bold">系统消息</view>
+        <view class="content text-bold">
+          <text class="text-lg text-black">系统消息</text>
+        </view>
         <view class="action" @click="hide()">
           <text class="cuIcon-close text-red"></text>
         </view>
@@ -12,10 +14,10 @@
           <view v-if="item.path" class="cu-item arrow text-left" :key="index" @click="detail(item.path)">
             <view class="content padding-tb-sm">
               <view>
-                <text class="margin-right-xs text-bold">{{ item.title }}</text>
+                <text class="margin-right-xs text-lg text-bold">{{ item.title }}</text>
               </view>
-              <view class="text-gray text-sm">
-                <text class="margin-right-xs">{{ item.message }}</text>
+              <view class="text-grey">
+                <text class="margin-right-xs text-df">{{ item.message }}</text>
               </view>
             </view>
           </view>
@@ -23,10 +25,10 @@
             <view class="cu-item text-left" :key="index">
               <view class="content padding-tb-sm">
                 <view>
-                  <text class="margin-right-xs text-bold">{{ item.title }}</text>
+                  <text class="margin-right-xs text-lg text-bold">{{ item.title }}</text>
                 </view>
-                <view class="text-gray text-sm">
-                  <text class="margin-right-xs">{{ item.message }}</text>
+                <view class="text-grey">
+                  <text class="margin-right-xs text-df">{{ item.message }}</text>
                 </view>
               </view>
             </view>

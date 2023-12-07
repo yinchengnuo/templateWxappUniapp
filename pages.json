@@ -80,6 +80,7 @@
     { "path": "pages/聊天管理/聊天收藏", "style": { "disableScroll": true } },
 
     { "path": "pages/用户中心/我的收藏", "style": { "disableScroll": true } },
+    { "path": "pages/用户中心/浏览记录", "style": { "disableScroll": true } },
     { "path": "pages/用户中心/我的能量", "style": { "disableScroll": true } },
     { "path": "pages/用户中心/我的能量记录", "style": { "disableScroll": true } },
     { "path": "pages/用户中心/我的购买记录", "style": { "disableScroll": true } },

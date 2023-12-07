@@ -58,7 +58,6 @@ export default {
         });
       }
       if (payload.type === "share") {
-        const energy = payload.data.num * 10000;
         this.$store.commit("user/SET_USER_INFO", {
           vip_time: payload.data.vip_end_time, // 更新 VIP 时间
           energy: this.$store.state.user.energy + energy, // 更新总能量

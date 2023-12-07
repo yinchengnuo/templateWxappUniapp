@@ -11,6 +11,7 @@
                 <text v-if="item.type === 'chat'" class="text-black margin-right-xs">AI对话消耗</text>
                 <text v-if="item.type === 'clock'" class="text-black margin-right-xs">当日签到</text>
                 <text v-if="item.type === 'logon'" class="text-black margin-right-xs">新用户赠送1000</text>
+                <text v-if="item.type === 'share'" class="text-black margin-right-xs">邀请新用户奖励</text>
               </view>
               <view class="text-gray text-sm">
                 <text class="margin-right-xs">{{ item.create_time }}</text>

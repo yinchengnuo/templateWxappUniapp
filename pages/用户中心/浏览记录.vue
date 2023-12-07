@@ -36,20 +36,9 @@ export default {
       empty: false,
     };
   },
-  onShow() {
-    uni.$once("COLLECT_CANCEL", _id => {
-      this.records.splice(
-        this.records.findIndex(e => e._id === _id),
-        1
-      );
-      if (!this.records.length) {
-        this.empty = true;
-      }
-    });
-  },
   created() {
     this.$loading();
-    this.$("/collect_record")
+    this.$("/view_record")
       .then(data => {
         this.records = data.map(e => this.$store.state.app.list.find(ee => e.function_id === ee._id)).map(e => ({ ...e, name: e.page.split("/").at(-1) }));
         if (!this.records.length) {
@@ -59,7 +48,7 @@ export default {
       .finally(() => {
         this.$loaded();
       });
-  },
+  }
 };
 </script>
 
