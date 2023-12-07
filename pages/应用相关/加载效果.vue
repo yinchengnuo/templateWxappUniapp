@@ -30,7 +30,8 @@ export default {
       } else {
         this.chooseed.push(e);
       }
-      console.log(this.chooseed);
+      this.$copy(this.chooseed.join())
+      this.$toast(this.chooseed.length);
     },
   },
 };

@@ -20,7 +20,7 @@ export default {
       }, 3456);
     },
     SET_LIST(state, payload) {
-      state.list = payload;
+      state.list = payload.filter(e => e.online);
     },
     UPDATE_FUNCTION(state, payload = {}) {
       const item = state.list.find(e => e._id === payload._id);

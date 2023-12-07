@@ -147,10 +147,6 @@ export default {
       { content: "不知道问什么？看看大家怎么问", func: () => this.showQuestions() },
       { content: "设置【连续对话记忆次数】，让AI理解对话上下文", func: () => this.showSettings() },
     ];
-
-    // setTimeout(() => {
-    //     this.showQuestions()
-    // }, 2333)
   },
   methods: {
     swiperDetail(item) {

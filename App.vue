@@ -5,10 +5,25 @@ const systemInfo = uni.getSystemInfoSync();
 const statusBarHeight = systemInfo.statusBarHeight;
 const menuButtonBoundingClientRect = uni.getMenuButtonBoundingClientRect();
 const navigationBarHeight = menuButtonBoundingClientRect.bottom + (menuButtonBoundingClientRect.top - statusBarHeight);
-const getNames = (name, num) =>
-  Array(num)
-    .fill(0)
-    .map((e, i) => `${name}${(i + 1).toString().padStart(2, "0")}`);
+// const getNames = (name, num) =>
+//   Array(num)
+//     .fill(0)
+//     .map((e, i) => `${name}${(i + 1).toString().padStart(2, "0")}`);
+// [
+//   ...getNames("clones", 20),
+//   ...getNames("cut", 10),
+//   ...getNames("dancers", 10),
+//   ...getNames("hungry", 8),
+//   ...getNames("time", 10),
+//   ...getNames("nature", 16),
+//   ...getNames("colorful", 20),
+//   ...getNames("continuous", 10),
+//   ...getNames("flipping", 20),
+//   ...getNames("wobbling", 20),
+//   ...getNames("progress", 20),
+//   ...getNames("shapes", 40),
+//   ...getNames("spinner", 29),
+// ];
 export default {
   globalData: {
     systemInfo,
@@ -17,19 +32,36 @@ export default {
     navigationBarHeight,
     menuButtonBoundingClientRect,
     loadings: [
-      ...getNames("clones", 20),
-      ...getNames("cut", 10),
-      ...getNames("dancers", 10),
-      ...getNames("hungry", 8),
-      ...getNames("time", 10),
-      ...getNames("nature", 16),
-      ...getNames("colorful", 20),
-      ...getNames("continuous", 10),
-      ...getNames("flipping", 20),
-      ...getNames("wobbling", 20),
-      ...getNames("progress", 20),
-      ...getNames("shapes", 40),
-      ...getNames("spinner", 29),
+      "clones08",
+      "clones10",
+      "clones16",
+      "clones18",
+      "cut01",
+      "clones20",
+      "hungry01",
+      "hungry02",
+      "hungry03",
+      "hungry08",
+      "time05",
+      "nature08",
+      "nature07",
+      "nature16",
+      "colorful19",
+      "continuous04",
+      "wobbling05",
+      "wobbling12",
+      "wobbling11",
+      "progress03",
+      "shapes16",
+      "spinner02",
+      "spinner03",
+      "spinner12",
+      "spinner16",
+      "spinner17",
+      "spinner15",
+      "spinner26",
+      "flipping09",
+      "dancers02",
     ],
     images: [
       "https://image.meiye.art/FhtISupNHMibBgrGZOe15CPQ-d5R",

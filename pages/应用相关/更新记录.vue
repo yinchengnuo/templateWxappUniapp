@@ -10,7 +10,10 @@
             </view>
             <view class="cu-item">
               <view class="content shadow-blur" :class="index === 0 ? 'bg-green' : ''">
-                <view v-for="(itemm, indexx) in item.desc" :key="itemm">{{ indexx + 1 }}、{{ itemm }}</view>
+                <view v-for="(itemm, indexx) in item.desc" :key="itemm">
+                  <text v-if="item.desc.length > 1">{{ indexx + 1 }}、</text>
+                  <text>{{ itemm }}</text>
+                </view>
               </view>
             </view>
           </block>
