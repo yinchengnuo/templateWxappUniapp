@@ -40,7 +40,10 @@ export default {
     this.$loading();
     this.$("/view_record")
       .then(data => {
-        this.records = data.map(e => this.$store.state.app.list.find(ee => e.function_id === ee._id)).map(e => ({ ...e, name: e.page.split("/").at(-1) }));
+        this.records = data
+          .map(e => this.$store.state.app.list.find(ee => e.function_id === ee._id))
+          .filter(e => e)
+          .map(e => ({ ...e, name: e.page.split("/").at(-1) }));
         if (!this.records.length) {
           this.empty = true;
         }
@@ -48,7 +51,7 @@ export default {
       .finally(() => {
         this.$loaded();
       });
-  }
+  },
 };
 </script>
 
