@@ -161,10 +161,10 @@ export default {
     this.rewardedVideoAd.onClose(res => {
       if (res && res.isEnded) {
         if (!this.lock) {
-          this.lock = true
+          this.lock = true;
           setTimeout(() => {
-            this.lock = false
-          })
+            this.lock = false;
+          });
           this.$loading();
           this.$("/ad")
             .then(({ total, num, energy }) => {
@@ -195,7 +195,6 @@ export default {
     chooseProvider(e) {
       const index = +e.detail.value;
       if (index !== this.aiNameIndex) {
-        console.log("change");
         const ai = this.$store.state.user.ai[index];
         this.$store.state.user.ai_provider = ai.provider;
         this.modelList = ai.models;

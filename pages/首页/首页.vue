@@ -137,18 +137,13 @@ export default {
       this.cardCur = e.detail.current;
     },
     navigateTo(item) {
-      console.log(item);
       uni.navigateTo({ url: item.page });
     },
     toDaily() {
       uni.switchTab({ url: "/pages/每日/每日" });
     },
-    trigger(e) {
-      console.log(e);
-    },
-    fabClick(e) {
-      console.log(e);
-    },
+    trigger() {},
+    fabClick() {},
   },
 };
 </script>

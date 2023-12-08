@@ -121,9 +121,7 @@ export default {
   async onShow() {
     // this.$store.dispatch('user/getCityWeather')
   },
-  onHide() {
-    console.log("App Hide");
-  },
+  onHide() {},
 };
 </script>
 

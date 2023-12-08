@@ -273,7 +273,6 @@ export default {
 	},
 	onLoad(opt) {
 		// if (Object.keys(opt).length) {
-		// 	console.log(opt)
 		// 	this.value = opt.rollText
 		// 	this.fontColor = this.fontPreviewColor = opt.fontColor,
 		// 		this.fontSize = Number(opt.fontSize)

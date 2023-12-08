@@ -91,7 +91,6 @@ export default {
     this.animationDelay = opt.animationDelay;
     this.animationTimingFunction = opt.animationTimingFunction;
     this.animationDirection = opt.animationDirection;
-    console.log(opt);
   },
 };
 </script>

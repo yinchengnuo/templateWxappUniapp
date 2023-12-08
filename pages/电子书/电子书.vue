@@ -91,7 +91,6 @@ export default {
     this.$("/book_detail", options)
       .then(data => {
         this.result = data;
-        console.log(data);
       })
       .finally(() => {
         this.$loaded();

@@ -87,7 +87,6 @@ export default {
             url: "https://api.oioweb.cn/api/search/FoodHeat?page=1&keyword=" + this.text,
           })
           .then(res => {
-            console.log(res);
             if (res.data.code === 200) {
               this.result = res.data.result;
             } else {

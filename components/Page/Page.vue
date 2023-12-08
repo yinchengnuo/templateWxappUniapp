@@ -115,9 +115,7 @@ export default {
     this.interstitialAd = uni.createInterstitialAd({
       adUnitId: "adunit-e3f467955c2226a4",
     });
-    this.interstitialAd.onError(e => {
-      console.log(e);
-    });
+    this.interstitialAd.onError(() => {});
 
     if (this.$store.state.user.openid) {
       this.recordView();
@@ -149,7 +147,6 @@ export default {
     getHeight() {
       this.$offset(this.PageID).then(res => {
         this.height = res.height;
-        console.log("广告OK");
       });
     },
     // 记录浏览及获取收藏状态
@@ -192,17 +189,13 @@ export default {
             this.interstitialAd
               .show()
               .then(resolve)
-              .catch(e => {
-                console.log(e.errMsg);
-              });
+              .catch(() => {});
         }
         if (type === 2) {
           this.rewardedVideoAd
             .show()
             .then(resolve)
-            .catch(e => {
-              console.log(e.errMsg);
-            });
+            .catch(() => {});
         }
       });
     },

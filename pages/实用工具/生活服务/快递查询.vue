@@ -96,7 +96,6 @@ export default {
             url: "https://api.linhun.vip/api/express?apiKey=d1b5f5d56e81c4ec2a5c91c9a14ea186&nu=" + this.text,
           })
           .then(res => {
-            console.log(res);
             if (res.data.code === 200) {
               this.result = res.data;
             } else {
