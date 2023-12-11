@@ -25,9 +25,11 @@ function onShare({ from }) {
 
   if (!title) title = route.split("/").at(-1);
 
+  path = this.$store.state.user.openid ? `${path}?openid=${this.$store.state.user.openid}&t=${dayjs().valueOf()}&from=${from}` : "/pages/首页/首页";
+  console.log("👀  file: index.js:30  onShare  path:", path);
   return {
+    path,
     title,
-    path: this.$store.state.user.openid ? `${path}?openid=${this.$store.state.user.openid}&t=${dayjs().valueOf()}&from=${from}` : "/pages/首页/首页",
   };
 }
 

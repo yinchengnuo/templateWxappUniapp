@@ -27,7 +27,7 @@
                 <button class="cu-btn round shadow bg-red">每日签到 +1000</button>
               </navigator>
               <button open-type="share" class="cu-btn round shadow bg-green" style="margin: 0 30rpx">邀请好友 +1000</button>
-              <button class="cu-btn round shadow bg-blue" @click="showAD()">看30S广告+1000</button>
+              <button class="cu-btn round shadow bg-blue" @click="showAD()">看视频广告+1000</button>
             </view>
           </view>
         </view>
@@ -56,7 +56,7 @@
       </view>
       <view class="flex p-xs margin-bottom-sm mb-sm shadow">
         <view class="cu-avatar xl radius margin-left margin-right">
-          <image v-if="user.ai_provider" mode="aspectFit" :src="'../../static/ai' + user.ai_provider + '.jpg'" class="w100 h100"></image>
+          <image v-if="user.ai_provider" mode="aspectFit" :src="'../../static/ai/' + user.ai_provider + '.jpg'" class="w100 h100"></image>
         </view>
         <view class="flex-treble padding-left-sm margin-left">
           <picker class="text-black text-xxl text-bold" :value="aiNameIndex" :range="aiNameList" @change="chooseProvider">

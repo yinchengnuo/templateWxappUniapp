@@ -51,11 +51,6 @@ export default {
         this.$loaded();
       });
   },
-  mounted() {
-    this.$refs.Page.getHeight();
-    this.$refs.ADFloat.show = false;
-    clearInterval(this.$refs.Page.timer);
-  },
 };
 </script>
 

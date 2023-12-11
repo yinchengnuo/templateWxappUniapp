@@ -82,21 +82,22 @@ export default {
   onLaunch(option) {
     // 监听消息推送
     uni.onPushMessage(({ data: { payload } }) => {
+      uni.vibrateLong(); // 震动一下
       // 如果是支付消息
       if (payload.type === "pay") {
         this.$store.commit("user/SET_USER_INFO", {
-          energy: this.$store.state.user.energy + payload.energy, // 更新总能量
-          total_income: this.$store.state.user.total_income + payload.energy, // 更新总入账能量
+          vip_time: payload.data.vip_end_time, // 更新 VIP 时间
+          energy: this.$store.state.user.energy + payload.data.energy, // 更新总能量
+          total_income: this.$store.state.user.total_income + payload.data.energy, // 更新总入账能量
         });
       }
+      // 如果是邀请新用户奖励到账
       if (payload.type === "share") {
         this.$store.commit("user/SET_USER_INFO", {
-          vip_time: payload.data.vip_end_time, // 更新 VIP 时间
           energy: this.$store.state.user.energy + energy, // 更新总能量
           total_income: this.$store.state.user.total_income + energy, // 更新总入账能量
         });
       }
-      uni.vibrateLong(); // 震动一下
       this.$store.state.app.notify.push(payload); // 弹出系统消息提示框
       this.$store.state.app.notifyRoute = this.$store.state.app.currentRoute; // 标记弹出系统消息提示框的页面
     });
@@ -116,11 +117,8 @@ export default {
       };
       setInterval(() => check(), 1000); // 1秒钟检查一次，时间一到立马切换状态
     });
-    // this.$store.dispatch('user/getCityWeather')
   },
-  async onShow() {
-    // this.$store.dispatch('user/getCityWeather')
-  },
+  async onShow() {},
   onHide() {},
 };
 </script>

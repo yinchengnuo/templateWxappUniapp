@@ -37,7 +37,7 @@
             <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
             <text class="text-bold">
               <text>能量充值</text>
-              <text class="text-grey" style="font-size: 24rpx; font-weight: normal;line-height: 2;" @click="toAD">
+              <text class="text-grey" style="font-size: 24rpx; font-weight: normal; line-height: 2" @click="toAD">
                 <text class="margin-lr-xs">充值赠送免广告</text>
                 <text class="cuIcon-questionfill"></text>
               </text>
@@ -102,7 +102,6 @@ export default {
   },
   mounted() {
     this.$refs.Page.getHeight();
-    this.$refs.ADFloat.show = false;
     clearInterval(this.$refs.Page.timer);
   },
   onLoad() {},

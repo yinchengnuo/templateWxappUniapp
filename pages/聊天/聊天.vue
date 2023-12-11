@@ -64,7 +64,9 @@
             <view class="date" style="bottom: 8rpx; right: auto; left: 128rpx">
               <text class="cuIcon-lightauto text-green flex" style="position: absolute; left: -128rpx; width: 128rpx; top: 0; white-space: nowrap">-{{ item.energy || item._energy }}</text>
               <text class="margin-right-xs">{{ item.time }} </text>
-              <text class="text-gray text-xs">{{ item.content.length }}字 耗时{{ item.long }} S</text>
+              <text v-if="item.long" class="text-gray text-xs">
+                <text class="text-bold">{{ item.content.length }}</text> 字 耗时 <text class="text-bold">{{ item.long }}</text> S</text
+              >
             </view>
           </view>
         </template>
@@ -252,12 +254,14 @@ export default {
         })
           .then(data => {
             chat.time = data.chat_time;
-            reply.content = data.reply;
-            reply.time = data.reply_time;
             chat.energy = data.promptTokens;
             chat._energy = data.totalTokens;
+
+            reply.content = data.reply;
+            reply.time = data.reply_time;
             reply._energy = data.totalTokens;
             reply.energy = data.completionTokens;
+            reply.long = +((data._reply_time - data._chat_time) / 1000).toFixed(2);
             setTimeout(() => this.scroll++);
             this.$store.state.user.total_chat_count++;
             this.$store.state.user.energy -= data.totalTokens;

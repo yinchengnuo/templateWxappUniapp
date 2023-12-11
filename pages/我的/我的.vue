@@ -3,6 +3,17 @@
     <image class="page_bg" mode="aspectFill" src="../../static/page_bg.png"></image>
     <view class="page_bg bg-gradual-blue-light"></view>
     <image class="w100;" mode="widthFix" style="position: absolute; top: 0; left: 0; opacity: 0.2; z-index: 0" src="../../static/logo.png"></image>
+    <view
+      url="/pages/每日随机/功能类/天气"
+      class="flex relative"
+      style="box-sizing: border-box"
+      :style="{ marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px`, padding: `0 ${$app().globalData.menuButtonBoundingClientRect.width}px` }">
+      <text></text>
+    </view>
+
+    <view url="/pages/每日随机/功能类/天气" class="relative flex flex_sb text-shadow relative" style="box-sizing: border-box; padding: 0 20rpx" :style="{ height: `${$app().globalData.menuButtonBoundingClientRect.height}px` }">
+      <text></text>
+    </view>
     <view class="relative UCenter-bg">
       <image v-if="user.avatar" :src="user.avatar" class="png bg-white shadow" mode="aspectFill"></image>
       <open-data v-else class="png bg-white shadow" type="userAvatarUrl"></open-data>
@@ -52,7 +63,7 @@
       </navigator>
       <navigator v-if="user.vip" url="/pages/用户中心/找到组织" class="cu-item arrow">
         <view class="content">
-          <text class="cuIcon-communityfill text-pink"></text>
+          <text class="cuIcon-community text-blue"></text>
           <text class="text-black">找到组织</text>
         </view>
       </navigator>
@@ -78,7 +89,7 @@
         </button>
       </view>
     </view>
-    <ADFloat ref="ADFloat" />
+    <AD3 />
   </view>
 </template>
 
