@@ -83,8 +83,8 @@ export default {
       interstitialAd: {},
       rewardedVideoAd: {},
       PageID: "Page_" + Date.now(),
+      inlet: "../../static/树洞.jpg",
       title: getCurrentPages().at(-1).route.split("/").at(-1),
-      inlet: "https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/树洞.jpg",
       bgClass: this.bg
         ? getApp()
             .globalData.bgClass.slice()

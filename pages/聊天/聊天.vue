@@ -1,13 +1,7 @@
 <template>
   <view class="index" style="overflow: hidden">
-    <image class=".page_bg" mode="aspectFill" src="https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/page_bg.png"></image>
-    <view
-      class="flex"
-      style="box-sizing: border-box; padding: 0 30rpx; position: relative"
-      :style="{
-        marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`,
-        height: `${$app().globalData.menuButtonBoundingClientRect.height}px`,
-      }">
+    <image class=".page_bg" mode="aspectFill" src="../../static/page_bg.png"></image>
+    <view class="flex" style="box-sizing: border-box; padding: 0 30rpx; position: relative" :style="{ marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` }">
       <navigator url="/pages/用户中心/我的能量" class="flex h100" style="position: absolute; top: 0; left: 0; padding: 0 30rpx; font-weight: bolder">
         <text class="cuIcon-lightauto text-purple text-shadow">{{ user.energy }}</text>
         <text class="cuIcon-right text-purple text-shadow text-bold" style="margin: 0 6rpx"></text>
@@ -300,7 +294,7 @@ export default {
         itemList: ["A", "B", "C"],
         success: function (res) {
           console.log("选中了第" + (res.tapIndex + 1) + "个按钮");
-        }
+        },
       });
     },
   },

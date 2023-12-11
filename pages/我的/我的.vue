@@ -1,45 +1,8 @@
 <template>
   <view class="index" style="position: relative; min-height: 100vh; overflow: hidden">
-    <image class="page_bg" mode="aspectFill" src="https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/page_bg.png"></image>
+    <image class="page_bg" mode="aspectFill" src="../../static/page_bg.png"></image>
     <view class="page_bg bg-gradual-blue-light"></view>
-
-    <image class="w100;" mode="widthFix" style="position: absolute; top: 0; left: 0; opacity: 0.2; z-index: 0" src="https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/logo.png"></image>
-
-    <view
-      url="/pages/每日随机/功能类/天气"
-      class="flex relative"
-      style="box-sizing: border-box"
-      :style="{
-        marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`,
-        height: `${$app().globalData.menuButtonBoundingClientRect.height}px`,
-        padding: `0 ${$app().globalData.menuButtonBoundingClientRect.width}px`,
-      }">
-      <!-- <view class="flex h100" style="position: absolute; top: 0; left: 0; padding: 0 20rpx; font-weight: bolder;">
-				<text v-if="user.city"
-					class="cuIcon-locationfill text-blue text-shadow">{{ ' ' + (weather.city || user.city || '') }}</text>
-			</view>
-			<swiper class="h100 w100" autoplay circular vertical :interval="3210" :duration="1000">
-				<swiper-item class="h100 flex text-center" v-for="item in (weather.living || [])" :key="item.name">
-					<text class="page_title text-black text-bold text-shadow text-sm">{{ item.tips }}</text>
-				</swiper-item>
-			</swiper> -->
-    </view>
-
-    <view url="/pages/每日随机/功能类/天气" class="relative flex flex_sb text-shadow relative" style="box-sizing: border-box; padding: 0 20rpx" :style="{ height: `${$app().globalData.menuButtonBoundingClientRect.height}px` }">
-      <!-- <view v-if="weather.city" class="flex">
-				<image class="margin-right-xs" :src="weather.current.image" :style="{
-						width: `${$app().globalData.menuButtonBoundingClientRect.height / 2}px`,
-						height: `${$app().globalData.menuButtonBoundingClientRect.height / 2}px`,
-				}"></image>
-				{{ weather.current.weather }}·{{ weather.weather }}{{ ' ' }}{{ weather.current.temp }}°C
-			</view>
-			<text v-if="weather.city && weather.warning"
-				class="text-bold">{{ weather.warning.wind }}{{ weather.warning.color }}预警</text>
-			<view v-if="weather.city">
-				{{ weather.current.wind }}{{ ' ' }}{{ weather.current.windSpeed }}{{ ' ' }}
-			</view> -->
-    </view>
-
+    <image class="w100;" mode="widthFix" style="position: absolute; top: 0; left: 0; opacity: 0.2; z-index: 0" src="../../static/logo.png"></image>
     <view class="relative UCenter-bg">
       <image v-if="user.avatar" :src="user.avatar" class="png bg-white shadow" mode="aspectFill"></image>
       <open-data v-else class="png bg-white shadow" type="userAvatarUrl"></open-data>
@@ -133,9 +96,6 @@ export default {
     user() {
       return this.$store.state.user || {};
     },
-    weather() {
-      return (this.$store.state.user || {}).weather || {};
-    },
   },
   onShow() {
     this.show++;
@@ -144,25 +104,23 @@ export default {
     }
   },
   onLoad() {
-    this.interstitialAd = uni.createInterstitialAd({
-      adUnitId: "adunit-e3f467955c2226a4",
-    });
-    uni.$on("LOGON", () => {
-      uni.stopPullDownRefresh();
-    });
+    this.interstitialAd = uni.createInterstitialAd({ adUnitId: "adunit-e3f467955c2226a4" });
   },
   onPullDownRefresh() {
-    this.$store.dispatch("user/login");
+    this.$store.dispatch("user/login").finally(() => uni.stopPullDownRefresh());
   },
   methods: {
+    // 修改头像
     async chooseavatar(e) {
-      const filePath = e.target.avatarUrl;
       this.$loading();
+      const filePath = e.target.avatarUrl;
+      // 如果用户已有头像，删除云端图片
       if (this.user.avatar) {
         await this.$("/delete_file", {
           file: this.user.avatar,
         });
       }
+      // 上传图片
       uniCloud
         .uploadFile({
           filePath: filePath,
@@ -170,20 +128,21 @@ export default {
           cloudPath: `/ToolBox365/avatar/${dayjs().format("YYYY-MM-DD_HH:mm:ss")}_${this.user.openid}.png`,
         })
         .then(res => {
-          this.$store.state.user.avatar = res.fileID;
+          this.$store.state.user.avatar = res.fileID; // 更新前端图片显示
           this.setting({
             avatar: this.$store.state.user.avatar,
-          });
+          }); // 更新后端头像图片链接
         })
         .catch(() => this.$loaded());
     },
+    // 修改昵称
     saveNickname() {
       if ((this.nickname || "").trim()) {
         this.$loading();
         this.$("/msg_sec_check", {
           content: this.nickname.trim(),
         })
-          .then(res => {
+          .then(() => {
             this.$store.state.user.nickname = this.nickname.trim();
             this.setting({
               nickname: this.$store.state.user.nickname,
@@ -198,10 +157,9 @@ export default {
         this.$toast("请输入昵称");
       }
     },
+    // 设置用户信息
     setting(payload) {
-      this.$("/user_setting", payload).finally(() => {
-        this.$loaded();
-      });
+      this.$("/user_setting", payload).finally(() => this.$loaded());
     },
   },
 };

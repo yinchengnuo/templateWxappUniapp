@@ -56,7 +56,7 @@
       </view>
       <view class="flex p-xs margin-bottom-sm mb-sm shadow">
         <view class="cu-avatar xl radius margin-left margin-right">
-          <image v-if="user.ai_provider" mode="aspectFit" :src="'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/' + user.ai_provider + '.jpg'" class="w100 h100"></image>
+          <image v-if="user.ai_provider" mode="aspectFit" :src="'../../static/ai' + user.ai_provider + '.jpg'" class="w100 h100"></image>
         </view>
         <view class="flex-treble padding-left-sm margin-left">
           <picker class="text-black text-xxl text-bold" :value="aiNameIndex" :range="aiNameList" @change="chooseProvider">

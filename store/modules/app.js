@@ -27,21 +27,5 @@ export default {
       item && Object.assign(item, payload);
     },
   },
-  actions: {
-    getFunction({ state, commit }) {
-      return new Promise((resolve, reject) => {
-        commit("LOADING");
-        Vue.prototype
-          .$("/functions")
-          .then(data => {
-            commit("SET_LIST", data);
-            setTimeout(() => resolve(state));
-          })
-          .catch(reject)
-          .finally(() => {
-            commit("LOADED");
-          });
-      });
-    },
-  },
+  actions: {},
 };

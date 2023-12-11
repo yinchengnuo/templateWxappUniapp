@@ -1,14 +1,7 @@
 <template>
   <view class="index">
-    <image class=".page_bg" mode="aspectFill" src="https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/page_bg.png"></image>
-    <view
-      class="page_title flex"
-      :style="{
-        marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`,
-        height: `${$app().globalData.menuButtonBoundingClientRect.height}px`,
-      }"
-      >ToolBox365</view
-    >
+    <image class=".page_bg" mode="aspectFill" src="../../static/page_bg.png"></image>
+    <view class="page_title flex" :style="{ marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` }">ToolBox365</view>
     <scroll-view
       scroll-y
       show-scrollbar
@@ -130,7 +123,7 @@ export default {
   methods: {
     getList() {
       this.refreshing = true;
-      this.$store.dispatch("app/getFunction").finally(() => {
+      this.$store.dispatch("user/login").finally(() => {
         this.refreshing = false;
       });
     },

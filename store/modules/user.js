@@ -40,17 +40,5 @@ export default {
           });
       });
     },
-    // 获取地理位置、天气
-    async getCityWeather({ state, commit }) {
-      if (!state.openid) await new Promise(resolve => uni.$once("LOGON", resolve));
-      uni.request({ url: "https://api.oioweb.cn/api/weather/GetWeather" }).then(({ data: { result } }) => {
-        const cpca = { country: result.city.country, province: result.city.economize, city: result.city.city_name, area: "" };
-        commit("SET_USER_INFO", cpca);
-        Vue.prototype.$("/setting", cpca).then(data => commit("SET_USER_INFO", data));
-        uni.request({ url: "https://api.lolimi.cn/API/weather/?city=" + state.city }).then(({ data: { data } }) => {
-          commit("SET_USER_INFO", { weather: { ...data, living: [{ tips: result.condition.tips }, ...data.living] } });
-        });
-      });
-    },
   },
 };
