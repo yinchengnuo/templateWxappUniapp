@@ -71,8 +71,6 @@
             </view>
           </view>
         </view>
-        <AD2 />
-        <AD3 />
       </template>
     </template>
   </Page>

@@ -33,7 +33,7 @@
         </navigator>
         <template v-for="(item, index) in list">
           <view v-if="item.type === 'chat'" :key="item.id" class="cu-item self" style="padding: 12rpx 24rpx 48rpx">
-            <view class="main" style="margin: 0 24rpx 0 0; max-width: 494rpx">
+            <view class="main" style="margin: 0 24rpx 0 0; max-width: 494rpx" @longpress="longpress('reply', item._, true)">
               <view class="content bg-green shadow">
                 <text>{{ item.content }}</text>
               </view>
@@ -52,15 +52,25 @@
             <view class="cu-avatar radius">
               <image mode="aspectFill" :src="'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/' + item.provider + '.jpg'" class="w100 h100"></image>
             </view>
-            <view class="main" style="margin: 0 0 0 24rpx; max-width: 494rpx">
+            <view class="main" style="margin: 0 0 0 24rpx; max-width: 494rpx" @longpress="longpress('reply', item._, true)">
               <view class="content shadow">
-                <text @longpress="longpress(item.content)">{{ item.content }} </text>
+                <text>{{ item.content }} </text>
                 <LoadingSpin v-if="generating && index === list.length - 1"></LoadingSpin>
+              </view>
+            </view>
+            <view style="align-self: flex-end">
+              <view class="flex padding-xs">
+                <text v-if="item.collected" class="cuIcon-favorfill text-yellow"></text>
+                <text v-else class="cuIcon-favor"></text>
+              </view>
+              <view class="flex padding-lr-xs bg-white shadow radius margin-left-xs">
+                <text class="cuIcon-more"></text>
               </view>
             </view>
             <view class="date" style="bottom: 8rpx; right: auto; left: 128rpx">
               <text class="cuIcon-lightauto text-green flex" style="position: absolute; left: -128rpx; width: 128rpx; top: 0; white-space: nowrap">-{{ item.energy || item._energy }}</text>
-              <text>{{ item.time }}</text>
+              <text class="margin-right-xs">{{ item.time }} </text>
+              <text class="text-gray text-xs">{{ item.content.length }}字 耗时{{ item.long }} S</text>
             </view>
           </view>
         </template>
@@ -85,6 +95,7 @@
       <AISettings v-if="page_container_ai_settings_show" />
       <AIQuestions :show="page_container_ai_questions_show" v-show="page_container_ai_questions_show" />
     </page-container>
+    <ADFloat ref="ADFloat" />
   </view>
 </template>
 
@@ -168,6 +179,7 @@ export default {
         if (data.length) {
           data.forEach(e => {
             this.list.push({
+              _: e,
               id: e._id,
               type: "chat",
               content: e.chat,
@@ -175,20 +187,24 @@ export default {
               provider: e.provider,
               energy: e.promptTokens,
               _energy: e.totalTokens,
+              collected: e.collected,
             });
             this.list.push({
-              id: e._id + "1",
+              _: e,
               type: "reply",
+              id: e._id + "1",
               content: e.reply,
               time: e.reply_time,
               provider: e.provider,
               _energy: e.totalTokens,
+              collected: e.collected,
               energy: e.completionTokens,
+              long: +((e._reply_time - e._chat_time) / 1000).toFixed(2),
             });
             setTimeout(() => this.scroll++);
           });
         }
-        this.check();
+        this.showRandowBox();
       };
       this.list = [];
       if (data) {
@@ -256,7 +272,7 @@ export default {
           .catch(() => {
             this.list.pop();
             this.list.pop();
-            this.check();
+            this.showRandowBox();
           })
           .finally(() => {
             this.generating = false;
@@ -266,7 +282,8 @@ export default {
         this.$toast("请输入问题");
       }
     },
-    check() {
+    // 是否显示随机推荐盒子
+    showRandowBox() {
       if (this.list.length === 0) {
         this.$store.state.user.show_random_box = true;
       } else {
@@ -275,6 +292,16 @@ export default {
           this.$store.state.user.show_random_box = true;
         }
       }
+    },
+    longpress(type, item, vibrate) {
+      if (vibrate) uni.vibrateShort();
+      uni.showActionSheet({
+        title: "111",
+        itemList: ["A", "B", "C"],
+        success: function (res) {
+          console.log("选中了第" + (res.tapIndex + 1) + "个按钮");
+        }
+      });
     },
   },
 };

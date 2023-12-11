@@ -24,8 +24,6 @@
           </view>
           <view class="margin flex text-grey text-sm">仅展示最新100条记录...</view>
         </view>
-        <AD2 />
-        <AD3 />
       </template>
     </template>
   </Page>

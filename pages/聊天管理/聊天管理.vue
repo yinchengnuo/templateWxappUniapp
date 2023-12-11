@@ -1,11 +1,7 @@
 <template>
   <Page ref="Page">
     <template v-slot:default="{ page }">
-      <template v-if="page">
-        聊天管理
-        <AD2 />
-        <AD3 />
-      </template>
+      <template v-if="page"> 聊天管理 </template>
     </template>
   </Page>
 </template>

@@ -9,11 +9,11 @@ function onShare({ from }) {
   let item = this.$store.state.app.list.find(e => e.page === path);
   if (route === "pages/滚动君/滚动君") {
     item = this.$store.state.app.list.find(e => e.name === "滚动君");
-    path = item.page;
+    item && (path = item.page);
   }
   if (route === "pages/电子书/电子书") {
     item = this.$store.state.app.list.find(e => e.page === "/" + getCurrentPages().at(-2).route);
-    path = item.page;
+    item && (path = item.page);
   }
   if (item) title = item.name + " " + item.desc;
 
@@ -27,7 +27,7 @@ function onShare({ from }) {
 
   return {
     title,
-    path: `${path}?openid=${this.$store.state.user.openid}&t=${dayjs().valueOf()}&from=${from}`
+    path: this.$store.state.user.openid ? `${path}?openid=${this.$store.state.user.openid}&t=${dayjs().valueOf()}&from=${from}` : "/pages/首页/首页",
   };
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <Page bg type="no" ref="Page">
+  <Page bg ref="Page">
     <template v-slot:default="{ page }">
       <template v-if="page">
         <view class="bg-white padding-xs margin-sm align-center radius-lg">
@@ -12,15 +12,6 @@
           <view class="padding-xs p">VIP 除了免广告（即：不展示所有页面和操作的 Banner、插屏、视频、浮动广告），同时会在【我的】页面解锁【加入组织】入口，用于加入用户服务群为您提供更好的服务。</view>
           <view class="padding-xs p">VIP 记录及时效页面可以在 <navigator url="/pages/用户中心/我的购买记录" style="display: inline" class="text-blue margin-sm">我的购买记录</navigator>页面查看，VIP 暂不支持单独购买，感谢理解支持。</view>
         </view>
-        <ad-custom unit-id="adunit-ca19851efd20b3b7"></ad-custom>
-        <ad unit-id="adunit-bb0d1a5ba7a52eac"></ad>
-        <ad unit-id="adunit-42238affd4939e6a" ad-type="video" ad-theme="white"></ad>
-        <view style="right: 8rpx; top: 38.2%; position: fixed; z-index: 9999999999">
-          <ad-custom unit-id="adunit-8b304cf8af7361f2"></ad-custom>
-        </view>
-        <view style="left: 8rpx; bottom: 38.2%; position: fixed; z-index: 9999999999">
-          <ad-custom unit-id="adunit-8b304cf8af7361f2"></ad-custom>
-        </view>
       </template>
     </template>
   </Page>
@@ -32,9 +23,6 @@ export default {
     return {};
   },
   onLoad() {},
-  mounted() {
-    this.$refs.Page.getHeight();
-  },
   methods: {},
 };
 </script>

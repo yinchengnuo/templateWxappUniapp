@@ -65,8 +65,6 @@
             <view :class="result && result.continuous > 10 ? 'text-green' : ''" class="text-bold">+1000</view>
           </view>
         </view>
-        <AD1 />
-        <AD2 />
       </template>
     </template>
   </Page>

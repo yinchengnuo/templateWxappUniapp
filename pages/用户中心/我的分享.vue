@@ -28,8 +28,6 @@
           </template>
           <Empty v-if="empty" />
         </view>
-        <AD2 />
-        <AD3 />
       </template>
     </template>
   </Page>

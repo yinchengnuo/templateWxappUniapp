@@ -1,5 +1,5 @@
 <template>
-  <Page bg ref="Page" type="no">
+  <Page bg ref="Page">
     <template v-slot:default="{ page }">
       <template v-if="page">
         <view class="bg-white padding-xs margin-sm align-center radius-lg">
@@ -53,9 +53,6 @@ export default {
     return {};
   },
   onLoad() {},
-  mounted() {
-    this.$refs.Page.getHeight();
-  },
   methods: {
     toSetting() {
       uni.setStorageSync('showSettings', 'showSettings')

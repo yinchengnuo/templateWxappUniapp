@@ -45,6 +45,7 @@
         </view>
       </view>
     </scroll-view>
+    <ADFloat ref="ADFloat" />
   </view>
 </template>
 

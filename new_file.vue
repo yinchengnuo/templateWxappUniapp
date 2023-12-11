@@ -2,8 +2,6 @@
   <Page ref="Page">
     <template v-slot:default="{ page }">
       <template v-if="page">
-        <AD2 />
-        <AD3 />
       </template>
     </template>
   </Page>

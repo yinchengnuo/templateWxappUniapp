@@ -3,8 +3,6 @@
     <template v-slot:default="{ page }">
       <template v-if="page">
         <BookDict :color="$refs.Page.bgClass.split('-')[2]" />
-        <AD2 />
-        <AD3 />
       </template>
     </template>
   </Page>

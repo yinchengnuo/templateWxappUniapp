@@ -43,8 +43,6 @@
         <view v-else class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
           <Empty />
         </view>
-        <AD2 />
-        <AD3 />
       </template>
     </template>
   </Page>

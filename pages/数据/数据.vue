@@ -23,6 +23,7 @@
         </view>
       </view>
     </view>
+    <ADFloat ref="ADFloat" />
   </view>
 </template>
 

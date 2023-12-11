@@ -7,7 +7,6 @@ module.exports = {
 					template = template.replace(/[\s\S]+?<[\d\D]+?>/, _ => `${_}
 						<Notify ref="Notify" />
 						<Loading ref="Loading" />
-						<ADFloat ref="ADFloat" />
 					`)
 				}
 				return compile(template, ...args)

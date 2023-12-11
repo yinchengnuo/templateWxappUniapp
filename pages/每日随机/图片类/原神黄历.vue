@@ -4,8 +4,6 @@
       <template v-if="page">
         <image v-if="src" class="w100" :src="src" mode="widthFix" show-menu-by-longpress @load="load" @error="error" />
         <ErrorImage v-if="errored" />
-        <AD2 />
-        <AD3 />
       </template>
     </template>
   </Page>

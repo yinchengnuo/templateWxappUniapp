@@ -18,8 +18,6 @@
           </view>
           <view class="margin flex text-grey text-sm">仅展示最新100条记录...</view>
         </view>
-        <AD1 />
-        <AD2 />
       </template>
     </template>
   </Page>

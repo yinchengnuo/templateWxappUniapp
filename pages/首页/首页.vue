@@ -62,6 +62,7 @@
       </view>
     </scroll-view>
     <!-- <uni-fab ref="fab" :pattern="pattern" horizontal="right" :content="content" @trigger="trigger" @fabClick="fabClick" /> -->
+    <ADFloat ref="ADFloat" />
   </view>
 </template>
 

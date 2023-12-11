@@ -71,8 +71,6 @@
           <view class="padding-xs p"> 国内使用 AI，需注意合规性。监管部门并不拒绝使用 AI 提升生产效率，但对于可能造成社会动员能力、价值观影响等政治问题、以及黄赌毒等违法问题非常敏感。 </view>
           <view class="padding-xs p"> ToolBox AI 在 uni-ai 的基础上增强了对文本安全内容的检查，请大家放心使用。 </view>
         </view>
-        <AD2 />
-        <AD3 />
       </template>
     </template>
   </Page>

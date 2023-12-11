@@ -115,9 +115,7 @@
         </button>
       </view>
     </view>
-    <AD1 />
-    <AD2 />
-    <AD3 />
+    <ADFloat ref="ADFloat" />
   </view>
 </template>
 

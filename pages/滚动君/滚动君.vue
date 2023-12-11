@@ -19,6 +19,7 @@
       }">
       {{ rollText }}
     </view>
+    <ADFloat ref="ADFloat" />
   </view>
 </template>
 

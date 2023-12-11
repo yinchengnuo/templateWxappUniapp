@@ -26,7 +26,7 @@
 export default {
   data() {
     return {
-      src: "https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/组织.jpg?t=" + Date.now(),
+      src: "https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/组织.jpg",
     };
   },
   onShow() {
