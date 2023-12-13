@@ -18,6 +18,15 @@ export default {
       SRC: "https://api.lolimi.cn/API/image-zw/",
     };
   },
+  created() {
+    console.log(2312);
+    wx.getImageInfo({
+      src: this.SRC,
+      success(res) {
+        console.log(res);
+      },
+    });
+  },
 };
 </script>
 

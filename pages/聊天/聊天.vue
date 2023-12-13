@@ -20,16 +20,19 @@
     </swiper>
     <scroll-view v-if="list.length" scroll-y show-scrollbar enhanced enable-passive :scroll-top="scroll" :style="{ height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px - 164rpx)` }">
       <view class="cu-chat">
-        <navigator v-if="total > 100" url="/pages/聊天管理/聊天管理" class="cu-info">
-          <text>更多对话记录，请至</text>
-          <text class="text-blue margin-lr-xs">聊天管理</text>
-          <text>查看</text>
-        </navigator>
+        <view v-if="total > 100" class="cu-info">
+          <text>仅展示最近100条对话记录</text>
+        </view>
         <template v-for="(item, index) in list">
           <view v-if="item.type === 'chat'" :key="item.id" class="cu-item self" style="padding: 12rpx 24rpx 48rpx">
-            <view class="main" style="margin: 0 24rpx 0 0; max-width: 494rpx" @longpress="longpress('reply', item._, true)">
+            <view class="flex1 flex" style="align-self: flex-end; justify-content: flex-end">
+              <view class="flex padding-lr-xs bg-white shadow radius margin-right-xs" @click="longpress('chat', item._)">
+                <text class="cuIcon-more"></text>
+              </view>
+            </view>
+            <view class="main" style="margin: 0 24rpx 0 0; max-width: 494rpx" @longpress="longpress('chat', item._, true)">
               <view class="content bg-green shadow">
-                <text>{{ item.content }}</text>
+                <text style="word-break: break-all">{{ item.content }}</text>
               </view>
             </view>
             <view v-if="user.avatar" class="cu-avatar" type="userAvatarUrl">
@@ -48,16 +51,12 @@
             </view>
             <view class="main" style="margin: 0 0 0 24rpx; max-width: 494rpx" @longpress="longpress('reply', item._, true)">
               <view class="content shadow">
-                <text>{{ item.content }} </text>
+                <text style="word-break: break-all">{{ item.content }} </text>
                 <LoadingSpin v-if="generating && index === list.length - 1"></LoadingSpin>
               </view>
             </view>
-            <view style="align-self: flex-end">
-              <view class="flex padding-xs">
-                <text v-if="item.collected" class="cuIcon-favorfill text-yellow"></text>
-                <text v-else class="cuIcon-favor"></text>
-              </view>
-              <view class="flex padding-lr-xs bg-white shadow radius margin-left-xs">
+            <view class="flex" style="align-self: flex-end">
+              <view class="flex padding-lr-xs bg-white shadow radius margin-left-xs" @click="longpress('reply', item._)">
                 <text class="cuIcon-more"></text>
               </view>
             </view>
@@ -101,8 +100,8 @@ export default {
   data() {
     return {
       show: 0,
-      total: 0,
       list: [],
+      total: 0,
       chat: "",
       scroll: 999999999,
       generating: false,
@@ -170,11 +169,12 @@ export default {
       this.page_container_ai_questions_show = true;
     },
     // 获取聊天记录
-    getList(data) {
+    getList(data, unScroll) {
       const make = data => {
         if (data.length) {
+          const list = [];
           data.forEach(e => {
-            this.list.push({
+            list.push({
               _: e,
               id: e._id,
               type: "chat",
@@ -183,9 +183,8 @@ export default {
               provider: e.provider,
               energy: e.promptTokens,
               _energy: e.totalTokens,
-              collected: e.collected,
             });
-            this.list.push({
+            list.push({
               _: e,
               type: "reply",
               id: e._id + "1",
@@ -193,16 +192,15 @@ export default {
               time: e.reply_time,
               provider: e.provider,
               _energy: e.totalTokens,
-              collected: e.collected,
               energy: e.completionTokens,
               long: +((e._reply_time - e._chat_time) / 1000).toFixed(2),
             });
-            setTimeout(() => this.scroll++);
+            !unScroll && setTimeout(() => this.scroll++);
           });
+          this.list = list;
         }
         this.showRandowBox();
       };
-      this.list = [];
       if (data) {
         setTimeout(() => {
           make(data);
@@ -210,9 +208,9 @@ export default {
       } else {
         this.$loading();
         this.$("/chat_record")
-          .then(data => {
-            make(data.records);
-            this.total = data.total;
+          .then(({ total, records }) => {
+            this.total = total;
+            make(records);
           })
           .finally(() => {
             this.$loaded();
@@ -230,6 +228,7 @@ export default {
       if (this.chat.trim()) {
         this.generating = true;
         const chat = {
+          id: "1",
           energy: 0,
           _energy: 0,
           type: "chat",
@@ -238,6 +237,7 @@ export default {
           provider: this.$store.state.user.ai_provider,
         };
         const reply = {
+          id: "2",
           time: "",
           energy: 0,
           _energy: 0,
@@ -249,14 +249,16 @@ export default {
         this.list.push(reply);
         this.$store.state.user.show_random_box = false;
         setTimeout(() => this.scroll++);
-        this.$("/chat", {
-          chat: this.chat,
-        })
+        this.$("/chat", { chat: this.chat })
           .then(data => {
+            chat._ = data;
+            chat.id = data._id;
             chat.time = data.chat_time;
             chat.energy = data.promptTokens;
             chat._energy = data.totalTokens;
 
+            reply._ = data;
+            reply.id = data._id + "1";
             reply.content = data.reply;
             reply.time = data.reply_time;
             reply._energy = data.totalTokens;
@@ -266,11 +268,18 @@ export default {
             this.$store.state.user.total_chat_count++;
             this.$store.state.user.energy -= data.totalTokens;
             this.$store.state.user.total_payout += data.totalTokens;
+
+            this.total++;
+            if (this.total > 100) {
+              this.list.shift();
+              this.list.shift();
+            }
           })
-          .catch(() => {
+          .catch(e => {
             this.list.pop();
             this.list.pop();
             this.showRandowBox();
+            uni.showModal({ title: "提示", content: e, showCancel: false, confirmText: "我知道了" });
           })
           .finally(() => {
             this.generating = false;
@@ -293,11 +302,47 @@ export default {
     },
     longpress(type, item, vibrate) {
       if (vibrate) uni.vibrateShort();
+      const itemList = type === "chat" ? ["再次提问", "复制问题", "问题转语音", "删除问答"] : ["复制回答", "回答转语音", "删除问答"];
       uni.showActionSheet({
-        title: "111",
-        itemList: ["A", "B", "C"],
-        success: function (res) {
-          console.log("选中了第" + (res.tapIndex + 1) + "个按钮");
+        itemList,
+        title: type === "chat" ? "问题操作" : "回答操作",
+        success: ({ tapIndex }) => {
+          if (itemList[tapIndex] === "再次提问") {
+            this.chat = item.chat;
+            this.send();
+          }
+          if (itemList[tapIndex] === "复制问题") {
+            this.$copy(item.chat);
+          }
+          if (itemList[tapIndex] === "复制回答") {
+            this.$copy(item.reply);
+          }
+          if (itemList[tapIndex] === "问题转语音") {
+          }
+          if (itemList[tapIndex] === "删除问答") {
+            this.delete(item);
+          }
+        },
+      });
+    },
+    // 删除
+    delete(item) {
+      uni.showModal({
+        title: "提示",
+        content: "确定删除该问答记录？删除后将无法恢复！",
+        success: ({ confirm }) => {
+          if (confirm) {
+            this.$loading();
+            this.$("/chat_delete", { ids: [item._id] })
+              .then(({ total, records }) => {
+                this.total = total;
+                this.$toast("操作成功");
+                this.getList(records, true);
+              })
+              .finally(() => {
+                this.$loaded();
+              });
+          }
         },
       });
     },

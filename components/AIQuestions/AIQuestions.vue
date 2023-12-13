@@ -53,7 +53,9 @@
       <swiper-item class="h100">
         <view class="flex margin-top-xs">
           <scroll-view class="cu-vertical-nav nav cu-timeline" scroll-y scroll-with-animation :scroll-top="VerticalNavTop1" style="height: calc(100vh - 375rpx)">
-            <view class="cu-item" style="white-space: nowrap; padding: 0; overflow: hidden;" :class="index == TabCur1 ? 'text-black text-bold cur' : 'text-black'" v-for="(item, index) in scene" :key="index" @click="tabSelect1" :data-id="index">{{ item.categoryName }} </view>
+            <view class="cu-item" style="white-space: nowrap; padding: 0; overflow: hidden" :class="index == TabCur1 ? 'text-black text-bold cur' : 'text-black'" v-for="(item, index) in scene" :key="index" @click="tabSelect1" :data-id="index"
+              >{{ item.categoryName }}
+            </view>
           </scroll-view>
           <scroll-view class="bg-ghostWhite" scroll-y scroll-with-animation style="height: calc(100vh - 375rpx)" :scroll-into-view="'main-1-' + MainCur1" @scroll="VerticalMain1">
             <view class="padding-top-xs padding-lr-xs" v-for="(item, index) in scene" :key="index" :id="'main-1-' + index">
@@ -80,7 +82,9 @@
       <swiper-item class="h100">
         <view class="flex margin-top-xs">
           <scroll-view class="cu-vertical-nav nav cu-timeline" scroll-y scroll-with-animation :scroll-top="VerticalNavTop2" style="height: calc(100vh - 375rpx)">
-            <view class="cu-item" style="white-space: nowrap; padding: 0; overflow: hidden;" :class="index == TabCur2 ? 'text-black text-bold cur' : 'text-black'" v-for="(item, index) in career" :key="index" @click="tabSelect2" :data-id="index">{{ item.categoryName }} </view>
+            <view class="cu-item" style="white-space: nowrap; padding: 0; overflow: hidden" :class="index == TabCur2 ? 'text-black text-bold cur' : 'text-black'" v-for="(item, index) in career" :key="index" @click="tabSelect2" :data-id="index"
+              >{{ item.categoryName }}
+            </view>
           </scroll-view>
           <scroll-view class="bg-ghostWhite" scroll-y scroll-with-animation style="height: calc(100vh - 375rpx)" :scroll-into-view="'main-2-' + MainCur2" @scroll="VerticalMain2">
             <view class="padding-top-xs padding-lr-xs" v-for="(item, index) in career" :key="index" :id="'main-2-' + index">
@@ -202,6 +206,12 @@ export default {
               .globalData.bgClass.slice()
               .sort(() => Math.random() - 0.5);
             this.list4 = data.filter(e => e.type === "recent").map((e, i) => ({ ...e, bg: bgs[i % 8] }));
+
+            // data.forEach((e, i) => {
+            //   this.$("/chat", { chat: e.content }).then(() => {
+            //     console.log(data.length, i);
+            //   });
+            // });
           })
           .finally(() => {
             this.$loaded();

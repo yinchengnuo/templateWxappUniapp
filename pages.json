@@ -75,10 +75,6 @@
     { "path": "pages/数据集合/电子书/黄帝内经", "style": { "disableScroll": true } },
     { "path": "pages/数据集合/电子书/诗经", "style": { "disableScroll": true } },
 
-    { "path": "pages/聊天管理/聊天管理", "style": { "disableScroll": true } },
-    { "path": "pages/聊天管理/聊天记录", "style": { "disableScroll": true } },
-    { "path": "pages/聊天管理/聊天收藏", "style": { "disableScroll": true } },
-
     { "path": "pages/用户中心/我的收藏", "style": { "disableScroll": true } },
     { "path": "pages/用户中心/浏览记录", "style": { "disableScroll": true } },
     { "path": "pages/用户中心/我的能量", "style": { "disableScroll": true } },

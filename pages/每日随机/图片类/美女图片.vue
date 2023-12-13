@@ -22,7 +22,6 @@ export default {
   methods: {
     refresh() {
       this.$loading();
-      this.$loading();
       this.errored = false;
       uni
         .request({

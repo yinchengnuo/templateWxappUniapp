@@ -38,6 +38,7 @@ export default {
   data() {
     return {
       records: [],
+      empty: false,
     };
   },
   created() {

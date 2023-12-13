@@ -101,9 +101,9 @@
           <switch class="green radius" :checked="user.show_random_box" @change="switchChange"> </switch>
         </view>
       </view>
-      <!-- <navigator url="/pages/聊天管理/聊天管理" class="cu-item margin-bottom-sm arrow">
+      <navigator url="/pages/聊天管理/聊天管理" class="cu-item margin-bottom-sm arrow">
         <view class="content">聊天管理</view>
-      </navigator> -->
+      </navigator>
       <button class="cu-btn block bg-red margin-tb-sm lg" @click="clearRecord()">清空聊天记录</button>
       <button class="cu-btn block bg-grey margin-tb-sm lg" @click="$parent.page_container_show = false">退出 ToolBox AI 设置</button>
     </view>
@@ -273,8 +273,10 @@ export default {
           if (confirm) {
             this.$loading();
             this.$("/chat_delete")
-              .then(data => {
-                this.$parent.getList(data);
+              .then(() => {
+                this.$parent.list = []
+                uni.removeStorageSync("hide_random_box");
+                this.$store.state.user.show_random_box = true
                 this.$toast("操作成功");
               })
               .finally(() => {
@@ -284,6 +286,7 @@ export default {
         },
       });
     },
+    // 打开推荐盒子
     switchChange(e) {
       this.$store.state.user.show_random_box = e.detail.value;
       if (this.$store.state.user.show_random_box) {
