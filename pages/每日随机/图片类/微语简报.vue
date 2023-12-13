@@ -1,21 +1,18 @@
 <template>
-  <Page ref="Page" refresh @refresh="refresh">
+  <Page ref="Page">
     <template v-slot:default="{ page }">
       <template v-if="page">
-        <image v-if="src" class="w100" :src="src" mode="widthFix" @load="load" @error="error" />
-        <ErrorImage v-if="errored" />
+        <Img ref="Img" :src="src" />
       </template>
     </template>
   </Page>
 </template>
 
 <script>
-import PageImg from "@/mixins/PageImg.js";
 export default {
-  mixins: [PageImg],
   data() {
     return {
-      SRC: "https://dayu.qqsuu.cn/weiyujianbao/apis.php",
+      src: "https://dayu.qqsuu.cn/weiyujianbao/apis.php",
     };
   },
 };

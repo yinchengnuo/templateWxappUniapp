@@ -2,39 +2,33 @@
   <Page ref="Page" refresh @refresh="refresh">
     <template v-slot:default="{ page }">
       <template v-if="page">
-        <image v-if="src" class="w100" :src="src" mode="widthFix" show-menu-by-longpress @load="load" @error="error" @click="$preview(src)" />
-        <ErrorImage v-if="errored" />
+        <Img ref="Img" :src="src" />
       </template>
     </template>
   </Page>
 </template>
 
 <script>
-import PageImg from "@/mixins/PageImg.js";
 export default {
-  mixins: [PageImg],
   data() {
-    return {};
+    return {
+      src: "",
+    };
   },
-  mounted() {
+  created() {
     this.refresh();
   },
   methods: {
     refresh() {
-      this.$loading();
-      this.errored = false;
+      this.$refs.Page.refreshing = true;
       uni
-        .request({
-          url: "https://jkapi.com/api/meinv_img?type=json&apiKey=385c3a57e003ecbe19aa0abc8a87ec3a",
+        .request({ url: "https://jkapi.com/api/meinv_img?type=text&apiKey=385c3a57e003ecbe19aa0abc8a87ec3a" })
+        .then(({ data }) => {
+          this.src = data;
         })
-        .then(res => {
-          this.src = "";
-          setTimeout(() => {
-            this.src = res.data.image_url;
-          });
-        })
-        .catch(() => {
-          this.error();
+        .catch(() => {})
+        .finally(() => {
+          this.$refs.Page.refreshing = false;
         });
     },
   },

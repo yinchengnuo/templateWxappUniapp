@@ -1,40 +1,35 @@
 <template>
-  <Page ref="Page" refresh @refresh="refresh">
+  <Page ref="Page" type="S1" refresh @refresh="refresh">
     <template v-slot:default="{ page }">
       <template v-if="page">
-        <image v-if="src" class="w100" :src="src" mode="widthFix" show-menu-by-longpress @load="load" @error="error" @click="$preview(src)" />
-        <ErrorImage v-if="errored" />
+        <Img ref="Img" :src="src" />
       </template>
     </template>
   </Page>
 </template>
 
 <script>
-import PageImg from "@/mixins/PageImg.js";
 export default {
-  mixins: [PageImg],
   data() {
-    return {};
+    return {
+      src: "",
+    };
   },
-  mounted() {
+  created() {
     this.refresh();
   },
   methods: {
     refresh() {
-      this.$loading();
-      this.errored = false;
+      this.$refs.Page.refreshing = true;
       uni
-        .request({
-          url: "https://jkapi.com/api/yo_cup?type=json&apiKey=a580bcd81968c389bc55384807b565ad",
+        .request({ url: "https://jkapi.com/api/yo_cup?type=text&apiKey=a580bcd81968c389bc55384807b565ad" })
+        // .request({ url: "https://jkapi.com/api/m_wp?type=text&apiKey=3bd4580dc343ea7d01fdabc1ebd50cef" })
+        .then(({ data }) => {
+          this.src = data;
         })
-        .then(res => {
-          this.src = "";
-          setTimeout(() => {
-            this.src = res.data.content;
-          });
-        })
-        .catch(() => {
-          this.error();
+        .catch(() => {})
+        .finally(() => {
+          this.$refs.Page.refreshing = false;
         });
     },
   },

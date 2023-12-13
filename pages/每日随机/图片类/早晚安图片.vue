@@ -2,30 +2,29 @@
   <Page ref="Page" refresh @refresh="refresh">
     <template v-slot:default="{ page }">
       <template v-if="page">
-        <image v-if="src" class="w100" show-menu-by-longpress :src="src" mode="widthFix" @load="load" @error="error" />
-        <ErrorImage v-if="errored" />
+        <Img ref="Img" :src="src" />
       </template>
     </template>
   </Page>
 </template>
 
 <script>
-import PageImg from "@/mixins/PageImg.js";
 export default {
-  mixins: [PageImg],
   data() {
     return {
-      SRC: "https://api.lolimi.cn/API/image-zw/",
+      src: "",
     };
   },
   created() {
-    console.log(2312);
-    wx.getImageInfo({
-      src: this.SRC,
-      success(res) {
-        console.log(res);
-      },
-    });
+    this.refresh();
+  },
+  methods: {
+    refresh() {
+      this.$refs.Page.refreshing = true;
+      wx.getImageInfo({ src: "https://api.lolimi.cn/API/image-zw/" })
+        .then(({ path }) => (this.src = path))
+        .finally(() => (this.$refs.Page.refreshing = false));
+    },
   },
 };
 </script>

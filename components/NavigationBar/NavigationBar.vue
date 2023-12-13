@@ -11,7 +11,7 @@
           <text v-else class="cuIcon-favor"></text>
         </view>
       </view>
-      <text class="text-bold">{{ title }}</text>
+      <text class="text-bold" :class="refresh ? 'refresh' : ''">{{ title }}</text>
     </view>
   </view>
 </template>
@@ -21,6 +21,10 @@ export default {
   name: "NavigationBar",
   props: {
     bg: {
+      type: String,
+      default: "",
+    },
+    refresh: {
       type: String,
       default: "",
     },
@@ -80,6 +84,18 @@ export default {
     .action_bar {
       font-size: 20px;
     }
+  }
+}
+
+.refresh {
+  position: relative;
+  &::after {
+    left: 111%;
+    bottom: 0;
+    font-size: 18rpx;
+    position: absolute;
+    content: "下拉刷新";
+    white-space: nowrap;
   }
 }
 </style>
