@@ -91,9 +91,7 @@ export default {
     }
   },
   onLoad() {
-    this.interstitialAd = uni.createInterstitialAd({
-      adUnitId: "adunit-e3f467955c2226a4",
-    });
+    this.interstitialAd = uni.createInterstitialAd({ adUnitId: "adunit-e3f467955c2226a4" });
   },
   methods: {
     getList() {
@@ -106,9 +104,7 @@ export default {
       this.cardCur = e.detail.current;
     },
     navigateTo(item) {
-      uni.navigateTo({
-        url: item.page,
-      });
+      uni.navigateTo({ url: item.page });
     },
   },
 };

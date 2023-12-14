@@ -10,13 +10,7 @@
         </view>
         <view class="cu-bar input solid-bottom">
           <input v-model.trim="text" ref="input" :focus="focus" class="my_input" confirm-type="search" placeholder="请输入单号" type="text" @blur="focus = false" @confirm="make" />
-          <text
-            v-if="text"
-            class="my_input_clear cuIcon-roundclosefill"
-            @click="
-              text = '';
-              make();
-            "></text>
+          <text v-if="text" class="my_input_clear cuIcon-roundclosefill" @click="(text = ''), make()"></text>
           <button class="cu-btn lg shadow-blur" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click="make">查询</button>
         </view>
         <view class="cu-bar input">
@@ -73,7 +67,11 @@ export default {
       result: null,
     };
   },
-  onLoad() {},
+  onLoad() {
+    if (this.text) {
+      this.make()
+    }
+  },
   methods: {
     scan() {
       uni.scanCode({
@@ -100,9 +98,7 @@ export default {
               this.$toast(res.data.msg);
             }
           })
-          .finally(() => {
-            this.$loaded();
-          });
+          .finally(() => this.$loaded());
       } else {
         this.focus = true;
         this.$toast("请输入单号");

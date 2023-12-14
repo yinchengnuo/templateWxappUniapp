@@ -74,14 +74,30 @@ Vue.prototype.$clone = object => {
 };
 
 Vue.prototype.$choose = object => {
-  return new Promise((success, fail) => {
+  return new Promise((resolve, reject) => {
     object = {
-      fail,
-      success,
+      success: ({ tempFiles: [e] }) => {
+        resolve({ path: e.path || e.tempFilePath, filePath: e.path || e.tempFilePath, ...e });
+      },
       count: 1,
       mediaType: ["image"],
+      fail: e => reject(e),
       ...object,
     };
-    uni.chooseMedia(object);
+    uni.showActionSheet({
+      itemList: ["拍摄", "从聊天选择", "从手机相册选择"],
+      success: ({ tapIndex }) => {
+        if (tapIndex === 0) {
+          uni.chooseMedia({ sourceType: ["camera"], ...object });
+        }
+        if (tapIndex === 1) {
+          uni.chooseMessageFile({ type: "image", ...object });
+        }
+        if (tapIndex === 2) {
+          uni.chooseMedia({ sourceType: ["album"], ...object });
+        }
+      },
+      fail: e => reject(e),
+    });
   });
 };

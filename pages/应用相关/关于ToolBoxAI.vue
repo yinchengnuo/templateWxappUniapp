@@ -3,8 +3,8 @@
     <template v-slot:default="{ page }">
       <template v-if="page">
         <view class="bg-white padding-xs margin-sm align-center radius-lg">
-          <view class="padding-xs p"> ToolBox AI 基于 uni-ai 开发。聚合了国内外各种流行 AI 能力，其中大语言模型 LLM（全称为Large Language Models） 包括科大讯飞、微软、百度文心一言、MiniMax等。图形能力（AI 绘画）正在开发中，敬请期待。 </view>
-          <view class="padding-xs p"> ToolBox AI 对话提供了切换模型功能，同时支持连续对话设置、收藏及语音播放等功能。 </view>
+          <view class="padding-xs p"> ToolBox AI 基于 uni-ai 开发。聚合了国内各种流行 AI 能力，其中大语言模型 LLM（全称为Large Language Models） 包括科大讯飞、百度文心一言等。图形能力（AI 绘画）正在开发中，敬请期待。 </view>
+          <view class="padding-xs p"> ToolBox AI 对话提供了切换模型功能，同时支持连续对话设置功能。 </view>
           <view class="cu-bar bg-white solid-bottom">
             <view class="action">
               <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]">关于生成式AI</text>

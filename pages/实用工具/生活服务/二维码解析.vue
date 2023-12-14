@@ -1,11 +1,11 @@
 <template>
-  <Page ref="Page" bg>
+  <Page ref="Page" type="S1" bg>
     <template v-slot:default="{ page }">
       <template v-if="page">
         <view class="cu-bar bg-white solid-bottom margin-top">
           <view class="action">
             <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-            <text>选择图片即可识别</text>
+            <text>选择图片即可解析</text>
           </view>
         </view>
         <view class="cu-bar input">
@@ -14,7 +14,7 @@
         <view class="cu-bar solid-bottom margin-top-xs">
           <view class="action">
             <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-            <text class="text-bold">识别结果</text>
+            <text class="text-bold">解析结果</text>
           </view>
           <view class="action" @click="result && $copy(result)">
             <text class="cuIcon-copy margin-left-xs text-bold"></text>
@@ -39,9 +39,7 @@
 </template>
 
 <script>
-import PageImg from "@/mixins/PageImg.js";
 export default {
-  mixins: [PageImg],
   data() {
     return {
       text: "",
@@ -53,7 +51,7 @@ export default {
   methods: {
     chooseImg() {
       this.$choose()
-        .then(({ tempFiles: [{ tempFilePath: filePath }] }) => {
+        .then(({ filePath }) => {
           this.$loading();
           this.text = filePath;
           uni
@@ -66,17 +64,10 @@ export default {
                 this.$toast(data.msg || "当前图片无法处理");
               }
             })
-            .catch(() => {
-              this.$toast("当前图片无法处理");
-            })
-            .finally(() => {
-              this.$loaded();
-            });
+            .catch(() => this.$toast("当前图片无法处理"))
+            .finally(() => this.$loaded());
         })
-        .catch(({ errMsg }) => {
-          this.$loaded();
-          this.$toast(errMsg);
-        });
+        .catch(() => this.$loaded());
     },
   },
 };

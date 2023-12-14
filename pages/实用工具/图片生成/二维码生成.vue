@@ -8,13 +8,7 @@
             <text>输入文字/网址即可生成</text>
           </view>
           <view class="action">
-            <text
-              v-if="text"
-              class="my_textarea_clear cuIcon-roundclosefill"
-              @click="
-                text = '';
-                make();
-              "></text>
+            <text v-if="text" class="my_textarea_clear cuIcon-roundclosefill" @click="(text = ''), make()"></text>
           </view>
         </view>
         <view class="cu-form-group padding-left-sm padding-right-sm">
@@ -29,14 +23,9 @@
             <text class="text-bold">生成结果</text>
           </view>
         </view>
-        <template v-if="result">
-          <view class="cu-list menu sm-border card-menu margin-top margin-bottom" @click="$preview(result)">
-            <ErrorImage v-if="errored" />
-            <image v-else :src="result" mode="aspectFill" show-menu-by-longpress style="width: 686rpx; height: 686rpx" @load="load" @error="error"> </image>
-          </view>
-        </template>
-        <view v-else class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
-          <Empty />
+        <view class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
+          <Img v-if="result" :src="result" />
+          <Empty v-else />
         </view>
       </template>
     </template>
@@ -44,9 +33,7 @@
 </template>
 
 <script>
-import PageImg from "@/mixins/PageImg.js";
 export default {
-  mixins: [PageImg],
   data() {
     return {
       text: "",
@@ -65,7 +52,6 @@ export default {
       this.result = null;
       this.text = (this.text || "").toString().trim();
       if (this.text) {
-        this.$loading();
         this.result = "https://api.vvhan.com/api/qr?text=" + this.text;
       } else {
         this.focus = true;

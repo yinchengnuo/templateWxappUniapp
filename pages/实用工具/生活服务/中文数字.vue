@@ -10,13 +10,7 @@
         </view>
         <view class="cu-bar input">
           <input v-model.trim="text" ref="input" :focus="focus" class="my_input" confirm-type="search" placeholder="请输入数字" type="digit" @blur="focus = false" @confirm="make" />
-          <text
-            v-if="text"
-            class="my_input_clear cuIcon-roundclosefill"
-            @click="
-              text = '';
-              make();
-            "></text>
+          <text v-if="text" class="my_input_clear cuIcon-roundclosefill" @click="(text = ''), make()"></text>
           <button class="cu-btn lg shadow-blur" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click="make">转换</button>
         </view>
         <view class="cu-bar solid-bottom margin-top-xs">
@@ -36,18 +30,7 @@
             <text class="cuIcon-copy margin-left-xs text-bold"></text>
           </view>
         </view>
-        <template v-if="result">
-          <view class="cu-list menu sm-border card-menu margin-top margin-bottom">
-            <view class="cu-item">
-              <view class="content">
-                <view class="text-lg text-black text-bold padding-top-sm padding-bottom-sm">{{ result }}</view>
-              </view>
-            </view>
-          </view>
-        </template>
-        <view v-else class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
-          <Empty />
-        </view>
+        <TextBoard :result="result" />
       </template>
     </template>
   </Page>

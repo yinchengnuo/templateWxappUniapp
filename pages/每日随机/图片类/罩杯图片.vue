@@ -23,7 +23,6 @@ export default {
       this.$refs.Page.refreshing = true;
       uni
         .request({ url: "https://jkapi.com/api/yo_cup?type=text&apiKey=a580bcd81968c389bc55384807b565ad" })
-        // .request({ url: "https://jkapi.com/api/m_wp?type=text&apiKey=3bd4580dc343ea7d01fdabc1ebd50cef" })
         .then(({ data }) => {
           this.src = data;
         })

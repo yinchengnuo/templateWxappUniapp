@@ -16,9 +16,6 @@
             <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
             <text class="text-bold">识别结果</text>
           </view>
-          <view class="action" @click="result && $copy(result.join(''))">
-            <text class="cuIcon-copy margin-left-xs text-bold"></text>
-          </view>
         </view>
         <template v-if="result">
           <button class="block cu-btn shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="$preview(text)">查看原图</button>
@@ -69,7 +66,7 @@ export default {
   methods: {
     chooseImg() {
       this.$choose()
-        .then(({ tempFiles: [{ tempFilePath: filePath }] }) => {
+        .then(({ filePath }) => {
           this.$loading();
           this.text = filePath;
           uni
@@ -82,17 +79,10 @@ export default {
                 this.$toast(data.msg || "当前图片无法处理");
               }
             })
-            .catch(() => {
-              this.$toast("当前图片无法处理");
-            })
-            .finally(() => {
-              this.$loaded();
-            });
+            .catch(() => this.$toast("当前图片无法处理"))
+            .finally(() => this.$loaded());
         })
-        .catch(({ errMsg }) => {
-          this.$loaded();
-          this.$toast(errMsg);
-        });
+        .catch(() => this.$loaded());
     },
   },
 };

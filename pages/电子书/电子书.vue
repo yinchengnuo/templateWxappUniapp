@@ -90,9 +90,7 @@ export default {
       .then(data => {
         this.result = data;
       })
-      .finally(() => {
-        this.$loaded();
-      });
+      .finally(() => this.$loaded());
   },
   methods: {},
 };

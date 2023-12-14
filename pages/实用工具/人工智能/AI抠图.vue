@@ -18,10 +18,9 @@
           </view>
         </view>
         <template v-if="result">
-          <view class="cu-list menu sm-border card-menu margin-top margin-bottom" @click="$preview(result)">
-            <ErrorImage v-if="errored" />
-            <image v-else class="solid" :src="result" mode="widthFix" show-menu-by-longpress style="width: 686rpx" @load="load" @error="error"> </image>
-            <button class="w100 cu-btn shadow-blur margin-top-sm" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="$preview(text)">查看原图</button>
+          <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="$preview(text)">查看原图</button>
+          <view class="cu-list menu sm-border card-menu" @click="$preview(result)">
+            <Img :src="result" />
           </view>
         </template>
         <view v-else class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
@@ -33,9 +32,7 @@
 </template>
 
 <script>
-import PageImg from "@/mixins/PageImg.js";
 export default {
-  mixins: [PageImg],
   data() {
     return {
       text: "",
@@ -47,7 +44,7 @@ export default {
   methods: {
     chooseImg() {
       this.$choose()
-        .then(({ tempFiles: [{ tempFilePath: filePath }] }) => {
+        .then(({ filePath }) => {
           this.$loading();
           this.text = filePath;
           uni
@@ -60,17 +57,10 @@ export default {
                 this.$toast(data.msg || "当前图片无法处理");
               }
             })
-            .catch(() => {
-              this.$toast("当前图片无法处理");
-            })
-            .finally(() => {
-              this.$loaded();
-            });
+            .catch(() => this.$toast("当前图片无法处理"))
+            .finally(() => this.$loaded());
         })
-        .catch(({ errMsg }) => {
-          this.$loaded();
-          this.$toast(errMsg);
-        });
+        .catch(() => this.$loaded());
     },
   },
 };

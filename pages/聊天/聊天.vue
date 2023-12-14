@@ -302,7 +302,7 @@ export default {
     },
     longpress(type, item, vibrate) {
       if (vibrate) uni.vibrateShort();
-      const itemList = type === "chat" ? ["再次提问", "复制问题", "问题转语音", "删除问答"] : ["复制回答", "回答转语音", "删除问答"];
+      const itemList = type === "chat" ? ["再次提问", "复制问题", "删除问答"] : ["复制回答", "删除问答"];
       uni.showActionSheet({
         itemList,
         title: type === "chat" ? "问题操作" : "回答操作",
@@ -313,11 +313,6 @@ export default {
           }
           if (itemList[tapIndex] === "复制问题") {
             this.$copy(item.chat);
-          }
-          if (itemList[tapIndex] === "复制回答") {
-            this.$copy(item.reply);
-          }
-          if (itemList[tapIndex] === "问题转语音") {
           }
           if (itemList[tapIndex] === "删除问答") {
             this.delete(item);

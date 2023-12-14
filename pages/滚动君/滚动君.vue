@@ -25,18 +25,6 @@
 
 <script>
 export default {
-  // onShareAppMessage(res) {
-  // 	return {
-  // 		title: this.rollText,
-  // 		path: `/pages/B/roll-page/roll-page?rollText=${this.rollText}&fontColor=${this.fontColor}&fontSize=${this.fontSize}&fontWeight=${this.fontWeight}&fontStyle=${this.fontStyle}&textDecoration=${this.textDecoration}&textShadow=${this.textShadow}&opacity=${this.opacity}&fontFamily=${this.fontFamily}&letterSpacing=${this.letterSpacing}&bgColor=${this.bgColor}&animationDuration=${this.animationDuration}&animationDelay=${this.animationDelay}&animationTimingFunction=${this.animationTimingFunction}&animationDirection=${this.animationDirection}`
-  // 	}
-  // },
-  // onShareTimeline() {
-  // 	return {
-  // 		title: this.rollText,
-  // 		query: `rollText=${this.rollText}&fontColor=${this.fontColor}&fontSize=${this.fontSize}&fontWeight=${this.fontWeight}&fontStyle=${this.fontStyle}&textDecoration=${this.textDecoration}&textShadow=${this.textShadow}&opacity=${this.opacity}&fontFamily=${this.fontFamily}&letterSpacing=${this.letterSpacing}&bgColor=${this.bgColor}&animationDuration=${this.animationDuration}&animationDelay=${this.animationDelay}&animationTimingFunction=${this.animationTimingFunction}&animationDirection=${this.animationDirection}`
-  // 	}
-  // },
   data() {
     return {
       rollText: "",
@@ -56,27 +44,7 @@ export default {
       animationDirection: "",
     };
   },
-  // onShareAppMessage(res) {
-  // 	const item = this.$store.state.app.list.find(e => e.page.replace('/', '') === 'pages/实用工具/滚动君/滚动君')
-  // 	return {
-  // 		title: '叮当工具箱ToolBox365_' + (item.desc ? item.desc : ''),
-  // 		path: '/' + this.$scope.route + '?openid=' + this.$store.state.user.openid
-  // 	}
-  // },
-  // onShareAppMessage(res) {
-  //   const item = this.$store.state.app.list.find(e => e.page === "/pages/实用工具/滚动君/滚动君");
-  //   return {
-  //     title: "叮当工具箱ToolBox365_滚动君_" + item.desc,
-  //     path: `/pages/首页/首页?openid=${this.$store.state.user.openid}&path=/pages/实用工具/滚动君/滚动君`,
-  //   };
-  // },
   onLoad(opt) {
-    // if (!opt.fromRollMan) { // 表示不是从分享页面进入
-    // 	delete opt.fromRollMan
-    // 	this.$router.reLaunch('/index', {
-    // 		...opt
-    // 	})
-    // }
     this.rollText = opt.rollText;
     this.fontColor = opt.fontColor;
     this.fontSize = Number(opt.fontSize);

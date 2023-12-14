@@ -69,14 +69,14 @@
 								</picker>
 								<text class="cuIcon-right"></text>
 							</view>
-							<view class="config-item">
+							<!-- <view class="config-item">
 								<text>文本字体</text>
 								<picker mode="selector" @change="fonFacePickerChange" :value="fontFaceIndex" :range="fontFaceRange"
 									range-key="name">
 									<view class="bold">{{ fontFaceRange[fontFaceIndex].name }}</view>
 								</picker>
 								<text class="cuIcon-right"></text>
-							</view>
+							</view> -->
 							<view class="config-item">
 								<text>文本阴影</text>
 								<CustomCounter v-model="fontShadowH" mini />
@@ -266,36 +266,8 @@ export default {
 			this.$refs.Page.showAD()
 		}
 		this.show++
-		// this.$emit('onShow')
-		// uni.hideShareMenu({
-		// 	menus: ['shareAppMessage', 'shareTimeline']
-		// })
 	},
-	onLoad(opt) {
-		// if (Object.keys(opt).length) {
-		// 	this.value = opt.rollText
-		// 	this.fontColor = this.fontPreviewColor = opt.fontColor,
-		// 		this.fontSize = Number(opt.fontSize)
-		// 	this.fontWeightIndex = this.fontWeightRange.findIndex(e => e.value === opt.fontWeight)
-		// 	this.fontStyle = opt.fontStyle
-		// 	this.fontFaceIndex = this.fontFaceRange.findIndex(e => e.value === opt.fontFamily)
-		// 	this.fontDecorationIndex = this.fontDecorationRange.findIndex(e => e.value === opt.textDecoration)
-		// 	this.fontShadowH = opt.textShadow.split(' ')[0].replace('px', '')
-		// 	this.fontShadowV = opt.textShadow.split(' ')[1].replace('px', '')
-		// 	this.fontShadowB = opt.textShadow.split(' ')[2].replace('px', '')
-		// 	this.fontShadowColor = opt.textShadow.split(' ')[3]
-		// 	this.opacity = Number(opt.opacity)
-		// 	this.letterSpacing = Number(opt.letterSpacing.replace('px', ''))
-		// 	this.bgColor = this.bgPreviewColor = opt.bgColor
-		// 	this.animationDuration = Number(opt.animationDuration.replace('s', ''))
-		// 	this.animationDelay = Number(opt.animationDelay.replace('s', ''))
-		// 	this.animationTimingFunctionIndex = this.animationTimingFunctionRange.findIndex(e => e.value === opt
-		// 		.animationTimingFunction)
-		// 	this.animationDirectionIndex = this.animationDirectionRange.findIndex(e => e.value === opt
-		// 		.animationDirection)
-		// 	this.$once('onShow', () => this.toRoll())
-		// }
-	},
+	onLoad() {},
 	methods: {
 		toRoll() { // 去work页面
 			this.$loading()
@@ -334,35 +306,6 @@ export default {
 			}).finally(() => {
 				this.$loaded()
 			})
-
-			// if (errmsg == 'ok') {
-			// this.$router.push('/B/roll-page', {
-			// fromRollMan: 1, // 标记，不是从分享后的页面进入
-			// rollText: this.rollText,
-			// fontColor: this.fontColor,
-			// fontSize: this.fontSize,
-			// fontWeight: this.fontWeightRange[this.fontWeightIndex].value,
-			// fontStyle: this.fontStyle,
-			// textDecoration: this.fontDecorationRange[this.fontDecorationIndex].value,
-			// textShadow: `${this.fontShadowH}px ${this.fontShadowV}px ${this.fontShadowB}px ${this.fontShadowColor}`,
-			// opacity: this.opacity,
-			// fontFamily: this.fontFaceRange[this.fontFaceIndex] ? this.fontFaceRange[this
-			// 	.fontFaceIndex].value : '',
-			// letterSpacing: `${this.letterSpacing}px`,
-			// bgColor: this.bgColor,
-			// animationDuration: `${this.animationDuration}s`,
-			// animationDelay: `${this.animationDelay}s`,
-			// animationTimingFunction: this.animationTimingFunctionRange[this
-			// 	.animationTimingFunctionIndex].value,
-			// animationDirection: this.animationDirectionRange[this.animationDirectionIndex]
-			// 	.value
-			// })
-			// } else {
-			// 	this.$toast(errmsg)
-			// 	this.fontColor = '#FF0000'
-			// 	this.animationDuration = '16'
-			// 	this.value = '富强、民主、文明、和谐，自由、平等、公正、法治，爱国、敬业、诚信、友善'
-			// }
 		},
 		colorPickerPreview1(color) {
 			this.fontPreviewColor = color

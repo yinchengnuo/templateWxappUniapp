@@ -77,9 +77,7 @@ export default {
           .then(res => {
             this.result = res.data;
           })
-          .finally(() => {
-            this.$loaded();
-          });
+          .finally(() => this.$loaded());
       } else {
         this.focus = true;
         this.$toast("请输入翻译内容");
