@@ -5,16 +5,16 @@
         <view class="cu-bar bg-white solid-bottom margin-top">
           <view class="action">
             <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-            <text>输入数字即可转换</text>
+            <text>输入中草药即可转换</text>
           </view>
           <view class="action" @click="show = true">
             <text class="cuIcon-unfold">{{ text }}</text>
           </view>
         </view>
         <view class="cu-bar input">
-          <input v-model.trim="text" ref="input" :focus="focus" class="my_input" confirm-type="search" placeholder="请输入数字" type="digit" @blur="focus = false" @confirm="make" />
+          <input v-model.trim="text" ref="input" :focus="focus" class="my_input" confirm-type="search" placeholder="请输入中草药" type="digit" @blur="focus = false" @confirm="make" />
           <text v-if="text" class="my_input_clear cuIcon-roundclosefill" @click="(text = ''), make()"></text>
-          <button class="cu-btn lg shadow-blur" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click="make">转换</button>
+          <button class="cu-btn lg shadow-blur" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click="make">查询</button>
         </view>
         <view class="cu-bar solid-bottom margin-top-xs">
           <view class="action">
@@ -28,7 +28,7 @@
         <TextBoard :result="result" arrayView />
       </template>
       <page-container :show="show" :z-index="2048" round>
-        <view style="height: 61.8vh">
+        <view style="height: 55.5vh">
           <view class="cu-list menu card-menu sm-border shadow radius-lg">
             <view class="cu-bar">
               <view class="action">
@@ -656,7 +656,7 @@ export default {
           .finally(() => this.$loaded());
       } else {
         this.focus = true;
-        this.$toast("请输入数字");
+        this.$toast("请输入中草药");
       }
       uni.setStorageSync("express", this.text || "");
     },
