@@ -1,5 +1,5 @@
 <template>
-  <Page type="S1" ref="Page" bg>
+  <Page ref="Page" bg>
     <template v-slot:default="{ page }">
       <template v-if="page">
         <view class="cu-bar bg-white solid-bottom margin-top">
@@ -8,7 +8,9 @@
             <text>输入中草药即可转换</text>
           </view>
           <view class="action" @click="show = true">
-            <text class="cuIcon-unfold">{{ text }}</text>
+            <text class="cuIcon-unfold">
+              <text class="text-df">{{ text }}</text>
+            </text>
           </view>
         </view>
         <view class="cu-bar input">
@@ -27,7 +29,7 @@
         </view>
         <TextBoard :result="result" arrayView />
       </template>
-      <page-container :show="show" :z-index="2048" round>
+      <page-container :show="show" :z-index="999999999" round>
         <view style="height: 55.5vh">
           <view class="cu-list menu card-menu sm-border shadow radius-lg">
             <view class="cu-bar">
@@ -39,7 +41,7 @@
               </view>
             </view>
           </view>
-          <view class="padding margin-bottom" style="height: 61.8vh; overflow: auto">
+          <view class="padding margin-bottom" style="height: 61.8vh; overflow: auto; padding-bottom: 300px">
             <view v-for="item in list" :key="item" class="cu-tag radius margin-xs" @click="(text = item), make(), (show = false)">{{ item }}</view>
           </view>
         </view>
@@ -53,7 +55,7 @@ export default {
   data() {
     return {
       show: false,
-      text: uni.getStorageSync("express") || "人参",
+      text: uni.getStorageSync("caoyao") || "人参",
       focus: true,
       result: null,
       list: [
@@ -658,7 +660,7 @@ export default {
         this.focus = true;
         this.$toast("请输入中草药");
       }
-      uni.setStorageSync("express", this.text || "");
+      uni.setStorageSync("caoyao", this.text || "");
     },
   },
 };
