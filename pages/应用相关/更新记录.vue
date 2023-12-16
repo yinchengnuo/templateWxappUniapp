@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       list: [
-      {
+        {
           date: "2023-12-16",
           version: "6.0.4",
           desc: ["修复邀请新用户消息推送通知异常"],
