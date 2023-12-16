@@ -94,9 +94,10 @@ export default {
       // 如果是邀请新用户奖励到账
       if (payload.type === "share") {
         this.$store.commit("user/SET_USER_INFO", {
-          energy: this.$store.state.user.energy + energy, // 更新总能量
-          total_income: this.$store.state.user.total_income + energy, // 更新总入账能量
+          energy: this.$store.state.user.energy + payload.data.energy, // 更新总能量
+          total_income: this.$store.state.user.total_income + payload.data.energy, // 更新总入账能量
         });
+        this.$toast(payload.type)
       }
       this.$store.state.app.notify.push(payload); // 弹出系统消息提示框
       this.$store.state.app.notifyRoute = this.$store.state.app.currentRoute; // 标记弹出系统消息提示框的页面

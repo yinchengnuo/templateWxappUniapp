@@ -28,6 +28,21 @@ export default {
   data() {
     return {
       list: [
+      {
+          date: "2023-12-16",
+          version: "6.0.4",
+          desc: ["修复邀请新用户消息推送通知异常"],
+        },
+        {
+          date: "2023-12-15",
+          version: "6.0.3",
+          desc: ["修复无法分享"],
+        },
+        {
+          date: "2023-12-15",
+          version: "6.0.2",
+          desc: ["修复无法分享"],
+        },
         {
           date: "2023-12-15",
           version: "6.0.1",
