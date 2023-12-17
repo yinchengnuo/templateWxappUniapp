@@ -19,7 +19,7 @@ function onShare({ from }) {
 
   if (route === "pages/首页/首页") title = "100+工具 各类实用&AI&图文&信息查询&有趣&解压小工具免费使用";
   if (route === "pages/每日/每日") title = "每日随机 看全网实时热搜&新闻&段子&日更&随机图片&文案大全等等全部都有";
-  if (route === "pages/聊天/聊天") title = "AI聊天 有问提，问AI！文心一言&星火认知大模型&MineMax&OpneAI共六大语言模型随你提问";
+  if (route === "pages/聊天/聊天") title = "AI聊天 有问提，问AI！文心一言&星火认知大模型随你提问";
   if (route === "pages/数据/数据") title = "数据集合 看古籍，查资料";
   if (route === "pages/我的/我的") title = "生活工作好帮手";
 
