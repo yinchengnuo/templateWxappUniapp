@@ -3,7 +3,7 @@
     <template v-slot:default="{ page }">
       <template v-if="page">
         <view class="cu-bar solid-bottom margin-top-xs">
-          <view class="flex">
+          <view class="flex margin-left">
             <CustomCounter v-model="row" :min="6" :max="29" />
             <text>行</text>
           </view>

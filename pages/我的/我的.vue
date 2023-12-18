@@ -61,12 +61,12 @@
           <text class="text-black">我的分享</text>
         </view>
       </navigator>
-      <navigator v-if="user.vip" url="/pages/用户中心/找到组织" class="cu-item arrow">
+      <!-- <navigator v-if="user.vip" url="/pages/用户中心/找到组织" class="cu-item arrow">
         <view class="content">
           <text class="cuIcon-community text-blue"></text>
           <text class="text-black">找到组织</text>
         </view>
-      </navigator>
+      </navigator> -->
       <navigator url="/pages/应用相关/关于小程序" class="cu-item arrow">
         <view class="content">
           <text class="cuIcon-link text-green"></text>

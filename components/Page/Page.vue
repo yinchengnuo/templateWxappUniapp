@@ -112,9 +112,7 @@ export default {
   },
   created() {
     // 初始化弹屏广告
-    this.interstitialAd = uni.createInterstitialAd({
-      adUnitId: "adunit-e3f467955c2226a4",
-    });
+    this.interstitialAd = uni.createInterstitialAd({ adUnitId: "adunit-e3f467955c2226a4" });
     this.interstitialAd.onError(() => {});
 
     if (this.$store.state.user.openid) {
@@ -151,16 +149,18 @@ export default {
     },
     // 记录浏览及获取收藏状态
     recordView() {
-      this.page = this.$store.state.app.list.find(e => e.page.includes(getCurrentPages().at(-1).route.split("?")[0]));
-      if (this.page) {
-        this.$("/record_view", this.page)
-          .then(data => {
-            this.collected = data.collected;
-            this.$store.commit("app/UPDATE_FUNCTION", data);
-          })
-          .finally(() => {
-            this.favor = true;
-          });
+      if (process.env.NODE_ENV === "production") {
+        this.page = this.$store.state.app.list.find(e => e.page.includes(getCurrentPages().at(-1).route.split("?")[0]));
+        if (this.page) {
+          this.$("/record_view", this.page)
+            .then(data => {
+              this.collected = data.collected;
+              this.$store.commit("app/UPDATE_FUNCTION", data);
+            })
+            .finally(() => {
+              this.favor = true;
+            });
+        }
       }
     },
     // 点击收藏
