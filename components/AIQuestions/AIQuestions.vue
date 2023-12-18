@@ -206,12 +206,6 @@ export default {
               .globalData.bgClass.slice()
               .sort(() => Math.random() - 0.5);
             this.list4 = data.filter(e => e.type === "recent").map((e, i) => ({ ...e, bg: bgs[i % 8] }));
-
-            // data.forEach((e, i) => {
-            //   this.$("/chat", { chat: e.content }).then(() => {
-            //     console.log(data.length, i);
-            //   });
-            // });
           })
           .finally(() => {
             this.$loaded();
@@ -291,7 +285,7 @@ export default {
     },
     VerticalMain2(e) {
       let tabHeight = 0;
-      if (!this._load) {
+      if (!this.__load) {
         for (let i = 0; i < this.career.length; i++) {
           uni
             .createSelectorQuery()
@@ -304,13 +298,15 @@ export default {
             })
             .exec();
         }
-        this._load = true;
+        this.__load = true;
       }
       let scrollTop = e.detail.scrollTop + 20;
       for (let i = 0; i < this.career.length; i++) {
         if (scrollTop > this.career[i].top && scrollTop < this.career[i].bottom) {
           this.TabCur2 = this.career[i].id;
           this.VerticalNavTop2 = (this.career[i].id - 1) * 50;
+          console.log("👀  file: AIQuestions.vue:307  VerticalMain2  this.TabCur2:", this.TabCur2)
+          console.log("👀  file: AIQuestions.vue:308  VerticalMain2  this.VerticalNavTop2:", this.VerticalNavTop2)
           return false;
         }
       }

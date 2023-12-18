@@ -2,7 +2,7 @@
   <Page ref="Page" bg refresh @refresh="refresh">
     <template v-slot:default="{ page }">
       <template v-if="page">
-        <TextBoard :result="result" arrayView />
+        <TextBoard :result="result" arrayView indent />
       </template>
     </template>
   </Page>
@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     refresh() {
-      this.$loading()
+      this.$loading();
       this.$refs.Page.refreshing = true;
       uni
         .request({ url: "https://api.tangdouz.com/wenzhang.php" })
@@ -29,7 +29,7 @@ export default {
         })
         .catch(() => {})
         .finally(() => {
-          this.$loaded()
+          this.$loaded();
           this.$refs.Page.refreshing = false;
         });
     },

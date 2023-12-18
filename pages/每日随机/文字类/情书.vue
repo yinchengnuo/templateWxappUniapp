@@ -2,7 +2,7 @@
   <Page ref="Page" bg refresh @refresh="refresh">
     <template v-slot:default="{ page }">
       <template v-if="page">
-        <TextBoard :result="result" arrayView />
+        <TextBoard :result="result" arrayView indent />
         <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="$copy(result)">复制</button>
       </template>
     </template>
@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     refresh() {
-      this.$loading()
+      this.$loading();
       this.$refs.Page.refreshing = true;
       uni
         .request({ url: "https://api.tangdouz.com/a/love.php?gon=%E6%88%91&shou=%E4%BD%A0" })
@@ -30,7 +30,7 @@ export default {
         })
         .catch(() => {})
         .finally(() => {
-          this.$loaded()
+          this.$loaded();
           this.$refs.Page.refreshing = false;
         });
     },

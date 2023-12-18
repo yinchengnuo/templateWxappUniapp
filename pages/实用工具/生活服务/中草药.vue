@@ -27,7 +27,7 @@
             <text class="cuIcon-copy margin-left-xs text-bold"></text>
           </view>
         </view>
-        <TextBoard :result="result" arrayView />
+        <TextBoard :result="result" arrayView indent />
       </template>
       <page-container :show="show" :z-index="999999999" round>
         <view style="height: 55.5vh">
@@ -652,8 +652,8 @@ export default {
           .request({
             url: "https://api.tangdouz.com/a/zcy.php?nr=" + this.text,
           })
-          .then(res => {
-            this.result = res.data.split("\\r").filter(e => e);
+          .then(({ data }) => {
+            this.result = data.split("\\r").filter(e => e);
           })
           .finally(() => this.$loaded());
       } else {

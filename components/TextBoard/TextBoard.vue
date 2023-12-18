@@ -5,7 +5,7 @@
         <view class="text-lg text-black text-bold padding-tb-sm" style="word-wrap: break-word">
           <template v-if="arrayView">
             <view>
-              <view v-for="(item, index) in result" :key="index" style="text-indent: 2em">{{ item }}</view>
+              <view v-for="(item, index) in result" :key="index" :style="{textIndent: indent ? '2em' : '0em'}">{{ item }}</view>
             </view>
           </template>
           <template v-if="!arrayView">
@@ -23,6 +23,10 @@ export default {
   name: "TextBoard",
   props: {
     richText: {
+      type: String,
+      default: "",
+    },
+    indent: {
       type: String,
       default: "",
     },

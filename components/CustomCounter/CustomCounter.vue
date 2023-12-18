@@ -11,6 +11,14 @@ export default {
   props: {
     value: String,
     mini: String,
+    min: {
+      type: Number,
+      default: 0,
+    },
+    max: {
+      type: Number,
+      default: 100,
+    },
   },
   data() {
     return {
@@ -21,13 +29,17 @@ export default {
   methods: {
     reduce() {
       // -
-      this.counterValue--;
-      this.$emit("input", this.counterValue);
+      if (this.counterValue > this.min) {
+        this.counterValue--;
+        this.$emit("input", this.counterValue);
+      }
     },
     add() {
       // +
-      this.counterValue++;
-      this.$emit("input", this.counterValue);
+      if (this.counterValue < this.max) {
+        this.counterValue++;
+        this.$emit("input", this.counterValue);
+      }
     },
     longpress(type) {
       // 长按

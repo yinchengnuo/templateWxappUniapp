@@ -35,6 +35,9 @@
     { "path": "pages/实用工具/人工智能/AI万物识别", "style": { "disableScroll": true } },
     { "path": "pages/实用工具/生活服务/二维码解析", "style": { "disableScroll": true } },
     { "path": "pages/实用工具/生活服务/中草药", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/生活服务/周公解梦", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/生活服务/对对联", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/生活服务/文字找茬", "style": { "disableScroll": true } },
 
     { "path": "pages/每日随机/图片类/早晚安图片", "style": { "disableScroll": true } },
     { "path": "pages/每日随机/图片类/历史上的今天", "style": { "disableScroll": true } },
