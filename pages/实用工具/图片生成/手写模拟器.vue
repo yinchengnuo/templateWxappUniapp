@@ -41,10 +41,14 @@ export default {
       result: null,
     };
   },
-  onLoad() {
+  onLoad({ text }) {
     setTimeout(() => (this.focus = true), 1234);
     setTimeout(() => (this.focus = true), 2345);
     setTimeout(() => (this.focus = true), 3456);
+    if (text) {
+      this.text = text;
+      this.make();
+    }
   },
   methods: {
     make() {
@@ -52,7 +56,7 @@ export default {
       this.result = null;
       this.text = (this.text || "").toString().trim();
       if (this.text) {
-        this.result = "https://zj.v.api.aa1.cn/api/zuoye/?msg=" + this.text;
+        this.result = "http://api.caonmtx.cn/api/twhca.php?text=" + this.text;
       } else {
         this.focus = true;
         this.$toast("请输入文字");

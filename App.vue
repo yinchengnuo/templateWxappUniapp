@@ -173,7 +173,7 @@ export default {
 }
 
 .my_textarea {
-  padding: 0 20rpx;
+  padding: 20rpx 28rpx;
   border-radius: 10rpx;
   border: 1px solid #efefef;
 }

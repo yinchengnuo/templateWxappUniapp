@@ -34,17 +34,17 @@ export default {
   },
   watch: {
     row() {
-      this.make();
+      this.refresh();
     },
     col() {
-      this.make();
+      this.refresh();
     },
   },
   onLoad() {
-    this.make();
+    this.refresh();
   },
   methods: {
-    make() {
+    refresh() {
       this.$loading();
       this.$refs.Page.refreshing = true;
       uni

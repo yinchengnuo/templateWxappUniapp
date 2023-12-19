@@ -89,14 +89,12 @@
 export default {
   data() {
     return {
-      text: "411381199611231215",
+      text: "",
       focus: true,
       result: null,
     };
   },
-  onLoad() {
-    this.make();
-  },
+  onLoad() {},
   methods: {
     make() {
       this.focus = false;
