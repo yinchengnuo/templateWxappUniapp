@@ -28,12 +28,6 @@
               <text class="text-black">更新记录</text>
             </view>
           </navigator>
-          <navigator url="/pages/应用相关/需求墙" class="cu-item arrow">
-            <view class="content">
-              <text class="cuIcon-favorfill text-yellow"></text>
-              <text class="text-black">需求墙</text>
-            </view>
-          </navigator>
           <navigator url="/pages/应用相关/加载效果" class="cu-item arrow">
             <view class="content">
               <text class="cuIcon-lightauto text-green"></text>

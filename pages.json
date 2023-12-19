@@ -121,8 +121,7 @@
     { "path": "pages/应用相关/关于能量", "style": { "disableScroll": true } },
     { "path": "pages/应用相关/关于小程序", "style": { "disableScroll": true } },
     { "path": "pages/应用相关/关于ToolBoxAI", "style": { "disableScroll": true } },
-    { "path": "pages/应用相关/更新记录", "style": { "disableScroll": true } },
-    { "path": "pages/应用相关/需求墙", "style": { "disableScroll": true } }
+    { "path": "pages/应用相关/更新记录", "style": { "disableScroll": true } }
   ],
   "globalStyle": {
     "navigationStyle": "custom",
