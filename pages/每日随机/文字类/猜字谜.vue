@@ -2,8 +2,23 @@
   <Page ref="Page" bg type="S1" refresh @refresh="refresh">
     <template v-slot:default="{ page }">
       <template v-if="page">
+        <view class="cu-bar solid-bottom margin-top-xs">
+          <view class="action">
+            <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+            <text class="text-bold">字谜</text>
+          </view>
+        </view>
         <TextBoard :result="result" />
-        <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="showAnswer">查看答案</button>
+        <view class="cu-bar solid-bottom margin-top-xs">
+          <view class="action">
+            <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+            <text class="text-bold">谜底</text>
+          </view>
+          <view class="action">
+            <switch class="radius" :class="$refs.Page.bgClass.split('-')[2]" :checked="checked" @change="change"> </switch>
+          </view>
+        </view>
+        <TextBoard :blur="!checked" :result="answer" />
       </template>
     </template>
   </Page>
@@ -14,7 +29,8 @@ export default {
   data() {
     return {
       result: "",
-      answer: ""
+      answer: "",
+      checked: Boolean(uni.getStorageSync("caizimi")),
     };
   },
   created() {
@@ -22,23 +38,29 @@ export default {
   },
   methods: {
     refresh() {
-      this.$loading()
+      this.$loading();
       this.$refs.Page.refreshing = true;
       uni
         .request({ url: "https://api.tangdouz.com/czm.php" })
         .then(({ data }) => {
-          this.result = data.zm
-          this.answer = data.key
+          this.result = data.zm;
+          this.answer = data.key;
         })
         .catch(() => {})
         .finally(() => {
-          this.$loaded()
+          this.$loaded();
           this.$refs.Page.refreshing = false;
         });
     },
-    showAnswer() {
-      this.$toast(this.answer)
-    }
+    change(e) {
+      if (e.detail.value) {
+        this.checked = true;
+        uni.setStorageSync("caizimu", true);
+      } else {
+        this.checked = false;
+        uni.removeStorageSync("caizimi");
+      }
+    },
   },
 };
 </script>

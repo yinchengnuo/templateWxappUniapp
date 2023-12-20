@@ -24,7 +24,7 @@
           </view>
         </view>
         <view class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
-          <Img v-if="result" :src="result" />
+          <Img v-if="result" :src="result" @error="$toast('生成失败'), (text = ''), (result = '')" />
           <Empty v-else />
         </view>
       </template>
@@ -42,12 +42,13 @@ export default {
     };
   },
   onLoad({ text }) {
-    setTimeout(() => (this.focus = true), 1234);
-    setTimeout(() => (this.focus = true), 2345);
-    setTimeout(() => (this.focus = true), 3456);
     if (text) {
       this.text = text;
       this.make();
+    } else {
+      setTimeout(() => (this.focus = true), 1234);
+      setTimeout(() => (this.focus = true), 2345);
+      setTimeout(() => (this.focus = true), 3456);
     }
   },
   methods: {

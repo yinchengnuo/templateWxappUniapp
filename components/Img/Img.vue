@@ -37,8 +37,9 @@ export default {
       this.$loaded();
     },
     error() {
-      this.errored = true;
       this.$loaded();
+      this.errored = true;
+      this.$emit('error', this.src)
     },
   },
 };

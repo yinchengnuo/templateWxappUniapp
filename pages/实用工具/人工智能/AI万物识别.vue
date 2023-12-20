@@ -35,7 +35,7 @@
                 </view>
               </view>
               <view v-if="item.baike_info && item.baike_info.image_url" class="cu-item" @click="$preview(item.baike_info.image_url)">
-                <image class="w100" :src="item.baike_info.image_url" show-menu-by-longpress mode="widthFix"></image>
+                <image class="w100 radius" :src="item.baike_info.image_url" show-menu-by-longpress mode="widthFix"></image>
               </view>
               <view v-if="item.baike_info && item.baike_info.description" class="cu-item">
                 <view class="content">

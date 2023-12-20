@@ -4,11 +4,11 @@
       <template v-if="page">
         <view class="cu-bar solid-bottom margin-top-xs">
           <view class="flex margin-left">
-            <CustomCounter v-model="row" :min="6" :max="29" />
+            <CustomCounter v-model="rowNum" :min="6" :max="29" />
             <text class="text-lg margin-xs">行</text>
           </view>
           <view class="flex">
-            <CustomCounter v-model="col" :min="6" :max="29" />
+            <CustomCounter v-model="colNum" :min="6" :max="29" />
             <text class="text-lg margin-xs">列</text>
           </view>
           <view class="action" @click="$copy(result)">
@@ -27,21 +27,22 @@ export default {
   data() {
     return {
       result: null,
-      row: 20,
-      col: 20,
-      answer: "",
+      rowNum: 18,
+      colNum: 18,
+      row: 0,
+      col: 0,
     };
   },
   watch: {
-    row() {
+    rowNum() {
       this.refresh();
     },
-    col() {
+    colNum() {
       this.refresh();
     },
   },
   onLoad() {
-    this.refresh();
+    this.$refs.Page.refreshing = true;
   },
   methods: {
     refresh() {
@@ -49,11 +50,13 @@ export default {
       this.$refs.Page.refreshing = true;
       uni
         .request({
-          url: "https://api.tangdouz.com/tdcq/wzzc.php?x=" + this.row + "&y=" + this.col,
+          url: "https://api.tangdouz.com/tdcq/wzzc.php?x=" + this.rowNum + "&y=" + this.colNum,
         })
         .then(({ data }) => {
-          this.answer = data.answer;
           this.result = data.subject.split("\\r").filter(e => e);
+          this.row = this.result.findIndex(e => this.result.findIndex(ee => ee === e) === this.result.findLastIndex(ee => ee === e));
+          const rows = this.result[this.row].split("");
+          this.col = rows.findIndex(e => rows.findIndex(ee => ee === e) === rows.findLastIndex(ee => ee === e));
         })
         .finally(() => {
           this.$loaded();
@@ -61,9 +64,7 @@ export default {
         });
     },
     showAnswer() {
-      const row = this.answer.slice(0, this.answer.length / 2);
-      const col = this.answer.slice(this.answer.length / 2, this.answer.length);
-      this.$toast(`第${row}行第${col}列：${this.result[row - 1][col - 1]}`);
+      this.$toast(`第${this.row + 1}行第${this.col + 1}列：${this.result[this.row][this.col]}`);
     },
   },
 };

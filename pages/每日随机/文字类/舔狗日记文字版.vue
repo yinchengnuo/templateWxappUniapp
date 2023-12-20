@@ -3,7 +3,10 @@
     <template v-slot:default="{ page }">
       <template v-if="page">
         <TextBoard :result="result" />
-        <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="$copy(result)">复制</button>
+        <button v-if="result" class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="$copy(result)">复制</button>
+        <navigator v-if="result" :url="'/pages/实用工具/图片生成/手写模拟器?text=' + result">
+          <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]">生成文字</button>
+        </navigator>
       </template>
     </template>
   </Page>

@@ -1,5 +1,5 @@
 <template>
-  <Page type="S1" ref="Page">
+  <Page ref="Page" refresh @refresh="refresh">
     <template v-slot:default="{ page }">
       <template v-if="page">
         <Img ref="Img" :src="src" />
@@ -12,8 +12,19 @@
 export default {
   data() {
     return {
-      src: "https://api.lykep.com/api/tgbj",
+      src: "",
     };
+  },
+  created() {
+    this.refresh();
+  },
+  methods: {
+    refresh() {
+      this.$refs.Page.refreshing = true;
+      wx.getImageInfo({ src: "https://api.lykep.com/api/tgbj" })
+        .then(({ path }) => (this.src = path))
+        .finally(() => (this.$refs.Page.refreshing = false));
+    },
   },
 };
 </script>

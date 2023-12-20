@@ -28,6 +28,11 @@ export default {
   data() {
     return {
       list: [
+      {
+          date: "2023-12-21",
+          version: "6.0.9",
+          desc: ["新增CosPlay", "新增网站出装", "新增点阵字生成", "优化交互逻辑"],
+        },
         {
           date: "2023-12-19",
           version: "6.0.7",

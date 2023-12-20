@@ -163,6 +163,9 @@ export default {
   border: 1px solid #efefef;
   margin: 0 20rpx !important;
   min-height: 74rpx !important;
+  &.no_button {
+    padding-right: 20rpx;
+  }
 }
 
 .my_input_clear {
@@ -170,12 +173,15 @@ export default {
   right: 190rpx;
   font-size: 44rpx;
   position: absolute;
+  &.no_button {
+    right: 56rpx;
+  }
 }
 
 .my_textarea {
-  padding: 20rpx 28rpx;
   border-radius: 10rpx;
   border: 1px solid #efefef;
+  padding: 10rpx 14rpx !important;
 }
 
 .my_textarea_clear {

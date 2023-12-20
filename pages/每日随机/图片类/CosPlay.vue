@@ -2,11 +2,7 @@
   <Page ref="Page" bg refresh @refresh="refresh">
     <template v-slot:default="{ page }">
       <template v-if="page">
-        <TextBoard :result="result" arrayView indent />
-        <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="$copy(result)">复制</button>
-        <navigator v-if="result" :url="'/pages/实用工具/图片生成/手写模拟器?text=' + result">
-          <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]">生成文字</button>
-        </navigator>
+        <Img v-for="item in list" :key="item.src" ref="Img" :title="title" :src="item.src" @error="error" />
       </template>
     </template>
   </Page>
@@ -16,7 +12,9 @@
 export default {
   data() {
     return {
-      result: "",
+      src: "",
+      list: [],
+      title: "",
     };
   },
   created() {
@@ -27,15 +25,22 @@ export default {
       this.$loading();
       this.$refs.Page.refreshing = true;
       uni
-        .request({ url: "https://api.tangdouz.com/wenzhang.php" })
+        .request({ url: "https://oiapi.net/API/Cosplay" })
         .then(({ data }) => {
-          this.result = data.split("\\r").filter(e => e);
+          this.title = data.data.title;
+          this.list = data.data.images.map(e => ({ src: e, errored: false }));
         })
         .catch(() => {})
         .finally(() => {
           this.$loaded();
           this.$refs.Page.refreshing = false;
         });
+    },
+    error(src) {
+      this.list.find(e => e.src === src).errored = true;
+      if (this.list.every(e => e.errored == true)) {
+        this.refresh();
+      }
     },
   },
 };

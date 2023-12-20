@@ -223,7 +223,20 @@ export default {
         return this.$toast("AI正在生成对话，请稍后再试");
       }
       if (this.$store.state.user.energy < 1) {
-        return this.$toast("能量不足");
+        uni.showModal({
+          title: "能量不足",
+          content: "您可以选择付费或免费获取能量",
+          confirmText: "立即充值",
+          cancelText: "免费获取",
+          success: ({ confirm }) => {
+            if (confirm) {
+              uni.navigateTo({ url: "/pages/用户中心/我的能量" });
+            } else {
+              this.showSettings();
+            }
+          },
+        });
+        return
       }
       if (this.chat.trim()) {
         this.generating = true;

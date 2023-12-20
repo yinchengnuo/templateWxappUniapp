@@ -1,5 +1,5 @@
 <template>
-  <Page ref="Page" bg>
+  <Page ref="Page" type="S1" bg>
     <template v-slot:default="{ page }">
       <template v-if="page">
         <view class="cu-bar bg-white solid-bottom margin-top">

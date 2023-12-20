@@ -7,9 +7,6 @@
             <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
             <text>输入文字即可生成</text>
           </view>
-          <view class="action">
-            <text v-if="text" class="my_textarea_clear cuIcon-roundclosefill" @click="(text = ''), make()"></text>
-          </view>
         </view>
         <view class="cu-bar input solid-bottom">
           <input v-model.trim="text" ref="input" :focus="focus" class="my_input" confirm-type="search" placeholder="请输入文字" type="text" @blur="focus = false" @confirm="make" />
@@ -35,7 +32,7 @@
 export default {
   data() {
     return {
-      text: "我考上了地瓜",
+      text: "李白",
       focus: false,
       result: null,
     };
@@ -49,8 +46,7 @@ export default {
       this.result = null;
       this.text = (this.text || "").toString().trim();
       if (this.text) {
-        this.result = "http://ovoa.cc/api/beibao.php?msg=" + this.text;
-        this.$toast(this.result);
+        this.result = "https://xiaoapi.cn/API/wzry_pic.php?msg=" + this.text;
       } else {
         this.focus = true;
         this.$toast("请输入文字");

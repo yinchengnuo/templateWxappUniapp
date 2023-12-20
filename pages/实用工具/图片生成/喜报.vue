@@ -49,7 +49,7 @@ export default {
       this.result = null;
       this.text = (this.text || "").toString().trim();
       if (this.text) {
-        this.result = "http://api.tangdouz.com/wz/xb.php?nr=" + this.text;
+        this.result = "https://api.tangdouz.com/wz/xb.php?nr=" + this.text;
       } else {
         this.focus = true;
         this.$toast("请输入文字");

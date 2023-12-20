@@ -41,7 +41,7 @@ import NZH from "nzh";
 export default {
   data() {
     return {
-      text: "",
+      text: "1234567.89",
       to: 0,
       type: 0,
       typeList: ["简体", "繁体"],
@@ -58,7 +58,9 @@ export default {
       this.make();
     },
   },
-  onLoad() {},
+  onLoad() {
+    this.make();
+  },
   methods: {
     make() {
       this.focus = false;
@@ -87,6 +89,7 @@ export default {
             this.result = NZH.hk.encodeS(this.text);
           }
         }
+        console.log(this.result);
       } else {
         this.focus = true;
         this.$toast("请输入数字");
