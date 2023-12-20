@@ -1,6 +1,7 @@
 <template>
   <view>
-    <image v-if="src" :src="src" class="w100" mode="widthFix" show-menu-by-longpress @click="$preview(src)" @load="load" @error="error" />
+    <image v-if="src && !errored" :src="src" class="w100" mode="widthFix" show-menu-by-longpress @click="$preview(src)" @load="load" @error="error" />
+    <view v-if="title && src && !errored" class="text-center">{{ title }}</view>
   </view>
 </template>
 
@@ -9,6 +10,10 @@ export default {
   name: "Img",
   props: {
     src: {
+      type: String,
+      default: "",
+    },
+    title: {
       type: String,
       default: "",
     },
@@ -27,10 +32,12 @@ export default {
     },
   },
   methods: {
-    load() {
+    load(e) {
+      console.log("load", e);
       this.$loaded();
     },
     error() {
+      this.errored = true;
       this.$loaded();
     },
   },

@@ -41,7 +41,7 @@ export default {
     };
   },
   onLoad() {
-    this.make()
+    this.make();
   },
   methods: {
     make() {
@@ -50,6 +50,7 @@ export default {
       this.text = (this.text || "").toString().trim();
       if (this.text) {
         this.result = "http://ovoa.cc/api/beibao.php?msg=" + this.text;
+        this.$toast(this.result);
       } else {
         this.focus = true;
         this.$toast("请输入文字");

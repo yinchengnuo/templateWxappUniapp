@@ -2,7 +2,7 @@
   <Page ref="Page" bg refresh @refresh="refresh">
     <template v-slot:default="{ page }">
       <template v-if="page">
-        <Img v-for="item in list" :key="item" ref="Img" :src="item" />
+        <Img v-for="item in list" :key="item" ref="Img" :title="title" :src="item" />
       </template>
     </template>
   </Page>
@@ -24,10 +24,11 @@ export default {
     refresh() {
       this.$loading();
       this.$refs.Page.refreshing = true;
-      this.$("/proxy", { url: "http://jiuli.xiaoapi.cn/i/img/mnyjs.php" })
-        .then(data => {
-          this.list = data.img;
-          this.title = data.title;
+      uni
+        .request({ url: "https://oiapi.net/API/Cosplay" })
+        .then(({ data }) => {
+          this.title = data.data.title;
+          this.list = data.data.images;
         })
         .catch(() => {})
         .finally(() => {
