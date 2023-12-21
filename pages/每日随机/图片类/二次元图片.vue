@@ -1,5 +1,5 @@
 <template>
-  <Page ref="Page" type="S1" refresh @refresh="refresh">
+  <Page ref="Page" bg type="S1" refresh @refresh="refresh">
     <template v-slot:default="{ page }">
       <template v-if="page">
         <Img ref="Img" :src="src" />
@@ -21,15 +21,9 @@ export default {
   methods: {
     refresh() {
       this.$refs.Page.refreshing = true;
-      uni
-        .request({ url: "https://api.xcboke.cn/api/sjmn?type=json&mode=0" })
-        .then(({ data }) => {
-          this.src = data.url;
-        })
-        .catch(() => {})
-        .finally(() => {
-          this.$refs.Page.refreshing = false;
-        });
+      wx.getImageInfo({ src: "https://ybapi.cn/API/pe_acgimg.php" })
+        .then(({ path }) => (this.src = path))
+        .finally(() => (this.$refs.Page.refreshing = false));
     },
   },
 };

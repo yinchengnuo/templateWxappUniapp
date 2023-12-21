@@ -1,5 +1,5 @@
 <template>
-  <Page ref="Page">
+  <Page ref="Page" bg>
     <template v-slot:default="{ page }">
       <template v-if="page">
         <view class="cu-bar solid-bottom margin-top-xs">
@@ -25,7 +25,7 @@ export default {
     return {
       src: "",
       types: map,
-      index: Number(uni.getStorageSync("xingzuo")) || 8,
+      index: map.indexOf(uni.getStorageSync("xingzuo") || '天秤座'),
     };
   },
   created() {
@@ -33,7 +33,7 @@ export default {
   },
   watch: {
     index() {
-      uni.setStorageSync("xingzuo", this.index),
+      uni.setStorageSync("xingzuo", this.types[this.index]),
       this.src = "https://xiaoapi.cn/API/xzys_pic.php?msg=" + this.types[this.index];
     },
   },

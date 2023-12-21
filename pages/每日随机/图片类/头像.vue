@@ -38,13 +38,14 @@ export default {
     return {
       src: "",
       src1: "",
-      index: uni.getStorageSync("touxinag") || 0,
+      index: Number(uni.getStorageSync("touxinag")) || 0,
       types: Object.keys(map),
     };
   },
   watch: {
     index() {
       this.$refs.Page.refreshing = true;
+      uni.setStorageSync('touxinag', this.index)
     },
   },
   created() {

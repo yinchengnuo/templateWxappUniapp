@@ -8,7 +8,9 @@
             <text class="text-bold">题目</text>
           </view>
         </view>
-        <TextBoard :result="result" />
+        <view class="margin radius">
+          <Img v-if="result" :src="result" />
+        </view>
         <view class="cu-bar solid-bottom margin-top-xs">
           <view class="action">
             <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
@@ -30,7 +32,7 @@ export default {
     return {
       result: "",
       answer: "",
-      checked: Boolean(uni.getStorageSync("naojinjizhuanwan")),
+      checked: Boolean(uni.getStorageSync("kantucaichengyu")),
     };
   },
   created() {
@@ -41,10 +43,11 @@ export default {
       this.$loading();
       this.$refs.Page.refreshing = true;
       uni
-        .request({ url: "https://api.tq23.cn/api/xd-naowan?num=1" })
+        .request({ url: "https://xiaoapi.cn/API/game_ktccy.php?msg=开始游戏" })
         .then(({ data }) => {
-          this.result = data.data.list[0].quest;
-          this.answer = data.data.list[0].result;
+          console.log("👀  file: 看图猜成语.vue:46  .then  data:", data.data.pic);
+          this.result = data.data.pic;
+          this.answer = data.data.answer;
         })
         .catch(() => {})
         .finally(() => {
@@ -55,10 +58,10 @@ export default {
     change(e) {
       if (e.detail.value) {
         this.checked = true;
-        uni.setStorageSync("naojinjizhuanwan", true);
+        uni.setStorageSync("kantucaichengyu", true);
       } else {
         this.checked = false;
-        uni.setStorageSync("naojinjizhuanwan", false);
+        uni.setStorageSync("kantucaichengyu", false);
       }
     },
   },

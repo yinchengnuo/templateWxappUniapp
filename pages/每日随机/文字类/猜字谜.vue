@@ -55,10 +55,10 @@ export default {
     change(e) {
       if (e.detail.value) {
         this.checked = true;
-        uni.setStorageSync("caizimu", true);
+        uni.setStorageSync("caizimi", true);
       } else {
         this.checked = false;
-        uni.removeStorageSync("caizimi");
+        uni.setStorageSync("caizimi", false);
       }
     },
   },

@@ -5,7 +5,7 @@
         <TextBoard :result="result" />
         <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="$copy(result)">复制</button>
         <navigator v-if="result" :url="'/pages/实用工具/图片生成/手写模拟器?text=' + result">
-          <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]">生成文字</button>
+          <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]">生成手写图</button>
         </navigator>
       </template>
     </template>

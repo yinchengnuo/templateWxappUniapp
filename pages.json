@@ -17,6 +17,8 @@
     { "path": "pages/数据/数据", "style": { "navigationStyle": "default", "enablePullDownRefresh": true, "navigationBarTitleText": "数据集" } },
     { "path": "pages/我的/我的", "style": { "enablePullDownRefresh": true } },
 
+    { "path": "pages/WebView/WebView", "style": { "navigationStyle": "default" } },
+
     { "path": "pages/滚动君/滚动君" },
     { "path": "pages/实用工具/生活服务/滚动君", "style": { "disableScroll": true } },
     { "path": "pages/实用工具/生活服务/手机号信息查询", "style": { "disableScroll": true } },
@@ -33,6 +35,8 @@
     { "path": "pages/实用工具/生活服务/身份证信息查询", "style": { "disableScroll": true } },
     { "path": "pages/实用工具/生活服务/中文数字", "style": { "disableScroll": true } },
     { "path": "pages/实用工具/生活服务/点阵字生成", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/生活服务/狗屁不通文章生成器", "style": { "disableScroll": true } },
+    { "path": "pages/实用工具/生活服务/看图猜成语", "style": { "disableScroll": true } },
 
     { "path": "pages/实用工具/图片生成/二维码生成", "style": { "disableScroll": true } },
     { "path": "pages/实用工具/图片生成/喜报", "style": { "disableScroll": true } },
@@ -74,6 +78,9 @@
     { "path": "pages/每日随机/图片类/美腿图片", "style": { "disableScroll": true } },
     { "path": "pages/每日随机/图片类/初音图片", "style": { "disableScroll": true } },
     { "path": "pages/每日随机/图片类/头像", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/帅哥图片", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/二次元图片", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/Pixiv插画", "style": { "disableScroll": true } },
 
     { "path": "pages/每日随机/文字类/情侣名字", "style": { "disableScroll": true } },
     { "path": "pages/每日随机/文字类/笑话", "style": { "disableScroll": true } },
