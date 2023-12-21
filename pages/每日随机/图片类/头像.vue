@@ -1,5 +1,5 @@
 <template>
-  <Page ref="Page" type="S1" bg refresh @refresh="refresh">
+  <Page ref="Page" bg refresh @refresh="refresh">
     <template v-slot:default="{ page }">
       <template v-if="page">
         <view class="cu-bar solid-bottom margin-top-xs">
@@ -12,7 +12,12 @@
             <text class="cuIcon-unfold"></text>
           </picker>
         </view>
-        <Img ref="Img" :src="src" />
+        <view class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
+          <Img ref="Img" :src="src" />
+        </view>
+        <view v-if="src1" class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
+          <Img ref="Img" :src="src1" />
+        </view>
       </template>
     </template>
   </Page>
@@ -20,24 +25,20 @@
 
 <script>
 const map = {
-  秀人网: "2.02",
-  舞蹈生日记: "2.01",
-  高质量JK: "1.10",
-  DJAWA: "1.09",
-  DISI第四印象: "1.08",
-  耶米西奶露: "1.07",
-  少女秩序: "1.06",
-  木花琳琳是勇者: "1.05",
-  紧急企划: "1.04",
-  "喵写真;": "1.03",
-  兔玩印画: "1.02",
-  JKFUN: "1.01",
+  情侣头像: "ql",
+  男生头像: "nan",
+  女生头像: "nv",
+  卡通头像: "kt",
+  风景静物头像: "fj",
+  微信头像: "wx",
+  qq头像: "qq",
 };
 export default {
   data() {
     return {
       src: "",
-      index: 0,
+      src1: "",
+      index: uni.getStorageSync("touxinag") || 0,
       types: Object.keys(map),
     };
   },
@@ -54,15 +55,17 @@ export default {
       this.$loading();
       this.$refs.Page.refreshing = true;
       uni
-        .request({ url: "https://www.onexiaolaji.cn/RandomPicture/api/?key=qq249663924&type=json&class=" + map[this.types[this.index]] })
+        .request({ url: "https://api.linhun.vip/api/gexingtouxiang?apiKey=6e58be5b1f231a21d36b5dd8c3ac820c&type=" + map[this.types[this.index]] })
         .then(({ data }) => {
-          this.src = data.url;
+          this.src = data.img;
+          this.src1 = data.img1 || "";
         })
         .catch(() => {})
         .finally(() => {
           this.$loaded();
           this.$refs.Page.refreshing = false;
         });
+      uni.setStorageSync("touxiang", index);
     },
   },
 };

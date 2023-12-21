@@ -32,8 +32,7 @@ export default {
     },
   },
   methods: {
-    load(e) {
-      console.log("load", e);
+    load() {
       this.$loaded();
     },
     error() {

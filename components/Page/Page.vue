@@ -29,11 +29,11 @@
       </view>
       <view class="w100">
         <!-- 原生横幅广告 -->
-        <AD1 v-if="type === 'YHF'" @load="getHeight" @error="getHeight" @close="getHeight" />
+        <AD1 v-if="ad && type === 'YHF'" @load="getHeight" @error="getHeight" @close="getHeight" />
         <!-- 横幅广告 -->
-        <AD2 v-if="type === 'B1'" @load="getHeight" @error="getHeight" @close="getHeight" />
+        <AD2 v-if="ad && type === 'B1'" @load="getHeight" @error="getHeight" @close="getHeight" />
         <!-- 视频广告 -->
-        <AD3 v-if="type === 'S1'" @load="getHeight" @error="getHeight" @close="getHeight" />
+        <AD3 v-if="ad && type === 'S1'" @load="getHeight" @error="getHeight" @close="getHeight" />
         <!-- 原生多格广告 -->
         <!-- <ad-custom v-if="type === 'YDG'" unit-id="adunit-e986a45f75420d2e"></ad-custom> -->
       </view>
@@ -72,6 +72,7 @@ export default {
   data() {
     return {
       time: 0,
+      ad: true,
       page: {},
       show: false,
       favor: false,
@@ -84,6 +85,7 @@ export default {
       rewardedVideoAd: {},
       PageID: "Page_" + Date.now(),
       inlet: "../../static/树洞.jpg",
+      times: [30, 90, 150, 210, 330, 450, 570, 750, 930],
       title: getCurrentPages().at(-1).route.split("/").at(-1),
       bgClass: this.bg
         ? getApp()
@@ -109,6 +111,25 @@ export default {
         }, 400);
       }
     },
+    // 没刷新一次，时间加1秒，加速弹窗弹出
+    refreshing() {
+      if (this.refreshing) {
+        this.time++;
+        this.ad = false;
+        setTimeout(() => {
+          this.ad = true;
+        });
+      }
+    },
+    // 时间变化控制弹窗弹出
+    time() {
+      if (this.times.includes(this.time)) {
+        !this.vip && this.showAD();
+      }
+      if (this.time > this.times.at(-1)) {
+        clearInterval(this.timer);
+      }
+    },
   },
   created() {
     // 初始化弹屏广告
@@ -122,15 +143,8 @@ export default {
     }
 
     // 进入页面开始计时，控制弹出广告
-    const times = [30, 90, 150, 210, 330, 450, 570, 750, 930];
     this.timer = setInterval(() => {
       this.time++;
-      if (times.includes(this.time)) {
-        !this.vip && this.showAD();
-      }
-      if (this.time > times.at(-1)) {
-        clearInterval(this.timer);
-      }
     }, 1000);
   },
   beforeDestroy() {
@@ -177,9 +191,7 @@ export default {
             uni.$emit("COLLECT_CANCEL", data._id);
           }
         })
-        .finally(() => {
-          this.$loaded();
-        });
+        .finally(() => this.$loaded());
     },
     // 显示广告
     showAD(type = 1, cb = () => {}) {

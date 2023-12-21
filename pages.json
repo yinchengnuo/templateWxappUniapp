@@ -73,6 +73,7 @@
     { "path": "pages/每日随机/图片类/妹子图片", "style": { "disableScroll": true } },
     { "path": "pages/每日随机/图片类/美腿图片", "style": { "disableScroll": true } },
     { "path": "pages/每日随机/图片类/初音图片", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/图片类/头像", "style": { "disableScroll": true } },
 
     { "path": "pages/每日随机/文字类/情侣名字", "style": { "disableScroll": true } },
     { "path": "pages/每日随机/文字类/笑话", "style": { "disableScroll": true } },
@@ -87,6 +88,10 @@
     { "path": "pages/每日随机/文字类/文案合集", "style": { "disableScroll": true } },
     { "path": "pages/每日随机/文字类/舔狗日记文字版", "style": { "disableScroll": true } },
     { "path": "pages/每日随机/文字类/王者荣耀语录", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/文字类/冷知识", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/文字类/生活小窍门", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/文字类/渣男语录", "style": { "disableScroll": true } },
+    { "path": "pages/每日随机/文字类/脑筋急转弯", "style": { "disableScroll": true } },
 
     { "path": "pages/电子书/电子书", "style": { "disableScroll": true } },
     { "path": "pages/数据集合/电子书/三国志", "style": { "disableScroll": true } },
