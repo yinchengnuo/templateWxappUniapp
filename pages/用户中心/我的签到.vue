@@ -148,9 +148,7 @@ export default {
             },
           });
         })
-        .finally(() => {
-          this.$loaded();
-        });
+        .finally(() => this.$loaded());
     },
   },
 };

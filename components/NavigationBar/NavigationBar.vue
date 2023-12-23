@@ -10,6 +10,7 @@
           <text v-if="collected" class="cuIcon-favorfill" style="color: #f37b1d"></text>
           <text v-else class="cuIcon-favor"></text>
         </view>
+        <slot name="left"></slot>
       </view>
       <text class="text-bold" :class="refresh ? 'refresh' : ''">{{ title }}</text>
     </view>

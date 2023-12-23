@@ -3898,6 +3898,7 @@ movable-view.indexBar-item::before {
   background-color: currentColor;
   top: 0;
   right: 0rpx;
+  left: auto;
   bottom: 0;
   margin: auto;
 }

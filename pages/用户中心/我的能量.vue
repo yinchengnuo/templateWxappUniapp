@@ -134,16 +134,10 @@ export default {
         .then(data => {
           uni.requestPayment({
             ...data,
-            success: () => {},
-            fail: e => {},
-            complete: () => {
-              this.$loaded();
-            },
+            complete: () => this.$loaded(),
           });
         })
-        .catch(() => {
-          this.$loaded();
-        });
+        .catch(() => this.$loaded());
     },
     toAD() {
       uni.navigateTo({ url: "/pages/应用相关/关于广告" });

@@ -48,9 +48,7 @@ export default {
           this.empty = true;
         }
       })
-      .finally(() => {
-        this.$loaded();
-      });
+      .finally(() => this.$loaded());
   },
 };
 </script>

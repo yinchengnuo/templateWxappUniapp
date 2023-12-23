@@ -37,8 +37,6 @@
     { "path": "pages/实用工具/生活服务/点阵字生成", "style": { "disableScroll": true } },
     { "path": "pages/实用工具/生活服务/狗屁不通文章生成器", "style": { "disableScroll": true } },
     { "path": "pages/实用工具/生活服务/看图猜成语", "style": { "disableScroll": true } },
-    { "path": "pages/实用工具/生活服务/车牌归属地", "style": { "disableScroll": true } },
-    { "path": "pages/实用工具/生活服务/常用号码大全", "style": { "disableScroll": true } },
     { "path": "pages/实用工具/生活服务/量角器", "style": { "disableScroll": true } },
     { "path": "pages/实用工具/生活服务/尺子", "style": { "disableScroll": true } },
     { "path": "pages/实用工具/生活服务/色盲测试", "style": { "disableScroll": true } },
@@ -147,7 +145,6 @@
     { "path": "pages/用户中心/我的签到", "style": { "disableScroll": true } },
     { "path": "pages/用户中心/我的签到记录", "style": { "disableScroll": true } },
     { "path": "pages/用户中心/我的分享", "style": { "disableScroll": true } },
-    { "path": "pages/用户中心/找到组织", "style": { "disableScroll": true } },
 
     { "path": "pages/应用相关/加载效果", "style": { "disableScroll": true } },
     { "path": "pages/应用相关/关于广告", "style": { "disableScroll": true } },

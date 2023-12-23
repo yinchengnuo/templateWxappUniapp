@@ -30,6 +30,11 @@ export default {
       clock_records: uni.getStorageSync("clock_records"),
     };
   },
+  onShow() {
+    uni.hideShareMenu({
+      menus: ["shareAppMessage", "shareTimeline"],
+    });
+  },
   mounted() {
     this.$refs.Page.showAD();
   },
