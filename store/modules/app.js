@@ -20,6 +20,11 @@ export default {
       }, 3456);
     },
     SET_LIST(state, payload) {
+      payload.forEach(e => {
+        e.type = e.page.split("/")[2];
+        e.name = e.page.split("/")[4];
+        e.icon = `/static/functions/${e.name}.${e.type === "数据集合" ? "jpg" : "svg"}`;
+      });
       state.list = payload.filter(e => e.online);
     },
     UPDATE_FUNCTION(state, payload = {}) {
