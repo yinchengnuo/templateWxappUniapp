@@ -8,9 +8,9 @@
       enhanced
       scroll-with-animation
       enable-passive
-      :style="{ height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px)` }"
       refresher-enabled
       :refresher-triggered="refreshing"
+      :style="{ height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px)` }"
       @refresherrefresh="getList">
       <swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="2333" duration="500" @change="cardSwiper" previousMargin="0.01rpx" indicator-color="#1F1F1F" indicator-active-color="#000000">
         <swiper-item v-for="(item, index) in listHot" :key="index" :class="cardCur == index ? 'cur' : ''" @click="navigateTo(item)">
@@ -53,9 +53,11 @@
           <ListItem :item="item" />
         </view>
       </view>
+      <ADFloat ref="ADFloat" :index="0" />
+      <ADFloat ref="ADFloat" :index="1" />
+      <ADFloat ref="ADFloat" :index="2" />
     </scroll-view>
     <!-- <uni-fab ref="fab" :pattern="pattern" horizontal="right" :content="content" @trigger="trigger" @fabClick="fabClick" /> -->
-    <ADFloat ref="ADFloat" />
   </view>
 </template>
 

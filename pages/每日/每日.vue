@@ -37,8 +37,11 @@
           <ListItem :item="item" />
         </view>
       </view>
+      <ADFloat ref="ADFloat" :index="0" />
+      <ADFloat ref="ADFloat" :index="1" />
+      <ADFloat ref="ADFloat" :index="2" />
+      <ADFloat ref="ADFloat" :index="3" />
     </scroll-view>
-    <ADFloat ref="ADFloat" />
   </view>
 </template>
 

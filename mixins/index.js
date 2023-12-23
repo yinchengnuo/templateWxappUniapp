@@ -7,11 +7,11 @@ function onShare({ from }) {
   let path = "/" + this.$store.state.app.currentRoute;
 
   let item = this.$store.state.app.list.find(e => e.page === path);
-  if (route === "pages/滚动君/滚动君") {
+  if (route === "pages/实用工具/滚动君/滚动君") {
     item = this.$store.state.app.list.find(e => e.name === "滚动君");
     item && (path = item.page);
   }
-  if (route === "pages/电子书/电子书") {
+  if (route === "pages/数据集合/电子书") {
     item = this.$store.state.app.list.find(e => e.page === "/" + getCurrentPages().at(-2).route);
     item && (path = item.page);
   }

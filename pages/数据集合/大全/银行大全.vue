@@ -34,7 +34,6 @@ export default {
           url: "https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/数据集合/数据集/银行大全.xls",
         })
         .then(({ tempFilePath }) => {
-          this.$toast(tempFilePath);
           uni.openDocument({ showMenu: true, filePath: tempFilePath });
         })
         .finally(() => this.$loaded());

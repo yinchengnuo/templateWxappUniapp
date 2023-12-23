@@ -296,7 +296,7 @@ export default {
 						.value
 				}
 				uni.navigateTo({
-					url: '/pages/滚动君/滚动君' + Object.entries(config).reduce((t, e) => t +
+					url: '/pages/实用工具/滚动君/滚动君' + Object.entries(config).reduce((t, e) => t +
 						`${e[0]}=${e[1]}&`, '?').slice(0, -1)
 				})
 			}).catch((e) => {

@@ -1,5 +1,5 @@
 <template>
-  <view v-show="show" class="index">
+  <view v-show="show" class="index" :style="{ top: 'calc(' + index * 100 + 'vh + 233px)', left: index % 2 === 0 ? '0px' : 'auto', right: index % 2 === 1 ? '0px' : 'auto' }">
     <ad-custom v-if="show" unit-id="adunit-8b304cf8af7361f2" @error="error"></ad-custom>
   </view>
 </template>
@@ -7,6 +7,12 @@
 <script>
 export default {
   name: "ADFloat",
+  props: {
+    index: {
+      type: Number,
+      default: 0,
+    },
+  },
   data() {
     return {
       show: true,
@@ -43,9 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 .index {
-  left: 8rpx;
-  bottom: 38.2%;
-  position: fixed;
-  z-index: 9999999999;
+  position: absolute;
+  z-index: 999999999;
 }
 </style>

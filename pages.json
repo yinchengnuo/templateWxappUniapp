@@ -19,7 +19,7 @@
 
     { "path": "pages/WebView/WebView", "style": { "navigationStyle": "default" } },
 
-    { "path": "pages/滚动君/滚动君" },
+    { "path": "pages/实用工具/滚动君/滚动君" },
     { "path": "pages/实用工具/生活服务/滚动君", "style": { "disableScroll": true } },
     { "path": "pages/实用工具/生活服务/手机号信息查询", "style": { "disableScroll": true } },
     { "path": "pages/实用工具/生活服务/翻译", "style": { "disableScroll": true } },
@@ -109,7 +109,7 @@
     { "path": "pages/每日随机/文字类/渣男语录", "style": { "disableScroll": true } },
     { "path": "pages/每日随机/文字类/脑筋急转弯", "style": { "disableScroll": true } },
 
-    { "path": "pages/电子书/电子书", "style": { "disableScroll": true } },
+    { "path": "pages/数据集合/电子书", "style": { "disableScroll": true } },
     { "path": "pages/数据集合/电子书/三国志", "style": { "disableScroll": true } },
     { "path": "pages/数据集合/电子书/山海经", "style": { "disableScroll": true } },
     { "path": "pages/数据集合/电子书/世说新语", "style": { "disableScroll": true } },

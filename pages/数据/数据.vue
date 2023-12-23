@@ -23,7 +23,10 @@
         </view>
       </view>
     </view>
-    <ADFloat ref="ADFloat" />
+    <ADFloat ref="ADFloat" :index="0" />
+    <ADFloat ref="ADFloat" :index="1" />
+    <ADFloat ref="ADFloat" :index="2" />
+    <ADFloat ref="ADFloat" :index="3" />
   </view>
 </template>
 

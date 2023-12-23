@@ -65,11 +65,11 @@ export default {
       if (item.dict) {
         item.checked = !item.checked;
       } else {
-        uni.navigateTo({ url: `/pages/电子书/电子书?book=${this.result.name}&name=${item.name}` });
+        uni.navigateTo({ url: `/pages/数据集合/电子书?book=${this.result.name}&name=${item.name}` });
       }
     },
     clickDetail(book, dict, name) {
-      uni.navigateTo({ url: `/pages/电子书/电子书?book=${book}&dict=${dict}&name=${name}` });
+      uni.navigateTo({ url: `/pages/数据集合/电子书?book=${book}&dict=${dict}&name=${name}` });
     },
   },
 };
