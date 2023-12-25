@@ -30,6 +30,11 @@ export default {
       list: [
         {
           date: "2023-12-25",
+          version: "6.1.3",
+          desc: ["修复webview页面收藏异常"],
+        },
+        {
+          date: "2023-12-25",
           version: "6.1.2",
           desc: ["新增九宫格切图", "新增白板"],
         },
