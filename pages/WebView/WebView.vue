@@ -1,7 +1,6 @@
 <template>
   <view>
     <web-view v-if="src" :src="src" />
-    <Empty v-else />
   </view>
 </template>
 
@@ -60,7 +59,7 @@ export default {
       if (func) {
         if (process.env.NODE_ENV === "production") {
           this.$loading();
-          this.$("/function_collect", func)
+          this.$("/function_view", func)
             .then(data => {
               this.$store.commit("app/UPDATE_FUNCTION", data);
               this.src = `${src}?openid=${this.$store.state.user.openid}&_id=${func._id}&collected=${data.collected ? 1 : 0}`;
