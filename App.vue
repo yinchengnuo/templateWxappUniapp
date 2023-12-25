@@ -82,24 +82,34 @@ export default {
   onLaunch(option) {
     // 监听消息推送
     uni.onPushMessage(({ data: { payload } }) => {
-      uni.vibrateLong(); // 震动一下
-      // 如果是支付消息
-      if (payload.type === "pay") {
-        this.$store.commit("user/SET_USER_INFO", {
-          vip_time: payload.data.vip_end_time, // 更新 VIP 时间
-          energy: this.$store.state.user.energy + payload.data.energy, // 更新总能量
-          total_income: this.$store.state.user.total_income + payload.data.energy, // 更新总入账能量
-        });
+      if (payload.type === "collect") {
+        this.$store.commit("app/UPDATE_FUNCTION", payload.data);
+        this.$toast(JSON.stringify(payload.data))
+        if (payload.data.collected) {
+          this.$toast("收藏成功");
+        } else {
+          this.$toast("取消收藏成功");
+        }
+      } else {
+        uni.vibrateLong(); // 震动一下
+        // 如果是支付消息
+        if (payload.type === "pay") {
+          this.$store.commit("user/SET_USER_INFO", {
+            vip_time: payload.data.vip_end_time, // 更新 VIP 时间
+            energy: this.$store.state.user.energy + payload.data.energy, // 更新总能量
+            total_income: this.$store.state.user.total_income + payload.data.energy, // 更新总入账能量
+          });
+        }
+        // 如果是邀请新用户奖励到账
+        if (payload.type === "share") {
+          this.$store.commit("user/SET_USER_INFO", {
+            energy: this.$store.state.user.energy + payload.data.energy, // 更新总能量
+            total_income: this.$store.state.user.total_income + payload.data.energy, // 更新总入账能量
+          });
+        }
+        this.$store.state.app.notify.push(payload); // 弹出系统消息提示框
+        this.$store.state.app.notifyRoute = this.$store.state.app.currentRoute; // 标记弹出系统消息提示框的页面
       }
-      // 如果是邀请新用户奖励到账
-      if (payload.type === "share") {
-        this.$store.commit("user/SET_USER_INFO", {
-          energy: this.$store.state.user.energy + payload.data.energy, // 更新总能量
-          total_income: this.$store.state.user.total_income + payload.data.energy, // 更新总入账能量
-        });
-      }
-      this.$store.state.app.notify.push(payload); // 弹出系统消息提示框
-      this.$store.state.app.notifyRoute = this.$store.state.app.currentRoute; // 标记弹出系统消息提示框的页面
     });
     // 小程序启动即登录
     this.$store.dispatch("user/login", { ...option.query, path: option.path }).then(async () => {

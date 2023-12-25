@@ -6,8 +6,8 @@
           <text v-if="PageStack.length === 1" class="cuIcon-home"></text>
           <text v-else class="cuIcon-back"></text>
         </view>
-        <view v-if="favor" class="action_bar h100 flex" :style="{ width: height + 'px' }" @click="$emit('collect')">
-          <text v-if="collected" class="cuIcon-favorfill" style="color: #f37b1d"></text>
+        <view v-if="favor" class="action_bar h100 flex" :style="{ width: height + 'px' }" style="color: #f37b1d" @click="$emit('collect')">
+          <text v-if="collected" class="cuIcon-favorfill"></text>
           <text v-else class="cuIcon-favor"></text>
         </view>
         <slot name="left"></slot>

@@ -51,10 +51,7 @@ export default {
     this.$loading();
     this.$("/collect_record")
       .then(data => {
-        this.records = data
-          .map(e => this.$store.state.app.list.find(ee => e.function_id === ee._id))
-          .filter(e => e)
-          .map(e => ({ ...e, name: e.page.split("/").at(-1) }));
+        this.records = data.map(e => this.$store.state.app.list.find(ee => e.function_id === ee._id)).filter(e => e);
         if (!this.records.length) {
           this.empty = true;
         }
