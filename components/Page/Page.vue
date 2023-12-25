@@ -2,7 +2,7 @@
   <view class="Page" :class="classList.length ? classList : bg ? bgClass : ''">
     <view class="cu-drawer-page flex flexc" :class="show ? 'show' : ''">
       <!-- <image v-if="favor" class="inlet animation-shake" :src="inlet" @click="show = true"></image> -->
-      <NavigationBar :bg="classList.length || bg" :refresh="refresh" :title="title" :favor="favor" :collected="collected" @collect="collect" >
+      <NavigationBar :bg="classList.length || bg" :refresh="refresh" :title="title" :favor="favor" :collected="collected" @collect="collect">
         <template v-slot:left>
           <slot name="nav"></slot>
         </template>
@@ -40,6 +40,8 @@
         <AD3 v-if="ad && type === 'S1'" @load="getHeight" @error="getHeight" @close="getHeight" />
         <!-- 原生多格广告 -->
         <!-- <ad-custom v-if="type === 'YDG'" unit-id="adunit-e986a45f75420d2e"></ad-custom> -->
+        <!-- 浮动广告 -->
+        <ADFloat v-if="ad && type === 'F1'" :index="0" />
       </view>
     </view>
 

@@ -29,7 +29,7 @@
         </view>
         <TextBoard :result="result" arrayView indent />
       </template>
-      <page-container :show="show" :z-index="999999999" round>
+      <page-container :show="show" :z-index="999999999" round @afterleave="show = false">
         <view style="height: 55.5vh">
           <view class="cu-list menu card-menu sm-border shadow radius-lg">
             <view class="cu-bar">

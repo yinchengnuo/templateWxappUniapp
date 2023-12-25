@@ -1,7 +1,11 @@
 <template>
   <Page ref="Page">
     <template v-slot:default="{ page }">
-      <template v-if="page"> 图片拼接 </template>
+      <template v-if="page">
+        <view class="flex" :style="{ height: page.height + 'px' }">
+          <text class="text-black text-bold text-xxl">开发中</text>
+        </view>
+      </template>
     </template>
   </Page>
 </template>

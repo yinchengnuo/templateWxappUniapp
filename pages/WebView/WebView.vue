@@ -1,7 +1,6 @@
 <template>
   <view>
-    <!-- <web-view v-if="src" :src="src" /> -->
-    123
+    <web-view v-if="src" :src="src" />
   </view>
 </template>
 
@@ -9,12 +8,12 @@
 export default {
   data() {
     return {
-      src: "https://p.pinduoduo.com/1rljK8Ft",
+      src: "",
     };
   },
   onLoad({ src, title }) {
     this.src = src;
-    uni.setNavigationBarTitle({ title });
+    title && uni.setNavigationBarTitle({ title });
   },
 };
 </script>

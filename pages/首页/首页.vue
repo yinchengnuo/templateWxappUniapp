@@ -56,6 +56,7 @@
       <ADFloat ref="ADFloat" :index="0" />
       <ADFloat ref="ADFloat" :index="1" />
       <ADFloat ref="ADFloat" :index="2" />
+      <ADFloat ref="ADFloat" :index="3" />
     </scroll-view>
     <!-- <uni-fab ref="fab" :pattern="pattern" horizontal="right" :content="content" @trigger="trigger" @fabClick="fabClick" /> -->
   </view>

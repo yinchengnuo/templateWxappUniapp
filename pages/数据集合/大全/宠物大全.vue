@@ -26,7 +26,7 @@
         </view>
       </view>
     </template>
-    <page-container :show="show" :z-index="999999999" round>
+    <page-container :show="show" :z-index="999999999" round @afterleave="show = false">
       <scroll-view scroll-y show-scrollbar enhanced scroll-with-animation enable-passive using-sticky :bounces="false" style="height: 88.8vh; position: relative">
         <view class="cu-list menu card-menu sm-borde bg-white radius-lg" style="position: sticky; top: 0; z-index: 1; border-radius: 0">
           <view class="cu-bar">

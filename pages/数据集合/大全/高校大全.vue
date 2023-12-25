@@ -2,9 +2,9 @@
   <Page ref="Page" type="S1">
     <template v-slot:default="{ page }">
       <template v-if="page">
-        <view class="flex" :style="{ height: page.height + 'px' }" style="flex-direction: column; justify-content: space-evenly">
-          <button class="block cu-btn xxl shadow-blur margin-top-sm margin-left-sm margin-bottom-sm bg-black" @click="view(1)">全国普通高等学校名单</button>
-          <button class="block cu-btn xxl shadow-blur margin-top-sm margin-left-sm margin-bottom-sm bg-black" @click="view(2)">全国成人高等学校名单</button>
+        <view class="flexc" :style="{ height: page.height + 'px' }" style="justify-content: space-evenly">
+          <button class="block cu-btn xxl shadow-blur margin-top-sm margin-left-sm margin-bottom-sm bg-black" @click="view(1)">查看全国普通高等学校名单</button>
+          <button class="block cu-btn xxl shadow-blur margin-top-sm margin-left-sm margin-bottom-sm bg-black" @click="view(2)">查看全国成人高等学校名单</button>
         </view>
       </template>
     </template>

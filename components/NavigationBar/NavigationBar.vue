@@ -69,6 +69,8 @@ export default {
 <style lang="scss" scoped>
 .index {
   width: 100vw;
+  z-index: 999;
+  position: relative;
   box-sizing: border-box;
 
   .bar {
