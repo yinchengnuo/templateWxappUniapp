@@ -47,7 +47,6 @@
         { "path": "生活服务/一生时间", "style": { "disableScroll": true } },
         { "path": "生活服务/手机清灰", "style": { "disableScroll": true } },
         { "path": "生活服务/全屏时钟", "style": { "disableScroll": true } },
-        { "path": "生活服务/亲戚关系计算器", "style": { "disableScroll": true } },
         { "path": "生活服务/九宫格切图", "style": { "disableScroll": true } },
         { "path": "生活服务/图片拼接", "style": { "disableScroll": true } },
 
