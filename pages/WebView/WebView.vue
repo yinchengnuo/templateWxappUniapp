@@ -10,6 +10,7 @@ export default {
     return {
       time: 0,
       src: "",
+      SRC: "",
       interstitialAd: null,
       times: [30, 90, 150, 210, 330, 450, 570, 750, 930],
     };
@@ -55,6 +56,7 @@ export default {
   },
   methods: {
     init(src) {
+      this.SRC = src
       const func = this.$store.state.app.list.find(e => e.src === src);
       if (func) {
         if (process.env.NODE_ENV === "production") {

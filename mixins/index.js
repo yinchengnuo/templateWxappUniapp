@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 function onShare({ from }) {
   let title = "";
   const route = this.$store.state.app.currentRoute;
+  console.log('route', route)
   let path = "/" + this.$store.state.app.currentRoute;
 
   // 滚动君滚动页分享跳转到滚动君
@@ -28,14 +29,19 @@ function onShare({ from }) {
   if (route === "pages/我的/我的") title = "生活工作好帮手";
 
   if (route === "pages/WebView/WebView") {
-    if (this.src) {
-      item = this.$store.state.app.list.find(e => e.src === this.src);
-      path = `/pages/WebView/WebView?src=${this.src}`;
+    console.log('route === "pages/WebView/WebView"')
+    if (this.SRC) {
+      item = this.$store.state.app.list.find(e => e.src === this.SRC);
+      console.log(this.SRC)
+      console.log(this.$store.state.app.list)
+      console.log('WebViewItem', item)
+      path = `/pages/WebView/WebView?src=${this.SRC}`;
       if (item) {
         title = item.desc;
       }
     } else {
       path = "/pages/首页/首页";
+      console.log(route !== "pages/WebView/WebView")
     }
   }
 
@@ -45,9 +51,12 @@ function onShare({ from }) {
 
   if (this.$store.state.user.openid) {
     if (route === "pages/WebView/WebView") {
+      console.log('111111111', path)
       path = `${path}&openid=${this.$store.state.user.openid}&t=${dayjs().valueOf()}&from=${from}`;
+      console.log('111111111', path)
     } else {
       path = `${path}?openid=${this.$store.state.user.openid}&t=${dayjs().valueOf()}&from=${from}`;
+      console.log('222222222', path)
     }
   } else {
     path = "/pages/首页/首页";

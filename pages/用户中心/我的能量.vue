@@ -1,5 +1,5 @@
 <template>
-  <Page type="no" ref="Page">
+  <Page type="no" ref="Page" refresh @refresh="refresh">
     <template v-slot:default="{ page }">
       <template v-if="page">
         <view class="flex solid-bottom margin-top justify-center">
@@ -32,7 +32,7 @@
             </view>
           </view>
         </view>
-        <view class="cu-bar bg-white solid-bottom margin-top">
+        <view v-show="show" class="cu-bar bg-white solid-bottom margin-top">
           <view class="action">
             <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
             <text class="text-bold">
@@ -48,7 +48,7 @@
             <text class="cuIcon-right"></text>
           </navigator>
         </view>
-        <view class="cu-list no-border grid col-3">
+        <view v-show="show" class="cu-list no-border grid col-3">
           <view v-for="(item, index) in PAY" :key="item.num" class="cu-item radius light" :class="[active === index ? 'bg-' + color : '', active === index ? active : '']" @click="active = index">
             <view class="flex text-bold text-xl text-shadow margin-top-sm">
               {{ (item.num * 10000).toFixed(0) }}
@@ -64,12 +64,17 @@
             <view class="text-xs text-bold" :class="active === index ? '' : 'text-yellow'" style="position: absolute; right: 4rpx; bottom: 2rpx">{{ item.discount }}折</view>
           </view>
         </view>
-        <button class="margin cu-btn xxl block" :class="'bg-' + color" @click="pay()">
+        <button v-show="show" class="margin cu-btn xxl block" :class="'bg-' + color" @click="pay()">
           <text>立即充值</text>
           <text class="text-price margin-left-xs">{{ PAY[active] ? PAY[active].price : "" }}</text>
           <text class="text-sm" style="position: absolute; right: 50rpx; bottom: 8rpx; font-style: italic"> 赠送{{ PAY[active] ? PAY[active].price : "" }}天免广告 </text>
         </button>
-        <navigator url="/pages/应用相关/关于能量" class="flex text-blue padding">关于能量</navigator>
+        <view v-show="show">
+          <navigator url="/pages/应用相关/关于能量" class="flex text-blue padding">关于能量</navigator>
+        </view>
+        <view v-if="!show" class="margin-top">
+          <AD3 />
+        </view>
       </template>
     </template>
   </Page>
@@ -85,6 +90,13 @@ export default {
     };
   },
   computed: {
+    show() {
+      if (getApp().globalData.systemInfo.platform === "ios" && this.user.INREVIEW) {
+        return false;
+      } else {
+        return true;
+      }
+    },
     user() {
       return this.$store.state.user;
     },
@@ -141,6 +153,11 @@ export default {
     },
     toAD() {
       uni.navigateTo({ url: "/pages/应用相关/关于广告" });
+    },
+    refresh() {
+      this.$store.dispatch("user/login").finally(() => {
+        this.$refs.Page.refreshing = false;
+      });
     },
   },
 };
