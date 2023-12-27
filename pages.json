@@ -92,7 +92,7 @@
         { "path": "图片类/原神黄历", "style": { "disableScroll": true } },
         { "path": "图片类/妹子图片", "style": { "disableScroll": true } },
         { "path": "图片类/美腿图片", "style": { "disableScroll": true } },
-        { "path": "图片类/初音图片", "style": { "disableScroll": true } },
+        { "path": "图片类/壁纸", "style": { "disableScroll": true } },
         { "path": "图片类/头像", "style": { "disableScroll": true } },
         { "path": "图片类/帅哥图片", "style": { "disableScroll": true } },
         { "path": "图片类/二次元图片", "style": { "disableScroll": true } },
@@ -114,7 +114,10 @@
         { "path": "文字类/冷知识", "style": { "disableScroll": true } },
         { "path": "文字类/生活小窍门", "style": { "disableScroll": true } },
         { "path": "文字类/渣男语录", "style": { "disableScroll": true } },
-        { "path": "文字类/脑筋急转弯", "style": { "disableScroll": true } }
+        { "path": "文字类/脑筋急转弯", "style": { "disableScroll": true } },
+        { "path": "文字类/世界未解之谜", "style": { "disableScroll": true } },
+        { "path": "文字类/沙雕新闻", "style": { "disableScroll": true } },
+        { "path": "文字类/树洞", "style": { "disableScroll": true } }
       ]
     },
     {

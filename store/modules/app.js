@@ -27,7 +27,7 @@ export default {
       state.loading = true;
       setTimeout(() => {
         state.loading = false;
-      }, 3456);
+      }, 6666);
     },
     SET_LIST(state, payload) {
       payload.forEach(e => {

@@ -2,7 +2,7 @@
   <view class="cu-list menu sm-border card-menu margin-tb bg-white">
     <view v-if="result" class="cu-item" :style="{ filter: blur ? 'blur(6px)' : 'blur(0px)' }">
       <view class="content">
-        <view class="text-lg text-black text-bold padding-tb-sm" style="word-wrap: break-word">
+        <view class="text-lg text-black text-bold padding-tb-sm" style="word-wrap: break-word; white-space: pre-wrap">
           <template v-if="arrayView">
             <view>
               <view v-for="(item, index) in result" :key="index" :style="{ textIndent: indent ? '2em' : '0em' }">{{ item }}</view>

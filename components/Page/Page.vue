@@ -172,7 +172,7 @@ export default {
       if (process.env.NODE_ENV === "production") {
         this.page = this.$store.state.app.list.find(e => e.page.includes(getCurrentPages().at(-1).route.split("?")[0]));
         if (this.page) {
-          this.$("/function_collect", this.page)
+          this.$("/function_view", this.page)
             .then(data => {
               this.collected = data.collected;
               this.$store.commit("app/UPDATE_FUNCTION", data);
