@@ -1,5 +1,5 @@
 <template>
-  <Page ref="Page" refresh @refresh="refresh">
+  <Page ref="Page" type="S1" refresh @refresh="refresh">
     <template v-slot:default="{ page }">
       <template v-if="page">
         <Img ref="Img" :src="src" />

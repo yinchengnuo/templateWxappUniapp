@@ -8,13 +8,7 @@
             <text>输入中&英文即可翻译</text>
           </view>
           <view class="action">
-            <text
-              v-if="text"
-              class="my_textarea_clear cuIcon-roundclosefill"
-              @click="
-                text = '';
-                make();
-              "></text>
+            <text v-if="text" class="my_textarea_clear cuIcon-roundclosefill" @click="(text = ''), make()"></text>
           </view>
         </view>
         <view class="cu-form-group padding-left-sm padding-right-sm">

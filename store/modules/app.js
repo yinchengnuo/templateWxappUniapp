@@ -30,9 +30,7 @@ export default {
       }, 6666);
     },
     SET_LIST(state, payload) {
-      payload.forEach(e => {
-        make(e)
-      });
+      payload.forEach(e => make(e));
       state.list = payload.filter(e => e.online);
     },
     UPDATE_FUNCTION(state, payload = {}) {

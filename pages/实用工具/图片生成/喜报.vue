@@ -7,9 +7,6 @@
             <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
             <text>输入文字即可生成</text>
           </view>
-          <view class="action">
-            <text v-if="text" class="my_textarea_clear cuIcon-roundclosefill" @click="(text = ''), make()"></text>
-          </view>
         </view>
         <view class="cu-bar input solid-bottom">
           <input v-model.trim="text" ref="input" :focus="focus" class="my_input" confirm-type="search" placeholder="请输入文字" type="text" @blur="focus = false" @confirm="make" />

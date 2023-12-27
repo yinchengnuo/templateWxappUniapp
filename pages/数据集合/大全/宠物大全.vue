@@ -1,5 +1,5 @@
 <template>
-  <Page ref="Page">
+  <Page ref="Page" :scrollTop="!show">
     <template v-slot:nav>
       <picker :value="index" :range="types" @change="e => (index = +e.detail.value)" class="margin-right">
         <text>{{ types[index] }}</text>

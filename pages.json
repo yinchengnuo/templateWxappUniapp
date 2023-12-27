@@ -57,6 +57,7 @@
         { "path": "图片生成/手写模拟器", "style": { "disableScroll": true } },
         { "path": "图片生成/QQ号估值", "style": { "disableScroll": true } },
         { "path": "图片生成/王者荣耀出装查询", "style": { "disableScroll": true } },
+        { "path": "图片生成/奖状", "style": { "disableScroll": true } },
 
         { "path": "人工智能/AI抠图", "style": { "disableScroll": true } },
         { "path": "人工智能/AI以图搜番", "style": { "disableScroll": true } },
@@ -168,12 +169,13 @@
     {
       "root": "pages/应用相关",
       "pages": [
+        { "path": "功能搜索", "style": { "disableScroll": true } },
         { "path": "加载效果", "style": { "disableScroll": true } },
         { "path": "关于广告", "style": { "disableScroll": true } },
         { "path": "关于能量", "style": { "disableScroll": true } },
+        { "path": "更新记录", "style": { "disableScroll": true } },
         { "path": "关于小程序", "style": { "disableScroll": true } },
-        { "path": "关于ToolBoxAI", "style": { "disableScroll": true } },
-        { "path": "更新记录", "style": { "disableScroll": true } }
+        { "path": "关于ToolBoxAI", "style": { "disableScroll": true } }
       ]
     }
   ],

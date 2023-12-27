@@ -1,7 +1,12 @@
 <template>
   <view class="index">
     <image class=".page_bg" mode="aspectFill" src="../../static/page_bg.png"></image>
-    <view class="page_title flex" :style="{ marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` }">每日随机</view>
+    <view class="page_title flex" :style="{ marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` }">
+      <navigator url="/pages/用户中心/我的签到" class="flex h100 padding-lr" style="position: absolute; top: 0; left: 20rpx">
+        <text class="cuIcon-font text-purple" style="font-size: 42rpx"></text>
+      </navigator>
+      <text>每日随机</text>
+    </view>
     <scroll-view
       scroll-y
       show-scrollbar
@@ -127,6 +132,7 @@ export default {
   .page_title {
     font-size: 13pt;
     font-weight: bold;
+    position: relative;
   }
 }
 </style>

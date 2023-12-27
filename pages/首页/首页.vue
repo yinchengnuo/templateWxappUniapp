@@ -1,7 +1,12 @@
 <template>
   <view class="index">
     <image class=".page_bg" mode="aspectFill" src="../../static/page_bg.png"></image>
-    <view class="page_title flex" :style="{ marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` }">ToolBox365</view>
+    <view class="page_title flex" :style="{ marginTop: `${$app().globalData.menuButtonBoundingClientRect.top}px`, height: `${$app().globalData.menuButtonBoundingClientRect.height}px` }">
+      <navigator url="/pages/应用相关/功能搜索" class="flex h100 padding-lr" style="position: absolute; top: 0; left: 20rpx">
+        <text class="cuIcon-searchlist text-purple" style="font-size: 42rpx"></text>
+      </navigator>
+      <text>ToolBox365</text>
+    </view>
     <scroll-view
       scroll-y
       show-scrollbar
@@ -159,6 +164,7 @@ export default {
   .page_title {
     font-size: 12pt;
     font-weight: bold;
+    position: relative;
   }
 }
 </style>

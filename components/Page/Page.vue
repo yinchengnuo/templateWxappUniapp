@@ -28,7 +28,7 @@
           </scroll-view>
         </view>
       </view>
-      <view v-if="nowScrollTop > 50" class="flex _to_top shadow padding-sm" :class="bgClass || 'bg-white'" @click="toTop">
+      <view v-if="scrollTop && nowScrollTop > 50" class="flex _to_top shadow padding-sm" :class="bgClass || 'bg-white'" @click="toTop">
         <text class="cuIcon-top" style="font-size: 56rpx"></text>
       </view>
       <view class="w100">
@@ -65,6 +65,10 @@ export default {
     type: {
       type: String,
       default: "YHF",
+    },
+    scrollTop: {
+      type: Boolean,
+      default: true,
     },
     refresh: {
       type: String,
