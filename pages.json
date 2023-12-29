@@ -58,11 +58,13 @@
         { "path": "图片生成/QQ号估值", "style": { "disableScroll": true } },
         { "path": "图片生成/王者荣耀出装查询", "style": { "disableScroll": true } },
         { "path": "图片生成/奖状", "style": { "disableScroll": true } },
+        { "path": "图片生成/文字转图片", "style": { "disableScroll": true } },
 
         { "path": "人工智能/AI抠图", "style": { "disableScroll": true } },
         { "path": "人工智能/AI以图搜番", "style": { "disableScroll": true } },
         { "path": "人工智能/AI图片文字识别", "style": { "disableScroll": true } },
-        { "path": "人工智能/AI万物识别", "style": { "disableScroll": true } }
+        { "path": "人工智能/AI万物识别", "style": { "disableScroll": true } },
+        { "path": "人工智能/AI文字转语音", "style": { "disableScroll": true } }
       ]
     },
     {
@@ -118,7 +120,11 @@
         { "path": "文字类/脑筋急转弯", "style": { "disableScroll": true } },
         { "path": "文字类/世界未解之谜", "style": { "disableScroll": true } },
         { "path": "文字类/沙雕新闻", "style": { "disableScroll": true } },
-        { "path": "文字类/树洞", "style": { "disableScroll": true } }
+        { "path": "文字类/树洞", "style": { "disableScroll": true } },
+
+        { "path": "语音类/绿茶语音", "style": { "disableScroll": true } },
+        { "path": "语音类/御姐撒娇语音", "style": { "disableScroll": true } }
+
       ]
     },
     {
