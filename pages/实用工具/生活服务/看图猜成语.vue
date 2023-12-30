@@ -1,29 +1,31 @@
 <template>
-  <Page ref="Page" bg type="S1" refresh @refresh="refresh">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view class="cu-bar solid-bottom margin-top-xs">
-          <view class="action">
-            <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-            <text class="text-bold">题目</text>
+  <view>
+    <Page ref="Page" bg type="S1" refresh @refresh="refresh">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view class="cu-bar solid-bottom margin-top-xs">
+            <view class="action">
+              <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+              <text class="text-bold">题目</text>
+            </view>
           </view>
-        </view>
-        <view class="margin radius">
-          <Img v-if="result" :src="result" />
-        </view>
-        <view class="cu-bar solid-bottom margin-top-xs">
-          <view class="action">
-            <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-            <text class="text-bold">答案</text>
+          <view class="margin radius">
+            <Img v-if="result" :src="result" />
           </view>
-          <view class="action">
-            <switch class="radius" :class="$refs.Page.bgClass.split('-')[2]" :checked="checked" @change="change"> </switch>
+          <view class="cu-bar solid-bottom margin-top-xs">
+            <view class="action">
+              <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+              <text class="text-bold">答案</text>
+            </view>
+            <view class="action">
+              <switch class="radius" :class="$refs.Page.bgClass.split('-')[2]" :checked="checked" @change="change"> </switch>
+            </view>
           </view>
-        </view>
-        <TextBoard :blur="!checked" :result="answer" />
+          <TextBoard :blur="!checked" :result="answer" />
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

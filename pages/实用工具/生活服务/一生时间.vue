@@ -1,23 +1,25 @@
 <template>
-  <Page ref="Page">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view>
-          <view class="my-info">
-            <text class="my-text">2010年第六次全国人口普查，我国人口平均预期寿命大约75岁，也就是900个月，我们用以下30x30的格子来代表人的一生，看看我们一生的时间吧 </text>
+  <view>
+    <Page ref="Page">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view>
+            <view class="my-info">
+              <text class="my-text">2010年第六次全国人口普查，我国人口平均预期寿命大约75岁，也就是900个月，我们用以下30x30的格子来代表人的一生，看看我们一生的时间吧 </text>
+            </view>
+            <view class="page-container">
+              <text class="my-tip">请点击选择出生日期</text>
+              <picker @change="bindDateChange" fields="month" mode="date" :value="l4">
+                <view class="my-picker">{{ l3 }}</view>
+              </picker>
+              <canvas disableScroll canvasId="canvas-grid" class="my-canvas" :style="'width: ' + l1 + 'px; height: ' + l1 + 'px;'"></canvas>
+            </view>
+            <view class="adbt"></view>
           </view>
-          <view class="page-container">
-            <text class="my-tip">请点击选择出生日期</text>
-            <picker @change="bindDateChange" fields="month" mode="date" :value="l4">
-              <view class="my-picker">{{ l3 }}</view>
-            </picker>
-            <canvas disableScroll canvasId="canvas-grid" class="my-canvas" :style="'width: ' + l1 + 'px; height: ' + l1 + 'px;'"></canvas>
-          </view>
-          <view class="adbt"></view>
-        </view>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

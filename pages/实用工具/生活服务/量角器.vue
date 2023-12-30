@@ -1,27 +1,29 @@
 <template>
-  <Page ref="Page">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view :style="{ height: page.height + 'px' }">
-          <camera devicePosition="back" flash="off" v-if="show" class="h100"></camera>
-          <canvas canvasId="firstCanvas" id="can"></canvas>
-          <canvas @touchmove="move" @touchstart="move" canvasId="secCanvas" id="can2"></canvas>
-          <cover-view class="co">
-            <button @tap.stop.prevent="toint" class="int">取 整</button>
-          </cover-view>
-          <cover-view class="showWrap co">
-            <button @tap="showFun" class="ph" v-if="!show && !isTake">开摄像头</button>
-            <button @tap="close" class="ph" v-if="show">关摄像头</button>
-            <button @tap="reset" class="ph" v-if="isTake && !show">复 位</button>
-          </cover-view>
-          <cover-view class="takeWrap co">
-            <button @tap="takePhoto" class="take" v-if="!isTake && show">拍 照</button>
-            <button @tap="takePhoto" class="take" v-if="isTake && !show">重 拍</button>
-          </cover-view>
-        </view>
+  <view>
+    <Page ref="Page">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view :style="{ height: page.height + 'px' }">
+            <camera devicePosition="back" flash="off" v-if="show" class="h100"></camera>
+            <canvas canvasId="firstCanvas" id="can"></canvas>
+            <canvas @touchmove="move" @touchstart="move" canvasId="secCanvas" id="can2"></canvas>
+            <cover-view class="co">
+              <button @tap.stop.prevent="toint" class="int">取 整</button>
+            </cover-view>
+            <cover-view class="showWrap co">
+              <button @tap="showFun" class="ph" v-if="!show && !isTake">开摄像头</button>
+              <button @tap="close" class="ph" v-if="show">关摄像头</button>
+              <button @tap="reset" class="ph" v-if="isTake && !show">复 位</button>
+            </cover-view>
+            <cover-view class="takeWrap co">
+              <button @tap="takePhoto" class="take" v-if="!isTake && show">拍 照</button>
+              <button @tap="takePhoto" class="take" v-if="isTake && !show">重 拍</button>
+            </cover-view>
+          </view>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

@@ -1,18 +1,20 @@
 <template>
-  <Page ref="Page" type="F1" :classList="['bg-black']">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view :style="{ height: page.height + 'px' }" @tap.native="change" class="page" :class="changeColor == 0 ? 'blackPage' : changeColor == 1 ? 'orangePage' : 'whitePage'">
-          <view class="clock">
-            <view class="displayTime" :style="'transform:' + diretion + ';'">
-              <text class="hourAndMin">{{ time }}</text>
-              <text class="sec">{{ sec }}</text>
+  <view>
+    <Page ref="Page" type="F1" :classList="['bg-black']">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view :style="{ height: page.height + 'px' }" @tap.native="change" class="page" :class="changeColor == 0 ? 'blackPage' : changeColor == 1 ? 'orangePage' : 'whitePage'">
+            <view class="clock">
+              <view class="displayTime" :style="'transform:' + diretion + ';'">
+                <text class="hourAndMin">{{ time }}</text>
+                <text class="sec">{{ sec }}</text>
+              </view>
             </view>
           </view>
-        </view>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

@@ -1,21 +1,23 @@
 <template>
-  <Page ref="Page" bg>
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view class="cu-bar solid-bottom margin-top-xs">
-          <view class="action">
-            <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-            <text class="text-bold">星座</text>
+  <view>
+    <Page ref="Page" bg>
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view class="cu-bar solid-bottom margin-top-xs">
+            <view class="action">
+              <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+              <text class="text-bold">星座</text>
+            </view>
+            <picker :value="index" :range="types" @change="e => (index = +e.detail.value)" class="margin-right">
+              <text>{{ types[index] }}</text>
+              <text class="cuIcon-unfold"></text>
+            </picker>
           </view>
-          <picker :value="index" :range="types" @change="e => (index = +e.detail.value)" class="margin-right">
-            <text>{{ types[index] }}</text>
-            <text class="cuIcon-unfold"></text>
-          </picker>
-        </view>
-        <Img v-if="src" ref="Img" :src="src" />
+          <Img v-if="src" ref="Img" :src="src" />
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>
@@ -25,7 +27,7 @@ export default {
     return {
       src: "",
       types: map,
-      index: map.indexOf(uni.getStorageSync("xingzuo") || '天秤座'),
+      index: map.indexOf(uni.getStorageSync("xingzuo") || "天秤座"),
     };
   },
   created() {
@@ -33,8 +35,7 @@ export default {
   },
   watch: {
     index() {
-      uni.setStorageSync("xingzuo", this.types[this.index]),
-      this.src = "https://xiaoapi.cn/API/xzys_pic.php?msg=" + this.types[this.index];
+      uni.setStorageSync("xingzuo", this.types[this.index]), (this.src = "https://xiaoapi.cn/API/xzys_pic.php?msg=" + this.types[this.index]);
     },
   },
 };

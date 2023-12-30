@@ -1,24 +1,26 @@
 <template>
-  <Page ref="Page" refresh bg @refresh="getList">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view v-for="item in list" :key="item.group_id" class="cu-card article no-card margin-sm radius" @click="$copy(item.url)">
-          <view class="cu-item shadow" style="padding: 0rpx">
-            <view class="title flex flex_sb">
-              <view class="text-cut text-grey">点击复制链接至微信或浏览器打开即可购买</view>
-              <text class="cuIcon-copy text-grey"></text>
-            </view>
-            <view class="content" style="padding: 24rpx">
-              <image :src="item.image" mode="aspectFill" @click.stop="$preview(item.image)"></image>
-              <view class="desc">
-                <view class="text-content" style="color: black"> {{ item.content }}</view>
+  <view>
+    <Page ref="Page" refresh bg @refresh="getList">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view v-for="item in list" :key="item.group_id" class="cu-card article no-card margin-sm radius" @click="$copy(item.url)">
+            <view class="cu-item shadow" style="padding: 0rpx">
+              <view class="title flex flex_sb">
+                <view class="text-cut text-grey">点击复制链接至微信或浏览器打开即可购买</view>
+                <text class="cuIcon-copy text-grey"></text>
+              </view>
+              <view class="content" style="padding: 24rpx">
+                <image :src="item.image" mode="aspectFill" @click.stop="$preview(item.image)"></image>
+                <view class="desc">
+                  <view class="text-content" style="color: black"> {{ item.content }}</view>
+                </view>
               </view>
             </view>
           </view>
-        </view>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

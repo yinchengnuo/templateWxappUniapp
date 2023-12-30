@@ -1,12 +1,14 @@
 <template>
-  <Page ref="Page" bg refresh @refresh="refresh">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <TextBoard :result="result" arrayView indent />
-        <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="$copy(result)">复制</button>
+  <view>
+    <Page ref="Page" bg refresh @refresh="refresh">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <TextBoard :result="result" arrayView indent />
+          <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="$copy(result)">复制</button>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

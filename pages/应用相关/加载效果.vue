@@ -1,15 +1,17 @@
 <template>
-  <Page ref="Page">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view class="flex" style="flex-wrap: wrap">
-          <view class="flexc" style="width: 250rpx; height: 250rpx" v-for="(item, index) in list" :key="index" @click="choose(item)" :style="{ background: chooseed.includes(item) ? '#dedede' : '' }">
-            <LoadingSpin :loading="item" />
+  <view>
+    <Page ref="Page">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view class="flex" style="flex-wrap: wrap">
+            <view class="flexc" style="width: 250rpx; height: 250rpx" v-for="(item, index) in list" :key="index" @click="choose(item)" :style="{ background: chooseed.includes(item) ? '#dedede' : '' }">
+              <LoadingSpin :loading="item" />
+            </view>
           </view>
-        </view>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>
@@ -30,7 +32,7 @@ export default {
       } else {
         this.chooseed.push(e);
       }
-      this.$copy(this.chooseed.join())
+      this.$copy(this.chooseed.join());
       this.$toast(this.chooseed.length);
     },
   },

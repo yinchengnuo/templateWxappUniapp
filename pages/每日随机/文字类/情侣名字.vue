@@ -1,12 +1,14 @@
 <template>
-  <Page ref="Page" bg type="S1" refresh @refresh="refresh">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <TextBoard :result="result" />
-        <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="$copy(result)">复制</button>
+  <view>
+    <Page ref="Page" bg type="S1" refresh @refresh="refresh">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <TextBoard :result="result" />
+          <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="$copy(result)">复制</button>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>
@@ -22,7 +24,7 @@ export default {
   methods: {
     refresh() {
       this.$refs.Page.refreshing = true;
-      this.$loading()
+      this.$loading();
       uni
         .request({ url: "https://api.tangdouz.com/qlmz.php" })
         .then(({ data }) => {
@@ -30,7 +32,7 @@ export default {
         })
         .catch(() => {})
         .finally(() => {
-          this.$loaded()
+          this.$loaded();
           this.$refs.Page.refreshing = false;
         });
     },

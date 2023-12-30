@@ -1,60 +1,62 @@
 <template>
-  <Page ref="Page" bg>
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view class="cu-bar bg-white solid-bottom margin-top">
-          <view class="action">
-            <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-            <text>输入垃圾名称即可查询垃圾分类</text>
+  <view>
+    <Page ref="Page" bg>
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view class="cu-bar bg-white solid-bottom margin-top">
+            <view class="action">
+              <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+              <text>输入垃圾名称即可查询垃圾分类</text>
+            </view>
           </view>
-        </view>
-        <view class="cu-bar input">
-          <input v-model.trim="text" ref="input" :focus="focus" class="my_input" confirm-type="search" placeholder="请输入垃圾名称" type="text" @blur="focus = false" @confirm="make" />
-          <text v-if="text" class="my_input_clear cuIcon-roundclosefill" @click="(text = ''), make()"></text>
-          <button class="cu-btn lg shadow-blur" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click="make">查询</button>
-        </view>
-        <view class="cu-bar solid-bottom margin-top-xs">
-          <view class="action">
-            <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-            <text class="text-bold">查询结果</text>
+          <view class="cu-bar input">
+            <input v-model.trim="text" ref="input" :focus="focus" class="my_input" confirm-type="search" placeholder="请输入垃圾名称" type="text" @blur="focus = false" @confirm="make" />
+            <text v-if="text" class="my_input_clear cuIcon-roundclosefill" @click="(text = ''), make()"></text>
+            <button class="cu-btn lg shadow-blur" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click="make">查询</button>
           </view>
-        </view>
-        <template v-if="result">
-          <view class="cu-list menu sm-border card-menu margin-top margin-bottom">
-            <block v-for="(item, index) in result" :key="index">
-              <view class="cu-item">
-                <view class="content">
-                  <text class="text-lg">{{ item.name }}</text>
+          <view class="cu-bar solid-bottom margin-top-xs">
+            <view class="action">
+              <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+              <text class="text-bold">查询结果</text>
+            </view>
+          </view>
+          <template v-if="result">
+            <view class="cu-list menu sm-border card-menu margin-top margin-bottom">
+              <block v-for="(item, index) in result" :key="index">
+                <view class="cu-item">
+                  <view class="content">
+                    <text class="text-lg">{{ item.name }}</text>
+                  </view>
+                  <view class="action">
+                    <text class="text-lg text-bold">{{ types[item.type] }}</text>
+                  </view>
                 </view>
-                <view class="action">
-                  <text class="text-lg text-bold">{{ types[item.type] }}</text>
+                <view class="cu-item">
+                  <view class="content">
+                    <text class="text-sm text-black text-bold">分类描述：{{ item.explain }}</text>
+                  </view>
                 </view>
-              </view>
-              <view class="cu-item">
-                <view class="content">
-                  <text class="text-sm text-black text-bold">分类描述：{{ item.explain }}</text>
+                <view class="cu-item">
+                  <view class="content">
+                    <text class="text-sm text-black text-bold">扩展知识：{{ item.contain }}</text>
+                  </view>
                 </view>
-              </view>
-              <view class="cu-item">
-                <view class="content">
-                  <text class="text-sm text-black text-bold">扩展知识：{{ item.contain }}</text>
+                <view class="cu-item">
+                  <view class="content">
+                    <text class="text-sm text-black text-bold">分类提示：{{ item.tip }}</text>
+                  </view>
                 </view>
-              </view>
-              <view class="cu-item">
-                <view class="content">
-                  <text class="text-sm text-black text-bold">分类提示：{{ item.tip }}</text>
-                </view>
-              </view>
-            </block>
-            <view class="cu-item text-grey text-sm justify-center">没有更多了...</view>
+              </block>
+              <view class="cu-item text-grey text-sm justify-center">没有更多了...</view>
+            </view>
+          </template>
+          <view v-else class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
+            <Empty />
           </view>
         </template>
-        <view v-else class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
-          <Empty />
-        </view>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

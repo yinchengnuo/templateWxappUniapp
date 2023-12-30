@@ -1,13 +1,15 @@
 <template>
-  <Page ref="Page" type="S1">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view class="flex" :style="{ height: page.height + 'px' }">
-          <button class="block cu-btn xxl shadow-blur margin-top-sm margin-left-sm margin-bottom-sm bg-black" @click="view">查看数据</button>
-        </view>
+  <view>
+    <Page ref="Page" type="S1">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view class="flex" :style="{ height: page.height + 'px' }">
+            <button class="block cu-btn xxl shadow-blur margin-top-sm margin-left-sm margin-bottom-sm bg-black" @click="view">查看数据</button>
+          </view>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

@@ -1,59 +1,61 @@
 <template>
-  <Page ref="Page">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view :style="{ height: page.height + 'px' }" style="position: relative; overflow: hidden">
-          <view class="cu-bar bg-white search fixed" :style="{ top: CustomBar + 'px' }">
-            <view class="search-form round">
-              <text class="cuIcon-search"></text>
-              <input v-model="input" type="text" placeholder="输入搜索的关键词" confirm-type="search" :focus="focus" @blur="focus = false" @confirm="make" />
+  <view>
+    <Page ref="Page">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view :style="{ height: page.height + 'px' }" style="position: relative; overflow: hidden">
+            <view class="cu-bar bg-white search fixed" :style="{ top: CustomBar + 'px' }">
+              <view class="search-form round">
+                <text class="cuIcon-search"></text>
+                <input v-model="input" type="text" placeholder="输入搜索的关键词" confirm-type="search" :focus="focus" @blur="focus = false" @confirm="make" />
+              </view>
+              <text v-if="input" class="my_input_clear cuIcon-roundclosefill" @click="(input = ''), make()"></text>
+              <view class="action">
+                <button class="cu-btn bg-gradual-blue shadow-blur round" @click="make">搜索</button>
+              </view>
             </view>
-            <text v-if="input" class="my_input_clear cuIcon-roundclosefill" @click="(input = ''), make()"></text>
-            <view class="action">
-              <button class="cu-btn bg-gradual-blue shadow-blur round" @click="make">搜索</button>
-            </view>
-          </view>
 
-          <view class="margin-top-xxl padding-top">
-            <scroll-view scroll-y class="indexes" :scroll-into-view="'indexes-' + listCurID" :style="{ height: 'calc(' + page.height + 'px - 50px)' }" scroll-with-animation="true" enable-back-to-top="true">
-              <block v-if="list.length" v-for="letter in list" :key="letter">
-                <view class="padding padding-tb-sm text-bold" :class="'indexItem-' + letter" :id="'indexes-' + letter" :data-index="letter">{{ letter }}（{{ functionList.filter(e => e.initial === letter).length }}）</view>
-                <view class="cu-list menu-avatar no-padding">
-                  <navigator :url="item.page" class="cu-item bg-white shadow" v-for="item in functionList.filter(e => e.initial === letter)" :key="item._id">
-                    <view class="cu-avatar round lg light">
-                      <image :src="item.icon" class="radius-lg" mode="aspectFit" style="width: 111rpx; height: 111rpx" />
-                    </view>
-                    <view class="content">
-                      <view class="text-black">
-                        <text v-for="(item, index) in item.name.split('')" :key="index" :style="{ fontWeight: (input || '').split('').includes(item) ? 'bolder' : '', color: (input || '').split('').includes(item) ? 'red' : '' }">{{ item }}</text>
+            <view class="margin-top-xxl padding-top">
+              <scroll-view scroll-y class="indexes" :scroll-into-view="'indexes-' + listCurID" :style="{ height: 'calc(' + page.height + 'px - 50px)' }" scroll-with-animation="true" enable-back-to-top="true">
+                <block v-if="list.length" v-for="letter in list" :key="letter">
+                  <view class="padding padding-tb-sm text-bold" :class="'indexItem-' + letter" :id="'indexes-' + letter" :data-index="letter">{{ letter }}（{{ functionList.filter(e => e.initial === letter).length }}）</view>
+                  <view class="cu-list menu-avatar no-padding">
+                    <navigator :url="item.page" class="cu-item bg-white shadow" v-for="item in functionList.filter(e => e.initial === letter)" :key="item._id">
+                      <view class="cu-avatar round lg light">
+                        <image :src="item.icon" class="radius-lg" mode="aspectFit" style="width: 111rpx; height: 111rpx" />
                       </view>
-                      <view class="text-gray text-sm">
-                        <text v-for="(item, index) in item.desc.split('')" :key="index" :style="{ fontWeight: (input || '').split('').includes(item) ? 'bolder' : '', color: (input || '').split('').includes(item) ? 'red' : '' }">{{ item }}</text>
+                      <view class="content">
+                        <view class="text-black">
+                          <text v-for="(item, index) in item.name.split('')" :key="index" :style="{ fontWeight: (input || '').split('').includes(item) ? 'bolder' : '', color: (input || '').split('').includes(item) ? 'red' : '' }">{{ item }}</text>
+                        </view>
+                        <view class="text-gray text-sm">
+                          <text v-for="(item, index) in item.desc.split('')" :key="index" :style="{ fontWeight: (input || '').split('').includes(item) ? 'bolder' : '', color: (input || '').split('').includes(item) ? 'red' : '' }">{{ item }}</text>
+                        </view>
                       </view>
-                    </view>
-                    <view class="action margin-right">
-                      <view class="cuIcon-right"></view>
-                    </view>
-                  </navigator>
-                </view>
-              </block>
-              <Empty v-else />
-            </scroll-view>
-          </view>
+                      <view class="action margin-right">
+                        <view class="cuIcon-right"></view>
+                      </view>
+                    </navigator>
+                  </view>
+                </block>
+                <Empty v-else />
+              </scroll-view>
+            </view>
 
-          <view class="indexBar flex align-center" :style="{ height: 'calc(' + page.height + 'px - 50px)' }" style="bottom: auto; top: 50vh; transform: translateY(-50%)">
-            <view class="indexBar-box bg-white flex flex-column radius shadow" @touchstart="tStart" @touchend="tEnd" @touchmove="tMove">
-              <view class="indexBar-item flex justify-center" v-for="letter in list" :key="letter" :id="letter" @touchstart="getCur" @touchend="setCur">{{ letter }}</view>
+            <view class="indexBar flex align-center" :style="{ height: 'calc(' + page.height + 'px - 50px)' }" style="bottom: auto; top: 50vh; transform: translateY(-50%)">
+              <view class="indexBar-box bg-white flex flex-column radius shadow" @touchstart="tStart" @touchend="tEnd" @touchmove="tMove">
+                <view class="indexBar-item flex justify-center" v-for="letter in list" :key="letter" :id="letter" @touchstart="getCur" @touchend="setCur">{{ letter }}</view>
+              </view>
+            </view>
+
+            <view :hidden="hidden" class="indexToast">
+              {{ listCur }}
             </view>
           </view>
-
-          <view :hidden="hidden" class="indexToast">
-            {{ listCur }}
-          </view>
-        </view>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

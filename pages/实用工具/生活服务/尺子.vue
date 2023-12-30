@@ -1,17 +1,19 @@
 <template>
-  <Page ref="Page">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view :style="{ height: page.height + 'px' }">
-          <canvas canvasId="ruler" class="ruler" :style="{ height: page.height + 'px', width: $app().globalData.systemInfo.windowWidth + 'px' }"></canvas>
-          <view class="show_tip">小提示:如果测量有误差,可以调整分辨率系数校对</view>
-          <view class="show">分辨率系数：{{ coefficient }}</view>
-          <slider activeColor="#000000" @change="changeCoefficient" blockColor="#000000" class="slider" max="70" min="30" :value="coefficient"></slider>
-          <view @tap="reset" class="button" hoverClass="button-hover">重置</view>
-        </view>
+  <view>
+    <Page ref="Page">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view :style="{ height: page.height + 'px' }">
+            <canvas canvasId="ruler" class="ruler" :style="{ height: page.height + 'px', width: $app().globalData.systemInfo.windowWidth + 'px' }"></canvas>
+            <view class="show_tip">小提示:如果测量有误差,可以调整分辨率系数校对</view>
+            <view class="show">分辨率系数：{{ coefficient }}</view>
+            <slider activeColor="#000000" @change="changeCoefficient" blockColor="#000000" class="slider" max="70" min="30" :value="coefficient"></slider>
+            <view @tap="reset" class="button" hoverClass="button-hover">重置</view>
+          </view>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

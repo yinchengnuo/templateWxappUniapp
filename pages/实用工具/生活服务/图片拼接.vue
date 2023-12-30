@@ -1,41 +1,43 @@
 <template>
-  <Page ref="Page">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view class="index" style="position: relative" :style="{ height: page.height + 'px' }">
-          <view @tap="changePreview" class="preview-image" :data-src="item.url" :style="'background-image:url(' + item.url + ');background-repeat:no-repeat;background-size:100% auto;'" v-for="(item, index) in imageInfo" :key="index">
-            <view @tap.stop.prevent="removeImage" class="remove" :data-index="index">移除{{ index + 1 }} </view>
-          </view>
-          <view @tap="showActions" class="select-image" hoverClass="select-image-hover">选择图片 </view>
-          <view class="bottom-tab">
-            <view @click="goToPage" class="tabBtn" data-direction="horizontal">横向拼接 </view>
-            <view @click="goToPage" class="tabBtn" data-direction="vertical">竖向拼接 </view>
-          </view>
-        </view>
-      </template>
-      <page-container :show="show" :z-index="999999999" round @afterleave="show = false">
-        <view style="height: 66.6vh; position: relative; overflow: auto">
-          <view class="cu-list menu card-menu sm-borde bg-white radius-lg" style="margin: 0 26rpx; position: sticky; top: 0; z-index: 1; border-radius: 0">
-            <view class="cu-bar">
-              <view class="action">
-                <text class="text-bold">拼接结果</text>
-              </view>
-              <view class="flex" style="width: 42rpx; height: 42rpx" @click="show = false">
-                <text class="cuIcon-close"></text>
-              </view>
+  <view>
+    <Page ref="Page">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view class="index" style="position: relative" :style="{ height: page.height + 'px' }">
+            <view @tap="changePreview" class="preview-image" :data-src="item.url" :style="'background-image:url(' + item.url + ');background-repeat:no-repeat;background-size:100% auto;'" v-for="(item, index) in imageInfo" :key="index">
+              <view @tap.stop.prevent="removeImage" class="remove" :data-index="index">移除{{ index + 1 }} </view>
+            </view>
+            <view @tap="showActions" class="select-image" hoverClass="select-image-hover">选择图片 </view>
+            <view class="bottom-tab">
+              <view @click="goToPage" class="tabBtn" data-direction="horizontal">横向拼接 </view>
+              <view @click="goToPage" class="tabBtn" data-direction="vertical">竖向拼接 </view>
             </view>
           </view>
-          <view v-if="!hidden" style="opacity: 0">
-            <canvas canvasId="draw" :style="'width:' + canvasWidth + 'px;height:' + canvasHeight + 'px'"></canvas>
+        </template>
+        <page-container :show="show" :z-index="999999999" round @afterleave="show = false">
+          <view style="height: 66.6vh; position: relative; overflow: auto">
+            <view class="cu-list menu card-menu sm-borde bg-white radius-lg" style="margin: 0 26rpx; position: sticky; top: 0; z-index: 1; border-radius: 0">
+              <view class="cu-bar">
+                <view class="action">
+                  <text class="text-bold">拼接结果</text>
+                </view>
+                <view class="flex" style="width: 42rpx; height: 42rpx" @click="show = false">
+                  <text class="cuIcon-close"></text>
+                </view>
+              </view>
+            </view>
+            <view v-if="!hidden" style="opacity: 0">
+              <canvas canvasId="draw" :style="'width:' + canvasWidth + 'px;height:' + canvasHeight + 'px'"></canvas>
+            </view>
+            <view class="tips">小提示：点击图片预览,再长按即可保存!</view>
+            <view class="image-box" :style="'height:' + showImage.height + 'px;'">
+              <image @tap="previewImage" class="image" :src="showImage.url" :style="'max-width:' + showImage.width + 'px;width:' + showImage.width + 'px;height:' + showImage.height + 'px'"></image>
+            </view>
           </view>
-          <view class="tips">小提示：点击图片预览,再长按即可保存!</view>
-          <view class="image-box" :style="'height:' + showImage.height + 'px;'">
-            <image @tap="previewImage" class="image"  :src="showImage.url" :style="'max-width:' + showImage.width + 'px;width:' + showImage.width + 'px;height:' + showImage.height + 'px'"></image>
-          </view>
-        </view>
-      </page-container>
-    </template>
-  </Page>
+        </page-container>
+      </template>
+    </Page>
+  </view>
 </template>
 
 <script>

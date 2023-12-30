@@ -1,73 +1,75 @@
 <template>
-  <Page ref="Page" type="S1">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <navigator url="/pages/用户中心/我的签到记录" class="flex padding-sm justify-between solid-bottom">
-          <view class="flex">
-            <view class="padding-lr-xs">
-              <view class="cu-avatar lg round">
-                <image v-if="user.avatar" class="w100 h100" :src="user.avatar" mode="aspectFill" />
-                <open-data v-else class="w100 h100" type="userAvatarUrl"></open-data>
+  <view>
+    <Page ref="Page" type="S1">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <navigator url="/pages/用户中心/我的签到记录" class="flex padding-sm justify-between solid-bottom">
+            <view class="flex">
+              <view class="padding-lr-xs">
+                <view class="cu-avatar lg round">
+                  <image v-if="user.avatar" class="w100 h100" :src="user.avatar" mode="aspectFill" />
+                  <open-data v-else class="w100 h100" type="userAvatarUrl"></open-data>
+                </view>
+              </view>
+              <view class="padding-xs text-xl text-black">
+                <view>{{ user.nickname || "微信用户" }}</view>
+                <view v-if="result" class="text-sm padding-top-xs">累计签到{{ result.records.length }}天</view>
               </view>
             </view>
-            <view class="padding-xs text-xl text-black">
-              <view>{{ user.nickname || "微信用户" }}</view>
-              <view v-if="result" class="text-sm padding-top-xs">累计签到{{ result.records.length }}天</view>
+            <view v-if="result" class="padding-right padding-top-sm">
+              <text>签到累计获得能量：{{ result.total }}</text>
+              <text class="cuIcon-right"></text>
             </view>
-          </view>
-          <view v-if="result" class="padding-right padding-top-sm">
-            <text>签到累计获得能量：{{ result.total }}</text>
-            <text class="cuIcon-right"></text>
-          </view>
-        </navigator>
-        <view class="margin-top">
-          <view v-if="result" class="flex justify-center">
-            <view v-if="result.clocked" class="cu-clockin-time_over flex justify-center align-center flex-column">
-              <text class="text-white" style="z-index: 99">今日已签到</text>
-              <text class="text-white" style="z-index: 99">+{{ result.energy }}</text>
-            </view>
-            <view v-else class="cu-clockin-time flex justify-center align-center" :animation="animationData" @click="clockInStart">
-              <view class="text-white" style="z-index: 99">
-                <text class="text-xxl">今日签到</text>
-                <text>+{{ result.energy }}</text>
+          </navigator>
+          <view class="margin-top">
+            <view v-if="result" class="flex justify-center">
+              <view v-if="result.clocked" class="cu-clockin-time_over flex justify-center align-center flex-column">
+                <text class="text-white" style="z-index: 99">今日已签到</text>
+                <text class="text-white" style="z-index: 99">+{{ result.energy }}</text>
+              </view>
+              <view v-else class="cu-clockin-time flex justify-center align-center" :animation="animationData" @click="clockInStart">
+                <view class="text-white" style="z-index: 99">
+                  <text class="text-xxl">今日签到</text>
+                  <text>+{{ result.energy }}</text>
+                </view>
               </view>
             </view>
+            <view class="padding-tb flex justify-center align-center text-grey" @click="$copy(user.ip)">
+              <text>当前ip：</text>
+              <text class="cuIcon-location">{{ user.ip }}</text>
+              <text class="cuIcon-copy"></text>
+            </view>
           </view>
-          <view class="padding-tb flex justify-center align-center text-grey" @click="$copy(user.ip)">
-            <text>当前ip：</text>
-            <text class="cuIcon-location">{{ user.ip }}</text>
-            <text class="cuIcon-copy"></text>
+          <view class="cu-bar bg-white solid-bottom">
+            <view class="action">
+              <text class="text-bold">连续签到领能量！</text>
+            </view>
+            <view class="action">
+              <text>已连续签到：{{ result.continuous }}天</text>
+            </view>
           </view>
-        </view>
-        <view class="cu-bar bg-white solid-bottom">
-          <view class="action">
-            <text class="text-bold">连续签到领能量！</text>
+          <view class="cu-list grid col-5">
+            <view class="cu-item" v-for="item in 7" :key="item">
+              <view :class="result && result.continuous > item ? 'text-green' : ''">第{{ item + 1 }}天</view>
+              <view :class="result && result.continuous > item ? 'text-green' : ''" class="text-bold">+{{ 100 + item * 100 }} </view>
+            </view>
+            <view class="cu-item">
+              <view :class="result && result.continuous > 7 ? 'text-green' : ''" class="text-bold">...</view>
+              <view :class="result && result.continuous > 7 ? 'text-green' : ''" class="text-bold">...</view>
+            </view>
+            <view class="cu-item">
+              <view :class="result && result.continuous >= 10 ? 'text-green' : ''">第10天</view>
+              <view :class="result && result.continuous >= 10 ? 'text-green' : ''" class="text-bold">+1000</view>
+            </view>
+            <view class="cu-item">
+              <view :class="result && result.continuous > 10 ? 'text-green' : ''">第10+天</view>
+              <view :class="result && result.continuous > 10 ? 'text-green' : ''" class="text-bold">+1000</view>
+            </view>
           </view>
-          <view class="action">
-            <text>已连续签到：{{ result.continuous }}天</text>
-          </view>
-        </view>
-        <view class="cu-list grid col-5">
-          <view class="cu-item" v-for="item in 7" :key="item">
-            <view :class="result && result.continuous > item ? 'text-green' : ''">第{{ item + 1 }}天</view>
-            <view :class="result && result.continuous > item ? 'text-green' : ''" class="text-bold">+{{ 100 + item * 100 }} </view>
-          </view>
-          <view class="cu-item">
-            <view :class="result && result.continuous > 7 ? 'text-green' : ''" class="text-bold">...</view>
-            <view :class="result && result.continuous > 7 ? 'text-green' : ''" class="text-bold">...</view>
-          </view>
-          <view class="cu-item">
-            <view :class="result && result.continuous >= 10 ? 'text-green' : ''">第10天</view>
-            <view :class="result && result.continuous >= 10 ? 'text-green' : ''" class="text-bold">+1000</view>
-          </view>
-          <view class="cu-item">
-            <view :class="result && result.continuous > 10 ? 'text-green' : ''">第10+天</view>
-            <view :class="result && result.continuous > 10 ? 'text-green' : ''" class="text-bold">+1000</view>
-          </view>
-        </view>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

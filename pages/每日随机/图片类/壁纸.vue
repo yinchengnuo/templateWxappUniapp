@@ -1,21 +1,23 @@
 <template>
-  <Page ref="Page" bg refresh @refresh="refresh">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view class="cu-bar solid-bottom margin-top-xs">
-          <view class="action">
-            <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-            <text class="text-bold">类型</text>
+  <view>
+    <Page ref="Page" bg refresh @refresh="refresh">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view class="cu-bar solid-bottom margin-top-xs">
+            <view class="action">
+              <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+              <text class="text-bold">类型</text>
+            </view>
+            <picker :value="index" :range="types" @change="e => (index = +e.detail.value)" class="margin-right">
+              <text>{{ types[index] }}</text>
+              <text class="cuIcon-unfold"></text>
+            </picker>
           </view>
-          <picker :value="index" :range="types" @change="e => (index = +e.detail.value)" class="margin-right">
-            <text>{{ types[index] }}</text>
-            <text class="cuIcon-unfold"></text>
-          </picker>
-        </view>
-        <Img ref="Img" :src="src" />
+          <Img ref="Img" :src="src" />
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

@@ -1,27 +1,29 @@
 <template>
-  <Page ref="Page" type="S1">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view :style="{ height: page.height + 'px' }">
-          <view class="flex">
-            <view class="score-time">
-              <text class="text-black">得分: {{ score }}</text>
-              <text class="text-black">时间: {{ time }}</text>
+  <view>
+    <Page ref="Page" type="S1">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view :style="{ height: page.height + 'px' }">
+            <view class="flex">
+              <view class="score-time">
+                <text class="text-black">得分: {{ score }}</text>
+                <text class="text-black">时间: {{ time }}</text>
+              </view>
+              <view class="box">
+                <view @tap="nextBlock" class="inbox" :data-id="index" :style="'width:' + 100 / block.lv + '%;height:' + 100 / block.lv + '%;background:' + item" v-for="(item, index) in block.color" :key="index"></view>
+              </view>
             </view>
-            <view class="box">
-              <view @tap="nextBlock" class="inbox" :data-id="index" :style="'width:' + 100 / block.lv + '%;height:' + 100 / block.lv + '%;background:' + item" v-for="(item, index) in block.color" :key="index"></view>
+            <view class="modal" v-if="!isHidden">
+              <view class="content">
+                <text class="modal-result">{{ score }}</text>
+                <button @tap="again" class="modal-btn" style="background: rgb(39, 114, 226)">再测一次</button>
+              </view>
             </view>
           </view>
-          <view class="modal" v-if="!isHidden">
-            <view class="content">
-              <text class="modal-result">{{ score }}</text>
-              <button @tap="again" class="modal-btn" style="background: rgb(39, 114, 226)">再测一次</button>
-            </view>
-          </view>
-        </view>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>
@@ -46,9 +48,9 @@ export default {
     again: function () {
       this.createBlock(0);
       this.stop();
-      this.time = 30
-      this.score = 0
-      this.isHidden = true
+      this.time = 30;
+      this.score = 0;
+      this.isHidden = true;
     },
 
     stop: function () {

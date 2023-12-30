@@ -1,27 +1,29 @@
 <template>
-  <Page ref="Page" bg type="S1" refresh @refresh="refresh">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view class="cu-bar solid-bottom margin-top-xs">
-          <view class="action">
-            <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-            <text class="text-bold">字谜</text>
+  <view>
+    <Page ref="Page" bg type="S1" refresh @refresh="refresh">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view class="cu-bar solid-bottom margin-top-xs">
+            <view class="action">
+              <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+              <text class="text-bold">字谜</text>
+            </view>
           </view>
-        </view>
-        <TextBoard :result="result" />
-        <view class="cu-bar solid-bottom margin-top-xs">
-          <view class="action">
-            <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-            <text class="text-bold">谜底</text>
+          <TextBoard :result="result" />
+          <view class="cu-bar solid-bottom margin-top-xs">
+            <view class="action">
+              <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+              <text class="text-bold">谜底</text>
+            </view>
+            <view class="action">
+              <switch class="radius" :class="$refs.Page.bgClass.split('-')[2]" :checked="checked" @change="change"> </switch>
+            </view>
           </view>
-          <view class="action">
-            <switch class="radius" :class="$refs.Page.bgClass.split('-')[2]" :checked="checked" @change="change"> </switch>
-          </view>
-        </view>
-        <TextBoard :blur="!checked" :result="answer" />
+          <TextBoard :blur="!checked" :result="answer" />
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

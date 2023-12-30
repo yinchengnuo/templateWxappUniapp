@@ -1,11 +1,13 @@
 <template>
-  <Page type="B1" ref="Page">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <Img ref="Img" :src="src" />
+  <view>
+    <Page type="B1" ref="Page">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <Img ref="Img" :src="src" />
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

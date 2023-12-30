@@ -1,25 +1,27 @@
 <template>
-  <Page ref="Page" bg refresh @refresh="refresh">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view class="cu-bar solid-bottom margin-top-xs">
-          <view class="flex margin-left">
-            <CustomCounter v-model="rowNum" :min="6" :max="29" />
-            <text class="text-lg margin-xs">行</text>
+  <view>
+    <Page ref="Page" bg refresh @refresh="refresh">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view class="cu-bar solid-bottom margin-top-xs">
+            <view class="flex margin-left">
+              <CustomCounter v-model="rowNum" :min="6" :max="29" />
+              <text class="text-lg margin-xs">行</text>
+            </view>
+            <view class="flex">
+              <CustomCounter v-model="colNum" :min="6" :max="29" />
+              <text class="text-lg margin-xs">列</text>
+            </view>
+            <view class="action" @click="$copy(result)">
+              <text class="cuIcon-copy margin-left-xs text-bold"></text>
+            </view>
           </view>
-          <view class="flex">
-            <CustomCounter v-model="colNum" :min="6" :max="29" />
-            <text class="text-lg margin-xs">列</text>
-          </view>
-          <view class="action" @click="$copy(result)">
-            <text class="cuIcon-copy margin-left-xs text-bold"></text>
-          </view>
-        </view>
-        <TextBoard :result="result" arrayView />
-        <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="showAnswer">查看答案</button>
+          <TextBoard :result="result" arrayView />
+          <button class="cu-btn block shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="showAnswer">查看答案</button>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

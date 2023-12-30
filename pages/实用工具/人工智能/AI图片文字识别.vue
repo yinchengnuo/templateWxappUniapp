@@ -1,46 +1,48 @@
 <template>
-  <Page ref="Page" bg>
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view class="cu-bar bg-white solid-bottom margin-top">
-          <view class="action">
-            <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-            <text>选择图片即可识别</text>
+  <view>
+    <Page ref="Page" bg>
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view class="cu-bar bg-white solid-bottom margin-top">
+            <view class="action">
+              <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+              <text>选择图片即可识别</text>
+            </view>
           </view>
-        </view>
-        <view class="cu-bar input">
-          <button class="w100 cu-btn xxl shadow-blur margin-top-sm margin-left-sm margin-bottom-sm" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click="chooseImg">选择图片</button>
-        </view>
-        <view class="cu-bar solid-bottom margin-top-xs">
-          <view class="action">
-            <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-            <text class="text-bold">识别结果</text>
+          <view class="cu-bar input">
+            <button class="w100 cu-btn xxl shadow-blur margin-top-sm margin-left-sm margin-bottom-sm" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click="chooseImg">选择图片</button>
           </view>
-          <view class="action" @click="result && $copy(result.join(''))">
-            <text class="cuIcon-copy margin-left-xs text-bold"></text>
+          <view class="cu-bar solid-bottom margin-top-xs">
+            <view class="action">
+              <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+              <text class="text-bold">识别结果</text>
+            </view>
+            <view class="action" @click="result && $copy(result.join(''))">
+              <text class="cuIcon-copy margin-left-xs text-bold"></text>
+            </view>
           </view>
-        </view>
-        <template v-if="result">
-          <button class="block cu-btn shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="$preview(text)">查看原图</button>
-          <view class="cu-list menu sm-border card-menu margin-tb">
-            <view class="cu-item">
-              <view class="content">
-                <view class="text-lg text-black text-bold padding-tb flex-wrap">
-                  <text v-for="(item, index) in result" :key="index">
-                    <text class="text-blue" @click="$copy(item)">{{ item }}</text>
-                    <text>、</text>
-                  </text>
+          <template v-if="result">
+            <button class="block cu-btn shadow-blur margin" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click.stop="$preview(text)">查看原图</button>
+            <view class="cu-list menu sm-border card-menu margin-tb">
+              <view class="cu-item">
+                <view class="content">
+                  <view class="text-lg text-black text-bold padding-tb flex-wrap">
+                    <text v-for="(item, index) in result" :key="index">
+                      <text class="text-blue" @click="$copy(item)">{{ item }}</text>
+                      <text>、</text>
+                    </text>
+                  </view>
                 </view>
               </view>
             </view>
+          </template>
+          <view v-else class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
+            <Empty />
           </view>
         </template>
-        <view v-else class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
-          <Empty />
-        </view>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

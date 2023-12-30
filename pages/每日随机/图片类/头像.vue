@@ -1,26 +1,28 @@
 <template>
-  <Page ref="Page" bg refresh @refresh="refresh">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view class="cu-bar solid-bottom margin-top-xs">
-          <view class="action">
-            <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
-            <text class="text-bold">类型</text>
+  <view>
+    <Page ref="Page" bg refresh @refresh="refresh">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view class="cu-bar solid-bottom margin-top-xs">
+            <view class="action">
+              <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+              <text class="text-bold">类型</text>
+            </view>
+            <picker :value="index" :range="types" @change="e => (index = +e.detail.value)" class="margin-right">
+              <text>{{ types[index] }}</text>
+              <text class="cuIcon-unfold"></text>
+            </picker>
           </view>
-          <picker :value="index" :range="types" @change="e => (index = +e.detail.value)" class="margin-right">
-            <text>{{ types[index] }}</text>
-            <text class="cuIcon-unfold"></text>
-          </picker>
-        </view>
-        <view class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
-          <Img ref="Img" :src="src" />
-        </view>
-        <view v-if="src1" class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
-          <Img ref="Img" :src="src1" />
-        </view>
+          <view class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
+            <Img ref="Img" :src="src" />
+          </view>
+          <view v-if="src1" class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
+            <Img ref="Img" :src="src1" />
+          </view>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>
@@ -45,7 +47,7 @@ export default {
   watch: {
     index() {
       this.$refs.Page.refreshing = true;
-      uni.setStorageSync('touxinag', this.index)
+      uni.setStorageSync("touxinag", this.index);
     },
   },
   created() {

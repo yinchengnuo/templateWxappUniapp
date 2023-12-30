@@ -1,25 +1,27 @@
 <template>
-  <Page ref="Page" type="S1">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view>
-          <progress :active="true" activeMode="forwards" color="#F69B30" :percent="newprogress" :style="'display:' + isProgress"></progress>
-          <view class="container">
-            <image class="bo" src="http://xue.ccy1994.top/xiaochengxu/mini-tools/static/pages/my_module/qh/bo.png"></image>
-            <view class="progress">
-              {{ progress }}
-              <image class="good" :src="goodUrl" :style="'display:' + isGood"></image>
-            </view>
-            <text class="tip">{{ tip }}</text>
-            <text class="tip2" :style="'display:' + isTip2">{{ tip2 }}</text>
-            <view class="btn">
-              <button @tap="cleanNew" :disabled="subing">{{ btnData }}</button>
+  <view>
+    <Page ref="Page" type="S1">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view>
+            <progress :active="true" activeMode="forwards" color="#F69B30" :percent="newprogress" :style="'display:' + isProgress"></progress>
+            <view class="container">
+              <image class="bo" src="http://xue.ccy1994.top/xiaochengxu/mini-tools/static/pages/my_module/qh/bo.png"></image>
+              <view class="progress">
+                {{ progress }}
+                <image class="good" :src="goodUrl" :style="'display:' + isGood"></image>
+              </view>
+              <text class="tip">{{ tip }}</text>
+              <text class="tip2" :style="'display:' + isTip2">{{ tip2 }}</text>
+              <view class="btn">
+                <button @tap="cleanNew" :disabled="subing">{{ btnData }}</button>
+              </view>
             </view>
           </view>
-        </view>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

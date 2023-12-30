@@ -1,11 +1,13 @@
 <template>
-  <Page ref="Page" bg refresh @refresh="refresh">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <Img v-for="item in list" :key="item.src" ref="Img" :title="title" :src="item.src" @error="error" />
+  <view>
+    <Page ref="Page" bg refresh @refresh="refresh">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <Img v-for="item in list" :key="item.src" ref="Img" :title="title" :src="item.src" @error="error" />
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

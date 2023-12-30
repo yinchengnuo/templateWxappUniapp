@@ -1,15 +1,17 @@
 <template>
-  <Page ref="Page" bg refresh @refresh="refresh">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <TextBoard v-if="result1" :result="result1" />
-        <view v-if="result3" class="margin">
-          <Img :src="result3" />
-        </view>
-        <TextBoard v-if="result2" :result="result2" />
+  <view>
+    <Page ref="Page" bg refresh @refresh="refresh">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <TextBoard v-if="result1" :result="result1" />
+          <view v-if="result3" class="margin">
+            <Img :src="result3" />
+          </view>
+          <TextBoard v-if="result2" :result="result2" />
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

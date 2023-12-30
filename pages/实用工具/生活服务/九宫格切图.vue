@@ -1,26 +1,28 @@
 <template>
-  <Page ref="Page">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view :style="{ height: page.height + 'px' }">
-          <button @tap="onChooseSuccess" class="button" hoverClass="button-hover">选择图片</button>
-          <image class="image" v-if="!(isChoose == true ? false : true)" :src="img" :style="'width:' + showInfo.width + 'px;height:' + showInfo.height + 'px'"></image>
-          <view class="choose" v-if="!(isChoose == true ? false : true)" :style="'width:' + showInfo.width + 'px;height:' + showInfo.height + 'px'">
-            <view
-              @tap="previewImage"
-              :class="'choose-module ' + (index % 2 == 0 ? 'choose-module-odd' : '')"
-              :data-index="index"
-              :style="'width:' + showInfo.width / 3 + 'px;height:' + showInfo.height / 3 + 'px;line-height:' + showInfo.height / 3 + 'px;'"
-              v-for="(item, index) in [0, 1, 2, 3, 4, 5, 6, 7, 8]"
-              :key="index">
-              {{ index + 1 }}
+  <view>
+    <Page ref="Page">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view :style="{ height: page.height + 'px' }">
+            <button @tap="onChooseSuccess" class="button" hoverClass="button-hover">选择图片</button>
+            <image class="image" v-if="!(isChoose == true ? false : true)" :src="img" :style="'width:' + showInfo.width + 'px;height:' + showInfo.height + 'px'"></image>
+            <view class="choose" v-if="!(isChoose == true ? false : true)" :style="'width:' + showInfo.width + 'px;height:' + showInfo.height + 'px'">
+              <view
+                @tap="previewImage"
+                :class="'choose-module ' + (index % 2 == 0 ? 'choose-module-odd' : '')"
+                :data-index="index"
+                :style="'width:' + showInfo.width / 3 + 'px;height:' + showInfo.height / 3 + 'px;line-height:' + showInfo.height / 3 + 'px;'"
+                v-for="(item, index) in [0, 1, 2, 3, 4, 5, 6, 7, 8]"
+                :key="index">
+                {{ index + 1 }}
+              </view>
             </view>
+            <canvas :canvasId="canvasInfo.id" class="canvas" :style="'width:' + canvasInfo.width + 'px;height:' + canvasInfo.height + 'px;position:absolute;top:' + (showInfo.height + systemInfo.height) + 'px;left:0;'"></canvas>
           </view>
-          <canvas :canvasId="canvasInfo.id" class="canvas" :style="'width:' + canvasInfo.width + 'px;height:' + canvasInfo.height + 'px;position:absolute;top:' + (showInfo.height + systemInfo.height) + 'px;left:0;'"></canvas>
-        </view>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>

@@ -1,26 +1,28 @@
 <template>
-  <Page ref="Page">
-    <template v-slot:default="{ page }">
-      <template v-if="page">
-        <view class="cu-timeline">
-          <block v-for="(item, index) in list" :key="index">
-            <view class="cu-time w100" style="text-align: left">
-              <text class="text-black text-xl text-bold margin-lr">V {{ item.version }}</text>
-              <text>{{ item.date }}</text>
-            </view>
-            <view class="cu-item">
-              <view class="content shadow-blur" :class="index === 0 ? 'bg-green' : ''">
-                <view v-for="(itemm, indexx) in item.desc" :key="itemm">
-                  <text v-if="item.desc.length > 1">{{ indexx + 1 }}、</text>
-                  <text>{{ itemm }}</text>
+  <view>
+    <Page ref="Page">
+      <template v-slot:default="{ page }">
+        <template v-if="page">
+          <view class="cu-timeline">
+            <block v-for="(item, index) in list" :key="index">
+              <view class="cu-time w100" style="text-align: left">
+                <text class="text-black text-xl text-bold margin-lr">V {{ item.version }}</text>
+                <text>{{ item.date }}</text>
+              </view>
+              <view class="cu-item">
+                <view class="content shadow-blur" :class="index === 0 ? 'bg-green' : ''">
+                  <view v-for="(itemm, indexx) in item.desc" :key="itemm">
+                    <text v-if="item.desc.length > 1">{{ indexx + 1 }}、</text>
+                    <text>{{ itemm }}</text>
+                  </view>
                 </view>
               </view>
-            </view>
-          </block>
-        </view>
+            </block>
+          </view>
+        </template>
       </template>
-    </template>
-  </Page>
+    </Page>
+  </view>
 </template>
 
 <script>
@@ -28,6 +30,11 @@ export default {
   data() {
     return {
       list: [
+        {
+          date: "2023-12-31",
+          version: "6.1.8",
+          desc: ["修复收藏异常", "修复系统消息推送异常", "修复二次元图片", "修复手写模拟器"],
+        },
         {
           date: "2023-12-30",
           version: "6.1.7",

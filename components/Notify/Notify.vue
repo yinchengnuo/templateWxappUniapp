@@ -67,6 +67,21 @@ export default {
       this.$store.state.app.notifyRoute = "";
     },
     detail(url) {
+      if (url === "/pages/首页/首页") {
+        return uni.switchTab({ url });
+      }
+      if (url === "/pages/每日/每日") {
+        return uni.switchTab({ url });
+      }
+      if (url === "/pages/聊天/聊天") {
+        return uni.switchTab({ url });
+      }
+      if (url === "/pages/数据/数据") {
+        return uni.switchTab({ url });
+      }
+      if (url === "/pages/我的/我的") {
+        return uni.switchTab({ url });
+      }
       uni.navigateTo({ url });
     },
   },
