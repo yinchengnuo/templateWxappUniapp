@@ -12,7 +12,7 @@
       show-scrollbar
       enhanced
       enable-passive
-      :scroll-top="scrollTop"
+      :scroll-top="willScrollTop"
       :style="{ height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px)` }"
       refresher-enabled
       :refresher-triggered="refreshing"
@@ -58,6 +58,7 @@ export default {
       show: 0,
       cardCur: 0,
       scrollTop: 0,
+      willScrollTop: 0,
       refreshing: false,
       interstitialAd: {},
     };
@@ -95,6 +96,7 @@ export default {
     },
   },
   onShow() {
+    this.willScrollTop = this.scrollTop
     this.show++;
     if (this.show !== 0 && this.show % 4 === 0) {
       !this.$store.state.user.vip && this.interstitialAd.show();
