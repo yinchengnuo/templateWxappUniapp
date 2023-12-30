@@ -11,11 +11,12 @@
       scroll-y
       show-scrollbar
       enhanced
-      scroll-with-animation
       enable-passive
       refresher-enabled
+      :scroll-top="scrollTop"
       :refresher-triggered="refreshing"
       :style="{ height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px)` }"
+      @scroll="scroll"
       @refresherrefresh="getList">
       <swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="2333" duration="500" @change="cardSwiper" previousMargin="0.01rpx" indicator-color="#1F1F1F" indicator-active-color="#000000">
         <swiper-item v-for="(item, index) in listHot" :key="index" :class="cardCur == index ? 'cur' : ''" @click="navigateTo(item)">
@@ -63,7 +64,6 @@
       <ADFloat ref="ADFloat" :index="2" />
       <ADFloat ref="ADFloat" :index="3" />
     </scroll-view>
-    <!-- <uni-fab ref="fab" :pattern="pattern" horizontal="right" :content="content" @trigger="trigger" @fabClick="fabClick" /> -->
   </view>
 </template>
 
@@ -73,6 +73,7 @@ export default {
     return {
       show: 0,
       cardCur: 0,
+      scrollTop: 0,
       refreshing: false,
       interstitialAd: {},
       pattern: {
@@ -146,6 +147,9 @@ export default {
     },
     trigger() {},
     fabClick() {},
+    scroll({ detail }) {
+      this.scrollTop = detail.scrollTop
+    },
   },
 };
 </script>

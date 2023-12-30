@@ -29,7 +29,11 @@ export default {
       playing: false,
     };
   },
-  beforeDestroy() {},
+  beforeDestroy() {
+    if (this.ctx) {
+      this.ctx.destroy()
+    }
+  },
   methods: {
     play(src) {
       if (this.ctx) {

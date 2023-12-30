@@ -11,11 +11,12 @@
       scroll-y
       show-scrollbar
       enhanced
-      scroll-with-animation
       enable-passive
+      :scroll-top="scrollTop"
       :style="{ height: `calc(100vh - ${$app().globalData.menuButtonBoundingClientRect.bottom}px)` }"
       refresher-enabled
       :refresher-triggered="refreshing"
+      @scroll="scroll"
       @refresherrefresh="getList">
       <swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="2333" duration="500" @change="cardSwiper" previousMargin="0.01rpx" indicator-color="#1F1F1F" indicator-active-color="#000000">
         <swiper-item v-for="(item, index) in listHot" :key="index" :class="cardCur == index ? 'cur' : ''" @click="navigateTo(item)">
@@ -56,6 +57,7 @@ export default {
     return {
       show: 0,
       cardCur: 0,
+      scrollTop: 0,
       refreshing: false,
       interstitialAd: {},
     };
@@ -113,6 +115,9 @@ export default {
     },
     navigateTo(item) {
       uni.navigateTo({ url: item.page });
+    },
+    scroll({ detail }) {
+      this.scrollTop = detail.scrollTop
     },
   },
 };
