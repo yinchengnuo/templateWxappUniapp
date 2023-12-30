@@ -33,15 +33,15 @@
       </view>
       <view class="w100">
         <!-- 原生横幅广告 -->
-        <AD1 v-if="ad && type === 'YHF'" @load="getHeight" @error="getHeight" @close="getHeight" />
+        <AD1 v-if="type === 'YHF'" @load="getHeight" @error="getHeight" @close="getHeight" />
         <!-- 横幅广告 -->
-        <AD2 v-if="ad && type === 'B1'" @load="getHeight" @error="getHeight" @close="getHeight" />
+        <AD2 v-if="type === 'B1'" @load="getHeight" @error="getHeight" @close="getHeight" />
         <!-- 视频广告 -->
-        <AD3 v-if="ad && type === 'S1'" @load="getHeight" @error="getHeight" @close="getHeight" />
+        <AD3 v-if="type === 'S1'" @load="getHeight" @error="getHeight" @close="getHeight" />
         <!-- 原生多格广告 -->
         <!-- <ad-custom v-if="type === 'YDG'" unit-id="adunit-e986a45f75420d2e"></ad-custom> -->
         <!-- 浮动广告 -->
-        <ADFloat v-if="ad && type === 'F1'" :index="0" />
+        <ADFloat v-if="type === 'F1'" :index="0" />
       </view>
     </view>
 

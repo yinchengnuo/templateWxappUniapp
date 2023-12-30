@@ -1,5 +1,5 @@
 <template>
-  <Page ref="Page" bg type="S1" refresh @refresh="refresh">
+  <Page ref="Page" bg refresh @refresh="refresh">
     <template v-slot:default="{ page }">
       <template v-if="page">
         <Img ref="Img" :src="src" />
@@ -21,9 +21,14 @@ export default {
   methods: {
     refresh() {
       this.$refs.Page.refreshing = true;
-      wx.getImageInfo({ src: "https://ybapi.cn/API/pe_acgimg.php" })
-        .then(({ path }) => (this.src = path))
-        .finally(() => (this.$refs.Page.refreshing = false));
+      this.$("/proxy", { url: "http://api.liangx.link/API/AGG.php?type=json" })
+        .then(({ url }) => {
+          this.src = url;
+        })
+        .catch(() => {})
+        .finally(() => {
+          this.$refs.Page.refreshing = false;
+        });
     },
   },
 };
