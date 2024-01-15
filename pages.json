@@ -123,6 +123,7 @@
         { "path": "文字类/世界未解之谜", "style": { "disableScroll": true } },
         { "path": "文字类/沙雕新闻", "style": { "disableScroll": true } },
         { "path": "文字类/树洞", "style": { "disableScroll": true } },
+        { "path": "文字类/历史上的今天文字版", "style": { "disableScroll": true } },
 
         { "path": "语音类/绿茶语音", "style": { "disableScroll": true } },
         { "path": "语音类/御姐撒娇语音", "style": { "disableScroll": true } }

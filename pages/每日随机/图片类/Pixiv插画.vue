@@ -29,10 +29,10 @@ export default {
   methods: {
     refresh() {
       this.$refs.Page.refreshing = true;
-      uni
-        .request({ url: "https://ybapi.cn/API/pixiv.php" })
-        .then(({ data }) => {
+      this.$("/proxy", { url: "https://api.lolicon.app/setu/v2" })
+        .then(({ data: [data] }) => {
           this.src = data.urls.original;
+          console.log("👀  .then  this.src:", this.src)
           const colors = getApp()
             .globalData.colors.slice()
             .sort(() => Math.random() - 0.5);

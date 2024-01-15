@@ -47,7 +47,7 @@
 
           <view v-if="item.type === 'reply'" :key="item.id" class="cu-item" style="padding: 12rpx 24rpx 48rpx">
             <view class="cu-avatar radius">
-              <image mode="aspectFill" :src="'https://mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.cdn.bspapp.com/ToolBox365/' + item.provider + '.jpg'" class="w100 h100"></image>
+              <image mode="aspectFill" :src="'../../static/ai/' + item.provider + '.jpg'" class="w100 h100"></image>
             </view>
             <view class="main" style="margin: 0 0 0 24rpx; max-width: 494rpx" @longpress="longpress('reply', item._, true)">
               <view class="content shadow">

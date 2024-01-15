@@ -26,20 +26,28 @@ export default {
   data() {
     return {
       auto: false,
-      src: "https://api.pearktrue.cn/api/greentea",
+      src: "",
     };
   },
-  onLoad() {},
+  onLoad() {
+    this.refresh();
+  },
   methods: {
     refresh() {
-      this.$refs.Audio.clear();
-      this.src = "https://api.pearktrue.cn/api/greentea?t=" + Date.now();
-      if (this.auto) {
-        this.$refs.Audio.play(this.src);
-      }
-      setTimeout(() => {
-        this.$refs.Page.refreshing = false;
-      }, 567);
+      this.$refs.Audio && this.$refs.Audio.clear();
+      this.$loading();
+      this.$refs.Page.refreshing = true;
+      this.$("/proxy", { url: "https://api.pearktrue.cn/api/greentea", dataType: "text" })
+        .then(data => {
+          this.src = "https://api.pearktrue.cn/api/greentea" + data.split(".").find(e => e.startsWith("/voice/")) + ".mp3";
+          if (this.auto) {
+            this.$refs.Audio.play(this.src);
+          }
+        })
+        .finally(() => {
+          this.$loaded();
+          this.$refs.Page.refreshing = false;
+        });
     },
   },
 };
