@@ -64,7 +64,6 @@ export default {
   data() {
     return {
       text: uni.getStorageSync("express") || "",
-      // text: 'YT8934188937784',
       focus: true,
       result: null,
     };
@@ -98,6 +97,7 @@ export default {
               this.result = res.data;
             } else {
               this.$toast(res.data.msg);
+              uni.setStorageSync("express", "");
             }
           })
           .finally(() => this.$loaded());

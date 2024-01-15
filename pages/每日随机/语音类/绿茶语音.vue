@@ -26,14 +26,14 @@ export default {
   data() {
     return {
       auto: false,
-      src: "http://api.yujn.cn/api/lvcha.php",
+      src: "https://api.pearktrue.cn/api/greentea",
     };
   },
   onLoad() {},
   methods: {
     refresh() {
       this.$refs.Audio.clear();
-      this.src = "http://api.yujn.cn/api/lvcha.php?t=" + Date.now();
+      this.src = "https://api.pearktrue.cn/api/greentea?t=" + Date.now();
       if (this.auto) {
         this.$refs.Audio.play(this.src);
       }

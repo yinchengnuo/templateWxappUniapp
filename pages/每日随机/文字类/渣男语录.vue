@@ -29,7 +29,7 @@ export default {
       this.$loading();
       this.$refs.Page.refreshing = true;
       uni
-        .request({ url: "https://api.tq23.cn/api/xd-zhanan" })
+        .request({ url: "https://api.qqsuu.cn/api/dm-zhanan?apiKey=b02a175a68ddb913a9791c47ba758982" })
         .then(({ data }) => {
           this.result = data.data.content;
         })

@@ -26,8 +26,8 @@
                 <view class="content">
                   <text class="text-lg">运营商</text>
                 </view>
-                <view class="action" @click="$copy(result.isp)">
-                  <text class="text-lg text-bold">{{ result.isp }}</text>
+                <view class="action" @click="$copy(result.mobiletype)">
+                  <text class="text-lg text-bold">{{ result.mobiletype }}</text>
                   <text class="cuIcon-copy margin-left-xs"></text>
                 </view>
               </view>
@@ -35,8 +35,8 @@
                 <view class="content">
                   <text class="text-lg">省份</text>
                 </view>
-                <view class="action" @click="$copy(result.province)">
-                  <text class="text-lg text-bold">{{ result.province }}</text>
+                <view class="action" @click="$copy(result.mobileprovice)">
+                  <text class="text-lg text-bold">{{ result.mobileprovice }}</text>
                   <text class="cuIcon-copy margin-left-xs"></text>
                 </view>
               </view>
@@ -44,8 +44,8 @@
                 <view class="content">
                   <text class="text-lg">城市</text>
                 </view>
-                <view class="action" @click="$copy(result.city)">
-                  <text class="text-lg text-bold">{{ result.city }}</text>
+                <view class="action" @click="$copy(result.mobilearea)">
+                  <text class="text-lg text-bold">{{ result.mobilearea }}</text>
                   <text class="cuIcon-copy margin-left-xs"></text>
                 </view>
               </view>
@@ -53,8 +53,8 @@
                 <view class="content">
                   <text class="text-lg">电话区号</text>
                 </view>
-                <view class="action" @click="$copy(result.citycode)">
-                  <text class="text-lg text-bold">{{ result.citycode }}</text>
+                <view class="action" @click="$copy(result.areacode)">
+                  <text class="text-lg text-bold">{{ result.areacode }}</text>
                   <text class="cuIcon-copy margin-left-xs"></text>
                 </view>
               </view>
@@ -62,8 +62,8 @@
                 <view class="content">
                   <text class="text-lg">身份证号</text>
                 </view>
-                <view class="action" @click="$copy(result.areacode)">
-                  <text class="text-lg text-bold">{{ result.areacode }}</text>
+                <view class="action" @click="$copy(result.areaid)">
+                  <text class="text-lg text-bold">{{ result.areaid }}</text>
                   <text class="cuIcon-copy margin-left-xs"></text>
                 </view>
               </view>
@@ -91,12 +91,14 @@
 export default {
   data() {
     return {
-      text: "",
+      text: "18338112210",
       focus: true,
       result: null,
     };
   },
-  onLoad() {},
+  onLoad() {
+    this.make();
+  },
   methods: {
     make() {
       this.focus = false;
@@ -106,14 +108,14 @@ export default {
         this.$loading();
         uni
           .request({
-            url: "https://api.ooomn.com/api/phone?tel=" + this.text,
+            url: "https://api.qqsuu.cn/api/dm-mobilelocal?apiKey=827da2c53b76ce0cc4f31bb6d0aecbbc&phone=" + this.text,
           })
-          .then(res => {
-            if (res.data.code === 200) {
-              this.result = res.data;
+          .then(({ data }) => {
+            if (data.code === 200) {
+              this.result = data.data;
             } else {
               this.focus = true;
-              this.$toast(res.data.msg);
+              this.$toast(data.msg);
             }
           })
           .finally(() => this.$loaded());

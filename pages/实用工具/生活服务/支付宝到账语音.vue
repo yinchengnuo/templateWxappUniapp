@@ -15,8 +15,7 @@
             <button class="cu-btn lg shadow-blur" :class="'bg-' + $refs.Page.bgClass.split('-')[2]" @click="make">生成</button>
           </view>
           <view class="cu-list menu sm-border bg-white card-menu margin-top margin-bottom">
-            <Audio v-if="src" class="w100" ref="Audio" :src="src" />
-            <Empty v-else />
+            <Audio class="w100" ref="Audio" :src="src" />
           </view>
         </template>
       </template>
@@ -29,32 +28,23 @@ export default {
   data() {
     return {
       focus: false,
-      text: 1000000,
-      src: "",
+      text: 12345678,
+      src: "https://api.pearktrue.cn/api/alipay/?number=12345678",
     };
   },
   onLoad() {
-    this.make();
+    setTimeout(() => {
+      this.make();
+    }, 567);
   },
   methods: {
     make() {
-      this.src = "";
       this.focus = false;
       this.text = (this.text || "").toString().trim();
       if (this.text) {
-        this.$loading();
-        this.$("/proxy", { url: "http://api.liangx.link/API/zfb/dz.php?shu=" + (this.text || 1000000) })
-          .then(({ data, msg }) => {
-            if (data) {
-              this.src = data.url;
-              setTimeout(() => {
-                this.$refs.Audio.play(this.src);
-              });
-            } else {
-              this.$toast(msg);
-            }
-          })
-          .finally(() => this.$loaded());
+        this.$refs.Audio.clear();
+        this.src = "https://api.pearktrue.cn/api/alipay/?number=" + this.text + "&t=" + Date.now();
+        this.$refs.Audio.play(this.src);
       } else {
         this.focus = true;
         this.$toast("请输入金额");

@@ -29,7 +29,7 @@ export default {
       this.$loading();
       this.$refs.Page.refreshing = true;
       uni
-        .request({ url: "https://api.tq23.cn/api/xd-qiaomen" })
+        .request({ url: "https://api.qqsuu.cn/api/dm-qiaomen?apiKey=d6f4dc4ed2f72a67a39df06d8c74c29a" })
         .then(({ data }) => {
           this.result = data.data.content;
         })

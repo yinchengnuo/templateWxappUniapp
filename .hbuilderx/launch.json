@@ -6,6 +6,10 @@
      	{
      		"launchtype" : "local"
      	},
+     	"mp-toutiao" : 
+     	{
+     		"launchtype" : "local"
+     	},
      	"mp-weixin" : 
      	{
      		"launchtype" : "remote"

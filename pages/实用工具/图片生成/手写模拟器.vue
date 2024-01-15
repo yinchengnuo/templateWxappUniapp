@@ -59,7 +59,7 @@ export default {
       this.result = null;
       this.text = (this.text || "").toString().trim();
       if (this.text) {
-        this.result = "http://api.yujn.cn/api/shouxie.php?text=" + this.text;
+        this.result = "https://zj.v.api.aa1.cn/api/zuoye/?msg=" + this.text;
       } else {
         this.focus = true;
         this.$toast("请输入文字");

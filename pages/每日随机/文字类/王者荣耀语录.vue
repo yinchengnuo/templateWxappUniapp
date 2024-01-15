@@ -31,7 +31,7 @@ export default {
       uni
         .request({ url: "https://api.nanyinet.com/api/king/api.php?charset=txt" })
         .then(({ data }) => {
-          this.result = data;
+          this.result = (data || '').trim();
         })
         .catch(() => {})
         .finally(() => {

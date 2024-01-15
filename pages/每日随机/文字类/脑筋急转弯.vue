@@ -43,7 +43,7 @@ export default {
       this.$loading();
       this.$refs.Page.refreshing = true;
       uni
-        .request({ url: "https://api.tq23.cn/api/xd-naowan?num=1" })
+        .request({ url: "https://api.qqsuu.cn/api/dm-naowan?num=1&apiKey=d793b7ae0c152f80c37f2ebb4e2b8bc8" })
         .then(({ data }) => {
           this.result = data.data.list[0].quest;
           this.answer = data.data.list[0].result;
