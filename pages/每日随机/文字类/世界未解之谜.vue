@@ -33,7 +33,7 @@ export default {
       this.$("/proxy", { url: "https://api.yujn.cn/api/wjzm.php?type=wjzm" })
         .then(data => {
           this.result1 = data.title;
-          this.result2 = (data.content || "").trim();
+          this.result2 = (data.content || "").trim().replace(/&.+?;/g, '');
           this.result3 = data.img_url ? data.img_url[0] : "";
         })
         .finally(() => {

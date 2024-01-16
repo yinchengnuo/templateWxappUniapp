@@ -33,7 +33,25 @@
               </view>
             </view>
           </view>
-          <view v-show="show" class="cu-bar bg-white solid-bottom margin-top">
+          <view class="cu-bar bg-white solid-bottom margin-top">
+            <view class="action">
+              <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
+              <text class="text-bold">
+                <text>能量获取</text>
+                <text class="text-grey" style="font-size: 24rpx; font-weight: normal; line-height: 2">
+                  <text class="margin-lr-xs">免费的每天都能获取哦～</text>
+                </text>
+              </text>
+            </view>
+          </view>
+          <view class="flex justify-around align-center padding padding-tb-sm text-white bg-white radius">
+            <navigator url="/pages/用户中心/我的签到">
+              <button class="cu-btn round shadow bg-red">每日签到 +1000</button>
+            </navigator>
+            <button open-type="share" class="cu-btn round shadow bg-green" style="margin: 0 30rpx">邀请好友 +1000</button>
+            <button class="cu-btn round shadow bg-blue" @click="showAD()">看视频广告+1000</button>
+          </view>
+          <view v-show="show" class="cu-bar bg-white solid-bottom margin-top-xs">
             <view class="action">
               <text class="cuIcon-titles" :class="'text-' + $refs.Page.bgClass.split('-')[2]"></text>
               <text class="text-bold">
@@ -65,13 +83,13 @@
               <view class="text-xs text-bold" :class="active === index ? '' : 'text-yellow'" style="position: absolute; right: 4rpx; bottom: 2rpx">{{ item.discount }}折</view>
             </view>
           </view>
-          <button v-show="show" class="margin cu-btn xxl block" :class="'bg-' + color" @click="pay()">
+          <button v-show="show" class="margin cu-btn xxl block" style="margin-bottom: 0" :class="'bg-' + color" @click="pay()">
             <text>立即充值</text>
             <text class="text-price margin-left-xs">{{ PAY[active] ? PAY[active].price : "" }}</text>
             <text class="text-sm" style="position: absolute; right: 50rpx; bottom: 8rpx; font-style: italic"> 赠送{{ PAY[active] ? PAY[active].price : "" }}天免广告 </text>
           </button>
           <view v-show="show">
-            <navigator url="/pages/应用相关/关于能量" class="flex text-blue padding">关于能量</navigator>
+            <navigator url="/pages/应用相关/关于能量" class="flex text-blue padding padding-tb-sm">关于能量</navigator>
           </view>
           <view v-if="!show" class="margin-top">
             <AD3 />
@@ -113,10 +131,47 @@ export default {
   },
   created() {
     this.getClass();
+
+    this.rewardedVideoAd = uni.createRewardedVideoAd({ adUnitId: "adunit-02b562d4a8c16436" });
+    this.rewardedVideoAd.onError(() => {
+      this.$toast("视频广告拉取失败，请稍后再试");
+    });
+    this.lock = false;
+    this.rewardedVideoAd.onClose(res => {
+      if (res && res.isEnded) {
+        if (!this.lock) {
+          this.lock = true;
+          setTimeout(() => {
+            this.lock = false;
+          });
+          this.$loading();
+          this.$("/ad")
+            .then(({ total, num, energy }) => {
+              this.$store.state.user.energy += energy;
+              this.$store.state.user.total_income += energy;
+              uni.showModal({
+                title: "观看视频广告成功",
+                content: `免费赠送${energy}能量已到账，请查收（今日已领取${num}/${total}）次`,
+                showCancel: false,
+                confirmText: "好的",
+                complete: () => {
+                  this.$parent.interstitialAd.show();
+                },
+              });
+            })
+            .finally(() => {
+              this.$loaded();
+            });
+        }
+      }
+    });
   },
   mounted() {
     this.$refs.Page.getHeight();
     clearInterval(this.$refs.Page.timer);
+  },
+  beforeDestroy() {
+    this.rewardedVideoAd.destroy();
   },
   onLoad() {},
   methods: {
@@ -160,6 +215,36 @@ export default {
       this.$store.dispatch("user/login").finally(() => {
         this.$refs.Page.refreshing = false;
       });
+    },
+    // 显示聊天页面激励视频广告
+    showAD() {
+      if (!this.ing) {
+        this.ing = true;
+        this.rewardedVideoAd
+          .show()
+          .then(() => {
+            setTimeout(() => (this.ing = false), 1234);
+          })
+          .catch(() => {
+            this.rewardedVideoAd
+              .load()
+              .then(() => {
+                this.rewardedVideoAd
+                  .show()
+                  .then(() => {
+                    setTimeout(() => (this.ing = false), 1234);
+                  })
+                  .catch(() => {
+                    setTimeout(() => (this.ing = false), 1234);
+                    this.$toast("视频广告拉取失败，请稍后再试");
+                  });
+              })
+              .catch(() => {
+                setTimeout(() => (this.ing = false), 1234);
+                this.$toast("视频广告拉取失败，请稍后再试");
+              });
+          });
+      }
     },
   },
 };

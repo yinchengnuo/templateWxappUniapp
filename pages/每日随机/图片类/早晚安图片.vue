@@ -22,10 +22,15 @@ export default {
   },
   methods: {
     refresh() {
+      this.$loading();
       this.$refs.Page.refreshing = true;
-      wx.getImageInfo({ src: "https://api.lolimi.cn/API/image-zw/" })
+      uni
+        .getImageInfo({ src: "https://api.lolimi.cn/API/image-zw/" })
         .then(({ path }) => (this.src = path))
-        .finally(() => (this.$refs.Page.refreshing = false));
+        .finally(() => {
+          this.$loaded();
+          this.$refs.Page.refreshing = false;
+        });
     },
   },
 };

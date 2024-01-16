@@ -32,11 +32,7 @@ export default {
       src: "https://api.pearktrue.cn/api/alipay/?number=12345678",
     };
   },
-  onLoad() {
-    setTimeout(() => {
-      this.make();
-    }, 567);
-  },
+  onLoad() {},
   methods: {
     make() {
       this.focus = false;

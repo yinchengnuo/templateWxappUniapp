@@ -20,6 +20,7 @@ export default async (url = "/", data = {}, config = {}) => {
       header: {
         ...(config.header || {}),
         x: Vue.prototype.$store.state.user.x,
+        openid: Vue.prototype.$store.state.user.openid,
       },
       success({ data }) {
         if (data) {

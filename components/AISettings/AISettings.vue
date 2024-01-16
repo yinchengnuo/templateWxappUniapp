@@ -152,8 +152,8 @@ export default {
   },
   created() {
     this.ai_memory_count = this.user.ai_memory_count ? this.user.ai_memory_count : "";
-    this.rewardedVideoAd = uni.createRewardedVideoAd({ adUnitId: "adunit-02b562d4a8c16436" });
 
+    this.rewardedVideoAd = uni.createRewardedVideoAd({ adUnitId: "adunit-02b562d4a8c16436" });
     this.rewardedVideoAd.onError(() => {
       this.$toast("视频广告拉取失败，请稍后再试");
     });
@@ -274,9 +274,9 @@ export default {
             this.$loading();
             this.$("/chat_delete")
               .then(() => {
-                this.$parent.list = []
+                this.$parent.list = [];
                 uni.removeStorageSync("hide_random_box");
-                this.$store.state.user.show_random_box = true
+                this.$store.state.user.show_random_box = true;
                 this.$toast("操作成功");
               })
               .finally(() => {

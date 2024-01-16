@@ -22,10 +22,15 @@ export default {
   },
   methods: {
     refresh() {
+      this.$loading();
       this.$refs.Page.refreshing = true;
-      wx.getImageInfo({ src: "https://api.lykep.com/api/tgbj" })
+      uni
+        .getImageInfo({ src: "https://api.lykep.com/api/tgbj" })
         .then(({ path }) => (this.src = path))
-        .finally(() => (this.$refs.Page.refreshing = false));
+        .finally(() => {
+          this.$loaded();
+          this.$refs.Page.refreshing = false;
+        });
     },
   },
 };

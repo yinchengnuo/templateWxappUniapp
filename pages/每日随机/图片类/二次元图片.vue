@@ -22,13 +22,13 @@ export default {
   },
   methods: {
     refresh() {
+      this.$loading();
       this.$refs.Page.refreshing = true;
-      this.$("/proxy", { url: "http://api.liangx.link/API/AGG.php?type=json" })
-        .then(({ url }) => {
-          this.src = url;
-        })
-        .catch(() => {})
+      uni
+        .getImageInfo({ src: "https://shanhe.kim/api/tu/anime.php" })
+        .then(({ path }) => (this.src = path))
         .finally(() => {
+          this.$loaded();
           this.$refs.Page.refreshing = false;
         });
     },
