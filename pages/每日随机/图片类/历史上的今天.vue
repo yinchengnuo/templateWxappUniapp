@@ -3,6 +3,7 @@
     <Page ref="Page">
       <template v-slot:default="{ page }">
         <template v-if="page">
+          <Img ref="Img" src="https://api.andeer.top/API/img_history.php" />
           <Img ref="Img" :src="src" />
         </template>
       </template>
