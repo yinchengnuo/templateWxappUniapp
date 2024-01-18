@@ -31,6 +31,11 @@ export default {
     return {
       list: [
         {
+          date: "2024-01-18",
+          version: "6.2.2",
+          desc: ["新增悲报"],
+        },
+        {
           date: "2024-01-16",
           version: "6.2.1",
           desc: ["修复二次元图片", "优化我的能量", "新增彩虹屁"],

@@ -54,6 +54,7 @@
 
         { "path": "图片生成/二维码生成", "style": { "disableScroll": true } },
         { "path": "图片生成/喜报", "style": { "disableScroll": true } },
+        { "path": "图片生成/悲报", "style": { "disableScroll": true } },
         { "path": "图片生成/小人举牌", "style": { "disableScroll": true } },
         { "path": "图片生成/IP地理位置", "style": { "disableScroll": true } },
         { "path": "图片生成/手写模拟器", "style": { "disableScroll": true } },
