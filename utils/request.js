@@ -19,7 +19,7 @@ export default async (url = "/", data = {}, config = {}) => {
       ...config,
       header: {
         ...(config.header || {}),
-        x: Vue.prototype.$store.state.user.x,
+        // x: Vue.prototype.$store.state.user.x,
         openid: Vue.prototype.$store.state.user.openid,
       },
       success({ data }) {

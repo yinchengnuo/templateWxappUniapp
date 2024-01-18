@@ -1,6 +1,6 @@
 <template>
   <view>
-    <web-view v-if="src" :src="src" />
+    <web-view v-if="src" :src="src" @load="load" />
   </view>
 </template>
 
@@ -56,8 +56,9 @@ export default {
   },
   methods: {
     init(src) {
-      this.SRC = src
+      this.SRC = src;
       const func = this.$store.state.app.list.find(e => e.src === src);
+      this.func = func;
       if (func) {
         if (process.env.NODE_ENV === "production") {
           this.$loading();
@@ -91,6 +92,13 @@ export default {
             .catch(() => {});
         }
       });
+    },
+    load() {
+      if (this.src.includes("openid")) {
+        if (["电子木鱼", "锅碗瓢盆打击乐", "架子鼓", "捏泡泡", "烟花模拟器"].includes(this.func.name)) {
+          this.$toast("如果没有声音，请关闭手机静音并开启音量哦～");
+        }
+      }
     },
   },
 };

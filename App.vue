@@ -89,6 +89,7 @@ export default {
           this.$toast("收藏成功");
         } else {
           this.$toast("取消收藏成功");
+          uni.$emit("COLLECT_CANCEL", payload.data._id);
         }
       } else {
         uni.vibrateLong(); // 震动一下
