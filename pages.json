@@ -51,6 +51,7 @@
         { "path": "生活服务/图片拼接", "style": { "disableScroll": true } },
         { "path": "生活服务/支付宝到账语音", "style": { "disableScroll": true } },
         { "path": "生活服务/拼多多超级特价", "style": { "disableScroll": true } },
+        { "path": "生活服务/福布斯排行榜", "style": { "disableScroll": true } },
 
         { "path": "图片生成/二维码生成", "style": { "disableScroll": true } },
         { "path": "图片生成/喜报", "style": { "disableScroll": true } },
@@ -103,6 +104,9 @@
         { "path": "图片类/帅哥图片", "style": { "disableScroll": true } },
         { "path": "图片类/二次元图片", "style": { "disableScroll": true } },
         { "path": "图片类/Pixiv插画", "style": { "disableScroll": true } },
+        { "path": "图片类/一言", "style": { "disableScroll": true } },
+        { "path": "图片类/精选一言", "style": { "disableScroll": true } },
+        { "path": "图片类/明日方舟十连图", "style": { "disableScroll": true } },
 
         { "path": "文字类/情侣名字", "style": { "disableScroll": true } },
         { "path": "文字类/笑话", "style": { "disableScroll": true } },
@@ -129,7 +133,6 @@
 
         { "path": "语音类/绿茶语音", "style": { "disableScroll": true } },
         { "path": "语音类/御姐撒娇语音", "style": { "disableScroll": true } }
-
       ]
     },
     {

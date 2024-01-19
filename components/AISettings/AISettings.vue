@@ -101,9 +101,6 @@
           <switch class="green radius" :checked="user.show_random_box" @change="switchChange"> </switch>
         </view>
       </view>
-      <navigator url="/pages/聊天管理/聊天管理" class="cu-item margin-bottom-sm arrow">
-        <view class="content">聊天管理</view>
-      </navigator>
       <button class="cu-btn block bg-red margin-tb-sm lg" @click="clearRecord()">清空聊天记录</button>
       <button class="cu-btn block bg-grey margin-tb-sm lg" @click="$parent.page_container_show = false">退出 ToolBox AI 设置</button>
     </view>
