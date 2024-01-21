@@ -31,7 +31,7 @@ export default {
       uni
         .request({ url: "https://api.tangdouz.com/xh.php" })
         .then(({ data }) => {
-          this.result = data;
+          this.result = data.replace(/&.+?;/g, '');
         })
         .catch(() => {})
         .finally(() => {

@@ -48,7 +48,6 @@
       <ADFloat ref="ADFloat" :index="2" />
       <ADFloat ref="ADFloat" :index="3" />
       <ADFloat ref="ADFloat" :index="4" />
-      <ADFloat ref="ADFloat" :index="5" />
     </scroll-view>
   </view>
 </template>

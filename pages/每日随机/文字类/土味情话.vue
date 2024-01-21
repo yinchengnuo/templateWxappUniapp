@@ -31,7 +31,7 @@ export default {
       uni
         .request({ url: "https://api.tangdouz.com/love.php" })
         .then(({ data }) => {
-          this.result = data;
+          this.result = data.replace(/\s/g, ' ');
         })
         .catch(() => {})
         .finally(() => {

@@ -1,9 +1,9 @@
 <template>
   <view>
-    <Page ref="Page" bg refresh @refresh="refresh">
+    <Page ref="Page" refresh @refresh="refresh">
       <template v-slot:default="{ page }">
         <template v-if="page">
-          <TextBoard :result="result" arrayView indent />
+          <Img ref="Img" :src="src" />
         </template>
       </template>
     </Page>
@@ -14,7 +14,7 @@
 export default {
   data() {
     return {
-      result: "",
+      src: "",
     };
   },
   created() {
@@ -24,11 +24,9 @@ export default {
     refresh() {
       this.$loading();
       this.$refs.Page.refreshing = true;
-      this.$("/proxy", { url: "http://api.yujn.cn/api/shudong.php?type=json" })
-        .then(data => {
-          this.result = [(data.content || "").trim(), data.time];
-          console.log(data);
-        })
+      uni
+        .getImageInfo({ src: "https://api.71xk.com/api/picture/tb?xkkey=9dd82851b38bccb9564c7c1f6cb5a6a8" })
+        .then(({ path }) => (this.src = path))
         .finally(() => {
           this.$loaded();
           this.$refs.Page.refreshing = false;
