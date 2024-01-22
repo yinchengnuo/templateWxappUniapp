@@ -32,6 +32,11 @@ export default {
       list: [
         {
           date: "2024-01-22",
+          version: "6.2.6",
+          desc: ["优化代码"],
+        },
+        {
+          date: "2024-01-22",
           version: "6.2.5",
           desc: ["优化代码"],
         },

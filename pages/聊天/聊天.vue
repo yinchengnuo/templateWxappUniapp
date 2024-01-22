@@ -327,6 +327,9 @@ export default {
           if (itemList[tapIndex] === "复制问题") {
             this.$copy(item.chat);
           }
+          if (itemList[tapIndex] === "复制回答") {
+            this.$copy(item.reply);
+          }
           if (itemList[tapIndex] === "删除问答") {
             this.delete(item);
           }
