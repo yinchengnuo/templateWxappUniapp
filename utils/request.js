@@ -18,6 +18,7 @@ export default async (url = "/", data = {}, config = {}) => {
       url: url.startsWith("http") ? url : "https://fc-mp-f3138cb7-2a3b-4344-8e79-a1f65871aab2.next.bspapp.com/mp/toolbox365" + url,
       ...config,
       header: {
+        platform: 'wx',
         ...(config.header || {}),
         // x: Vue.prototype.$store.state.user.x,
         openid: Vue.prototype.$store.state.user.openid,

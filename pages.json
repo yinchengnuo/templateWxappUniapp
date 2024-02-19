@@ -16,7 +16,6 @@
     { "path": "pages/聊天/聊天", "style": { "disableScroll": true } },
     { "path": "pages/数据/数据", "style": { "navigationStyle": "default", "enablePullDownRefresh": true, "navigationBarTitleText": "数据集" } },
     { "path": "pages/我的/我的", "style": { "enablePullDownRefresh": true } },
-
     { "path": "pages/WebView/WebView", "style": { "navigationStyle": "default" } }
   ],
   "subPackages": [
@@ -52,6 +51,7 @@
         { "path": "生活服务/支付宝到账语音", "style": { "disableScroll": true } },
         { "path": "生活服务/拼多多超级特价", "style": { "disableScroll": true } },
         { "path": "生活服务/福布斯排行榜", "style": { "disableScroll": true } },
+        { "path": "生活服务/老黄历", "style": { "disableScroll": true } },
 
         { "path": "图片生成/二维码生成", "style": { "disableScroll": true } },
         { "path": "图片生成/喜报", "style": { "disableScroll": true } },
