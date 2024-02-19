@@ -1,6 +1,5 @@
 <script>
 import dayjs from "dayjs";
-const appBaseInfo = uni.getAppBaseInfo();
 const systemInfo = uni.getSystemInfoSync();
 const statusBarHeight = systemInfo.statusBarHeight;
 const menuButtonBoundingClientRect = uni.getMenuButtonBoundingClientRect();
@@ -27,7 +26,6 @@ const navigationBarHeight = menuButtonBoundingClientRect.bottom + (menuButtonBou
 export default {
   globalData: {
     systemInfo,
-    appBaseInfo,
     statusBarHeight,
     navigationBarHeight,
     menuButtonBoundingClientRect,
